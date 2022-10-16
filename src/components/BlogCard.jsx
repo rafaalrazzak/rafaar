@@ -14,7 +14,7 @@ function BlogCard({ title, description, publishOn, url }) {
             className="absolute inset-y-0 left-0 flex items-center"
             aria-hidden="true"
           ></span>
-          <span class="h-4 w-0.5 rounded-full bg-primary-200 dark:bg-primary-500"></span>
+          <span className="h-4 w-0.5 rounded-full bg-primary-200 dark:bg-primary-500"></span>
           {publishOn}
         </time>
         <h2 className="text-base font-semibold tracking-tight text-primary-800 dark:text-primary-100">

@@ -5,7 +5,9 @@ import SocialMedia from "@/components/SocialMedia"
 import ProjectImage from "@/components/ProjectImage"
 import BlogCard from "@/components/BlogCard"
 import Link from "@/components/Link"
+import { useRouter } from "next/router"
 export default function Home() {
+  
   return (
     <>
       <Layout>

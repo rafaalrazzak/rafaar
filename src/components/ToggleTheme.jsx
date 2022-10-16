@@ -9,7 +9,7 @@ function ToggleTheme() {
   }
 
   return (
-    <Button ariaLabel="Toggle dark mode" onClick={toggleTheme}>
+    <Button aria-label="Toggle dark mode" onClick={toggleTheme}>
       {theme === "dark" ? <MoonIcon /> : <SunIcon />}
     </Button>
   )
