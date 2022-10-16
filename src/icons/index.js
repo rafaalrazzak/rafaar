@@ -1,0 +1,6 @@
+export { default as MoonIcon } from "./Moon"
+export { default as SunIcon } from "./Sun"
+export { default as ArrowRightIcon } from "./ArrowRight"
+export { default as GithubIcon } from "./Github"
+export { default as InstagramIcon } from "./Instagram"
+export { default as TwitterIcon } from "./Twitter"
