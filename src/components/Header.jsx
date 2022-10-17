@@ -1,16 +1,16 @@
+import dynamic from "next/dynamic"
 import Navbar from "./Navbar"
-import ToggleTheme from "./ToggleTheme"
 function Header() {
+  const ToggleTheme = dynamic(() => import("@components/ToggleTheme"))
   return (
-    <header className="relative z-30">
-      <Navbar className="justify-between gap-6">
-        <Navbar.Items className="flex flex-1 gap-6">
-          <div className=" flex  flex-1 justify-center  ">
-            <div className="flex items-center gap-6 rounded-full bg-white/90 px-6 text-sm font-medium text-primary-800 shadow-lg shadow-primary-800/5 ring-1 ring-primary-900/5 backdrop-blur dark:bg-primary-800/90 dark:text-primary-200 dark:ring-white/10">
-              <Navbar.Item href="/">Home</Navbar.Item>
-              <Navbar.Item href="/about">About</Navbar.Item>
-              <Navbar.Item href="/contact">Contact</Navbar.Item>
-            </div>
+    <header className="sticky">
+      <Navbar className="flex">
+        <Navbar.Items className="flex gap-6 w-full items-center justify-between">
+        <h1 className="hidden text-lg font-semibold sm:flex">rafaar.</h1>
+          <div className="flex items-center justify-center gap-6 rounded-full bg-white/90 px-6 py-3 text-sm font-medium text-primary-800 shadow-lg shadow-primary-800/5 ring-1 ring-primary-900/5 backdrop-blur dark:bg-primary-800/90 dark:text-primary-200 dark:ring-white/10">
+            <Navbar.Item href="/">Home</Navbar.Item>
+            <Navbar.Item href="/about">About</Navbar.Item>
+            <Navbar.Item href="/contact">Contact</Navbar.Item>
           </div>
           <ToggleTheme />
         </Navbar.Items>
