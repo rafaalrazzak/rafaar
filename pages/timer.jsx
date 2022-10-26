@@ -36,11 +36,13 @@ function Timer({ time }) {
         break
       case "ArrowUp":
         setCounter((prevCount) => prevCount + 5)
+
         break
       case "ArrowDown":
         if (counter !== 0) {
           setCounter((prevCount) => prevCount - 5)
         }
+
         break
       default:
         break
@@ -70,16 +72,18 @@ function Timer({ time }) {
     <div className="relative overflow-hidden text-black transition-all duration-300 ease-in-out">
       <div
         className={clsx(
-          "flex h-screen w-full items-center justify-center bg-white ",
-          isTimeout && counter > 0 && "animate-pulse bg-red-500 ",
+          "flex h-screen w-full items-center justify-center bg-white",
+          { "animate-pulse bg-red-500 ": isTimeout && counter > 0 },
         )}
       >
         <h1
           className={clsx(
             "countdown text-[150px] font-bold ",
-            isTimeout && counter > 0 && "animate-scale",
+            { "animate-scale": isTimeout && counter > 0 },
+            {
+              "animate-pulse": isPaused,
+            },
             counter == 0 ? "text-4xl lg:text-[300px]" : "lg:text-[500px]",
-            isPaused && "animate-pulse",
           )}
         >
           {counter ? toCountDown(counter) : "Time's Up"}
