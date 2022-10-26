@@ -12,7 +12,7 @@ export async function getServerSideProps(req) {
   }
 }
 
-function Timer({ time, m }) {
+function Timer({ time }) {
   const second = time
     .toString()
     .split(".")
