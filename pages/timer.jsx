@@ -68,14 +68,13 @@ function Timer({ time }) {
   }, [counter, isPaused])
 
   useKeyboard(["r", "t", "s", "p", "ArrowUp", "ArrowDown"], onKeyPress)
+
   return (
     <div className="relative overflow-hidden text-black">
       <div
         className={clsx(
-          " flex h-screen w-full items-center justify-center bg-white transition-all duration-300 ease-in-out ",
-          {
-            "animate-pulse bg-red-500 ": isTimeout && counter > 0,
-          },
+          "flex h-screen w-full items-center justify-center bg-white transition-all duration-300 ease-in-out ",
+          isTimeout && counter > 0 && "animate-pulse bg-red-500 ",
         )}
       >
         <h1

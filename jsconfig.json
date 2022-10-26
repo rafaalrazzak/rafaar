@@ -9,6 +9,5 @@
       "@utils/*": ["src/utils/*"],
       "@hooks/*": ["src/hooks/*"]
     }
-  },
-  "exclude": ["node_modules"]
+  }
 }

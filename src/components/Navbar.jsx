@@ -3,12 +3,7 @@ import { useRouter } from "next/router"
 import Link from "./Link"
 
 function NavbarComponent({ className, children }) {
-  return (
-    <nav className={clsx("flex py-6", className)}>
-      
-      {children}
-    </nav>
-  )
+  return <nav className={clsx("flex py-6", className)}>{children}</nav>
 }
 
 function Items({ className, children }) {
