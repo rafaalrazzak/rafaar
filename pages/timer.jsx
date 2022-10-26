@@ -17,7 +17,9 @@ export async function getServerSideProps(req) {
 }
 
 function Timer({ time }) {
-  const second = time * 60
+  const second = time.toString().split(".").reduce((a,b) => {
+    return parseInt(a*60) + parseInt(b)
+})
   const [counter, setCounter] = useState(second)
   const [isTimeout, setIsTimeOut] = useState(false)
   const [isPaused, setIsPaused] = useState(false)
