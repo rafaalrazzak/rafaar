@@ -3,7 +3,6 @@ import Button from "./Button"
 import { SunIcon, MoonIcon } from "@/icons"
 function ToggleTheme() {
   const { theme, setTheme } = useTheme()
-
   function toggleTheme() {
     setTheme(theme === "dark" ? "light" : "dark")
   }

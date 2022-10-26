@@ -1,7 +1,6 @@
-import dynamic from "next/dynamic"
+import ToggleTheme from "./ToggleTheme"
 import Navbar from "./Navbar"
 function Header() {
-  const ToggleTheme = dynamic(() => import("@components/ToggleTheme"))
   return (
     <header className="sticky">
       <Navbar className="flex">
