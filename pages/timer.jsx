@@ -42,14 +42,13 @@ function Timer({ time }) {
           setCounter((prevCount) => prevCount - 5)
         }
         break
-
       default:
         break
     }
   }
 
   useKeyboard(Keyboard, onKeyPress)
-  
+
   useEffect(() => {
     if (!isPaused) {
       const timer = setTimeout(() => {

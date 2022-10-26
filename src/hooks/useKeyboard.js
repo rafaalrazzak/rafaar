@@ -1,11 +1,9 @@
-import { useCallback, useEffect, useLayoutEffect, useRef } from "react"
+import { useCallback, useEffect, useRef } from "react"
 
 export const useKeyboard = (keys, callback, node = null) => {
   // implement the callback ref pattern
   const callbackRef = useRef(callback)
-  useLayoutEffect(() => {
-    callbackRef.current = callback
-  })
+
 
   // handle what happens on key press
   const handleKeyPress = useCallback(
