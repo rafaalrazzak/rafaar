@@ -7,15 +7,18 @@ export async function getServerSideProps(req) {
   const query = req.query
   return {
     props: {
-      time: query.time || 3,
+      time: query.time || 300,
     },
   }
 }
 
-function Timer({ time }) {
-  const second = time.toString().split(".").reduce((a,b) => {
-    return parseInt(a*60) + parseInt(b)
-})
+function Timer({ time, m }) {
+  const second = time
+    .toString()
+    .split(".")
+    .reduce((a, b) => {
+      return parseInt(a * 60) + parseInt(b)
+    })
   const [counter, setCounter] = useState(second)
   const [isTimeout, setIsTimeOut] = useState(false)
   const [isPaused, setIsPaused] = useState(false)
@@ -33,11 +36,18 @@ function Timer({ time }) {
           setIsPaused((prevPause) => !prevPause)
         }
         break
+      case "ArrowUp":
+        setCounter((prevCount) => prevCount + 5)
+        break
+      case "ArrowDown":
+        if (counter !== 0) {
+          setCounter((prevCount) => prevCount - 5)
+        }
+        break
 
       default:
         break
     }
-    // console.log(`key pressed: ${event.key}`)
   }
 
   useEffect(() => {
@@ -57,12 +67,12 @@ function Timer({ time }) {
     }
   }, [counter, isPaused])
 
-  useKeyboard(["r", "t", "s", "p"], onKeyPress)
+  useKeyboard(["r", "t", "s", "p", "ArrowUp", "ArrowDown"], onKeyPress)
   return (
     <div className="relative overflow-hidden text-black">
       <div
         className={clsx(
-          " flex bg-white h-screen w-full items-center justify-center transition-all duration-300 ease-in-out ",
+          " flex h-screen w-full items-center justify-center bg-white transition-all duration-300 ease-in-out ",
           {
             "animate-pulse bg-red-500 ": isTimeout && counter > 0,
           },
