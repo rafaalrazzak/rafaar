@@ -39,7 +39,7 @@ function Timer({ time }) {
       default:
         break
     }
-    console.log(`key pressed: ${event.key}`)
+    // console.log(`key pressed: ${event.key}`)
   }
 
   useEffect(() => {
@@ -64,7 +64,7 @@ function Timer({ time }) {
     <div className="relative overflow-hidden text-black">
       <div
         className={clsx(
-          " flex h-screen w-full items-center justify-center transition-all duration-300 ease-in-out ",
+          " flex bg-white h-screen w-full items-center justify-center transition-all duration-300 ease-in-out ",
           {
             "animate-pulse bg-red-500 ": isTimeout && counter > 0,
           },
