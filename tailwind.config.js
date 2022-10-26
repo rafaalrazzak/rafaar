@@ -12,6 +12,14 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
+      animation: {
+        scale: "scale 1.1s cubic-bezier(0, 0, 0.2, 1) infinite",
+      },
+      keyframes: {
+        scale: {
+          "75%, 100%": { transform: "scale(1.1)", opacity: "opacity: 0" },
+        },
+      },
       colors: {
         primary: colors.zinc,
         secondary: colors.teal,
@@ -20,6 +28,7 @@ module.exports = {
   },
   plugins: [
     require("@tailwindcss/aspect-ratio"),
+    require("daisyui"),
     // ...
   ],
 }
