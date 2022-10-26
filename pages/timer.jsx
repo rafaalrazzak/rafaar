@@ -3,11 +3,7 @@ import clsx from "clsx"
 import { toCountDown } from "@/utils/toCountDown"
 import { useKeyboard } from "@/hooks/useKeyboard"
 
-//create a submit button that will submit the form'
-
-//getserver side
 export async function getServerSideProps(req) {
-  //get url param time by requset
   const query = req.query
   return {
     props: {
