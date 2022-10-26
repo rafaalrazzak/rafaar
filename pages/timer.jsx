@@ -79,11 +79,11 @@ function Timer({ time }) {
         <h1
           className={clsx(
             "countdown text-[150px] font-bold ",
-            { "animate-scale": isTimeout && counter > 0 },
+            { "animate-ping ": isTimeout && counter > 0 },
             {
               "animate-pulse": isPaused,
             },
-            counter == 0 ? "text-4xl lg:text-[300px]" : "lg:text-[500px]",
+            counter == 0 ? "text-4xl lg:text-[300px]" : "lg:text-[300px]",
           )}
         >
           {counter ? toCountDown(counter) : "Time's Up"}
