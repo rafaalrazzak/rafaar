@@ -62,7 +62,7 @@ function Timer({ time }) {
           return prevCounter - 1
         })
       }, 1000)
-      if (counter < 10) {
+      if (counter < 5) {
         setIsTimeOut(true)
       }
       return () => clearTimeout(timer)
