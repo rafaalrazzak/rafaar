@@ -71,41 +71,31 @@ function Timer({ time }) {
   }, [counter, isPaused])
 
   return (
-    <>
-      <header>
-        <Navbar>
-          <Navbar.Items className="flex w-full items-center justify-center gap-6">
-            <h1 className="hidden text-lg font-semibold sm:flex">OSIS/MPK</h1>
-          </Navbar.Items>
-        </Navbar>
-      </header>
-
-      <div className="relative overflow-hidden text-black transition-all duration-300 ease-in-out">
-        <div
+    <div className="relative overflow-hidden text-black transition-all duration-300 ease-in-out">
+      <div
+        className={clsx(
+          "flex h-screen w-screen items-center justify-center bg-white",
+          { "animate-pulse bg-red-500 ": isTimeout && counter > 0 },
+        )}
+      >
+        <h1
           className={clsx(
-            "flex h-screen w-screen items-center justify-center bg-white",
-            { "animate-pulse bg-red-500 ": isTimeout && counter > 0 },
+            "countdown justify-center text-[150px] font-bold ",
+            { "animate-pulse": isTimeout && counter > 0 },
+            {
+              "animate-pulse": isPaused,
+            },
+            {
+              "lg:text-[300px]": counter <= 10,
+            },
+            counter === 0 ? "text-4xl lg:text-[250px] " : "lg:text-[500px]",
           )}
         >
-          <h1
-            className={clsx(
-              "countdown justify-center text-[150px] font-bold ",
-              { "animate-pulse": isTimeout && counter > 0 },
-              {
-                "animate-pulse": isPaused,
-              },
-              {
-                "lg:text-[300px]": counter <= 10,
-              },
-              counter === 0 ? "text-4xl lg:text-[250px] " : "lg:text-[500px]",
-            )}
-          >
-            {counter ? toCountDown(counter) : "Time's Up"}
-          </h1>
-          <AudioPlayer playing={isTimeout} src="/countdown.wav" />
-        </div>
+          {counter ? toCountDown(counter) : "Time's Up"}
+        </h1>
+        <AudioPlayer playing={isTimeout} src="/countdown.wav" />
       </div>
-    </>
+    </div>
   )
 }
 
