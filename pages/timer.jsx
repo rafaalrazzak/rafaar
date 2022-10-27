@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import clsx from "clsx"
+import AudioPlayer from "@components/AudioPlayer"
 import { toCountDown } from "@/utils/toCountDown"
 import { toMinuteSecond } from "@/utils/toMinuteSecond"
 import { useKeyboard } from "@/hooks/useKeyboard"
@@ -60,8 +61,8 @@ function Timer({ time }) {
           }
           return prevCounter - 1
         })
-      }, 900)
-      if (counter <= 10) {
+      }, 1000)
+      if (counter < 10) {
         setIsTimeOut(true)
       }
       return () => clearTimeout(timer)
@@ -78,7 +79,7 @@ function Timer({ time }) {
       >
         <h1
           className={clsx(
-            " countdown justify-center text-[150px] font-bold ",
+            "countdown justify-center text-[150px] font-bold ",
             { "animate-pulse": isTimeout && counter > 0 },
             {
               "animate-pulse": isPaused,
@@ -91,6 +92,7 @@ function Timer({ time }) {
         >
           {counter ? toCountDown(counter) : "Time's Up"}
         </h1>
+        <AudioPlayer playing={isTimeout} src="/countdown.wav" />
       </div>
     </div>
   )
