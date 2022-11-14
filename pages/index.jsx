@@ -5,17 +5,20 @@ import SocialMedia from "@/components/SocialMedia"
 import ProjectImage from "@/components/ProjectImage"
 import BlogCard from "@/components/BlogCard"
 import Link from "@/components/Link"
+import { ArrowDown, MailIcon, WorkIcon } from "@/icons"
 export default function Home() {
   return (
     <>
       <Layout>
-        <section>
+        <section className="mt-12">
           <Image
             src="https://res.cloudinary.com/raf-ar/image/upload/v1651370642/blog/avatars/rafa al razzak.jpg"
             width={50}
             height={50}
             alt="Rafa Al Razzak"
-            className="h-16 w-16 rounded-full bg-primary-100 object-cover dark:bg-primary-800"
+            className="h-16 w-16 bg-primary-100 object-cover dark:bg-primary-800"
+            priority
+            rounded
           />
 
           <Hero />
@@ -52,24 +55,7 @@ export default function Home() {
                   className="rounded-2xl border border-primary-100 p-6 dark:border-primary-700/40"
                 >
                   <h2 className="flex text-sm font-semibold text-primary-900 dark:text-primary-100">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      aria-hidden="true"
-                      className="h-6 w-6 flex-none"
-                    >
-                      <path
-                        d="M2.75 7.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z"
-                        className="fill-primary-100 stroke-primary-400 dark:fill-primary-100/10 dark:stroke-primary-500"
-                      />
-                      <path
-                        d="m4 6 6.024 5.479a2.915 2.915 0 0 0 3.952 0L20 6"
-                        className="stroke-primary-400 dark:stroke-primary-500"
-                      />
-                    </svg>
+                    <MailIcon />
                     <span className="ml-3">Stay up to date</span>
                   </h2>
                   <p className="mt-2 text-sm text-primary-600 dark:text-primary-400">
@@ -95,29 +81,12 @@ export default function Home() {
 
                 <div className="rounded-2xl border border-primary-100 p-6 dark:border-primary-700/40">
                   <h2 className="flex text-sm font-semibold text-primary-900 dark:text-primary-100">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      aria-hidden="true"
-                      className="h-6 w-6 flex-none"
-                    >
-                      <path
-                        d="M2.75 9.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z"
-                        className="fill-primary-100 stroke-primary-400 dark:fill-primary-100/10 dark:stroke-primary-500"
-                      />
-                      <path
-                        d="M3 14.25h6.249c.484 0 .952-.002 1.316.319l.777.682a.996.996 0 0 0 1.316 0l.777-.682c.364-.32.832-.319 1.316-.319H21M8.75 6.5V4.75a2 2 0 0 1 2-2h2.5a2 2 0 0 1 2 2V6.5"
-                        className="stroke-primary-400 dark:stroke-primary-500"
-                      />
-                    </svg>
+                    <WorkIcon />
                     <span className="ml-3">Work</span>
                   </h2>
                   <ol className="mt-6 space-y-4">
-                    <li className="flex gap-4">
-                      {/* <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-primary-800/5 ring-1 ring-primary-900/5 dark:border dark:border-primary-700/50 dark:bg-primary-800 dark:ring-0">
+                    <li className="flex gap-4 items-center">
+                      <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-primary-800/5 ring-1 ring-primary-900/5 dark:border dark:border-primary-700/50 dark:bg-primary-800 dark:ring-0">
                         <img
                           alt=""
                           src="https://spotlight.tailwindui.com/_next/static/media/planetaria.ecd81ade.svg"
@@ -129,7 +98,7 @@ export default function Home() {
                           loading="lazy"
                           style={{ color: "transparent" }}
                         />
-                      </div> */}
+                      </div>
                       <dl className="flex flex-auto flex-wrap gap-x-2">
                         <dt className="sr-only">Company</dt>
                         <dd className="w-full flex-none text-sm font-medium text-primary-900 dark:text-primary-100">
@@ -143,19 +112,7 @@ export default function Home() {
                     href="/#"
                   >
                     Download CV
-                    <svg
-                      viewBox="0 0 16 16"
-                      fill="none"
-                      aria-hidden="true"
-                      className="h-4 w-4 stroke-primary-400 transition group-active:stroke-primary-600 dark:group-hover:stroke-primary-50 dark:group-active:stroke-primary-50"
-                    >
-                      <path
-                        d="M4.75 8.75 8 12.25m0 0 3.25-3.5M8 12.25v-8.5"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
+                    <ArrowDown />
                   </Link>
                 </div>
               </div>

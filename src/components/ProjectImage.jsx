@@ -24,7 +24,7 @@ function ProjectImage() {
           <Image
             src={project.url}
             width={200}
-            height={300}
+            height={500}
             alt={project.name}
             className="absolute inset-0 h-full object-cover"
           />
