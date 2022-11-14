@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react"
 import clsx from "clsx"
+import AudioPlayer from "@components/AudioPlayer"
 import { toCountDown } from "@/utils/toCountDown"
 import { toMinuteSecond } from "@/utils/toMinuteSecond"
 import { useKeyboard } from "@/hooks/useKeyboard"
 import Keyboard from "@data/Keyboard.json"
+import Navbar from "@/components/Navbar"
 
 export async function getServerSideProps(req) {
   const query = req.query
@@ -60,8 +62,8 @@ function Timer({ time }) {
           }
           return prevCounter - 1
         })
-      }, 900)
-      if (counter <= 10) {
+      }, 1000)
+      if (counter < 5) {
         setIsTimeOut(true)
       }
       return () => clearTimeout(timer)
@@ -72,22 +74,26 @@ function Timer({ time }) {
     <div className="relative overflow-hidden text-black transition-all duration-300 ease-in-out">
       <div
         className={clsx(
-          "flex h-screen w-full items-center justify-center bg-white",
+          "flex h-screen w-screen items-center justify-center bg-white",
           { "animate-pulse bg-red-500 ": isTimeout && counter > 0 },
         )}
       >
         <h1
           className={clsx(
-            "countdown text-[150px] font-bold ",
-            { "animate-ping ": isTimeout && counter > 0 },
+            "countdown justify-center text-[150px] font-bold ",
+            { "animate-pulse": isTimeout && counter > 0 },
             {
               "animate-pulse": isPaused,
             },
-            counter == 0 ? "text-4xl lg:text-[300px]" : "lg:text-[300px]",
+            {
+              "lg:text-[300px]": counter <= 10,
+            },
+            counter === 0 ? "text-4xl lg:text-[250px] " : "lg:text-[500px]",
           )}
         >
           {counter ? toCountDown(counter) : "Time's Up"}
         </h1>
+        <AudioPlayer playing={isTimeout} src="/countdown.wav" />
       </div>
     </div>
   )
