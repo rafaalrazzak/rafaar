@@ -15,6 +15,7 @@ module.exports = {
       colors: {
         primary: colors.zinc,
         secondary: colors.teal,
+        theme: colors.zinc,
       },
     },
   },
