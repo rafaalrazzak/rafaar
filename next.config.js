@@ -4,6 +4,7 @@ const nextConfig = {
   images: {
     domains: [
       "res.cloudinary.com",
+      "spotlight.tailwindui.com",
       "images.unsplash.com",
       "og-image.vercel.app",
     ],

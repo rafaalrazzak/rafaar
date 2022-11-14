@@ -14,7 +14,7 @@ export default function Home() {
         <SEO title="Hello" />
         <section className="mt-12">
           <Image
-            src="https://res.cloudinary.com/raf-ar/image/upload/v1651370642/blog/avatars/rafa al razzak.jpg"
+            src="/rafaar.jpg"
             width={50}
             height={50}
             alt="Rafa Al Razzak"
