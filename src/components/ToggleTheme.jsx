@@ -7,9 +7,11 @@ function ToggleTheme() {
     setTheme(theme === "dark" ? "light" : "dark")
   }
 
+  console.log(theme)
+
   return (
     <Button aria-label="Toggle dark mode" onClick={toggleTheme} size="small">
-      {theme === "dark" ? <MoonIcon /> : <SunIcon />}
+      {theme == "dark" ? <SunIcon /> : <MoonIcon />}
     </Button>
   )
 }
