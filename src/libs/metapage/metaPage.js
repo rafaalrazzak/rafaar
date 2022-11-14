@@ -2,7 +2,7 @@ import siteMetadata from "@/data/siteMetadata"
 
 export const getMetaPage = (data) => {
   return {
-    canonical: SITE_URL + data.slug,
+    canonical: siteMetadata.SITE_URL + data.slug,
     openGraph: {
       images: [
         {
@@ -13,7 +13,7 @@ export const getMetaPage = (data) => {
         },
       ],
       site_name: siteMetadata.SITE_NAME,
-      url: SITE_URL + data.slug,
+      url: siteMetadata.SITE_URL + data.slug,
       type: data.type ?? "website",
     },
     twitter: {
