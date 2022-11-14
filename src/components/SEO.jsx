@@ -16,7 +16,7 @@ export const SEO = ({ ...props }) => {
   const DESCRIPTION =
     props.description ?? (siteMetadata.SITE_DESCRIPTION || "hello world!")
 
-  const thumb = `${siteMetadata.SITE_URL}/api/og?title=${TITLE_TEMPLATE}`
+  const thumb = `${siteMetadata.SITE_URL}/api/og?title=${props.title} — ${siteMetadata.SITE_NAME}`
 
   return (
     <NextSeo
