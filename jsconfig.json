@@ -1,14 +1,15 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
-      "@/*": ["src/*"],
-      "@components/*": ["src/components/*"],
-      "@icons": ["src/icons/index.js"],
-      "@data/*": ["src/data/*"],
-      "@utils/*": ["src/utils/*"],
-      "@libs/*": ["src/libs/*"],
-      "@hooks/*": ["src/hooks/*"]
+      "@/hooks": ["hooks/index.js"],
+      "@/stores": ["stores/index.js"],
+      "@/components/*": ["components/*"],
+      "@/icons": ["icons/index.js"],
+      "@/data/*": ["data/*"],
+      "@/utils/*": ["utils/*"],
+      "@/libs/*": ["libs/*"],
+      "@/hooks/*": ["hooks/*"]
     }
   }
 }

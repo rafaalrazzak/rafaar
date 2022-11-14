@@ -1,4 +1,4 @@
-import { twclsx } from "@/utils/twClsx"
+import { twclsx } from "@/libs/twclsx"
 
 import { useClickOutside } from "@/hooks/useClickOutside"
 
