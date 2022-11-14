@@ -6,10 +6,12 @@ import ProjectImage from "@/components/ProjectImage"
 import BlogCard from "@/components/BlogCard"
 import Link from "@/components/Link"
 import { ArrowDown, MailIcon, WorkIcon } from "@/icons"
+import { SEO } from "@/components/SEO"
 export default function Home() {
   return (
     <>
       <Layout>
+        <SEO title="Hello" />
         <section className="mt-12">
           <Image
             src="https://res.cloudinary.com/raf-ar/image/upload/v1651370642/blog/avatars/rafa al razzak.jpg"
