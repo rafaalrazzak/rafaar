@@ -1,3 +1,5 @@
+"use client"
+
 import ToggleTheme from "./ToggleTheme"
 import Navbar from "./Navbar"
 function Header() {

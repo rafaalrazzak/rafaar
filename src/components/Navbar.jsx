@@ -12,7 +12,7 @@ function Items({ className, children }) {
 
 function Item({ href, children }) {
   const router = useRouter()
-  const thisPage = router.asPath === href
+  const thisPage = router?.asPath === href
 
   return (
     <li
