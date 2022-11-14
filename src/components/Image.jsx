@@ -1,30 +1,21 @@
-"use client"
-
 import NextImage from "next/image"
+import clsx from "clsx"
 import { useState } from "react"
 
-function cn(...classes) {
-  return classes.filter(Boolean).join(" ")
-}
-
-function completeLoad() {
-  console.log("Complete")
-}
-
-function Image({ ...rest }) {
-  const [isLoading, setLoading] = useState(true)
+function Image({ rounded, ...rest }) {
+  const [isLoading, setIsLoading] = useState(true)
   return (
     <NextImage
       {...rest}
-      loading="lazy"
       quality={isLoading ? "5" : "75"}
-      className={cn(
-        "object-cover duration-700 ease-in-out",
+      className={clsx(
+        "duration-700 ease-in-out",
         isLoading
-          ? "scale-110 blur-xl grayscale"
+          ? "scale-110 blur-2xl grayscale"
           : "scale-100 blur-0 grayscale-0",
+        rounded && "rounded-full",
       )}
-      onLoadingComplete={completeLoad}
+      onLoadingComplete={() => setIsLoading(!isLoading)}
     />
   )
 }
