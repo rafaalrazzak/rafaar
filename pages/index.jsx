@@ -85,7 +85,7 @@ export default function Home() {
                     <span className="ml-3">Work</span>
                   </h2>
                   <ol className="mt-6 space-y-4">
-                    <li className="flex gap-4 items-center">
+                    <li className="flex items-center gap-4">
                       <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-primary-800/5 ring-1 ring-primary-900/5 dark:border dark:border-primary-700/50 dark:bg-primary-800 dark:ring-0">
                         <img
                           alt=""

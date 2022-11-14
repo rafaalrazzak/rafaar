@@ -4,7 +4,6 @@ export const useKeyboard = (keys, callback, node = null) => {
   // implement the callback ref pattern
   const callbackRef = useRef(callback)
 
-
   // handle what happens on key press
   const handleKeyPress = useCallback(
     (event) => {
