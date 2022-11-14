@@ -1,8 +1,9 @@
-import ToggleTheme from "./ToggleTheme"
+// import ToggleTheme from "./ToggleTheme"
+import { ThemeButton } from "./ThemeButton"
 import Navbar from "./Navbar"
 function Header() {
   return (
-    <header className=" xl:w-12/12 fixed inset-x-0 top-0 z-50  mx-auto overflow-hidden px-8 lg:px-10 2xl:w-8/12">
+    <header className=" xl:w-12/12 fixed inset-x-0 top-0 z-50  mx-auto h-96 overflow-hidden px-8 lg:px-10 2xl:w-8/12">
       <Navbar className="mx-auto  flex justify-center">
         <Navbar.Items className="flex w-full items-center justify-between gap-3 lg:gap-6">
           <h1 className="hidden text-lg font-semibold sm:flex">rafaar.</h1>
@@ -11,7 +12,7 @@ function Header() {
             <Navbar.Item href="/about">About</Navbar.Item>
             <Navbar.Item href="/contact">Contact</Navbar.Item>
           </div>
-          <ToggleTheme />
+          <ThemeButton />
         </Navbar.Items>
       </Navbar>
     </header>

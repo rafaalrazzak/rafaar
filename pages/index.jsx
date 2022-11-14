@@ -6,13 +6,15 @@ import ProjectImage from "@/components/ProjectImage"
 import BlogCard from "@/components/BlogCard"
 import Link from "@/components/Link"
 import { ArrowDown, MailIcon, WorkIcon } from "@/icons"
+import { SEO } from "@/components/SEO"
 export default function Home() {
   return (
     <>
       <Layout>
+        <SEO title="Hello" />
         <section className="mt-12">
           <Image
-            src="https://res.cloudinary.com/raf-ar/image/upload/v1651370642/blog/avatars/rafa al razzak.jpg"
+            src="/rafaar.jpg"
             width={50}
             height={50}
             alt="Rafa Al Razzak"
@@ -85,9 +87,9 @@ export default function Home() {
                     <span className="ml-3">Work</span>
                   </h2>
                   <ol className="mt-6 space-y-4">
-                    <li className="flex gap-4 items-center">
+                    <li className="flex items-center gap-4">
                       <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-primary-800/5 ring-1 ring-primary-900/5 dark:border dark:border-primary-700/50 dark:bg-primary-800 dark:ring-0">
-                        <img
+                        <Image
                           alt=""
                           src="https://spotlight.tailwindui.com/_next/static/media/planetaria.ecd81ade.svg"
                           width={32}
