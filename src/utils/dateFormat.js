@@ -3,7 +3,7 @@
  * @param {string | Date} date - The date to format.
  * @returns The date in the format of Month Day, Year.
  */
-export const dateFormat = (date, locales?, config?) => {
+export const dateFormat = (date, locales, config) => {
   return new Intl.DateTimeFormat(
     locales ?? "en-GB",
     config ?? { dateStyle: "full" },
