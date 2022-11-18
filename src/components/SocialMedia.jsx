@@ -1,5 +1,5 @@
 import SocialMediaData from "@/data/SocialMedia.json"
-import { TwitterIcon, InstagramIcon, GithubIcon } from "@icons"
+import { TwitterIcon, InstagramIcon, GithubIcon } from "@/icons"
 
 import Link from "./Link"
 function SocialMedia() {

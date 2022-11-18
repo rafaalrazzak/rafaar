@@ -9,12 +9,12 @@ function ProjectImage() {
   // }
 
   return (
-    <div className="relative flex justify-center gap-5  py-12 sm:gap-8">
+    <div className="relative inset-x-0 flex justify-center gap-5  py-12 sm:gap-8">
       {Project.map((project, index) => (
         <div
           key={index}
           className={clsx(
-            "relative aspect-[9/10]  flex-none overflow-hidden rounded-xl  sm:rounded-2xl ",
+            "relative aspect-[9/10] flex-none  overflow-clip   rounded-xl  sm:rounded-2xl ",
             {
               "-rotate-2": index % 2 === 0,
               "rotate-2": index % 2 === 1,
