@@ -33,10 +33,10 @@ export const SEO = ({ ...props }) => {
             width: 1200,
             height: 630,
             alt: TITLE_TEMPLATE,
-            type: 'image/jpeg'
-          }
+            type: 'image/jpeg',
+          },
         ],
-        siteName: TITLE_TEMPLATE
+        siteName: TITLE_TEMPLATE,
       }}
     />
   )

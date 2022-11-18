@@ -2,7 +2,7 @@ import SocialMediaData from '@/data/SocialMedia.json'
 import { GithubIcon, InstagramIcon, TwitterIcon } from '@/icons'
 
 import Link from './Link'
-function SocialMedia () {
+function SocialMedia() {
   const Icon = ({ name }) => {
     switch (name) {
       case 'Twitter':

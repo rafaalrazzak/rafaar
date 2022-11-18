@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 /* eslint-disable react/no-unescaped-entities */
 
-function Hero ({ className }) {
+function Hero({ className }) {
   return (
     <div className={clsx('flex max-w-lg flex-col gap-6 py-6', className)}>
       <h1>Rafa Al Razzak</h1>

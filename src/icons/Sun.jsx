@@ -1,4 +1,4 @@
-function Sun () {
+function Sun() {
   return (
     <svg
       viewBox="0 0 24 24"

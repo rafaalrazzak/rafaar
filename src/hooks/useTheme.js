@@ -30,6 +30,6 @@ export const useTheme = () => {
     systemTheme,
     dropdownIsOpen,
     toggleDropdown,
-    closeDropdown
+    closeDropdown,
   }
 }

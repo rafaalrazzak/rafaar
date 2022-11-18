@@ -1,4 +1,4 @@
-function Work () {
+function Work() {
   return (
     <svg
       viewBox="0 0 24 24"

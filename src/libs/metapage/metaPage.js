@@ -9,25 +9,25 @@ export const getMetaPage = (data) => {
           url: data.og_image,
           alt: data.og_image_alt,
           width: 1200,
-          height: 600
-        }
+          height: 600,
+        },
       ],
       site_name: siteMetadata.SITE_NAME,
       url: siteMetadata.SITE_URL + data.slug,
-      type: data.type ?? 'website'
+      type: data.type ?? 'website',
     },
     twitter: {
       cardType: 'summary_large_image',
       // TODO: Change to your Tiwetter username
       site: siteMetadata.TWITER_USERNAME,
-      handle: siteMetadata.TWITER_USERNAME
+      handle: siteMetadata.TWITER_USERNAME,
     },
     additionalMetaTags: [
       {
         name: 'keywords',
-        content: data.keywords.join(', ')
-      }
+        content: data.keywords.join(', '),
+      },
     ],
-    ...data
+    ...data,
   }
 }

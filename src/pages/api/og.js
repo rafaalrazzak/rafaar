@@ -43,7 +43,7 @@ export default async function handler(req) {
       {
         width: 1200,
         height: 630,
-      },
+      }
     )
   } catch (e) {
     console.log(`${e.message}`)

@@ -9,7 +9,7 @@ export const useScroll = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   })
 
-  function handleScroll () {
+  function handleScroll() {
     const currentYOffset = window.pageYOffset
     const visible = yOffset > currentYOffset
 

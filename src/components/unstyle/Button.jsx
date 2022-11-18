@@ -7,7 +7,7 @@ export const UnstyledButton = ({ children, className, ...props }) => {
     'button',
     {
       ...props,
-      className: twclsx('inline-flex items-center justify-center', className)
+      className: twclsx('inline-flex items-center justify-center', className),
     },
     children
   )

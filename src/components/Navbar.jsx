@@ -3,15 +3,15 @@ import { useRouter } from 'next/router'
 
 import Link from './Link'
 
-function NavbarComponent ({ className, children }) {
+function NavbarComponent({ className, children }) {
   return <nav className={clsx('flex py-6', className)}>{children}</nav>
 }
 
-function Items ({ className, children }) {
+function Items({ className, children }) {
   return <ul className={clsx('flex', className)}>{children}</ul>
 }
 
-function Item ({ href, children }) {
+function Item({ href, children }) {
   const router = useRouter()
   const thisPage = router?.asPath === href
 
@@ -36,5 +36,5 @@ function Item ({ href, children }) {
 
 export default Object.assign(NavbarComponent, {
   Items,
-  Item
+  Item,
 })

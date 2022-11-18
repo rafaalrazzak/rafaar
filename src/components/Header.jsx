@@ -6,7 +6,7 @@ import { useScroll } from '@/hooks'
 import Image from './Image'
 import Navbar from './Navbar'
 import { ThemeButton } from './ThemeButton'
-function Header () {
+function Header() {
   const visible = useScroll()
   return (
     <header

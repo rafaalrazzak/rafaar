@@ -4,7 +4,7 @@ import { ArrowRightIcon } from '@/icons'
 
 import Link from './Link'
 
-function BlogCard ({ title, description, publishOn, url }) {
+function BlogCard({ title, description, publishOn, url }) {
   return (
     <article className="group relative flex flex-col justify-start ">
       <div className=" transition-color  rounded-xl p-4 ease-in-out group-hover:bg-primary-50 dark:group-hover:bg-primary-800/50 sm:rounded-2xl">

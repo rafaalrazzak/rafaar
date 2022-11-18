@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import NextImage from 'next/image'
 import { useState } from 'react'
 
-function Image ({ ...rest }) {
+function Image({ ...rest }) {
   const [isLoading, setIsLoading] = useState(true)
   return (
     <NextImage

@@ -31,6 +31,6 @@ export const useDrawer = () => {
 
   return {
     isOpen,
-    changeState
+    changeState,
   }
 }

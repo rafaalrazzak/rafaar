@@ -1,10 +1,10 @@
 import clsx from 'clsx'
 
-function Button ({ children, size, ...props }) {
+function Button({ children, size, ...props }) {
   const sizes = {
     xs: 'text-xs p-1',
     small: 'text-sm py-2 px-4',
-    normal: 'px-3 py-2'
+    normal: 'px-3 py-2',
   }
 
   return (

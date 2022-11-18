@@ -1,7 +1,7 @@
 import {
   ComputerDesktopIcon,
   MoonIcon,
-  SunIcon
+  SunIcon,
 } from '@heroicons/react/24/outline'
 import { m } from 'framer-motion'
 import { useCallback, useEffect, useMemo, useRef } from 'react'
@@ -18,7 +18,7 @@ export const ThemeMenu = (props) => {
     (() => ({
       hidden: { opacity: 0, translateY: 25 },
       enter: { opacity: 1, translateY: 0 },
-      exit: { opacity: 0, translateY: 20 }
+      exit: { opacity: 0, translateY: 20 },
     }),
     [])
 
@@ -26,7 +26,7 @@ export const ThemeMenu = (props) => {
     () => [
       { name: 'Light', value: 'light', Icon: SunIcon },
       { name: 'Dark', value: 'dark', Icon: MoonIcon },
-      { name: 'System', value: 'system', Icon: ComputerDesktopIcon }
+      { name: 'System', value: 'system', Icon: ComputerDesktopIcon },
     ],
     []
   )
@@ -49,7 +49,7 @@ export const ThemeMenu = (props) => {
       const changeOpts = {
         ' ': true,
         SpaceBar: true,
-        Enter: true
+        Enter: true,
       }
 
       if ((e.key === ARROW_DOWN || e.key === ARROW_RIGHT) && elArrowDown) {

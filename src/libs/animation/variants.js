@@ -1,11 +1,11 @@
 const hidden = {
   y: 15,
-  opacity: 0
+  opacity: 0,
 }
 
 const visible = {
   y: 0,
-  opacity: 1
+  opacity: 1,
 }
 
 const variants = () => ({
@@ -14,9 +14,9 @@ const variants = () => ({
     ...visible,
     transition: {
       type: 'tween',
-      duration: 0.15
-    }
-  }
+      duration: 0.15,
+    },
+  },
 })
 
 export const withExit = (func) => {
@@ -29,9 +29,9 @@ export const withExit = (func) => {
       opacity: 0,
       transition: {
         type: 'tween',
-        duration: 0.25
-      }
-    }
+        duration: 0.25,
+      },
+    },
   }
 }
 

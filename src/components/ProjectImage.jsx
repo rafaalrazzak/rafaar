@@ -5,7 +5,7 @@ import Project from '@/data/Project.json'
 
 import Image from './Image'
 
-function ProjectImage () {
+function ProjectImage() {
   // const generateUrl = (url) => {
   //   return `https://res.cloudinary.com/raf-ar/image/upload/v1651370642/blog/projects/${url}.jpg`
   // }
@@ -19,7 +19,7 @@ function ProjectImage () {
             'relative aspect-[9/10] flex-none  overflow-clip   rounded-xl  sm:rounded-2xl ',
             {
               '-rotate-2': index % 2 === 0,
-              'rotate-2': index % 2 === 1
+              'rotate-2': index % 2 === 1,
             }
           )}
         >

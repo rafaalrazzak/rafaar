@@ -11,22 +11,22 @@ const container = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.05, ease: 'easeOut' }
-  }
+    transition: { staggerChildren: 0.05, ease: 'easeOut' },
+  },
 }
 
 const item = {
   hidden: {
     ...container.hidden,
-    x: -20
+    x: -20,
   },
   visible: {
     opacity: 1,
     x: 0,
     transition: {
-      ease: 'easeOut'
-    }
-  }
+      ease: 'easeOut',
+    },
+  },
 }
 
 export const DrawerMenu = () => {
