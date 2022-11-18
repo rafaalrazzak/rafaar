@@ -23,11 +23,7 @@ function MyApp({ Component, pageProps, router }) {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className={
-              router.pathname !== "/resume"
-                ? "layout"
-                : "mx-auto w-11/12 max-w-3xl"
-            }
+          
           >
             <Component {...pageProps} />
           </m.div>

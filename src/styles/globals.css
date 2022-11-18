@@ -45,9 +45,6 @@
   .accessible {
     @apply ring-primary-400 transition-all duration-150 hover:ring dark:ring-theme-600;
   }
-  .layout {
-    @apply mx-auto w-[86%] max-w-2xl md:w-full;
-  }
   .content-auto {
     content-visibility: auto;
   }

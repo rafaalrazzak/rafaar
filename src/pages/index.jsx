@@ -12,7 +12,7 @@ export default function Home() {
     <>
       <Layout>
         <SEO title="Hello" />
-        <section className="mt-12">
+        <section>
           <Image
             src="/rafaar.jpg"
             width={50}
@@ -51,7 +51,7 @@ export default function Home() {
                 />
               </div>
 
-              <div className="flex flex-col gap-6">
+              {/* <div className="flex flex-col gap-6">
                 <form
                   action="/thank-you"
                   className="rounded-2xl border border-primary-100 p-6 dark:border-primary-700/40"
@@ -117,7 +117,7 @@ export default function Home() {
                     <ArrowDown />
                   </Link>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </section>
