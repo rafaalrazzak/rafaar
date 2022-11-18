@@ -4,14 +4,14 @@
 
 @layer base {
   ::selection {
-    @apply bg-primary-200 text-theme-900 dark:bg-primary-400 dark:text-white;
+    @apply bg-secondary-300 text-theme-900 dark:bg-secondary-700 dark:text-primary-100;
   }
   h1 {
-    @apply text-3xl font-bold text-theme-800 dark:text-theme-100 md:text-4xl;
+    @apply text-3xl font-bold md:text-4xl;
   }
 
   h2 {
-    @apply text-2xl font-bold text-theme-800 dark:text-theme-100 md:text-3xl;
+    @apply text-2xl font-bold  md:text-3xl;
   }
 
   h3 {
@@ -23,6 +23,10 @@
   }
   h5 {
     @apply font-bold text-theme-800 dark:text-theme-100 md:text-lg;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text  text-transparent;
   }
 
   body {
@@ -54,5 +58,12 @@
   }
   .dark .border-toast {
     border-image: linear-gradient(to bottom right, #3b82f6, #14b8a6) 1;
+  }
+  img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
   }
 }

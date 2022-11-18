@@ -13,20 +13,10 @@ export default function Home() {
       <Layout>
         <SEO title="Hello" />
         <section>
-          <Image
-            src="/rafaar.jpg"
-            width={50}
-            height={50}
-            alt="Rafa Al Razzak"
-            className="h-16 w-16 bg-primary-100 object-cover dark:bg-primary-800"
-            priority
-            rounded
-          />
-
           <Hero />
           <SocialMedia />
         </section>
-        <section className="flex flex-col items-center justify-center">
+        <section className="flex flex-col items-center justify-center py-6">
           <ProjectImage />
           <span className="dark:text-priary-300 my-12 text-sm text-primary-600">
             Photo By Unsplash
