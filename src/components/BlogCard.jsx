@@ -1,6 +1,8 @@
-import { ArrowRightIcon } from "@/icons"
-import React from "react"
-import Link from "./Link"
+import React from 'react'
+
+import { ArrowRightIcon } from '@/icons'
+
+import Link from './Link'
 
 function BlogCard({ title, description, publishOn, url }) {
   return (

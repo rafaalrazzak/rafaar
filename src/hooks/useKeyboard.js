@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from "react"
+import { useCallback, useEffect, useRef } from 'react'
 
 export const useKeyboard = (keys, callback, node = null) => {
   // implement the callback ref pattern
@@ -12,17 +12,17 @@ export const useKeyboard = (keys, callback, node = null) => {
         callbackRef.current(event)
       }
     },
-    [keys],
+    [keys]
   )
 
   useEffect(() => {
     // target is either the provided node or the document
     const targetNode = node ?? document
     // attach the event listener
-    targetNode && targetNode.addEventListener("keydown", handleKeyPress)
+    targetNode && targetNode.addEventListener('keydown', handleKeyPress)
 
     // remove the event listener
     return () =>
-      targetNode && targetNode.removeEventListener("keydown", handleKeyPress)
+      targetNode && targetNode.removeEventListener('keydown', handleKeyPress)
   }, [handleKeyPress, node])
 }

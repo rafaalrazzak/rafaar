@@ -3,8 +3,8 @@ export const toCountDown = (seconds) => {
   const remainingSeconds = seconds % 60
   return (
     <>
-      <span style={{ "--value": minutes }}></span>:
-      <span style={{ "--value": remainingSeconds }}></span>
+      <span style={{ '--value': minutes }}></span>:
+      <span style={{ '--value': remainingSeconds }}></span>
     </>
   )
 }

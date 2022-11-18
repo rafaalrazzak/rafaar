@@ -1,4 +1,4 @@
-import siteMetadata from "@/data/siteMetadata"
+import siteMetadata from '@/data/siteMetadata'
 
 export const getMetaPage = (data) => {
   return {
@@ -14,18 +14,18 @@ export const getMetaPage = (data) => {
       ],
       site_name: siteMetadata.SITE_NAME,
       url: siteMetadata.SITE_URL + data.slug,
-      type: data.type ?? "website",
+      type: data.type ?? 'website',
     },
     twitter: {
-      cardType: "summary_large_image",
+      cardType: 'summary_large_image',
       // TODO: Change to your Tiwetter username
       site: siteMetadata.TWITER_USERNAME,
       handle: siteMetadata.TWITER_USERNAME,
     },
     additionalMetaTags: [
       {
-        name: "keywords",
-        content: data.keywords.join(", "),
+        name: 'keywords',
+        content: data.keywords.join(', '),
       },
     ],
     ...data,

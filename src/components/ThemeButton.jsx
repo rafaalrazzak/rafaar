@@ -1,12 +1,11 @@
-import { UnstyledButton } from "./UnstyleButton"
-import { ThemeMenu } from "./ThemeMenu"
+import { ArrowPathIcon, MoonIcon, SunIcon } from '@heroicons/react/24/outline'
+import { AnimatePresence } from 'framer-motion'
 
-import { twclsx } from "@/utils/twClsx"
+import { useTheme } from '@/hooks/useTheme'
+import { twclsx } from '@/libs/twclsx'
 
-import { useTheme } from "@/hooks/useTheme"
-
-import { AnimatePresence } from "framer-motion"
-import { MoonIcon, SunIcon, ArrowPathIcon } from "@heroicons/react/24/outline"
+import { ThemeMenu } from './ThemeMenu'
+import { UnstyledButton } from './unstyle/Button'
 
 export const ThemeButton = () => {
   const theme = useTheme()
@@ -21,22 +20,22 @@ export const ThemeButton = () => {
         onClick={theme.toggleDropdown}
         title="Switch Theme"
         className={twclsx(
-          "accessible relative",
-          "h-10 w-10  text-sm",
-          "rounded-full",
-          "bg-white/90  shadow-lg shadow-primary-800/5 ring-1 ring-primary-900/5 backdrop-blur transition dark:bg-primary-800/90 dark:ring-white/10 dark:hover:ring-white/20",
+          'accessible relative',
+          'h-10 w-10  text-sm',
+          'rounded-full',
+          'bg-white/90  shadow-lg shadow-primary-800/5 ring-1 ring-primary-900/5 backdrop-blur transition dark:bg-primary-800/90 dark:ring-white/10 dark:hover:ring-white/20'
         )}
       >
-        {(theme.theme === "dark" ||
-          (theme.theme === "system" && theme.systemTheme === "dark")) && (
+        {(theme.theme === 'dark' ||
+          (theme.theme === 'system' && theme.systemTheme === 'dark')) && (
           <MoonIcon
-            className={twclsx("w-5 text-secondary-400", "pointer-events-none")}
+            className={twclsx('w-5 text-secondary-400', 'pointer-events-none')}
           />
         )}
-        {(theme.theme === "light" ||
-          (theme.theme === "system" && theme.systemTheme === "light")) && (
+        {(theme.theme === 'light' ||
+          (theme.theme === 'system' && theme.systemTheme === 'light')) && (
           <SunIcon
-            className={twclsx("w-5 text-primary-700", "pointer-events-none")}
+            className={twclsx('w-5 text-primary-700', 'pointer-events-none')}
           />
         )}
       </UnstyledButton>

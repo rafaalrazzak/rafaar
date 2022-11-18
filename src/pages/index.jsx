@@ -1,32 +1,19 @@
-import Hero from "@/components/Hero"
-import Image from "@/components/Image"
-import Layout from "@/components/Layout"
-import SocialMedia from "@/components/SocialMedia"
-import ProjectImage from "@/components/ProjectImage"
-import BlogCard from "@/components/BlogCard"
-import Link from "@/components/Link"
-import { ArrowDown, MailIcon, WorkIcon } from "@/icons"
-import { SEO } from "@/components/SEO"
+import BlogCard from '@/components/BlogCard'
+import Hero from '@/components/Hero'
+import Layout from '@/components/Layout'
+import ProjectImage from '@/components/ProjectImage'
+import { SEO } from '@/components/SEO'
+import SocialMedia from '@/components/SocialMedia'
 export default function Home() {
   return (
     <>
       <Layout>
         <SEO title="Hello" />
-        <section className="mt-12">
-          <Image
-            src="/rafaar.jpg"
-            width={50}
-            height={50}
-            alt="Rafa Al Razzak"
-            className="h-16 w-16 bg-primary-100 object-cover dark:bg-primary-800"
-            priority
-            rounded
-          />
-
+        <section>
           <Hero />
           <SocialMedia />
         </section>
-        <section className="flex flex-col items-center justify-center">
+        <section className="flex flex-col items-center justify-center py-6">
           <ProjectImage />
           <span className="dark:text-priary-300 my-12 text-sm text-primary-600">
             Photo By Unsplash
@@ -51,7 +38,7 @@ export default function Home() {
                 />
               </div>
 
-              <div className="flex flex-col gap-6">
+              {/* <div className="flex flex-col gap-6">
                 <form
                   action="/thank-you"
                   className="rounded-2xl border border-primary-100 p-6 dark:border-primary-700/40"
@@ -117,7 +104,7 @@ export default function Home() {
                     <ArrowDown />
                   </Link>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </section>

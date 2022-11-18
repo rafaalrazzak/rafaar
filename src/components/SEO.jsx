@@ -1,7 +1,7 @@
-import { NextSeo } from "next-seo"
-import { useRouter } from "next/router"
+import { useRouter } from 'next/router'
+import { NextSeo } from 'next-seo'
 
-import siteMetadata from "@/data/siteMetadata"
+import siteMetadata from '@/data/siteMetadata'
 
 /**
  * It takes a NextSeoProps object and returns a `<NextSeo /> component`.
@@ -10,11 +10,11 @@ export const SEO = ({ ...props }) => {
   const router = useRouter()
 
   const TITLE_TEMPLATE = `%s — ${
-    props.template ?? (siteMetadata.SITE_NAME || "rafaar.")
+    props.template ?? (siteMetadata.SITE_NAME || 'rafaar.')
   }`
 
   const DESCRIPTION =
-    props.description ?? (siteMetadata.SITE_DESCRIPTION || "hello world!")
+    props.description ?? (siteMetadata.SITE_DESCRIPTION || 'hello world!')
 
   const thumb = `${siteMetadata.SITE_URL}/api/og?title=${props.title} — ${siteMetadata.SITE_NAME}`
 
@@ -33,7 +33,7 @@ export const SEO = ({ ...props }) => {
             width: 1200,
             height: 630,
             alt: TITLE_TEMPLATE,
-            type: "image/jpeg",
+            type: 'image/jpeg',
           },
         ],
         siteName: TITLE_TEMPLATE,

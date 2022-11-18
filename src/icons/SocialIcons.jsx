@@ -1,5 +1,5 @@
-import Twitter from "./Twitter"
-import Instagram from "./Instagram"
-import Github from "./Github"
+import Github from './Github'
+import Instagram from './Instagram'
+import Twitter from './Twitter'
 
-export { Twitter, Instagram, Github }
+export { Github, Instagram, Twitter }
