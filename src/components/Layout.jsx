@@ -1,6 +1,6 @@
-import Container from "./Container"
-import Header from "./Header"
-function Layout({ children }) {
+import Container from './Container'
+import Header from './Header'
+function Layout ({ children }) {
   return (
     <>
       <main>

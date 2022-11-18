@@ -1,18 +1,18 @@
-import NextImage from "next/image"
-import { useState } from "react"
-import clsx from "clsx"
+import clsx from 'clsx'
+import NextImage from 'next/image'
+import { useState } from 'react'
 
-function Image({ ...rest }) {
+function Image ({ ...rest }) {
   const [isLoading, setIsLoading] = useState(true)
   return (
     <NextImage
       {...rest}
-      quality={isLoading ? "1" : "75"}
+      quality={isLoading ? '1' : '75'}
       className={clsx(
-        "duration-700 ease-in-out ",
+        'duration-700 ease-in-out ',
         isLoading
-          ? "scale-110 blur-2xl grayscale"
-          : "scale-100 blur-0 grayscale-0",
+          ? 'scale-110 blur-2xl grayscale'
+          : 'scale-100 blur-0 grayscale-0'
       )}
       onLoadingComplete={() => setIsLoading(!isLoading)}
     />

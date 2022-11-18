@@ -5,8 +5,8 @@
  */
 export const dateFormat = (date, locales, config) => {
   return new Intl.DateTimeFormat(
-    locales ?? "en-GB",
-    config ?? { dateStyle: "full" },
+    locales ?? 'en-GB',
+    config ?? { dateStyle: 'full' }
   ).format(new Date(date))
 }
 
@@ -16,5 +16,5 @@ export const dateFormat = (date, locales, config) => {
  */
 export const dateStringToISO = (
   /** provide valid date value in string, for example: `05/05/2005` that's going to be **5 May 2005** */
-  date,
+  date
 ) => new Date(date).toISOString()

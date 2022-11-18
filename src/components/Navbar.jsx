@@ -1,28 +1,29 @@
-import clsx from "clsx"
-import { useRouter } from "next/router"
-import Link from "./Link"
+import clsx from 'clsx'
+import { useRouter } from 'next/router'
 
-function NavbarComponent({ className, children }) {
-  return <nav className={clsx("flex py-6", className)}>{children}</nav>
+import Link from './Link'
+
+function NavbarComponent ({ className, children }) {
+  return <nav className={clsx('flex py-6', className)}>{children}</nav>
 }
 
-function Items({ className, children }) {
-  return <ul className={clsx("flex", className)}>{children}</ul>
+function Items ({ className, children }) {
+  return <ul className={clsx('flex', className)}>{children}</ul>
 }
 
-function Item({ href, children }) {
+function Item ({ href, children }) {
   const router = useRouter()
   const thisPage = router?.asPath === href
 
   return (
     <li
       className={clsx(
-        "text-sm font-semibold transition-colors ease-in-out hover:text-secondary-500",
+        'text-sm font-semibold transition-colors ease-in-out hover:text-secondary-500'
       )}
     >
       <Link
         href={href}
-        className={clsx(thisPage && "relative flex text-secondary-500")}
+        className={clsx(thisPage && 'relative flex text-secondary-500')}
       >
         {children}
         {thisPage && (
@@ -35,5 +36,5 @@ function Item({ href, children }) {
 
 export default Object.assign(NavbarComponent, {
   Items,
-  Item,
+  Item
 })

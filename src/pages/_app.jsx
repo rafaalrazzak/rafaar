@@ -1,7 +1,9 @@
-import "../styles/globals.css"
-import { ThemeProvider } from "next-themes"
-import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion"
-import variants, { withExit } from "@/libs/animation/variants"
+import '../styles/globals.css'
+
+import { AnimatePresence, domAnimation, LazyMotion, m } from 'framer-motion'
+import { ThemeProvider } from 'next-themes'
+
+import variants, { withExit } from '@/libs/animation/variants'
 
 function MyApp({ Component, pageProps, router }) {
   const v = withExit(variants)

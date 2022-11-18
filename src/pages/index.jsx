@@ -1,12 +1,9 @@
-import Hero from "@/components/Hero"
-import Image from "@/components/Image"
-import Layout from "@/components/Layout"
-import SocialMedia from "@/components/SocialMedia"
-import ProjectImage from "@/components/ProjectImage"
-import BlogCard from "@/components/BlogCard"
-import Link from "@/components/Link"
-import { ArrowDown, MailIcon, WorkIcon } from "@/icons"
-import { SEO } from "@/components/SEO"
+import BlogCard from '@/components/BlogCard'
+import Hero from '@/components/Hero'
+import Layout from '@/components/Layout'
+import ProjectImage from '@/components/ProjectImage'
+import { SEO } from '@/components/SEO'
+import SocialMedia from '@/components/SocialMedia'
 export default function Home() {
   return (
     <>

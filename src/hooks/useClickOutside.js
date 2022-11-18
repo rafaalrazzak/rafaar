@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import { useEffect } from 'react'
 
 /**
  * It adds a listener to the document that will call the handler function if the user clicks outside of
@@ -10,7 +10,7 @@ import React, { useEffect } from "react"
 export const useClickOutside = (
   /* A React.RefObject<T> that is used to attach a ref to a React element of type T. */
   refObject,
-  handler,
+  handler
 ) => {
   useEffect(() => {
     /**
@@ -30,12 +30,12 @@ export const useClickOutside = (
       handler(e)
     }
 
-    document.addEventListener("mousedown", listener)
-    document.addEventListener("touchstart", listener)
+    document.addEventListener('mousedown', listener)
+    document.addEventListener('touchstart', listener)
     /* upon unmounting, removes the event listeners. */
     return () => {
-      document.removeEventListener("mousedown", listener)
-      document.removeEventListener("touchstart", listener)
+      document.removeEventListener('mousedown', listener)
+      document.removeEventListener('touchstart', listener)
     }
   }, [handler, refObject])
 }

@@ -1,16 +1,18 @@
 // import ToggleTheme from "./ToggleTheme"
-import clsx from "clsx"
-import { useScroll } from "@/hooks"
-import { ThemeButton } from "./ThemeButton"
-import Navbar from "./Navbar"
-import Image from "./Image"
-function Header() {
+import clsx from 'clsx'
+
+import { useScroll } from '@/hooks'
+
+import Image from './Image'
+import Navbar from './Navbar'
+import { ThemeButton } from './ThemeButton'
+function Header () {
   const visible = useScroll()
   return (
     <header
       className={clsx(
-        " fixed z-50 w-full px-12 transition-all duration-300 ease-in-out",
-        visible ? "inset-0 " : "left-0 -top-16",
+        ' fixed z-50 w-full px-12 transition-all duration-300 ease-in-out',
+        visible ? 'inset-0 ' : 'left-0 -top-16'
       )}
     >
       <Navbar className="flex w-full ">

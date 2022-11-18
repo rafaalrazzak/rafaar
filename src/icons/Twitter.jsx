@@ -1,4 +1,4 @@
-function Twitter() {
+function Twitter () {
   return (
     <svg
       viewBox="0 0 24 24"

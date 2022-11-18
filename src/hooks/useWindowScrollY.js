@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from 'react'
 
 /**
  * react custom hook `useWindowScroll` will run on side effect to observe
@@ -10,11 +10,11 @@ export const useWindowScrollY = () => {
   const [scrollPos, setScrollPos] = useState(0)
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined') {
       const handleScroll = () => setScrollPos(window.scrollY)
-      window.addEventListener("scroll", handleScroll)
+      window.addEventListener('scroll', handleScroll)
 
-      return () => window.removeEventListener("scroll", handleScroll)
+      return () => window.removeEventListener('scroll', handleScroll)
     }
   }, [])
 

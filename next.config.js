@@ -3,10 +3,10 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: [
-      "res.cloudinary.com",
-      "spotlight.tailwindui.com",
-      "images.unsplash.com",
-      "og-image.vercel.app",
+      'res.cloudinary.com',
+      'spotlight.tailwindui.com',
+      'images.unsplash.com',
+      'og-image.vercel.app',
     ],
   },
   // experimental: {

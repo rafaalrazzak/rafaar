@@ -1,14 +1,14 @@
-import { twclsx } from "@/libs/twclsx"
+import { createElement } from 'react'
 
-import { createElement } from "react"
+import { twclsx } from '@/libs/twclsx'
 
 export const UnstyledButton = ({ children, className, ...props }) => {
   return createElement(
-    "button",
+    'button',
     {
       ...props,
-      className: twclsx("inline-flex items-center justify-center", className),
+      className: twclsx('inline-flex items-center justify-center', className)
     },
-    children,
+    children
   )
 }

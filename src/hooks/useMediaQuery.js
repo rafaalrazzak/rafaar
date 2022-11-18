@@ -1,7 +1,7 @@
-"use strict"
-Object.defineProperty(exports, "__esModule", { value: true })
-exports.useMediaQuery = void 0
-const react = require("react")
+'use strict'
+Object.defineProperty(exports, '__esModule', { value: true })
+
+const react = require('react')
 /**
  *
  * @param query - a string of media query.
@@ -11,12 +11,12 @@ const react = require("react")
  * @returns `true` or `false`
  */
 const useMediaQuery = function (query) {
-  const _a = (0, react.useState)(false),
-    matches = _a[0],
-    setMatches = _a[1]
+  const _a = (0, react.useState)(false)
+  const matches = _a[0]
+  const setMatches = _a[1]
   // check if the query is match with the given parameter
   const isMatch = (0, react.useCallback)(function (query) {
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined') {
       // this will return true
       return window.matchMedia(query).matches
     }
@@ -27,22 +27,22 @@ const useMediaQuery = function (query) {
     function () {
       return setMatches(isMatch(query))
     },
-    [isMatch, query],
+    [isMatch, query]
   )
   // we run side effect whenever media query has change
   ;(0, react.useEffect)(
     function () {
-      if (typeof window !== "undefined") {
-        const mediaQuery_1 = window.matchMedia(query)
+      if (typeof window !== 'undefined') {
+        const mediaQuery = window.matchMedia(query)
         handleChange()
-        mediaQuery_1.addEventListener("change", handleChange)
+        mediaQuery.addEventListener('change', handleChange)
         return function () {
-          return mediaQuery_1.removeEventListener("change", handleChange)
+          return mediaQuery.removeEventListener('change', handleChange)
         }
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     },
-    [query],
+    [query]
   )
   return matches
 }

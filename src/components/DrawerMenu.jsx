@@ -1,30 +1,32 @@
-import { m } from "framer-motion"
-import { useRouter } from "next/router"
-import APP_ROUTE from "@/data/AppRoute"
-import { twclsx } from "@/libs/twclsx"
-import { useDrawer } from "@/hooks"
-import { UnstyledLink } from "./unstyle/Link"
+import { m } from 'framer-motion'
+import { useRouter } from 'next/router'
+
+import APP_ROUTE from '@/data/AppRoute'
+import { useDrawer } from '@/hooks'
+import { twclsx } from '@/libs/twclsx'
+
+import { UnstyledLink } from './unstyle/Link'
 
 const container = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.05, ease: "easeOut" },
-  },
+    transition: { staggerChildren: 0.05, ease: 'easeOut' }
+  }
 }
 
 const item = {
   hidden: {
     ...container.hidden,
-    x: -20,
+    x: -20
   },
   visible: {
     opacity: 1,
     x: 0,
     transition: {
-      ease: "easeOut",
-    },
-  },
+      ease: 'easeOut'
+    }
+  }
 }
 
 export const DrawerMenu = () => {
@@ -35,13 +37,13 @@ export const DrawerMenu = () => {
     <aside
       aria-labelledby="toggle-drawer"
       className={twclsx(
-        "fixed left-0 bottom-0 top-20 z-20",
-        "h-screen w-screen backdrop-blur",
-        "bg-theme-50 dark:bg-theme-900",
-        "md:hidden",
+        'fixed left-0 bottom-0 top-20 z-20',
+        'h-screen w-screen backdrop-blur',
+        'bg-theme-50 dark:bg-theme-900',
+        'md:hidden'
       )}
     >
-      <nav className={twclsx("layout", "flex flex-col")}>
+      <nav className={twclsx('layout', 'flex flex-col')}>
         <m.ul variants={container} initial="hidden" animate="visible">
           {APP_ROUTE.map((prop, id) => (
             <m.li key={id} variants={item}>
@@ -50,11 +52,11 @@ export const DrawerMenu = () => {
                 href={prop.path}
                 onClick={changeState}
                 className={twclsx(
-                  "inline-flex w-full text-left",
-                  "border-b py-4 font-medium",
+                  'inline-flex w-full text-left',
+                  'border-b py-4 font-medium',
                   pathname === prop.path
-                    ? "border-primary-600 text-theme-900 dark:border-primary-500 dark:text-theme-100"
-                    : "border-theme-200 text-theme-700 dark:border-theme-800 dark:text-theme-300",
+                    ? 'border-primary-600 text-theme-900 dark:border-primary-500 dark:text-theme-100'
+                    : 'border-theme-200 text-theme-700 dark:border-theme-800 dark:text-theme-300'
                 )}
               >
                 {prop.name}

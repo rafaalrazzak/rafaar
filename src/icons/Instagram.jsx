@@ -1,4 +1,4 @@
-function Instagram() {
+function Instagram () {
   return (
     <svg
       viewBox="0 0 24 24"

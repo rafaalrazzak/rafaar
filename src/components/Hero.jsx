@@ -1,9 +1,9 @@
-import clsx from "clsx"
+import clsx from 'clsx'
 /* eslint-disable react/no-unescaped-entities */
 
-function Hero({ className }) {
+function Hero ({ className }) {
   return (
-    <div className={clsx("flex max-w-lg flex-col gap-6 py-6", className)}>
+    <div className={clsx('flex max-w-lg flex-col gap-6 py-6', className)}>
       <h1>Rafa Al Razzak</h1>
       <h2 className="text-gradient bg-gradient-to-r from-teal-500 to-teal-800 text-5xl font-bold">
         Front-End Developer, Desainer

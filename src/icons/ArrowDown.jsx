@@ -1,4 +1,4 @@
-function ArrowDown() {
+function ArrowDown () {
   return (
     <svg
       viewBox="0 0 16 16"
