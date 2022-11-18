@@ -8,7 +8,7 @@ function Header() {
   return (
     <header
       className={clsx(
-        " fixed w-full px-12 transition-all duration-300 ease-in-out",
+        " fixed z-50 w-full px-12 transition-all duration-300 ease-in-out",
         visible ? "inset-0 " : "left-0 -top-16",
       )}
     >
