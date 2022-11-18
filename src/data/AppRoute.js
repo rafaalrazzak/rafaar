@@ -3,9 +3,10 @@ const APP_ROUTE = [
     path: '/',
     name: 'Home',
   },
+
   {
-    path: '/guestbook',
-    name: 'Guestbook',
+    path: '/about',
+    name: 'About Me',
   },
   {
     path: '/portfolio',
@@ -14,10 +15,6 @@ const APP_ROUTE = [
   {
     path: '/blog',
     name: 'Blog',
-  },
-  {
-    path: '/about',
-    name: 'About Me',
   },
 ]
 
