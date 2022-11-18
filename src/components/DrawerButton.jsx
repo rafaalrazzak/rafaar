@@ -38,7 +38,7 @@ export const DrawerButton = () => {
               animate="visible"
               exit="exit"
             >
-              <XMarkIcon  />
+              <XMarkIcon />
             </m.span>
           )}
           {!isOpen && (
@@ -49,7 +49,7 @@ export const DrawerButton = () => {
               animate="visible"
               exit="exit"
             >
-              <Bars2Icon  />
+              <Bars2Icon />
             </m.span>
           )}
         </AnimatePresence>
