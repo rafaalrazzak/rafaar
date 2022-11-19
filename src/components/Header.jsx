@@ -13,7 +13,6 @@ function Header() {
   const visible = useScroll()
   const mdscreen = useMediaQuery('(min-width: 768px)')
 
-
   return (
     <header
       className={clsx(

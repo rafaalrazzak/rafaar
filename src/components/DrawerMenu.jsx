@@ -1,13 +1,15 @@
 import { m } from 'framer-motion'
+
 import { useRouter } from 'next/router'
 
 import APP_ROUTE from '@/data/AppRoute'
+
 import { useDrawer, useTheme } from '@/hooks'
+
 import { twclsx } from '@/libs/twclsx'
 
 import { UnstyledLink } from './unstyle/Link'
 
-// import { ThemeButton } from './ThemeButton'
 import { ThemeMenu } from './ThemeMenu'
 
 const container = {
@@ -47,11 +49,7 @@ export const DrawerMenu = () => {
       )}
     >
       <nav className={twclsx('layout', 'flex  flex-col', 'my-24')}>
-        <m.ul
-          variants={container}
-          initial="hidden"
-          animate="visible"
-        >
+        <m.ul variants={container} initial="hidden" animate="visible">
           {APP_ROUTE.map((prop, id) => (
             <m.li key={id} variants={item}>
               <UnstyledLink

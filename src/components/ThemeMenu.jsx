@@ -115,7 +115,7 @@ export const ThemeMenu = (props) => {
             aria-selected={theme.value === props.theme}
             tabIndex={0}
             className={twclsx(
-              'inline-flex w-full cursor-default items-center rounded-lg justify-center',
+              'inline-flex w-full cursor-default items-center justify-center rounded-lg',
               ' h-5 p-4 text-sm font-semibold transition md:h-5 md:text-base',
               'hover:bg-primary-100 dark:hover:bg-theme-700',
               'text-theme-700 dark:text-theme-200',

@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { useMediaQuery } from './useMediaQuery'
 
 export const useScroll = () => {
   const [yOffset, setYOffset] = useState(0)

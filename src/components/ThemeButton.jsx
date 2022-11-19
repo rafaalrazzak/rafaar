@@ -38,7 +38,6 @@ export const ThemeButton = ({ screen }) => {
             className={twclsx('w-5 text-primary-700', 'pointer-events-none')}
           />
         )}
-        
       </UnstyledButton>
 
       <AnimatePresence exitBeforeEnter>
