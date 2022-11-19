@@ -1,14 +1,14 @@
 // import ToggleTheme from "./ToggleTheme"
 import clsx from 'clsx'
 
-import { useScroll } from '@/hooks'
 import AppRoute from '@/data/AppRoute'
+import { useScroll } from '@/hooks'
+import { useMediaQuery } from '@/hooks'
 
+import { DrawerButton } from './DrawerButton'
 import Image from './Image'
 import Navbar from './Navbar'
 import { ThemeButton } from './ThemeButton'
-import { useMediaQuery } from '@/hooks'
-import { DrawerButton } from './DrawerButton'
 function Header() {
   const visible = useScroll()
   const mdscreen = useMediaQuery('(min-width: 768px)')
@@ -36,7 +36,7 @@ function Header() {
             <h1 className=" hidden text-lg font-semibold sm:flex">rafaar.</h1>
           </div>
           {mdscreen ? (
-            <div className="hidden items-center gap-6 rounded-full bg-white/90 py-2 px-4 text-sm text-primary-800 shadow-lg shadow-primary-800/5 ring-1 ring-primary-900/5 backdrop-blur dark:bg-primary-800/90 dark:text-primary-200 dark:ring-white/10 sm:flex sm:flex">
+            <div className="hidden items-center gap-6 rounded-full bg-white/90 py-2 px-4 text-sm text-primary-800 shadow-lg shadow-primary-800/5 ring-1 ring-primary-900/5 backdrop-blur dark:bg-primary-800/90 dark:text-primary-200 dark:ring-white/10 sm:flex ">
               {AppRoute.map((route) => (
                 <Navbar.Item
                   key={route.name}
