@@ -11,14 +11,15 @@ function Items({ className, children }) {
   return <ul className={clsx('flex', className)}>{children}</ul>
 }
 
-function Item({ href, children }) {
+function Item({ href, children, className }) {
   const router = useRouter()
   const thisPage = router?.asPath === href
 
   return (
     <li
       className={clsx(
-        'text-sm font-semibold transition-colors ease-in-out hover:text-secondary-500'
+        'text-sm font-semibold transition-colors ease-in-out hover:text-secondary-500',
+        className
       )}
     >
       <Link

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useMediaQuery } from './useMediaQuery'
 
 export const useScroll = () => {
   const [yOffset, setYOffset] = useState(0)
@@ -12,8 +13,8 @@ export const useScroll = () => {
   function handleScroll() {
     const currentYOffset = window.pageYOffset
     const visible = yOffset > currentYOffset
-
     setYOffset(currentYOffset)
+
     setVisible(visible)
   }
 

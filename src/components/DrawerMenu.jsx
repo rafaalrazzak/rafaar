@@ -2,10 +2,13 @@ import { m } from 'framer-motion'
 import { useRouter } from 'next/router'
 
 import APP_ROUTE from '@/data/AppRoute'
-import { useDrawer } from '@/hooks'
+import { useDrawer, useTheme } from '@/hooks'
 import { twclsx } from '@/libs/twclsx'
 
 import { UnstyledLink } from './unstyle/Link'
+
+// import { ThemeButton } from './ThemeButton'
+import { ThemeMenu } from './ThemeMenu'
 
 const container = {
   hidden: { opacity: 0 },
@@ -32,19 +35,23 @@ const item = {
 export const DrawerMenu = () => {
   const { changeState } = useDrawer()
   const { pathname } = useRouter()
-
+  const theme = useTheme()
   return (
     <aside
       aria-labelledby="toggle-drawer"
       className={twclsx(
-        'fixed left-0 bottom-0 top-20 z-20',
+        'fixed inset-0 z-20',
         'h-screen w-screen backdrop-blur',
         'bg-theme-50 dark:bg-theme-900',
         'md:hidden'
       )}
     >
-      <nav className={twclsx('layout', 'flex flex-col')}>
-        <m.ul variants={container} initial="hidden" animate="visible">
+      <nav className={twclsx('layout', 'flex  flex-col', 'my-24')}>
+        <m.ul
+          variants={container}
+          initial="hidden"
+          animate="visible"
+        >
           {APP_ROUTE.map((prop, id) => (
             <m.li key={id} variants={item}>
               <UnstyledLink
@@ -52,7 +59,7 @@ export const DrawerMenu = () => {
                 href={prop.path}
                 onClick={changeState}
                 className={twclsx(
-                  'inline-flex w-full text-left',
+                  'inline-flex w-full px-6 text-left',
                   'border-b py-4 font-medium',
                   pathname === prop.path
                     ? 'border-primary-600 text-theme-900 dark:border-primary-500 dark:text-theme-100'
@@ -63,6 +70,13 @@ export const DrawerMenu = () => {
               </UnstyledLink>
             </m.li>
           ))}
+          <m.li variants={item}>
+            <ThemeMenu
+              changeTheme={theme.changeTheme}
+              onClose={theme.closeDropdown}
+              theme={theme.theme}
+            />
+          </m.li>
         </m.ul>
       </nav>
     </aside>
