@@ -18,7 +18,11 @@ function SocialMedia() {
   return (
     <>
       {SocialMediaData.map((socialMedia, index) => (
-        <Link key={index} href={socialMedia.url} className="mr-6 inline-flex">
+        <Link
+          key={index}
+          href={socialMedia.url}
+          className="group mr-6 inline-flex"
+        >
           <Icon name={socialMedia.name} />
         </Link>
       ))}

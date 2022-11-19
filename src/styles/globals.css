@@ -66,4 +66,8 @@
     -o-user-drag: none;
     user-drag: none;
   }
+
+  .social-icon {
+    @apply h-6 w-6 fill-primary-500 transition duration-300 hover:fill-secondary-500 dark:fill-primary-400 dark:hover:fill-secondary-500;
+  }
 }

@@ -12,7 +12,7 @@ function Header() {
   return (
     <header
       className={clsx(
-        ' fixed z-50 w-full px-12 transition-all duration-300 ease-in-out',
+        ' fixed z-50 h-24 w-full px-12 transition-all duration-300 ease-in-out',
         visible ? 'inset-0 ' : 'left-0 -top-16'
       )}
     >
@@ -33,7 +33,9 @@ function Header() {
           </div>
           <div className="flex items-center  gap-6 rounded-full bg-white/90 py-2 px-4 text-sm text-primary-800 shadow-lg shadow-primary-800/5 ring-1 ring-primary-900/5 backdrop-blur dark:bg-primary-800/90 dark:text-primary-200 dark:ring-white/10">
             {AppRoute.map((route) => (
-              <Navbar.Item href={route.path}>{route.name}</Navbar.Item>
+              <Navbar.Item key={route.name} href={route.path}>
+                {route.name}
+              </Navbar.Item>
             ))}
           </div>
           <ThemeButton />
