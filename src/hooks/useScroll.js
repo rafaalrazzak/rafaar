@@ -12,8 +12,8 @@ export const useScroll = () => {
   function handleScroll() {
     const currentYOffset = window.pageYOffset
     const visible = yOffset > currentYOffset
-
     setYOffset(currentYOffset)
+
     setVisible(visible)
   }
 

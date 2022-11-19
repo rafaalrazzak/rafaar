@@ -7,23 +7,23 @@ import { twclsx } from '@/libs/twclsx'
 import { ThemeMenu } from './ThemeMenu'
 import { UnstyledButton } from './unstyle/Button'
 
-export const ThemeButton = () => {
+export const ThemeButton = ({ screen }) => {
   const theme = useTheme()
 
   if (!theme.mounted) return <ArrowPathIcon className="w-5 animate-spin" />
 
+  console.log(theme)
   return (
-    <div className="relative">
+    <div className="relative z-50">
       <UnstyledButton
         aria-haspopup="listbox"
         aria-expanded={theme.dropdownIsOpen}
         onClick={theme.toggleDropdown}
         title="Switch Theme"
         className={twclsx(
-          'accessible relative',
-          'h-10 w-10  text-sm',
-          'rounded-full',
-          'bg-white/90  shadow-lg shadow-primary-800/5 ring-1 ring-primary-900/5 backdrop-blur transition dark:bg-primary-800/90 dark:ring-white/10 dark:hover:ring-white/20'
+          screen &&
+            ('accessible relative',
+            ' h-10 w-10 rounded-full bg-white/90  shadow-lg shadow-primary-800/5 ring-1 ring-primary-900/5 backdrop-blur transition dark:bg-primary-800/90 dark:ring-white/10 dark:hover:ring-white/20')
         )}
       >
         {(theme.theme === 'dark' ||

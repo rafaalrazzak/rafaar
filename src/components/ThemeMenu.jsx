@@ -6,12 +6,14 @@ import {
 import { m } from 'framer-motion'
 import { useCallback, useEffect, useMemo, useRef } from 'react'
 
+import { useMediaQuery } from '@/hooks'
 import { useClickOutside } from '@/hooks/useClickOutside'
 import { twclsx } from '@/libs/twclsx'
 
 export const ThemeMenu = (props) => {
   const animatableRef = useRef(null)
   const listRef = useRef(null)
+  const mdscreen = useMediaQuery('(min-width: 768px)')
   useClickOutside(animatableRef, props.onClose)
   const v =
     useMemo >
@@ -90,9 +92,9 @@ export const ThemeMenu = (props) => {
       variants={v}
       className={twclsx(
         'absolute z-50',
-        'right-0 -left-28 top-14 md:-left-28',
-        'rounded-xl shadow-md dark:shadow-none',
-        'bg-white/90  shadow-lg shadow-primary-800/5 ring-1 ring-primary-900/5 backdrop-blur transition dark:bg-primary-800/90 dark:ring-white/10 dark:hover:ring-white/20'
+        mdscreen
+          ? 'right-0 -left-28 top-14  rounded-xl bg-white/90  shadow-lg shadow-primary-800/5  ring-1 ring-primary-900/5 backdrop-blur transition dark:bg-primary-800/90 dark:shadow-none dark:ring-white/10 dark:hover:ring-white/20 md:-left-28'
+          : 'flex w-full '
       )}
     >
       <ul
@@ -100,7 +102,11 @@ export const ThemeMenu = (props) => {
         role="listbox"
         aria-activedescendant={themesList[activeDecsendant].value}
         tabIndex={-1}
-        className="flex flex-col gap-2  rounded-lg p-2.5"
+        className={twclsx(
+          mdscreen
+            ? 'flex flex-col gap-2  rounded-lg p-2.5'
+            : '  flex w-full items-center justify-between gap-2 p-2.5'
+        )}
       >
         {themesList.map((theme, index) => (
           <li
@@ -109,7 +115,7 @@ export const ThemeMenu = (props) => {
             aria-selected={theme.value === props.theme}
             tabIndex={0}
             className={twclsx(
-              'inline-flex w-full cursor-default items-center rounded-lg',
+              'inline-flex w-full cursor-default items-center justify-center rounded-lg',
               ' h-5 p-4 text-sm font-semibold transition md:h-5 md:text-base',
               'hover:bg-primary-100 dark:hover:bg-theme-700',
               'text-theme-700 dark:text-theme-200',

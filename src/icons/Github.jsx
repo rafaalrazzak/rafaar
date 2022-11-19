@@ -1,10 +1,6 @@
 function Github() {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className="h-6 w-6 fill-primary-500 transition group-hover:fill-primary-600 dark:fill-primary-400 dark:group-hover:fill-primary-300"
-    >
+    <svg viewBox="0 0 24 24" aria-label="Github" className="social-icon">
       <path
         fillRule="evenodd"
         clipRule="evenodd"

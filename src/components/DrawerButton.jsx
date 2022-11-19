@@ -25,7 +25,7 @@ export const DrawerButton = () => {
         aria-label="toggle-drawer"
         id="toggle-drawer"
         className={twclsx(
-          'accesible',
+          'accesible z-50',
           'md:hidden',
           'h-10 w-10 rounded-lg text-lg'
         )}
@@ -40,7 +40,7 @@ export const DrawerButton = () => {
               animate="visible"
               exit="exit"
             >
-              <XMarkIcon />
+              <XMarkIcon className="social-icon" />
             </m.span>
           )}
           {!isOpen && (
@@ -51,7 +51,7 @@ export const DrawerButton = () => {
               animate="visible"
               exit="exit"
             >
-              <Bars2Icon />
+              <Bars2Icon className="social-icon" />
             </m.span>
           )}
         </AnimatePresence>

@@ -28,13 +28,13 @@ export default function Home() {
                   title="Hello World"
                   description="Hello Dunia LOREM ipsum dolor sit amet"
                   publishOn="16/10/2022"
-                  url="/hello-world"
+                  url="blog/hello-world"
                 />
                 <BlogCard
                   title="Hello World"
                   description="Hello Dunia LOREM ipsum dolor sit amet"
                   publishOn="16/10/2022"
-                  url="/hello-world"
+                  url="blog/hello-world"
                 />
               </div>
 
