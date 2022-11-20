@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 @layer base {
   ::selection {
     @apply bg-secondary-300 text-theme-900 dark:bg-secondary-700 dark:text-primary-100;
