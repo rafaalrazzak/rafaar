@@ -1,9 +1,14 @@
 import '../styles/globals.css'
 
+import { Inter } from '@next/font/google'
 import { AnimatePresence, domAnimation, LazyMotion, m } from 'framer-motion'
 import { ThemeProvider } from 'next-themes'
 
 import variants, { withExit } from '@/libs/animation/variants'
+
+const inter = Inter({
+  subsets: ['latin'],
+})
 
 function MyApp({ Component, pageProps, router }) {
   const v = withExit(variants)
@@ -25,6 +30,7 @@ function MyApp({ Component, pageProps, router }) {
             initial="hidden"
             animate="visible"
             exit="exit"
+            className={inter.className}
           >
             <Component {...pageProps} />
           </m.div>

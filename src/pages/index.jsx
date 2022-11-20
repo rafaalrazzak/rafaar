@@ -1,13 +1,13 @@
 import BlogCard from '@/components/BlogCard'
 import Hero from '@/components/Hero'
-import Layout from '@/components/Layout'
 import ProjectImage from '@/components/ProjectImage'
 import { SEO } from '@/components/SEO'
 import SocialMedia from '@/components/SocialMedia'
+import { DefaultLayout } from '@/layout'
 export default function Home() {
   return (
     <>
-      <Layout>
+      <DefaultLayout>
         <SEO title="Hello" />
         <section>
           <Hero />
@@ -108,7 +108,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-      </Layout>
+      </DefaultLayout>
     </>
   )
 }

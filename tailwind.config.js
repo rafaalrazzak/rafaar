@@ -12,6 +12,9 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      backgroundImage: {
+        'og-pattern': "url('/pattern/circuit-board.svg')",
+      },
       colors: {
         primary: colors.zinc,
         secondary: colors.teal,
@@ -19,5 +22,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require('@tailwindcss/aspect-ratio')],
+  plugins: [require('@tailwindcss/aspect-ratio'), '@tailwindcss/typography'],
 }

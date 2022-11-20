@@ -1,4 +1,4 @@
-import Layout from '@/components/Layout'
+import { BlogLayout } from '@/layout'
 
 export async function getServerSideProps({ params }) {
   const { slug } = params
@@ -12,11 +12,11 @@ export async function getServerSideProps({ params }) {
 export default function BlogPage({ slug }) {
   return (
     <>
-      <Layout>
+      <BlogLayout>
         <section>
           <p>{slug}</p>
         </section>
-      </Layout>
+      </BlogLayout>
     </>
   )
 }

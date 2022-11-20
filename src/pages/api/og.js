@@ -1,4 +1,9 @@
+import { Inter } from '@next/font/google'
 import { ImageResponse } from '@vercel/og'
+
+const inter = Inter({
+  subsets: ['latin'],
+})
 
 export const config = {
   runtime: 'experimental-edge',
@@ -18,25 +23,49 @@ export default async function handler(req) {
     return new ImageResponse(
       (
         <div
-          tw="bg-slate-800"
+          className={inter.className}
           style={{
             height: '100%',
             width: '100%',
             display: 'flex',
-            flexDirection: 'column',
+            textAlign: 'center',
             alignItems: 'center',
             justifyContent: 'center',
+            flexDirection: 'column',
+            flexWrap: 'nowrap',
+            backgroundColor: 'black',
+            backgroundImage:
+              'radial-gradient(circle at 25px 25px, #f1f5f9 2%, transparent 0%), radial-gradient(circle at 75px 75px, #f1f5f9 2%, transparent 0%)',
+            backgroundSize: '100px 100px',
           }}
         >
-          <div tw="bg-slate-800 flex">
-            <div tw="flex w-full py-6 px-4 items-center justify-center p-8 text-center">
-              <h2 tw="flex flex-col text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 text-center justify-center items-center">
-                {isBlog && <span tw="text-white">rafaar | blog</span>}
-                <span tw={isBlog ? 'text-indigo-500' : 'text-white'}>
-                  {title}
-                </span>
-              </h2>
-            </div>
+          <div
+            style={{
+              left: 42,
+              top: 42,
+              position: 'absolute',
+              display: 'flex',
+              alignItems: 'center',
+              color: 'white',
+            }}
+          >
+            <span
+              style={{
+                marginLeft: 8,
+                fontSize: 20,
+                fontWeight: 700,
+              }}
+            >
+              rafaar.me
+            </span>
+          </div>
+          <div tw="flex w-full py-6 px-4 items-center justify-center p-8 text-center">
+            <h2 tw="flex flex-col text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 text-center justify-center items-center">
+              {isBlog && <span tw="text-white">rafaar | blog</span>}
+              <span tw={isBlog ? 'text-indigo-500' : 'text-white'}>
+                {title}
+              </span>
+            </h2>
           </div>
         </div>
       ),
