@@ -12,7 +12,6 @@ export const ThemeButton = ({ screen }) => {
 
   if (!theme.mounted) return <ArrowPathIcon className="w-5 animate-spin" />
 
-  console.log(theme)
   return (
     <div className="relative z-50">
       <UnstyledButton
