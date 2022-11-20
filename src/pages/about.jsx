@@ -1,5 +1,9 @@
+import { MDXRemote } from 'next-mdx-remote'
+import { serialize } from 'next-mdx-remote/serialize'
 import Layout from '@/components/Layout'
+
 import { base64 } from '@/utils/encrypt'
+import { SEO } from '@/components/SEO'
 
 export async function getServerSideProps() {
   const res = await fetch(
@@ -8,17 +12,20 @@ export async function getServerSideProps() {
 
   const data = await res.json()
 
+  const content = await serialize(base64.decode(data.content))
+
   return {
-    props: { data },
+    props: { content },
   }
 }
 
-export default function About({ data }) {
-  const content = base64.decode(data.content)
-
+export default function About({ content }) {
   return (
     <Layout>
-      <article className="prose prose-xl">{content}</article>
+      <SEO title="About" />
+      <div className="prose prose-slate">
+        <MDXRemote {...content} />
+      </div>
     </Layout>
   )
 }

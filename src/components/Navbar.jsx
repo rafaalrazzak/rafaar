@@ -24,11 +24,14 @@ function Item({ href, children, className }) {
     >
       <Link
         href={href}
-        className={clsx(thisPage && 'relative flex text-secondary-500')}
+        className={clsx(
+          thisPage && 'relative flex text-secondary-500',
+          'justify-center'
+        )}
       >
         {children}
         {thisPage && (
-          <span className="absolute -bottom-[9px] h-px w-10 items-center bg-gradient-to-r from-teal-500/0 via-teal-500/40 to-teal-500/0 dark:from-teal-400/0 dark:via-teal-400/40 dark:to-teal-400/0" />
+          <span className="absolute -bottom-[9px] h-px w-12  items-center bg-gradient-to-r from-teal-500/0 via-teal-500/40 to-teal-500/0 dark:from-teal-400/0 dark:via-teal-400/40 dark:to-teal-400/0" />
         )}
       </Link>
     </li>
