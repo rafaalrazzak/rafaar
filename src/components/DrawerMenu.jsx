@@ -12,7 +12,7 @@ const container = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.05, ease: 'easeOut' },
+    transition: { staggerChildren: 0.05, ease: 'easeInOut' },
   },
 }
 
@@ -25,7 +25,7 @@ const item = {
     opacity: 1,
     x: 0,
     transition: {
-      ease: 'easeOut',
+      ease: 'easeInOut',
     },
   },
 }
@@ -40,7 +40,7 @@ export const DrawerMenu = () => {
       className={twclsx(
         'fixed inset-0 z-20',
         'h-screen w-screen backdrop-blur',
-        'bg-theme-50 dark:bg-theme-900',
+        'bg-primary-50 dark:bg-primary-900',
         'md:hidden'
       )}
     >

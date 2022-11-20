@@ -5,6 +5,7 @@
       "@/hooks": ["hooks/index.js"],
       "@/stores": ["stores/index.js"],
       "@/components/*": ["components/*"],
+      "@/layout": ["layout/index.js"],
       "@/icons": ["icons/index.js"],
       "@/data/*": ["data/*"],
       "@/utils/*": ["utils/*"],
