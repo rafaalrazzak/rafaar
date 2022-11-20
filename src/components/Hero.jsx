@@ -1,5 +1,6 @@
-import siteMetadata from '@/data/siteMetadata'
 import clsx from 'clsx'
+
+import siteMetadata from '@/data/siteMetadata'
 /* eslint-disable react/no-unescaped-entities */
 
 function Hero({ className }) {
