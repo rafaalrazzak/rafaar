@@ -15,29 +15,35 @@ export const SEO = ({ ...props }) => {
   }`
 
   const DESCRIPTION =
-    props.description ?? (siteMetadata.SITE_DESCRIPTION || 'hello world!')
+    props.description ?? (siteMetadata.SELF_DESCRIPTION || 'hello world!')
 
   const thumb = `${siteMetadata.SITE_URL}/api/og?title=${props.title} — ${siteMetadata.SITE_NAME}`
-
+  const url = siteMetadata.SITE_URL + router.pathname
   return (
     <NextSeo
       {...props}
       title={props.title}
       titleTemplate={TITLE_TEMPLATE}
+      description={DESCRIPTION}
+      twitter={{
+        site: url,
+        handle: siteMetadata.TWITER_USERNAME,
+        cardType: 'summary_large_image',
+      }}
       openGraph={{
-        url: siteMetadata.SITE_URL + router.pathname,
-        title: TITLE_TEMPLATE,
+        url: url,
+        title: props.title,
         description: DESCRIPTION,
         images: [
           {
             url: thumb,
             width: 1200,
             height: 630,
-            alt: TITLE_TEMPLATE,
+            alt: props.title,
             type: 'image/jpeg',
           },
         ],
-        siteName: TITLE_TEMPLATE,
+        siteName: siteMetadata.SITE_NAME || 'rafaar.',
       }}
     />
   )
