@@ -1,3 +1,4 @@
+import siteMetadata from '@/data/siteMetadata'
 import clsx from 'clsx'
 /* eslint-disable react/no-unescaped-entities */
 
@@ -9,8 +10,7 @@ function Hero({ className }) {
         Front-End Developer, Desainer
       </h2>
       <p className=" text-primary-600 dark:text-primary-400">
-        I'm a front-end developer and designer from Indonesia. I love to create
-        beautiful and functional web applications.
+        {siteMetadata.SELF_DESCRIPTION}
       </p>
     </div>
   )
