@@ -40,8 +40,16 @@ export const SEO = ({ ...props }) => {
             width: 1200,
             height: 630,
             alt: props.title,
-            type: 'image/jpeg',
+            type: 'image/png',
           },
+          {
+            url: thumb,
+            width: 800,
+            height: 600,
+            alt: props.title,
+            type: 'image/png',
+          },
+          { thumb },
         ],
         siteName: siteMetadata.SITE_NAME || 'rafaar.',
       }}
