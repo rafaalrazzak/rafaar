@@ -12,6 +12,9 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      backgroundImage: {
+        'og-pattern': "url('/pattern/circuit-board.svg')",
+      },
       colors: {
         primary: colors.zinc,
         secondary: colors.teal,

@@ -6,6 +6,7 @@ import siteMetadata from '@/data/siteMetadata'
 /**
  * It takes a NextSeoProps object and returns a `<NextSeo /> component`.
  */
+
 export const SEO = ({ ...props }) => {
   const router = useRouter()
 
