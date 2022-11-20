@@ -1,8 +1,8 @@
 import '../styles/globals.css'
 
+import { Inter } from '@next/font/google'
 import { AnimatePresence, domAnimation, LazyMotion, m } from 'framer-motion'
 import { ThemeProvider } from 'next-themes'
-import { Inter } from '@next/font/google'
 
 import variants, { withExit } from '@/libs/animation/variants'
 
