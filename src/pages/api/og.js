@@ -1,4 +1,9 @@
 import { ImageResponse } from '@vercel/og'
+import { Inter } from '@next/font/google'
+
+const inter = Inter({
+  subsets: ['latin'],
+})
 
 export const config = {
   runtime: 'experimental-edge',
@@ -18,12 +23,12 @@ export default async function handler(req) {
     return new ImageResponse(
       (
         <div
+          className={inter.className}
           style={{
             height: '100%',
             width: '100%',
             display: 'flex',
             textAlign: 'center',
-            fontFamily: 'Poppins',
             alignItems: 'center',
             justifyContent: 'center',
             flexDirection: 'column',
@@ -45,10 +50,10 @@ export default async function handler(req) {
             }}
           >
             <span
-              tw="font-bold"
               style={{
                 marginLeft: 8,
                 fontSize: 20,
+                fontWeight: 700,
               }}
             >
               rafaar.me
