@@ -39,14 +39,15 @@ export default function Home() {
                   url="blog/hello-world"
                 />
               </div>
-              <section>
+              <section className="py-6">
+                
                 <h1>Skills</h1>
-                <div className=" max-w-md gap-4  bg-red-500 ">
+
+                <div className="flex gap-4 py-4 flex-wrap" style={{ display:"flex", flexWrap: "wrap" }}>
                   {Skills.map((skill) => (
-                    <div key={skill}>
-                      {/* <p>{skill}</p> */}
-                      <DynamicIcon name={skill} />
-                    </div>
+                   
+                      <DynamicIcon key={skill} name={skill}  className="flex"/>
+                    
                   ))}
                 </div>
               </section>
