@@ -1,4 +1,4 @@
-const Javascript = (props) => (
+const JavaScript = (props) => (
   <svg
     width="24px"
     height="24px"
@@ -13,4 +13,4 @@ const Javascript = (props) => (
   </svg>
 )
 
-export default Javascript
+export default JavaScript

@@ -4,6 +4,7 @@ import Hero from '@/components/Hero'
 import ProjectImage from '@/components/ProjectImage'
 import { SEO } from '@/components/SEO'
 import SocialMedia from '@/components/SocialMedia'
+import Tooltip from '@/components/Tooltip'
 import Skills from '@/data/Skills'
 import { DefaultLayout } from '@/layout'
 export default function Home() {
@@ -40,14 +41,19 @@ export default function Home() {
                 />
               </div>
               <section className="py-6">
-                
                 <h1>Skills</h1>
 
-                <div className="flex gap-4 py-4 flex-wrap" style={{ display:"flex", flexWrap: "wrap" }}>
+                <div
+                  className="flex flex-wrap gap-4 py-6"
+                  style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                  }}
+                >
                   {Skills.map((skill) => (
-                   
-                      <DynamicIcon key={skill} name={skill}  className="flex"/>
-                    
+                    <Tooltip key={skill} title={skill}>
+                      <DynamicIcon name={skill} className="flex" />
+                    </Tooltip>
                   ))}
                 </div>
               </section>
