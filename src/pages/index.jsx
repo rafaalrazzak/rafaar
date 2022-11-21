@@ -1,8 +1,10 @@
 import BlogCard from '@/components/BlogCard'
+import DynamicIcon from '@/components/DynamicIcon'
 import Hero from '@/components/Hero'
 import ProjectImage from '@/components/ProjectImage'
 import { SEO } from '@/components/SEO'
 import SocialMedia from '@/components/SocialMedia'
+import Skills from '@/data/Skills'
 import { DefaultLayout } from '@/layout'
 export default function Home() {
   return (
@@ -37,7 +39,17 @@ export default function Home() {
                   url="blog/hello-world"
                 />
               </div>
-          
+              <section>
+                <h1>Skills</h1>
+                <div className=" max-w-md gap-4  bg-red-500 ">
+                  {Skills.map((skill) => (
+                    <div key={skill}>
+                      {/* <p>{skill}</p> */}
+                      <DynamicIcon name={skill} />
+                    </div>
+                  ))}
+                </div>
+              </section>
 
               {/* <div className="flex flex-col gap-6">
                 <form

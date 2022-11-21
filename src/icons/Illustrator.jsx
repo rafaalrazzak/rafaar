@@ -1,7 +1,7 @@
 const Illustrator = (props) => (
   <svg
-    width="1em"
-    height="1em"
+    width="24px"
+    height="24px"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     {...props}
