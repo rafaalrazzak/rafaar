@@ -117,11 +117,11 @@ export const ThemeMenu = (props) => {
             className={twclsx(
               'inline-flex w-full cursor-default items-center justify-center rounded-lg',
               ' h-5 p-4 text-sm font-semibold transition md:h-5 md:text-base',
-              'hover:bg-primary-100 dark:hover:bg-theme-700',
+              'hover:bg-primary-100 dark:hover:bg-primary-600',
               'text-theme-700 dark:text-theme-200',
-              'focus-visible:outline-none focus-visible:ring focus-visible:ring-primary-500',
+              'focus-visible:outline-none focus-visible:ring focus-visible:ring-secondary-500',
               props.theme === theme.value &&
-                'text-primary-700 dark:text-primary-500'
+                'text-secondary-500 dark:text-secondary-500'
             )}
             key={theme.value}
             onClick={props.changeTheme(theme.value)}

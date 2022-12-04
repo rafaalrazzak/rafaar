@@ -17,7 +17,11 @@ export const SEO = ({ ...props }) => {
   const DESCRIPTION =
     props.description ?? (siteMetadata.SELF_DESCRIPTION || 'hello world!')
 
-  const thumb = `${siteMetadata.SITE_URL}/api/og?title=${props.title} — ${siteMetadata.SITE_NAME}`
+  const defaultThumb =
+    'https://res.cloudinary.com/raf-ar/image/upload/v1670138621/thumbnail/raf-dark-social-stack.png'
+  const thumb = router.pathname.startsWith('/blog')
+    ? `${siteMetadata.SITE_URL}/api/og?title=${props.title} — ${siteMetadata.SITE_NAME}&blog`
+    : defaultThumb
   const url = siteMetadata.SITE_URL + router.pathname
   return (
     <NextSeo
@@ -38,7 +42,7 @@ export const SEO = ({ ...props }) => {
           {
             url: thumb,
             width: 1200,
-            height: 630,
+            height: 628,
             alt: props.title,
             type: 'image/png',
           },
