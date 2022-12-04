@@ -57,6 +57,12 @@ export const SEO = ({ ...props }) => {
         ],
         siteName: siteMetadata.SITE_NAME || 'rafaar.',
       }}
+      additionalMetaTags={[
+        {
+          property: 'twitter:image',
+          content: thumb,
+        },
+      ]}
     />
   )
 }
