@@ -46,14 +46,6 @@ export const SEO = ({ ...props }) => {
             alt: props.title,
             type: 'image/png',
           },
-          {
-            url: thumb,
-            width: 800,
-            height: 600,
-            alt: props.title,
-            type: 'image/png',
-          },
-          { thumb },
         ],
         siteName: siteMetadata.SITE_NAME || 'rafaar.',
       }}
