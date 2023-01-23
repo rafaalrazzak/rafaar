@@ -1,13 +1,12 @@
-import Image from 'next/image'
-import Link from 'next/link'
-
 import BlogCard from '@/components/BlogCard'
 import DynamicIcon from '@/components/DynamicIcon'
 import Hero from '@/components/Hero'
+import PortfolioCard from '@/components/PortfolioCard'
 import ProjectImage from '@/components/ProjectImage'
 import { SEO } from '@/components/SEO'
 import SocialMedia from '@/components/SocialMedia'
 import Tooltip from '@/components/Tooltip'
+import Portfolio from '@/data/Portfolio'
 import Skills from '@/data/Skills'
 import { DefaultLayout } from '@/layout'
 
@@ -16,13 +15,13 @@ export default function Home() {
     <>
       <DefaultLayout>
         <SEO title="Hello" />
-        <section>
+        <section className="sm:mt-12">
           <Hero />
           <SocialMedia />
         </section>
-        <section className="flex flex-col items-center justify-center py-6">
+        <section className="-mx-6 flex flex-col items-center justify-center overflow-clip py-6 sm:-mx-12 md:overflow-visible lg:-mx-24 ">
           <ProjectImage />
-          <span className="dark:text-priary-300 my-12 text-sm text-primary-600">
+          <span className="my-12 text-sm text-primary-600 dark:text-primary-300">
             Photo By Unsplash
           </span>
         </section>
@@ -44,23 +43,39 @@ export default function Home() {
                   url="blog/hello-world"
                 />
               </div>
-              <div className="py-6">
-                <h1>Skills</h1>
+            </div>
+          </div>
+        </section>
 
-                <div
-                  className="flex flex-wrap gap-4 py-6"
-                  style={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                  }}
-                >
-                  {Skills.map((skill) => (
-                    <Tooltip key={skill} title={skill}>
-                      <DynamicIcon name={skill} className="flex" />
-                    </Tooltip>
-                  ))}
+        <section>
+          <div className="py-6">
+            <h1>Skills</h1>
+
+            <div
+              className="flex flex-wrap gap-4 py-6"
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+              }}
+            >
+              {Skills.map((skill) => (
+                <Tooltip key={skill} title={skill}>
+                  <DynamicIcon name={skill} className="flex" />
+                </Tooltip>
+              ))}
+            </div>
+          </div>
+        </section>
+        <section>
+          <div className="py-6">
+            <h1>Portfolio</h1>
+
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+              {Portfolio.map((portfolio) => (
+                <div key={portfolio.name} className="grid">
+                  <PortfolioCard {...portfolio} />
                 </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>

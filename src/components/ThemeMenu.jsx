@@ -1,3 +1,5 @@
+'use client'
+
 import {
   ComputerDesktopIcon,
   MoonIcon,
@@ -104,8 +106,8 @@ export const ThemeMenu = (props) => {
         tabIndex={-1}
         className={twclsx(
           mdscreen
-            ? 'flex flex-col gap-2  rounded-lg p-2.5 '
-            : '  flex w-full  items-center justify-between gap-2 p-2.5'
+            ? 'flex flex-col gap-2  rounded-lg p-2.5'
+            : '  flex w-full items-center justify-between gap-2 p-2.5'
         )}
       >
         {themesList.map((theme, index) => (
@@ -115,13 +117,13 @@ export const ThemeMenu = (props) => {
             aria-selected={theme.value === props.theme}
             tabIndex={0}
             className={twclsx(
-              'inline-flex w-full cursor-default items-center  rounded-lg',
+              'inline-flex w-full cursor-default items-center justify-center rounded-lg',
               ' h-5 p-4 text-sm font-semibold transition md:h-5 md:text-base',
-              'hover:bg-primary-100 dark:hover:bg-primary-600',
+              'hover:bg-primary-100 dark:hover:bg-theme-700',
               'text-theme-700 dark:text-theme-200',
-              'focus-visible:outline-none focus-visible:ring focus-visible:ring-secondary-500',
+              'focus-visible:outline-none focus-visible:ring focus-visible:ring-primary-500',
               props.theme === theme.value &&
-                'text-secondary-500 dark:text-secondary-500'
+                'text-primary-700 dark:text-primary-500'
             )}
             key={theme.value}
             onClick={props.changeTheme(theme.value)}

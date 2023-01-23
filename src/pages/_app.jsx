@@ -3,6 +3,7 @@ import '../styles/globals.css'
 import { Inter } from '@next/font/google'
 import { AnimatePresence, domAnimation, LazyMotion, m } from 'framer-motion'
 import { ThemeProvider } from 'next-themes'
+import { Provider } from 'react-wrap-balancer'
 
 import variants, { withExit } from '@/libs/animation/variants'
 
@@ -21,7 +22,7 @@ function MyApp({ Component, pageProps, router }) {
         <AnimatePresence
           initial={false}
           onExitComplete={onExitComplete}
-          exitBeforeEnter
+          mode={'wait'}
         >
           <m.div
             id="skip-content"
@@ -32,7 +33,9 @@ function MyApp({ Component, pageProps, router }) {
             exit="exit"
             className={inter.className}
           >
-            <Component {...pageProps} />
+            <Provider>
+              <Component {...pageProps} />
+            </Provider>
           </m.div>
         </AnimatePresence>
       </LazyMotion>

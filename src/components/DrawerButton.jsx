@@ -57,7 +57,7 @@ export const DrawerButton = () => {
         </AnimatePresence>
       </UnstyledButton>
 
-      <AnimatePresence exitBeforeEnter>
+      <AnimatePresence mode={'wait'}>
         {isOpen && <DrawerMenu />}
       </AnimatePresence>
     </>

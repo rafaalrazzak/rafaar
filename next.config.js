@@ -9,8 +9,8 @@ const nextConfig = {
       'og-image.vercel.app',
     ],
   },
-  // experimental: {
-  //   appDir: true,
-  // },
+  experimental: {
+    appDir: false,
+  },
 }
 module.exports = nextConfig

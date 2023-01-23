@@ -1,9 +1,9 @@
 // import ToggleTheme from "./ToggleTheme"
-import clsx from 'clsx'
 
 import AppRoute from '@/data/AppRoute'
-import { useScroll } from '@/hooks'
+import { useDrawer, useScroll } from '@/hooks'
 import { useMediaQuery } from '@/hooks'
+import { twclsx } from '@/libs/twclsx'
 
 import { DrawerButton } from './DrawerButton'
 import Image from './Image'
@@ -12,15 +12,16 @@ import { ThemeButton } from './ThemeButton'
 function Header() {
   const visible = useScroll()
   const mdscreen = useMediaQuery('(min-width: 768px)')
+  const { isOpen } = useDrawer()
 
   return (
     <header
-      className={clsx(
-        ' fixed z-50 h-[86px] w-full items-center bg-primary-100/20 px-6 backdrop-blur-lg backdrop-filter transition-all duration-300 ease-in-out dark:bg-primary-800/20 sm:bg-transparent sm:backdrop-blur-none sm:dark:bg-transparent md:px-12',
-        visible ? 'inset-0 ' : 'left-0 -top-24'
+      className={twclsx(
+        ' sticky top-0 z-[24] h-[86px]  w-full  items-center bg-primary-100/20  px-6 backdrop-blur-lg backdrop-filter transition-all duration-300 ease-in-out dark:bg-primary-800/20 sm:fixed sm:bg-transparent sm:backdrop-blur-none sm:dark:bg-transparent md:px-12',
+        visible && isOpen && 'bg-primary-100/20 dark:bg-primary-800/20'
       )}
     >
-      <Navbar className="flex w-full items-center ">
+      <Navbar className="relative flex flex-1 items-center  ">
         <Navbar.Items className="flex w-full items-center justify-between gap-3  lg:gap-6">
           <div className="z-50 flex items-center gap-4">
             <div className="h-10 w-10 justify-center overflow-hidden rounded-full">
