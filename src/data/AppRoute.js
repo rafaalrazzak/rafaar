@@ -16,7 +16,7 @@ const APP_ROUTE = [
     path: "/blog",
     name: "Blog",
   },
-]
+];
 
 export const ADDT_ROUTE = [
   {
@@ -36,6 +36,6 @@ export const ADDT_ROUTE = [
     path: "/certificate",
     name: "Certificate",
   },
-]
+];
 
-export default APP_ROUTE
+export default APP_ROUTE;

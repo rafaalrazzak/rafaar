@@ -1,9 +1,9 @@
-import clsx from "clsx"
-import NextImage from "next/image"
-import { useState } from "react"
+import clsx from "clsx";
+import NextImage from "next/image";
+import { useState } from "react";
 
 function Image({ className: addClassName, ...rest }) {
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
   return (
     <NextImage
       {...rest}
@@ -17,7 +17,7 @@ function Image({ className: addClassName, ...rest }) {
       )}
       onLoadingComplete={() => setIsLoading(!isLoading)}
     />
-  )
+  );
 }
 
-export default Image
+export default Image;

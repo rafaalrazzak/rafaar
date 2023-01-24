@@ -11,6 +11,6 @@ const MongoDB = (props) => (
       fill="#47A248"
     />
   </svg>
-)
+);
 
-export default MongoDB
+export default MongoDB;

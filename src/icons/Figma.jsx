@@ -11,6 +11,6 @@ const Figma = (props) => (
       fill="#F24E1E"
     />
   </svg>
-)
+);
 
-export default Figma
+export default Figma;

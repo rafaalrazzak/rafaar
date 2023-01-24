@@ -18,7 +18,7 @@ function Mail() {
         className="stroke-primary-400 dark:stroke-primary-500"
       />
     </svg>
-  )
+  );
 }
 
-export default Mail
+export default Mail;

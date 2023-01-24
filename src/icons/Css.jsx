@@ -11,6 +11,6 @@ const CSS = (props) => (
       fill="#1572B6"
     />
   </svg>
-)
+);
 
-export default CSS
+export default CSS;

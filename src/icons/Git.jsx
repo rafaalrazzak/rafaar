@@ -11,6 +11,6 @@ const Git = (props) => (
       fill="#F05032"
     />
   </svg>
-)
+);
 
-export default Git
+export default Git;

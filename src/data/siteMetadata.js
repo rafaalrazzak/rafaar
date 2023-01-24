@@ -5,6 +5,6 @@ const siteMetadata = {
   TWITER_USERNAME: "rafaalrazzak",
   SELF_DESCRIPTION: `I'm a front-end developer and designer from Indonesia. I love to create
   beautiful and functional web applications.`,
-}
+};
 
-export default siteMetadata
+export default siteMetadata;

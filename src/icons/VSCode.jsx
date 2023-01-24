@@ -11,6 +11,6 @@ const VSCode = (props) => (
       fill="#007ACC"
     />
   </svg>
-)
+);
 
-export default VSCode
+export default VSCode;

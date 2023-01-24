@@ -11,6 +11,6 @@ const Netlify = (props) => (
       fill="#00C7B7"
     />
   </svg>
-)
+);
 
-export default Netlify
+export default Netlify;

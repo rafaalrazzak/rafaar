@@ -1,22 +1,22 @@
-"use client"
+"use client";
 
 import {
   ComputerDesktopIcon,
   MoonIcon,
   SunIcon,
-} from "@heroicons/react/24/outline"
-import { m } from "framer-motion"
-import { useCallback, useEffect, useMemo, useRef } from "react"
+} from "@heroicons/react/24/outline";
+import { m } from "framer-motion";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 
-import { useMediaQuery } from "@/hooks"
-import { useClickOutside } from "@/hooks/useClickOutside"
-import { twclsx } from "@/libs/twclsx"
+import { useMediaQuery } from "@/hooks";
+import { useClickOutside } from "@/hooks/useClickOutside";
+import { twclsx } from "@/libs/twclsx";
 
 export const ThemeMenu = (props) => {
-  const animatableRef = useRef(null)
-  const listRef = useRef(null)
-  const mdscreen = useMediaQuery("(min-width: 768px)")
-  useClickOutside(animatableRef, props.onClose)
+  const animatableRef = useRef(null);
+  const listRef = useRef(null);
+  const mdscreen = useMediaQuery("(min-width: 768px)");
+  useClickOutside(animatableRef, props.onClose);
   const v =
     useMemo >
     (() => ({
@@ -24,7 +24,7 @@ export const ThemeMenu = (props) => {
       enter: { opacity: 1, translateY: 0 },
       exit: { opacity: 0, translateY: 20 },
     }),
-    [])
+    []);
 
   const themesList = useMemo(
     () => [
@@ -33,57 +33,57 @@ export const ThemeMenu = (props) => {
       { name: "System", value: "system", Icon: ComputerDesktopIcon },
     ],
     []
-  )
+  );
 
   const activeDecsendant = useMemo(() => {
-    return themesList.findIndex((f) => f.value === props.theme)
-  }, [props.theme, themesList])
+    return themesList.findIndex((f) => f.value === props.theme);
+  }, [props.theme, themesList]);
 
   const handleKeyDown = useCallback(
     (theme, index) => (e) => {
-      e.preventDefault()
-      const list = document.querySelectorAll("li[role='option']")
-      const ARROW_UP = "ArrowUp"
-      const ARROW_DOWN = "ArrowDown"
-      const ARROW_LEFT = "ArrowLeft"
-      const ARROW_RIGHT = "ArrowRight"
-      const elArrowDown = list[index + 1]
-      const elArrowUp = list[index - 1]
+      e.preventDefault();
+      const list = document.querySelectorAll("li[role='option']");
+      const ARROW_UP = "ArrowUp";
+      const ARROW_DOWN = "ArrowDown";
+      const ARROW_LEFT = "ArrowLeft";
+      const ARROW_RIGHT = "ArrowRight";
+      const elArrowDown = list[index + 1];
+      const elArrowUp = list[index - 1];
 
       const changeOpts = {
         " ": true,
         SpaceBar: true,
         Enter: true,
-      }
+      };
 
       if ((e.key === ARROW_DOWN || e.key === ARROW_RIGHT) && elArrowDown) {
-        elArrowDown.focus({ preventScroll: true })
+        elArrowDown.focus({ preventScroll: true });
       } else if (
         (e.key === ARROW_DOWN || e.key === ARROW_RIGHT) &&
         !elArrowDown
       ) {
-        list[0].focus({ preventScroll: true })
+        list[0].focus({ preventScroll: true });
       } else if ((e.key === ARROW_UP || e.key === ARROW_LEFT) && elArrowUp) {
-        elArrowUp.focus({ preventScroll: true })
+        elArrowUp.focus({ preventScroll: true });
       } else if ((e.key === ARROW_UP || e.key === ARROW_LEFT) && !elArrowUp) {
-        list[list.length - 1].focus({ preventScroll: true })
+        list[list.length - 1].focus({ preventScroll: true });
       }
 
       if (changeOpts[e.key]) {
-        props.changeTheme(theme)()
-        props.onClose()
+        props.changeTheme(theme)();
+        props.onClose();
       }
     },
     [props]
-  )
+  );
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       if (listRef.current) {
-        listRef.current.childNodes[0].focus({ preventScroll: true })
+        listRef.current.childNodes[0].focus({ preventScroll: true });
       }
     }
-  }, [])
+  }, []);
 
   return (
     <m.div
@@ -134,5 +134,5 @@ export const ThemeMenu = (props) => {
         ))}
       </ul>
     </m.div>
-  )
-}
+  );
+};

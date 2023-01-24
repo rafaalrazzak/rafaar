@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { useEffect } from "react"
+import { useEffect } from "react";
 
 /**
  * It adds a listener to the document that will call the handler function if the user clicks outside of
@@ -23,21 +23,21 @@ export const useClickOutside = (
      * @returns The return value of the function is the function itself.
      */
     const listener = (e) => {
-      const el = refObject?.current
+      const el = refObject?.current;
 
       if (!el || el.contains(e.target) || e.target.ariaHasPopup) {
-        return
+        return;
       }
 
-      handler(e)
-    }
+      handler(e);
+    };
 
-    document.addEventListener("mousedown", listener)
-    document.addEventListener("touchstart", listener)
+    document.addEventListener("mousedown", listener);
+    document.addEventListener("touchstart", listener);
     /* upon unmounting, removes the event listeners. */
     return () => {
-      document.removeEventListener("mousedown", listener)
-      document.removeEventListener("touchstart", listener)
-    }
-  }, [handler, refObject])
-}
+      document.removeEventListener("mousedown", listener);
+      document.removeEventListener("touchstart", listener);
+    };
+  }, [handler, refObject]);
+};

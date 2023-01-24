@@ -11,6 +11,6 @@ const PremierePro = (props) => (
       fill="#99F"
     />
   </svg>
-)
+);
 
-export default PremierePro
+export default PremierePro;

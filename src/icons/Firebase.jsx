@@ -11,6 +11,6 @@ const Firebase = (props) => (
       fill="#FFCA28"
     />
   </svg>
-)
+);
 
-export default Firebase
+export default Firebase;

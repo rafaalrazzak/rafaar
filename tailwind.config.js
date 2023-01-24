@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
 // const defaultTheme = require("tailwindcss/defaultTheme");
-const colors = require("tailwindcss/colors")
+const colors = require("tailwindcss/colors");
 
 module.exports = {
   content: [
@@ -47,4 +47,4 @@ module.exports = {
     require("@tailwindcss/typography"),
     require("@tailwindcss/line-clamp"),
   ],
-}
+};

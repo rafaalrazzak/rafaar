@@ -11,6 +11,6 @@ const GrapQL = (props) => (
       fill="#E10098"
     />
   </svg>
-)
+);
 
-export default GrapQL
+export default GrapQL;

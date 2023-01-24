@@ -13,7 +13,7 @@ function ArrowRight() {
         strokeLinejoin="round"
       />
     </svg>
-  )
+  );
 }
 
-export default ArrowRight
+export default ArrowRight;

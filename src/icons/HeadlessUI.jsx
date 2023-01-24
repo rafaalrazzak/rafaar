@@ -11,6 +11,6 @@ const HeadlessUI = (props) => (
       fill="#66E3FF"
     />
   </svg>
-)
+);
 
-export default HeadlessUI
+export default HeadlessUI;

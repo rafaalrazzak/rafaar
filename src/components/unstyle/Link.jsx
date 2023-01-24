@@ -1,6 +1,6 @@
-import NextLink from "next/link"
+import NextLink from "next/link";
 
-import { twclsx } from "@/libs/twclsx"
+import { twclsx } from "@/libs/twclsx";
 
 export const UnstyledLink = ({ href, children, onClick, ...props }) => {
   return (
@@ -14,5 +14,5 @@ export const UnstyledLink = ({ href, children, onClick, ...props }) => {
     >
       {children}
     </NextLink>
-  )
-}
+  );
+};

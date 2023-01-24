@@ -13,7 +13,7 @@ function ArrowDown() {
         strokeLinejoin="round"
       />
     </svg>
-  )
+  );
 }
 
-export default ArrowDown
+export default ArrowDown;

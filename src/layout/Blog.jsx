@@ -1,4 +1,4 @@
-import Container from "@/components/Container"
+import Container from "@/components/Container";
 // import Image from '@/components/Image'
 export const BlogLayout = ({ children }) => {
   return (
@@ -10,5 +10,5 @@ export const BlogLayout = ({ children }) => {
         </Container>
       </main>
     </>
-  )
-}
+  );
+};

@@ -1,18 +1,18 @@
 // import ToggleTheme from "./ToggleTheme"
 
-import AppRoute from "@/data/AppRoute"
-import { useDrawer, useScroll } from "@/hooks"
-import { useMediaQuery } from "@/hooks"
-import { twclsx } from "@/libs/twclsx"
+import AppRoute from "@/data/AppRoute";
+import { useDrawer, useScroll } from "@/hooks";
+import { useMediaQuery } from "@/hooks";
+import { twclsx } from "@/libs/twclsx";
 
-import { DrawerButton } from "./DrawerButton"
-import Image from "./Image"
-import Navbar from "./Navbar"
-import { ThemeButton } from "./ThemeButton"
+import { DrawerButton } from "./DrawerButton";
+import Image from "./Image";
+import Navbar from "./Navbar";
+import { ThemeButton } from "./ThemeButton";
 function Header() {
-  const visible = useScroll()
-  const mdscreen = useMediaQuery("(min-width: 768px)")
-  const { isOpen } = useDrawer()
+  const visible = useScroll();
+  const mdscreen = useMediaQuery("(min-width: 768px)");
+  const { isOpen } = useDrawer();
 
   return (
     <header
@@ -55,7 +55,7 @@ function Header() {
         </Navbar.Items>
       </Navbar>
     </header>
-  )
+  );
 }
 
-export default Header
+export default Header;

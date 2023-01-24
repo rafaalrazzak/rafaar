@@ -1,12 +1,12 @@
-import { BlogLayout } from "@/layout"
+import { BlogLayout } from "@/layout";
 
 export async function getServerSideProps({ params }) {
-  const { slug } = params
+  const { slug } = params;
   return {
     props: {
       slug,
     },
-  }
+  };
 }
 
 export default function BlogPage({ slug }) {
@@ -18,5 +18,5 @@ export default function BlogPage({ slug }) {
         </section>
       </BlogLayout>
     </>
-  )
+  );
 }

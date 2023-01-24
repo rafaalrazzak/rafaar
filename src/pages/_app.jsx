@@ -1,20 +1,20 @@
-import "../styles/globals.css"
+import "../styles/globals.css";
 
-import { Inter } from "@next/font/google"
-import { AnimatePresence, domAnimation, LazyMotion, m } from "framer-motion"
-import { ThemeProvider } from "next-themes"
-import { Provider } from "react-wrap-balancer"
+import { Inter } from "@next/font/google";
+import { AnimatePresence, domAnimation, LazyMotion, m } from "framer-motion";
+import { ThemeProvider } from "next-themes";
+import { Provider } from "react-wrap-balancer";
 
-import variants, { withExit } from "@/libs/animation/variants"
+import variants, { withExit } from "@/libs/animation/variants";
 
 const inter = Inter({
   subsets: ["latin"],
-})
+});
 
 function MyApp({ Component, pageProps, router }) {
-  const v = withExit(variants)
+  const v = withExit(variants);
 
-  const onExitComplete = () => window.scrollTo(0, 0)
+  const onExitComplete = () => window.scrollTo(0, 0);
 
   return (
     <ThemeProvider attribute="class" storageKey="theme" enableSystem>
@@ -40,6 +40,6 @@ function MyApp({ Component, pageProps, router }) {
         </AnimatePresence>
       </LazyMotion>
     </ThemeProvider>
-  )
+  );
 }
-export default MyApp
+export default MyApp;

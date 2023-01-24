@@ -12,7 +12,7 @@ function Moon() {
         strokeLinejoin="round"
       />
     </svg>
-  )
+  );
 }
 
-export default Moon
+export default Moon;
