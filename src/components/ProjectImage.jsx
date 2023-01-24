@@ -1,6 +1,6 @@
 import clsx from "clsx"
 
-import Project from "@/data/Project.json"
+import Project from "@/data/Project"
 
 import Image from "./Image"
 
@@ -11,7 +11,7 @@ function ProjectImage() {
         <div
           key={index}
           className={clsx(
-            " relative aspect-[9/10]  flex-none   overflow-clip  rounded-xl transition-all duration-300  hover:scale-[1.1] sm:rounded-2xl",
+            " relative aspect-[9/10] h-64 w-48  flex-none   overflow-clip  rounded-xl transition-all duration-300  hover:scale-[1.1] sm:rounded-2xl",
             {
               "-rotate-2 hover:-rotate-12 ": index % 2 === 0,
               "rotate-2 hover:rotate-12": index % 2 === 1,
@@ -24,6 +24,7 @@ function ProjectImage() {
             height={500}
             alt={project.name}
             className="absolute inset-0 h-full bg-cover object-cover"
+            sizes="(max-width: 800px) 100vw, (max-width: 1200px) 50vw, 40vw"
           />
         </div>
       ))}
