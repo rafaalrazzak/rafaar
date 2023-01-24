@@ -13,7 +13,7 @@ const variants = () => ({
   visible: {
     ...visible,
     transition: {
-      type: 'tween',
+      type: "tween",
       duration: 0.15,
     },
   },
@@ -28,7 +28,7 @@ export const withExit = (func) => {
       y: 20,
       opacity: 0,
       transition: {
-        type: 'tween',
+        type: "tween",
         duration: 0.25,
       },
     },

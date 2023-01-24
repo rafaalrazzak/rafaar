@@ -1,12 +1,14 @@
-import { useEffect, useState } from 'react'
+"use client"
+
+import { useEffect, useState } from "react"
 
 export const useScroll = () => {
   const [yOffset, setYOffset] = useState(0)
   const [visible, setVisible] = useState(true)
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
   })
 
   function handleScroll() {

@@ -1,49 +1,49 @@
 const Skills = [
-  'Photoshop',
+  "Photoshop",
 
-  'Illustrator',
+  "Illustrator",
 
-  'Premiere Pro',
+  "Premiere Pro",
 
-  'Figma',
+  "Figma",
 
-  'HTML',
+  "HTML",
 
-  'CSS',
+  "CSS",
 
-  'JavaScript',
+  "JavaScript",
 
-  'NodeJs',
+  "NodeJs",
 
-  'ReactJs',
+  "ReactJs",
 
-  'NextJs',
+  "NextJs",
 
-  'Sass',
+  "Sass",
 
-  'TailwindCSS',
+  "TailwindCSS",
 
-  'HeadlessUI',
+  "HeadlessUI",
 
-  'NGINX',
+  "NGINX",
 
-  'Supabase',
+  "Supabase",
 
-  'Firebase',
+  "Firebase",
 
-  'MongoDB',
+  "MongoDB",
 
-  'GraphQL',
+  "GraphQL",
 
-  'VSCode',
+  "VSCode",
 
-  'Git',
+  "Git",
 
-  'Vercel',
+  "Vercel",
 
-  'Netlify',
+  "Netlify",
 
-  'Heroku',
+  "Heroku",
 ]
 
 export default Skills

@@ -1,20 +1,8 @@
-/**
- * Given a date, format it in a human-readable way
- * @param {string | Date} date - The date to format.
- * @returns The date in the format of Month Day, Year.
- */
-export const dateFormat = (date, locales, config) => {
-  return new Intl.DateTimeFormat(
-    locales ?? 'en-GB',
-    config ?? { dateStyle: 'full' }
-  ).format(new Date(date))
+export const dateFormat = (date) => {
+  //   format date to 10/11/2019
+  return new Date(date).toLocaleDateString("id-ID", {
+    year: "numeric",
+    month: "short",
+    day: "2-digit",
+  })
 }
-
-/**
- * It takes a date string and returns an ISO date string
- * @param {string} date - The date string to convert to ISO format.
- */
-export const dateStringToISO = (
-  /** provide valid date value in string, for example: `05/05/2005` that's going to be **5 May 2005** */
-  date
-) => new Date(date).toISOString()

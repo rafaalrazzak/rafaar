@@ -1,4 +1,6 @@
-import { useEffect } from 'react'
+"use client"
+
+import { useEffect } from "react"
 
 /**
  * It adds a listener to the document that will call the handler function if the user clicks outside of
@@ -30,12 +32,12 @@ export const useClickOutside = (
       handler(e)
     }
 
-    document.addEventListener('mousedown', listener)
-    document.addEventListener('touchstart', listener)
+    document.addEventListener("mousedown", listener)
+    document.addEventListener("touchstart", listener)
     /* upon unmounting, removes the event listeners. */
     return () => {
-      document.removeEventListener('mousedown', listener)
-      document.removeEventListener('touchstart', listener)
+      document.removeEventListener("mousedown", listener)
+      document.removeEventListener("touchstart", listener)
     }
   }, [handler, refObject])
 }

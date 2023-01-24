@@ -1,5 +1,7 @@
-import { useTheme as useNextTheme } from 'next-themes'
-import { useCallback, useEffect, useState } from 'react'
+"use client"
+
+import { useTheme as useNextTheme } from "next-themes"
+import { useCallback, useEffect, useState } from "react"
 
 export const useTheme = () => {
   const { theme, setTheme, systemTheme } = useNextTheme()

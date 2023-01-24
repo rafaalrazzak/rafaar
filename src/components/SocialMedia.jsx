@@ -1,15 +1,15 @@
-import SocialMediaData from '@/data/SocialMedia.json'
-import { GithubIcon, InstagramIcon, TwitterIcon } from '@/icons'
+import SocialMediaData from "@/data/SocialMedia.json"
+import { GithubIcon, InstagramIcon, TwitterIcon } from "@/icons"
 
-import Link from './Link'
+import Link from "./Link"
 function SocialMedia() {
   const Icon = ({ name }) => {
     switch (name) {
-      case 'Twitter':
+      case "Twitter":
         return <TwitterIcon />
-      case 'Instagram':
+      case "Instagram":
         return <InstagramIcon />
-      case 'Github':
+      case "Github":
         return <GithubIcon />
       default:
         return null

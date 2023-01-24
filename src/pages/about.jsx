@@ -1,13 +1,13 @@
-import { MDXRemote } from 'next-mdx-remote'
-import { serialize } from 'next-mdx-remote/serialize'
+import { MDXRemote } from "next-mdx-remote"
+import { serialize } from "next-mdx-remote/serialize"
 
-import Layout from '@/components/Layout'
-import { SEO } from '@/components/SEO'
-import { base64 } from '@/utils/encrypt'
+import { SEO } from "@/components/SEO"
+import { DefaultLayout } from "@/layout"
+import { base64 } from "@/utils/encrypt"
 
 export async function getServerSideProps() {
   const res = await fetch(
-    'https://api.github.com/repos/rafaalrazzak/rafalrazzak/contents/README.md'
+    "https://api.github.com/repos/rafaalrazzak/rafalrazzak/contents/README.md"
   )
 
   const data = await res.json()
@@ -21,11 +21,11 @@ export async function getServerSideProps() {
 
 export default function About({ content }) {
   return (
-    <Layout>
+    <DefaultLayout>
       <SEO title="About" />
-      <div className="prose prose-slate">
+      <div className="prose prose-slate mx-auto flex-col justify-center py-16 prose-img:rounded-xl dark:prose-invert">
         <MDXRemote {...content} />
       </div>
-    </Layout>
+    </DefaultLayout>
   )
 }

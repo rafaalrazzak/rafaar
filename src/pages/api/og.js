@@ -1,12 +1,12 @@
-import { Inter } from '@next/font/google'
-import { ImageResponse } from '@vercel/og'
+import { Inter } from "@next/font/google"
+import { ImageResponse } from "@vercel/og"
 
 const inter = Inter({
-  subsets: ['latin'],
+  subsets: ["latin"],
 })
 
 export const config = {
-  runtime: 'experimental-edge',
+  runtime: "edge",
 }
 
 export default async function handler(req) {
@@ -14,39 +14,39 @@ export default async function handler(req) {
     const { searchParams } = new URL(req.url)
 
     // ?title=<title>
-    const hasTitle = searchParams.has('title')
+    const hasTitle = searchParams.has("title")
     const title = hasTitle
-      ? searchParams.get('title')?.slice(0, 100)
-      : 'My default title'
-    const isBlog = searchParams.has('blog')
+      ? searchParams.get("title")?.slice(0, 100)
+      : "My default title"
+    const isBlog = searchParams.has("blog")
 
     return new ImageResponse(
       (
         <div
           className={inter.className}
           style={{
-            height: '100%',
-            width: '100%',
-            display: 'flex',
-            textAlign: 'center',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexDirection: 'column',
-            flexWrap: 'nowrap',
-            backgroundColor: 'black',
+            height: "100%",
+            width: "100%",
+            display: "flex",
+            textAlign: "center",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+            flexWrap: "nowrap",
+            backgroundColor: "black",
             backgroundImage:
-              'radial-gradient(circle at 25px 25px, #f1f5f9 2%, transparent 0%), radial-gradient(circle at 75px 75px, #f1f5f9 2%, transparent 0%)',
-            backgroundSize: '100px 100px',
+              "radial-gradient(circle at 25px 25px, #f1f5f9 2%, transparent 0%), radial-gradient(circle at 75px 75px, #f1f5f9 2%, transparent 0%)",
+            backgroundSize: "100px 100px",
           }}
         >
           <div
             style={{
               left: 42,
               top: 42,
-              position: 'absolute',
-              display: 'flex',
-              alignItems: 'center',
-              color: 'white',
+              position: "absolute",
+              display: "flex",
+              alignItems: "center",
+              color: "white",
             }}
           >
             <span
@@ -62,7 +62,7 @@ export default async function handler(req) {
           <div tw="flex w-full py-6 px-4 items-center justify-center p-8 text-center">
             <h2 tw="flex flex-col text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 text-center justify-center items-center">
               {isBlog && <span tw="text-white">rafaar | blog</span>}
-              <span tw={isBlog ? 'text-indigo-500' : 'text-white'}>
+              <span tw={isBlog ? "text-indigo-500" : "text-white"}>
                 {title}
               </span>
             </h2>
