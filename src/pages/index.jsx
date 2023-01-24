@@ -65,11 +65,8 @@ export default function Home({ nowPlaying }) {
             <h1>Skills</h1>
 
             <div
-              className="flex flex-wrap gap-4 py-6"
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-              }}
+              className="flex flex-wrap gap-4 py-6 flex flex-wrap"
+
             >
               {Skills.map((skill) => (
                 <Tooltip key={skill} title={skill}>
@@ -83,7 +80,7 @@ export default function Home({ nowPlaying }) {
           <div className="py-6">
             <h1>Portfolio</h1>
 
-            <div className="my-6 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <div className="my-6 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-auto">
               {Portfolio.map((portfolio, idx) => (
                 <PortfolioCard key={idx} {...portfolio} />
               ))}
@@ -96,6 +93,7 @@ export default function Home({ nowPlaying }) {
             <NowPlaying {...nowPlaying} />
           </section>
         )}
+
       </DefaultLayout>
     </>
   );
