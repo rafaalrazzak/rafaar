@@ -1,4 +1,4 @@
-import { BlogLayout } from '@/layout'
+import { BlogLayout } from "@/layout"
 
 export async function getServerSideProps({ params }) {
   const { slug } = params

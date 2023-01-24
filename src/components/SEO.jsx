@@ -1,9 +1,9 @@
-'use client'
+"use client"
 
-import { useRouter } from 'next/router'
-import { NextSeo } from 'next-seo'
+import { useRouter } from "next/router"
+import { NextSeo } from "next-seo"
 
-import siteMetadata from '@/data/siteMetadata'
+import siteMetadata from "@/data/siteMetadata"
 
 /**
  * It takes a NextSeoProps object and returns a `<NextSeo /> component`.
@@ -13,15 +13,15 @@ export const SEO = ({ ...props }) => {
   const router = useRouter()
 
   const TITLE_TEMPLATE = `%s — ${
-    props.template ?? (siteMetadata.SITE_NAME || 'rafaar.')
+    props.template ?? (siteMetadata.SITE_NAME || "rafaar.")
   }`
 
   const DESCRIPTION =
-    props.description ?? (siteMetadata.SELF_DESCRIPTION || 'hello world!')
+    props.description ?? (siteMetadata.SELF_DESCRIPTION || "hello world!")
 
   const defaultThumb =
-    'https://res.cloudinary.com/raf-ar/image/upload/v1670138621/thumbnail/raf-dark-social-stack.png'
-  const thumb = router.pathname.startsWith('/blog')
+    "https://res.cloudinary.com/raf-ar/image/upload/v1670138621/thumbnail/raf-dark-social-stack.png"
+  const thumb = router.pathname.startsWith("/blog")
     ? `${siteMetadata.SITE_URL}/api/og?title=${props.title} — ${siteMetadata.SITE_NAME}&blog`
     : defaultThumb
   const url = siteMetadata.SITE_URL + router.pathname
@@ -34,7 +34,7 @@ export const SEO = ({ ...props }) => {
       twitter={{
         site: url,
         handle: siteMetadata.TWITER_USERNAME,
-        cardType: 'summary_large_image',
+        cardType: "summary_large_image",
       }}
       openGraph={{
         url: url,
@@ -46,14 +46,14 @@ export const SEO = ({ ...props }) => {
             width: 1200,
             height: 628,
             alt: props.title,
-            type: 'image/png',
+            type: "image/png",
           },
         ],
-        siteName: siteMetadata.SITE_NAME || 'rafaar.',
+        siteName: siteMetadata.SITE_NAME || "rafaar.",
       }}
       additionalMetaTags={[
         {
-          property: 'twitter:image',
+          property: "twitter:image",
           content: thumb,
         },
       ]}

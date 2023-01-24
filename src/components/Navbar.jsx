@@ -1,16 +1,16 @@
-'use client'
+"use client"
 
-import clsx from 'clsx'
-import { useRouter } from 'next/router'
+import clsx from "clsx"
+import { useRouter } from "next/router"
 
-import Link from './Link'
+import Link from "./Link"
 
 function NavbarComponent({ className, children }) {
-  return <nav className={clsx('flex py-6', className)}>{children}</nav>
+  return <nav className={clsx("flex py-6", className)}>{children}</nav>
 }
 
 function Items({ className, children }) {
-  return <ul className={clsx('flex', className)}>{children}</ul>
+  return <ul className={clsx("flex", className)}>{children}</ul>
 }
 
 function Item({ href, children, className }) {
@@ -20,15 +20,15 @@ function Item({ href, children, className }) {
   return (
     <li
       className={clsx(
-        'text-sm font-semibold transition-colors ease-in-out hover:text-secondary-500',
+        "text-sm font-semibold transition-colors ease-in-out hover:text-secondary-500",
         className
       )}
     >
       <Link
         href={href}
         className={clsx(
-          thisPage && 'relative flex text-secondary-500',
-          'justify-center'
+          thisPage && "relative flex text-secondary-500",
+          "justify-center"
         )}
       >
         {children}

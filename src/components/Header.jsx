@@ -1,24 +1,24 @@
 // import ToggleTheme from "./ToggleTheme"
 
-import AppRoute from '@/data/AppRoute'
-import { useDrawer, useScroll } from '@/hooks'
-import { useMediaQuery } from '@/hooks'
-import { twclsx } from '@/libs/twclsx'
+import AppRoute from "@/data/AppRoute"
+import { useDrawer, useScroll } from "@/hooks"
+import { useMediaQuery } from "@/hooks"
+import { twclsx } from "@/libs/twclsx"
 
-import { DrawerButton } from './DrawerButton'
-import Image from './Image'
-import Navbar from './Navbar'
-import { ThemeButton } from './ThemeButton'
+import { DrawerButton } from "./DrawerButton"
+import Image from "./Image"
+import Navbar from "./Navbar"
+import { ThemeButton } from "./ThemeButton"
 function Header() {
   const visible = useScroll()
-  const mdscreen = useMediaQuery('(min-width: 768px)')
+  const mdscreen = useMediaQuery("(min-width: 768px)")
   const { isOpen } = useDrawer()
 
   return (
     <header
       className={twclsx(
-        ' sticky top-0 z-[24] h-[86px]  w-full  items-center bg-primary-100/20  px-6 backdrop-blur-lg backdrop-filter transition-all duration-300 ease-in-out dark:bg-primary-800/20 sm:fixed sm:bg-transparent sm:backdrop-blur-none sm:dark:bg-transparent md:px-12',
-        visible && isOpen && 'bg-primary-100/20 dark:bg-primary-800/20'
+        " sticky top-0 z-[24] h-[86px]  w-full  items-center bg-primary-100/20  px-6 backdrop-blur-lg backdrop-filter transition-all duration-300 ease-in-out dark:bg-primary-800/20 sm:fixed sm:bg-transparent sm:backdrop-blur-none sm:dark:bg-transparent md:px-12",
+        visible && isOpen && "bg-primary-100/20 dark:bg-primary-800/20"
       )}
     >
       <Navbar className="relative flex flex-1 items-center  ">

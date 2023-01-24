@@ -1,5 +1,5 @@
-import clsx from 'clsx'
-import { twMerge } from 'tailwind-merge'
+import clsx from "clsx"
+import { twMerge } from "tailwind-merge"
 
 /**
  * It takes a list of class names, and returns a list of class names by using tailwind merge

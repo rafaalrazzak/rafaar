@@ -1,13 +1,13 @@
-import clsx from 'clsx'
-import Balancer from 'react-wrap-balancer'
+import clsx from "clsx"
+import Balancer from "react-wrap-balancer"
 
-import Image from '@/components/Image'
-import siteMetadata from '@/data/siteMetadata'
+import Image from "@/components/Image"
+import siteMetadata from "@/data/siteMetadata"
 
 function Hero({ className }) {
   return (
     <div
-      className={clsx('flex  flex-1 items-center justify-between', className)}
+      className={clsx("flex  flex-1 items-center justify-between", className)}
     >
       <div className="flex max-w-lg flex-col gap-6 py-6">
         <h1>Rafa Al Razzak</h1>

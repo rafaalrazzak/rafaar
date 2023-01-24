@@ -1,8 +1,8 @@
-import clsx from 'clsx'
+import clsx from "clsx"
 
-import Project from '@/data/Project.json'
+import Project from "@/data/Project.json"
 
-import Image from './Image'
+import Image from "./Image"
 
 function ProjectImage() {
   return (
@@ -11,10 +11,10 @@ function ProjectImage() {
         <div
           key={index}
           className={clsx(
-            ' relative aspect-[9/10]  flex-none   overflow-clip  rounded-xl transition-all duration-300  hover:scale-[1.1] sm:rounded-2xl',
+            " relative aspect-[9/10]  flex-none   overflow-clip  rounded-xl transition-all duration-300  hover:scale-[1.1] sm:rounded-2xl",
             {
-              '-rotate-2 hover:-rotate-12 ': index % 2 === 0,
-              'rotate-2 hover:rotate-12': index % 2 === 1,
+              "-rotate-2 hover:-rotate-12 ": index % 2 === 0,
+              "rotate-2 hover:rotate-12": index % 2 === 1,
             }
           )}
         >

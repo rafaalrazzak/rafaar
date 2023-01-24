@@ -1,11 +1,11 @@
-import { Bars2Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import { AnimatePresence, m } from 'framer-motion'
+import { Bars2Icon, XMarkIcon } from "@heroicons/react/24/outline"
+import { AnimatePresence, m } from "framer-motion"
 
-import { useDrawer } from '@/hooks'
-import { twclsx } from '@/libs/twclsx'
+import { useDrawer } from "@/hooks"
+import { twclsx } from "@/libs/twclsx"
 
-import { DrawerMenu } from './DrawerMenu'
-import { UnstyledButton } from './unstyle/Button'
+import { DrawerMenu } from "./DrawerMenu"
+import { UnstyledButton } from "./unstyle/Button"
 
 export const DrawerButton = () => {
   const v = {
@@ -13,7 +13,7 @@ export const DrawerButton = () => {
     visible: {
       scale: 1,
       opacity: 1,
-      transition: { type: 'tween', duration: 0.1 },
+      transition: { type: "tween", duration: 0.1 },
     },
     exit: { scale: 0.5, opacity: 0, transition: { duration: 0.1 } },
   }
@@ -25,13 +25,13 @@ export const DrawerButton = () => {
         aria-label="toggle-drawer"
         id="toggle-drawer"
         className={twclsx(
-          'accesible z-50',
-          'md:hidden',
-          'h-10 w-10 rounded-lg text-lg'
+          "accesible z-50",
+          "md:hidden",
+          "h-10 w-10 rounded-lg text-lg"
         )}
         onClick={changeState}
       >
-        <AnimatePresence exitBeforeEnter>
+        <AnimatePresence mode="wait">
           {isOpen && (
             <m.span
               key={1}
@@ -57,7 +57,7 @@ export const DrawerButton = () => {
         </AnimatePresence>
       </UnstyledButton>
 
-      <AnimatePresence mode={'wait'}>
+      <AnimatePresence mode={"wait"}>
         {isOpen && <DrawerMenu />}
       </AnimatePresence>
     </>

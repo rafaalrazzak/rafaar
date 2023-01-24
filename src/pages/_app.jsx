@@ -1,14 +1,14 @@
-import '../styles/globals.css'
+import "../styles/globals.css"
 
-import { Inter } from '@next/font/google'
-import { AnimatePresence, domAnimation, LazyMotion, m } from 'framer-motion'
-import { ThemeProvider } from 'next-themes'
-import { Provider } from 'react-wrap-balancer'
+import { Inter } from "@next/font/google"
+import { AnimatePresence, domAnimation, LazyMotion, m } from "framer-motion"
+import { ThemeProvider } from "next-themes"
+import { Provider } from "react-wrap-balancer"
 
-import variants, { withExit } from '@/libs/animation/variants'
+import variants, { withExit } from "@/libs/animation/variants"
 
 const inter = Inter({
-  subsets: ['latin'],
+  subsets: ["latin"],
 })
 
 function MyApp({ Component, pageProps, router }) {
@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps, router }) {
         <AnimatePresence
           initial={false}
           onExitComplete={onExitComplete}
-          mode={'wait'}
+          mode={"wait"}
         >
           <m.div
             id="skip-content"

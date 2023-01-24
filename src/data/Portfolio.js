@@ -1,22 +1,22 @@
 const Portfolio = [
   {
     id: 1,
-    title: 'Personal Website',
-    description: 'A personal website built with NextJs, MDX, TailwindCSS.',
+    title: "Personal Website",
+    description: "A personal website built with NextJs, MDX, TailwindCSS.",
     image:
-      'https://screenshotapi-dot-net.storage.googleapis.com/rafaar_me_c3989a57c915.png',
-    link: 'https://rafaar.me',
-    stack: ['NextJs', 'TailwindCSS', 'Vercel'],
+      "https://api.cloudinary.com/v1_1/raf-ar/image/download?api_key=762939459481927&format=jpg&public_id=portfolio%2Frafaar.me&signature=8f989e8cb94995f631942da6eb1c21f35bcec512&timestamp=1674478059&transformation=c_pad%2Cb_auto%3Apredominant%2Cfl_preserve_transparency&type=upload",
+    link: "https://rafaar.me",
+    stack: ["NextJs", "TailwindCSS", "Vercel"],
   },
   {
     id: 1,
-    title: 'OSIS/MPK SMK AL-ASIYAH',
+    title: "OSIS/MPK SMK AL-ASIYAH",
     description:
-      'A website for OSIS/MPK SMK AL-ASIYAH built with NextJs, TailwindCSS, Supabase.',
+      "A website for OSIS/MPK SMK AL-ASIYAH built with NextJs, TailwindCSS, Supabase.",
     image:
-      'https://screenshotapi-dot-net.storage.googleapis.com/osis_matick_live_69b8b6ca1396.png',
-    link: 'https://osis.matick.live',
-    stack: ['NextJs', 'TailwindCSS', 'Supabase', 'Vercel'],
+      "https://api.cloudinary.com/v1_1/raf-ar/image/download?api_key=762939459481927&format=jpg&public_id=portfolio%2Fosis.matick.live&signature=34ef2bc3edee6b890aec233387a9a6f7725a59ce&timestamp=1674478086&transformation=c_pad%2Cb_auto%3Apredominant%2Cfl_preserve_transparency&type=upload",
+    link: "https://osis.matick.live",
+    stack: ["NextJs", "TailwindCSS", "Supabase", "Vercel"],
   },
 ]
 

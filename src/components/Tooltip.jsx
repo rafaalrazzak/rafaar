@@ -1,13 +1,13 @@
-import { twclsx } from '@/libs/twclsx'
+import { twclsx } from "@/libs/twclsx"
 
-export default function Tooltip({ title, children, position = 'top' }) {
+export default function Tooltip({ title, children, position = "top" }) {
   const pos = {
-    top: '-translate-x-1/2 -top-8 left-1/2 before:left-1/2 before:top-full before:-translate-x-1/2',
+    top: "-translate-x-1/2 -top-8 left-1/2 before:left-1/2 before:top-full before:-translate-x-1/2",
     bottom:
-      '-translate-x-1/2 -bottom-8 left-1/2 before:left-1/2 before:bottom-full before:-translate-x-1/2 before:rotate-180',
-    left: '-left-[72px] -translate-y-1/2 top-1/2 before:top-1/2 before:left-full before:-translate-y-1/2 before:-rotate-90',
+      "-translate-x-1/2 -bottom-8 left-1/2 before:left-1/2 before:bottom-full before:-translate-x-1/2 before:rotate-180",
+    left: "-left-[72px] -translate-y-1/2 top-1/2 before:top-1/2 before:left-full before:-translate-y-1/2 before:-rotate-90",
     right:
-      '-right-[72px] -translate-y-1/2 top-1/2 before:top-1/2 before:right-full before:-translate-y-1/2 before:rotate-90',
+      "-right-[72px] -translate-y-1/2 top-1/2 before:top-1/2 before:right-full before:-translate-y-1/2 before:rotate-90",
   }
 
   return (
