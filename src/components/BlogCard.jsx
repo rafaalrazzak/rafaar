@@ -1,9 +1,9 @@
-import React from "react"
+import React from "react";
 
-import { ArrowRightIcon } from "@/icons"
+import { ArrowRightIcon } from "@/icons";
+import { dateFormat } from "@/utils/dateFormat";
 
-import { dateFormat } from "@/utils/dateFormat"
-import Link from "./Link"
+import Link from "./Link";
 
 function BlogCard({ title, description, publishOn, url }) {
   return (
@@ -38,7 +38,7 @@ function BlogCard({ title, description, publishOn, url }) {
         </Link>
       </div>
     </article>
-  )
+  );
 }
 
-export default BlogCard
+export default BlogCard;
