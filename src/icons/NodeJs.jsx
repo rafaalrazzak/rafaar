@@ -11,6 +11,6 @@ const NodeJs = (props) => (
       fill="#393"
     />
   </svg>
-);
+)
 
-export default NodeJs;
+export default NodeJs

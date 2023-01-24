@@ -1,12 +1,12 @@
 const hidden = {
   y: 15,
   opacity: 0,
-};
+}
 
 const visible = {
   y: 0,
   opacity: 1,
-};
+}
 
 const variants = () => ({
   hidden,
@@ -17,10 +17,10 @@ const variants = () => ({
       duration: 0.15,
     },
   },
-});
+})
 
 export const withExit = (func) => {
-  const v = func();
+  const v = func()
 
   return {
     ...v,
@@ -32,7 +32,7 @@ export const withExit = (func) => {
         duration: 0.25,
       },
     },
-  };
-};
+  }
+}
 
-export default variants;
+export default variants

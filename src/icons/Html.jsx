@@ -11,6 +11,6 @@ const HTML = (props) => (
       fill="#E34F26"
     />
   </svg>
-);
+)
 
-export default HTML;
+export default HTML

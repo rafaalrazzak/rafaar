@@ -4,5 +4,5 @@ export const dateFormat = (date, format) => {
     year: "numeric",
     month: "short",
     day: "2-digit",
-  });
-};
+  })
+}

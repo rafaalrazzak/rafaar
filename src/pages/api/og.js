@@ -1,24 +1,24 @@
-import { Inter } from "@next/font/google";
-import { ImageResponse } from "@vercel/og";
+import { Inter } from "@next/font/google"
+import { ImageResponse } from "@vercel/og"
 
 const inter = Inter({
   subsets: ["latin"],
-});
+})
 
 export const config = {
   runtime: "edge",
-};
+}
 
 export default async function handler(req) {
   try {
-    const { searchParams } = new URL(req.url);
+    const { searchParams } = new URL(req.url)
 
     // ?title=<title>
-    const hasTitle = searchParams.has("title");
+    const hasTitle = searchParams.has("title")
     const title = hasTitle
       ? searchParams.get("title")?.slice(0, 100)
-      : "My default title";
-    const isBlog = searchParams.has("blog");
+      : "My default title"
+    const isBlog = searchParams.has("blog")
 
     return new ImageResponse(
       (
@@ -73,11 +73,11 @@ export default async function handler(req) {
         width: 1200,
         height: 630,
       }
-    );
+    )
   } catch (e) {
-    console.log(`${e.message}`);
+    console.log(`${e.message}`)
     return new Response(`Failed to generate the image`, {
       status: 500,
-    });
+    })
   }
 }

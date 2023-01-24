@@ -1,14 +1,14 @@
-"use client";
+"use client"
 
-import { m } from "framer-motion";
-import { useRouter } from "next/router";
+import { m } from "framer-motion"
+import { useRouter } from "next/router"
 
-import APP_ROUTE from "@/data/AppRoute";
-import { useDrawer, useTheme } from "@/hooks";
-import { twclsx } from "@/libs/twclsx";
+import APP_ROUTE from "@/data/AppRoute"
+import { useDrawer, useTheme } from "@/hooks"
+import { twclsx } from "@/libs/twclsx"
 
-import { ThemeMenu } from "./ThemeMenu";
-import { UnstyledLink } from "./unstyle/Link";
+import { ThemeMenu } from "./ThemeMenu"
+import { UnstyledLink } from "./unstyle/Link"
 
 const container = {
   hidden: { opacity: 0 },
@@ -16,7 +16,7 @@ const container = {
     opacity: 1,
     transition: { staggerChildren: 0.05, ease: "easeInOut" },
   },
-};
+}
 
 const item = {
   hidden: {
@@ -30,12 +30,12 @@ const item = {
       ease: "easeInOut",
     },
   },
-};
+}
 
 export const DrawerMenu = () => {
-  const { changeState } = useDrawer();
-  const { pathname } = useRouter();
-  const theme = useTheme();
+  const { changeState } = useDrawer()
+  const { pathname } = useRouter()
+  const theme = useTheme()
   return (
     <aside
       aria-labelledby="toggle-drawer"
@@ -76,5 +76,5 @@ export const DrawerMenu = () => {
         </m.ul>
       </nav>
     </aside>
-  );
-};
+  )
+}

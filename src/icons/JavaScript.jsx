@@ -11,6 +11,6 @@ const JavaScript = (props) => (
       fill="#F7DF1E"
     />
   </svg>
-);
+)
 
-export default JavaScript;
+export default JavaScript

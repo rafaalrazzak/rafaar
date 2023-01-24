@@ -11,6 +11,6 @@ const Heroku = (props) => (
       fill="#430098"
     />
   </svg>
-);
+)
 
-export default Heroku;
+export default Heroku

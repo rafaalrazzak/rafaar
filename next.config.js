@@ -9,5 +9,5 @@ const nextConfig = {
       "i.scdn.co",
     ],
   },
-};
-module.exports = nextConfig;
+}
+module.exports = nextConfig

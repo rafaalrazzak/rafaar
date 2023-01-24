@@ -11,6 +11,6 @@ const Illustrator = (props) => (
       fill="#FF9A00"
     />
   </svg>
-);
+)
 
-export default Illustrator;
+export default Illustrator

@@ -18,6 +18,6 @@ const Portfolio = [
     link: "https://osis.matick.live",
     stack: ["NextJs", "TailwindCSS", "Supabase", "Vercel"],
   },
-];
+]
 
-export default Portfolio;
+export default Portfolio

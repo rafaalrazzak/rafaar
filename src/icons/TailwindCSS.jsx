@@ -14,6 +14,6 @@ const TailwindCSS = (props) => (
       fill="#06B6D4"
     />
   </svg>
-);
+)
 
-export default TailwindCSS;
+export default TailwindCSS

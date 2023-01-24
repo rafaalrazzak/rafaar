@@ -1,11 +1,11 @@
-import { Bars2Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { AnimatePresence, m } from "framer-motion";
+import { Bars2Icon, XMarkIcon } from "@heroicons/react/24/outline"
+import { AnimatePresence, m } from "framer-motion"
 
-import { useDrawer } from "@/hooks";
-import { twclsx } from "@/libs/twclsx";
+import { useDrawer } from "@/hooks"
+import { twclsx } from "@/libs/twclsx"
 
-import { DrawerMenu } from "./DrawerMenu";
-import { UnstyledButton } from "./unstyle/Button";
+import { DrawerMenu } from "./DrawerMenu"
+import { UnstyledButton } from "./unstyle/Button"
 
 export const DrawerButton = () => {
   const v = {
@@ -16,8 +16,8 @@ export const DrawerButton = () => {
       transition: { type: "tween", duration: 0.1 },
     },
     exit: { scale: 0.5, opacity: 0, transition: { duration: 0.1 } },
-  };
-  const { changeState, isOpen } = useDrawer();
+  }
+  const { changeState, isOpen } = useDrawer()
 
   return (
     <>
@@ -61,5 +61,5 @@ export const DrawerButton = () => {
         {isOpen && <DrawerMenu />}
       </AnimatePresence>
     </>
-  );
-};
+  )
+}

@@ -11,6 +11,6 @@ const Photoshop = (props) => (
       fill="#31A8FF"
     />
   </svg>
-);
+)
 
-export default Photoshop;
+export default Photoshop

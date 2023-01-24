@@ -11,6 +11,6 @@ const React = (props) => (
       fill="#61DAFB"
     />
   </svg>
-);
+)
 
-export default React;
+export default React

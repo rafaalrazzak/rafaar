@@ -1,20 +1,20 @@
-import SocialMediaData from "@/data/SocialMedia.json";
-import { GithubIcon, InstagramIcon, TwitterIcon } from "@/icons";
+import SocialMediaData from "@/data/SocialMedia.json"
+import { GithubIcon, InstagramIcon, TwitterIcon } from "@/icons"
 
-import Link from "./Link";
+import Link from "./Link"
 function SocialMedia() {
   const Icon = ({ name }) => {
     switch (name) {
       case "Twitter":
-        return <TwitterIcon />;
+        return <TwitterIcon />
       case "Instagram":
-        return <InstagramIcon />;
+        return <InstagramIcon />
       case "Github":
-        return <GithubIcon />;
+        return <GithubIcon />
       default:
-        return null;
+        return null
     }
-  };
+  }
   return (
     <>
       {SocialMediaData.map((socialMedia, index) => (
@@ -27,7 +27,7 @@ function SocialMedia() {
         </Link>
       ))}
     </>
-  );
+  )
 }
 
-export default SocialMedia;
+export default SocialMedia

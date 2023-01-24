@@ -11,6 +11,6 @@ const Supabase = (props) => (
       fill="#3ECF8E"
     />
   </svg>
-);
+)
 
-export default Supabase;
+export default Supabase

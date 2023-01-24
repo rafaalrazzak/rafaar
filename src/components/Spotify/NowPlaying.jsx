@@ -1,14 +1,14 @@
-import { usePalette } from "color-thief-react";
+import { usePalette } from "color-thief-react"
 
-import Image from "@/components/Image";
-import { SpotifyIcon } from "@/icons";
+import Image from "@/components/Image"
+import { SpotifyIcon } from "@/icons"
 
-import Link from "../Link";
+import Link from "../Link"
 
 export default function NowPlaying({ songUrl, songImage, title, artist }) {
   const { data: dominantColor } = usePalette(songImage, 2, "hex", {
     crossOrigin: "RAF",
-  });
+  })
 
   return (
     <div className="group/nowPlaying relative flex items-center overflow-hidden rounded-xl">
@@ -76,5 +76,5 @@ export default function NowPlaying({ songUrl, songImage, title, artist }) {
         </div>
       </div>
     </div>
-  );
+  )
 }

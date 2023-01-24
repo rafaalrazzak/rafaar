@@ -1,16 +1,16 @@
-import { ArrowPathIcon, MoonIcon, SunIcon } from "@heroicons/react/24/outline";
-import { AnimatePresence } from "framer-motion";
+import { ArrowPathIcon, MoonIcon, SunIcon } from "@heroicons/react/24/outline"
+import { AnimatePresence } from "framer-motion"
 
-import { useTheme } from "@/hooks/useTheme";
-import { twclsx } from "@/libs/twclsx";
+import { useTheme } from "@/hooks/useTheme"
+import { twclsx } from "@/libs/twclsx"
 
-import { ThemeMenu } from "./ThemeMenu";
-import { UnstyledButton } from "./unstyle/Button";
+import { ThemeMenu } from "./ThemeMenu"
+import { UnstyledButton } from "./unstyle/Button"
 
 export const ThemeButton = ({ screen }) => {
-  const theme = useTheme();
+  const theme = useTheme()
 
-  if (!theme.mounted) return <ArrowPathIcon className="w-5 animate-spin" />;
+  if (!theme.mounted) return <ArrowPathIcon className="w-5 animate-spin" />
 
   return (
     <div className="relative z-50">
@@ -49,5 +49,5 @@ export const ThemeButton = ({ screen }) => {
         )}
       </AnimatePresence>
     </div>
-  );
-};
+  )
+}

@@ -1,8 +1,8 @@
-import clsx from "clsx";
+import clsx from "clsx"
 
-import Project from "@/data/Project.json";
+import Project from "@/data/Project.json"
 
-import Image from "./Image";
+import Image from "./Image"
 
 function ProjectImage() {
   return (
@@ -28,7 +28,7 @@ function ProjectImage() {
         </div>
       ))}
     </div>
-  );
+  )
 }
 
-export default ProjectImage;
+export default ProjectImage

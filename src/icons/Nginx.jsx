@@ -11,6 +11,6 @@ const Nginx = (props) => (
       fill="#009639"
     />
   </svg>
-);
+)
 
-export default Nginx;
+export default Nginx

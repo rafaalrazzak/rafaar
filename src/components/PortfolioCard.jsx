@@ -1,9 +1,9 @@
-import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
-import Balancer from "react-wrap-balancer";
+import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline"
+import Balancer from "react-wrap-balancer"
 
-import DynamicIcon from "@/components/DynamicIcon";
-import Link from "@/components/Link";
-import Tooltip from "@/components/Tooltip";
+import DynamicIcon from "@/components/DynamicIcon"
+import Link from "@/components/Link"
+import Tooltip from "@/components/Tooltip"
 
 export default function PortfolioCard({
   title,
@@ -44,5 +44,5 @@ export default function PortfolioCard({
         </Balancer>
       </div>
     </div>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-import siteMetadata from "@/data/siteMetadata";
+import siteMetadata from "@/data/siteMetadata"
 
 export const getMetaPage = (data) => {
   return {
@@ -29,5 +29,5 @@ export const getMetaPage = (data) => {
       },
     ],
     ...data,
-  };
-};
+  }
+}

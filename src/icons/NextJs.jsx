@@ -11,6 +11,6 @@ const NextJs = (props) => (
       fill="#000"
     />
   </svg>
-);
+)
 
-export default NextJs;
+export default NextJs

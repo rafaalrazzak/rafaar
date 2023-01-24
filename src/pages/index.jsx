@@ -1,26 +1,26 @@
-import BlogCard from "@/components/BlogCard";
-import DynamicIcon from "@/components/DynamicIcon";
-import Hero from "@/components/Hero";
-import PortfolioCard from "@/components/PortfolioCard";
-import ProjectImage from "@/components/ProjectImage";
-import { SEO } from "@/components/SEO";
-import SocialMedia from "@/components/SocialMedia";
-import NowPlaying from "@/components/Spotify/NowPlaying";
-import Tooltip from "@/components/Tooltip";
-import Portfolio from "@/data/Portfolio";
-import Skills from "@/data/Skills";
-import { DefaultLayout } from "@/layout";
+import BlogCard from "@/components/BlogCard"
+import DynamicIcon from "@/components/DynamicIcon"
+import Hero from "@/components/Hero"
+import PortfolioCard from "@/components/PortfolioCard"
+import ProjectImage from "@/components/ProjectImage"
+import { SEO } from "@/components/SEO"
+import SocialMedia from "@/components/SocialMedia"
+import NowPlaying from "@/components/Spotify/NowPlaying"
+import Tooltip from "@/components/Tooltip"
+import Portfolio from "@/data/Portfolio"
+import Skills from "@/data/Skills"
+import { DefaultLayout } from "@/layout"
 
 export async function getServerSideProps() {
   const nowPlaying = await fetch(
     "https://api.rafaar.me/api/v1/spotify/now-playing"
-  ).then((res) => res.json());
+  ).then((res) => res.json())
 
   return {
     props: {
       nowPlaying,
     },
-  };
+  }
 }
 
 export default function Home({ nowPlaying }) {
@@ -98,5 +98,5 @@ export default function Home({ nowPlaying }) {
         )}
       </DefaultLayout>
     </>
-  );
+  )
 }

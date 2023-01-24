@@ -12,6 +12,6 @@ const Spotify = ({ fill, ...props }) => (
       fill={fill || "#1DB954"}
     />
   </svg>
-);
+)
 
-export default Spotify;
+export default Spotify

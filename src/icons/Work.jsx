@@ -18,7 +18,7 @@ function Work() {
         className="stroke-primary-400 dark:stroke-primary-500"
       />
     </svg>
-  );
+  )
 }
 
-export default Work;
+export default Work

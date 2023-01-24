@@ -14,7 +14,7 @@ function Sun() {
         fill="none"
       />
     </svg>
-  );
+  )
 }
 
-export default Sun;
+export default Sun

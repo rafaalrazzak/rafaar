@@ -1,8 +1,8 @@
-import clsx from "clsx";
-import Balancer from "react-wrap-balancer";
+import clsx from "clsx"
+import Balancer from "react-wrap-balancer"
 
-import Image from "@/components/Image";
-import siteMetadata from "@/data/siteMetadata";
+import Image from "@/components/Image"
+import siteMetadata from "@/data/siteMetadata"
 
 function Hero({ className }) {
   return (
@@ -27,7 +27,7 @@ function Hero({ className }) {
         />
       </div>
     </div>
-  );
+  )
 }
 
-export default Hero;
+export default Hero

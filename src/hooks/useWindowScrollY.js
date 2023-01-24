@@ -1,5 +1,5 @@
-"use client";
-import { useEffect, useState } from "react";
+"use client"
+import { useEffect, useState } from "react"
 
 /**
  * react custom hook `useWindowScroll` will run on side effect to observe
@@ -8,16 +8,16 @@ import { useEffect, useState } from "react";
  * @returns The scroll position of the window Y.
  */
 export const useWindowScrollY = () => {
-  const [scrollPos, setScrollPos] = useState(0);
+  const [scrollPos, setScrollPos] = useState(0)
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const handleScroll = () => setScrollPos(window.scrollY);
-      window.addEventListener("scroll", handleScroll);
+      const handleScroll = () => setScrollPos(window.scrollY)
+      window.addEventListener("scroll", handleScroll)
 
-      return () => window.removeEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll)
     }
-  }, []);
+  }, [])
 
-  return scrollPos;
-};
+  return scrollPos
+}

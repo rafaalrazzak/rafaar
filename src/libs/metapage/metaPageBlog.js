@@ -1,7 +1,7 @@
-import siteMetadata from "@/data/siteMetadata";
-import { dateStringToISO } from "@/utils/dateFormat";
+import siteMetadata from "@/data/siteMetadata"
+import { dateStringToISO } from "@/utils/dateFormat"
 
-import { generateOgImage } from "./ogImage";
+import { generateOgImage } from "./ogImage"
 
 export const getMetaPageBlog = (data) => ({
   title: data.title,
@@ -54,4 +54,4 @@ export const getMetaPageBlog = (data) => ({
       content: data.author_name,
     },
   ],
-});
+})

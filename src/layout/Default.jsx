@@ -1,5 +1,5 @@
-import Container from "@/components/Container";
-import Header from "@/components/Header";
+import Container from "@/components/Container"
+import Header from "@/components/Header"
 export const DefaultLayout = ({ children }) => {
   return (
     <>
@@ -13,6 +13,6 @@ export const DefaultLayout = ({ children }) => {
         </Container>
       </main>
     </>
-  );
-};
-export default DefaultLayout;
+  )
+}
+export default DefaultLayout

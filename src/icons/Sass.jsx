@@ -11,6 +11,6 @@ const Sass = (props) => (
       fill="#C69"
     />
   </svg>
-);
+)
 
-export default Sass;
+export default Sass

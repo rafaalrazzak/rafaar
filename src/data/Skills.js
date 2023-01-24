@@ -44,6 +44,6 @@ const Skills = [
   "Netlify",
 
   "Heroku",
-];
+]
 
-export default Skills;
+export default Skills
