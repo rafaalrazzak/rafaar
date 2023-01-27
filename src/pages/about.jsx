@@ -20,10 +20,12 @@ export async function getServerSideProps() {
 }
 
 export default function About({ content }) {
+
+
   return (
     <DefaultLayout>
       <SEO title="About" />
-      <div className="prose prose-slate mx-auto flex-col justify-center py-16 prose-img:rounded-xl dark:prose-invert">
+      <div className="prose prose-slate mx-auto flex-col justify-center py-16 prose-img:rounded dark:prose-invert">
         <MDXRemote {...content} />
       </div>
     </DefaultLayout>
