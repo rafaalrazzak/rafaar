@@ -1,29 +1,32 @@
-import BlogCard from "@/components/BlogCard";
-import DynamicIcon from "@/components/DynamicIcon";
-import Hero from "@/components/Hero";
-import PortfolioCard from "@/components/PortfolioCard";
-import ProjectImage from "@/components/ProjectImage";
-import { SEO } from "@/components/SEO";
-import SocialMedia from "@/components/SocialMedia";
-import NowPlaying from "@/components/Spotify/NowPlaying";
-import Tooltip from "@/components/Tooltip";
-import Portfolio from "@/data/Portfolio";
-import Skills from "@/data/Skills";
-import { DefaultLayout } from "@/layout";
+import BlogCard from "@/components/BlogCard"
+import DynamicIcon from "@/components/DynamicIcon"
+import Hero from "@/components/Hero"
+import IconText from "@/components/IconText"
+import PortfolioCard from "@/components/PortfolioCard"
+import ProjectImage from "@/components/ProjectImage"
+import { SEO } from "@/components/SEO"
+import SocialMedia from "@/components/SocialMedia"
+import NowPlaying from "@/components/Spotify/NowPlaying"
+import Tooltip from "@/components/Tooltip"
+import Portfolio from "@/data/Portfolio"
+import Tools from "@/data/Tools"
+import { DefaultLayout } from "@/layout"
 
 export async function getServerSideProps() {
   const nowPlaying = await fetch(
     "https://api.rafaar.me/api/v1/spotify/now-playing"
-  ).then((res) => res.json());
+  ).then((res) => res.json())
 
   return {
     props: {
       nowPlaying,
     },
-  };
+  }
 }
 
 export default function Home({ nowPlaying }) {
+  console.log(Skills)
+
   return (
     <>
       <DefaultLayout>
@@ -60,14 +63,19 @@ export default function Home({ nowPlaying }) {
           </div>
         </section>
 
-        <section>
+        {/* {Tools.map((tool) => {
+          <Tools title={tool.title}>
+              {tool.item.map((itemName)=> {
+                 <IconText text={itemName} icon={<DynamicIcon name={itemName} />
+               })
+          </Tools>
+        })} */}
+
+        {/* <section>
           <div className="py-6">
             <h1>Skills</h1>
 
-            <div
-              className="flex flex-wrap gap-4 py-6 flex flex-wrap"
-
-            >
+            <div className="flex flex-wrap gap-4 py-6">
               {Skills.map((skill) => (
                 <Tooltip key={skill} title={skill}>
                   <DynamicIcon name={skill} className="flex" />
@@ -75,12 +83,13 @@ export default function Home({ nowPlaying }) {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
+
         <section>
           <div className="py-6">
             <h1>Portfolio</h1>
 
-            <div className="my-6 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-auto">
+            <div className="md:grid-cols-auto my-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
               {Portfolio.map((portfolio, idx) => (
                 <PortfolioCard key={idx} {...portfolio} />
               ))}
@@ -93,8 +102,7 @@ export default function Home({ nowPlaying }) {
             <NowPlaying {...nowPlaying} />
           </section>
         )}
-
       </DefaultLayout>
     </>
-  );
+  )
 }
