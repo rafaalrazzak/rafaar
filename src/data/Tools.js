@@ -1,4 +1,3 @@
-
 const Languages = {
   title: "Languages",
   item: ["TypeScript", "JavaScript", "HTML", "CSS"],

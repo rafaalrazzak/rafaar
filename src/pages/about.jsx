@@ -20,8 +20,6 @@ export async function getServerSideProps() {
 }
 
 export default function About({ content }) {
-
-
   return (
     <DefaultLayout>
       <SEO title="About" />
