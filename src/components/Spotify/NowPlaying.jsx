@@ -62,10 +62,14 @@ export default function NowPlaying({songUrl, songImage, title, artist}){
 									className="absolute inset-0 z-10 flex h-full items-end justify-end p-2 opacity-0 transition-opacity duration-300 group-hover/nowPlaying:opacity-100"
 									rel="noopener noreferrer"
 							>
-								<div className="flex items-center justify-end gap-1 rounded-full bg-black/30 p-1 backdrop-blur-xl">
-
-									<SpotifyIcon className="scale-[0.7]"/>
-									<p className="text-xs font-medium text-gray-400 line-clamp-1">
+								<div
+										className="flex items-center justify-end gap-1 rounded-full bg-black/30 p-1 absolute bottom-4  backdrop-blur-xl  ">
+									<div>
+										<SpotifyIcon className="scale-[0.7]" fill={dominantColor ? dominantColor[1] : "black"}/>
+									</div>
+									<p className="text-xs font-medium line-clamp-1" style={{
+										color: dominantColor ? dominantColor[1] : "black",
+									}}>
 										Open in Spotify
 									</p>
 								</div>

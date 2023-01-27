@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="88e2d9b3-f517-4091-90bd-0efb71afd19e" name="Changes" comment="Spotify Now Playing" />
+    <list default="true" id="88e2d9b3-f517-4091-90bd-0efb71afd19e" name="Changes" comment="Spotify Now Playing">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Spotify/TopTrack.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_01_2023_12_16__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PortfolioCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PortfolioCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Spotify/NowPlaying.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Spotify/NowPlaying.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.jsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,28 +42,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;eslint.code.style.apply.dismiss&quot;: &quot;true&quot;,
-    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;16.17.0&quot;,
-    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;16.18.4&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/RAF/coding/Github/api&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;E:\\RAF\\coding\\Github\\personal-web\\node_modules\\prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "eslint.code.style.apply.dismiss": "true",
+    "javascript.nodejs.core.library.configured.version": "16.17.0",
+    "javascript.nodejs.core.library.typings.version": "16.18.4",
+    "last_opened_file_path": "E:/RAF/coding/Github/api",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "pnpm",
+    "prettierjs.PrettierConfiguration.Package": "E:\\RAF\\coding\\Github\\personal-web\\node_modules\\prettier",
+    "settings.editor.selected.configurable": "preferences.editor",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="dev" type="js.build_tools.npm" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
@@ -86,7 +95,8 @@
       <workItem from="1674546740767" duration="11927000" />
       <workItem from="1674575253378" duration="3041000" />
       <workItem from="1674578522044" duration="50000" />
-      <workItem from="1674813928230" duration="6338000" />
+      <workItem from="1674813928230" duration="6704000" />
+      <workItem from="1674822181494" duration="6256000" />
     </task>
     <task id="LOCAL-00001" summary="add: Ambient Blur in background, PortfolioCard.jsx fix:Header">
       <created>1674458189059</created>

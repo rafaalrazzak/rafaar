@@ -1,4 +1,4 @@
-import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline"
+import {ArrowTopRightOnSquareIcon} from "@heroicons/react/24/outline"
 import Balancer from "react-wrap-balancer"
 
 import DynamicIcon from "@/components/DynamicIcon"
@@ -15,7 +15,7 @@ export default function PortfolioCard({
 }) {
   return (
     <div
-      className="fixed top-24 relative sticky flex  h-64 w-full flex-col justify-between overflow-clip rounded-xl bg-cover  bg-center px-4 py-2 text-white  transition-all duration-300 ease-in-out after:bg-gradient-to-t  after:from-black after:to-transparent after:absolute after:inset-0 after:z-2"
+        className="fixed top-24 relative sticky flex  border-2 border-white dark:border-primary-900 h-64 w-full flex-col justify-between overflow-clip rounded-xl bg-cover  bg-center px-4 py-2 text-white  transition-all duration-300 ease-in-out after:bg-gradient-to-t  after:from-black after:to-transparent after:absolute after:inset-0 after:z-2"
     >
       <Image
         src={image}

@@ -8,22 +8,25 @@ import {SEO} from "@/components/SEO"
 import SocialMedia from "@/components/SocialMedia"
 import ToolsSection from "@/components/ToolsSection"
 import NowPlaying from "@/components/Spotify/NowPlaying"
+import TopTrack from "@/components/Spotify/TopTrack"
 import Portfolio from "@/data/Portfolio"
 import Tools from "@/data/Tools"
 import {DefaultLayout} from "@/layout"
 
 export async function getServerSideProps(){
 	const nowPlaying = await fetch("https://api.rafaar.me/api/v1/spotify/now-playing").then((res) => res.json())
+	const topTracks = await fetch("https://api.rafaar.me/api/v1/spotify/top-tracks?limit=5").then((res) => res.json())
 
 	return {
 		props: {
-			nowPlaying,
+			nowPlaying, topTracks,
 		},
 	}
 }
 
-export default function Home({nowPlaying}){
-	console.log(Tools)
+export default function Home({nowPlaying, topTracks}){
+
+	console.log(topTracks)
 
 	return (
 			<>
@@ -88,6 +91,20 @@ export default function Home({nowPlaying}){
 							<section>
 								<NowPlaying {...nowPlaying} />
 							</section>)}
+
+
+					{topTracks && (
+							<section className="my-4 gap-4 flex flex-col">
+								<h1>Top Tracks</h1>
+								<div className="flex flex-wrap gap-2 ">
+
+								{topTracks?.tracks?.map((track, idx) => (
+										<TopTrack key={idx} {...track} />
+								))}
+								</div>
+							</section>)}
+
+
 				</DefaultLayout>
 			</>)
 }
