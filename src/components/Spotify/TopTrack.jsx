@@ -42,7 +42,7 @@ export default function TopTrack({ songUrl, songImage, title, artist }) {
         >
           <div className="flex flex-1 flex-col gap-2">
             <Balancer
-              className="w-32s text-xl font-bold"
+              className="w-48 text-xl font-bold"
               style={{ color: dominantColor ? dominantColor[1] : "black" }}
             >
               {title}

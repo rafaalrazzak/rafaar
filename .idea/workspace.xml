@@ -5,14 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="88e2d9b3-f517-4091-90bd-0efb71afd19e" name="Changes" comment="Top Tracks Section">
-      <change beforePath="$PROJECT_DIR$/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.prettierrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/.prettierrc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PortfolioCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PortfolioCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Spotify/TopTrack.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Spotify/TopTrack.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/Default.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/Default.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/BlogCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BlogCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/IconText.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/IconText.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ProjectImage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ProjectImage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Spotify/NowPlaying.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Spotify/NowPlaying.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ToolsSection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ToolsSection.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/Portfolio.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/Portfolio.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/Project.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/Project.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/Tools.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/Tools.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/icons/TypeScript.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/icons/TypeScript.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/icons/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/icons/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/about.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/about.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/api/og.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/api/og.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/dateFormat.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/dateFormat.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +73,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="npm.lint">
+  <component name="RunManager" selected="npm.prettier">
     <configuration name="dev" type="js.build_tools.npm" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -99,8 +106,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.lint" />
         <item itemvalue="npm.prettier" />
+        <item itemvalue="npm.lint" />
       </list>
     </recent_temporary>
   </component>
@@ -123,7 +130,7 @@
       <workItem from="1674575253378" duration="3041000" />
       <workItem from="1674578522044" duration="50000" />
       <workItem from="1674813928230" duration="6704000" />
-      <workItem from="1674822181494" duration="8087000" />
+      <workItem from="1674822181494" duration="8478000" />
     </task>
     <task id="LOCAL-00001" summary="add: Ambient Blur in background, PortfolioCard.jsx fix:Header">
       <created>1674458189059</created>
@@ -146,11 +153,21 @@
       <option name="project" value="LOCAL" />
       <updated>1674829556445</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Top Tracks Section">
+      <created>1674831687368</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1674831687368</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.prettierignore" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
