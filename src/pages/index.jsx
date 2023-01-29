@@ -1,37 +1,39 @@
+import { getAll } from "@vercel/edge-config"
+
 import BlogCard from "@/components/BlogCard"
 import DynamicIcon from "@/components/DynamicIcon"
+import GalleryImage from "@/components/GalleryImage"
 import Hero from "@/components/Hero"
 import IconText from "@/components/IconText"
 import PortfolioCard from "@/components/PortfolioCard"
-import ProjectImage from "@/components/ProjectImage"
 import { SEO } from "@/components/SEO"
 import SocialMedia from "@/components/SocialMedia"
-import ToolsSection from "@/components/ToolsSection"
 import NowPlaying from "@/components/Spotify/NowPlaying"
 import TopTrack from "@/components/Spotify/TopTrack"
-import Portfolio from "@/data/Portfolio"
+import ToolsSection from "@/components/ToolsSection"
 import Tools from "@/data/Tools"
 import { DefaultLayout } from "@/layout"
 
 export async function getServerSideProps() {
-  const nowPlaying = await fetch(
-    "https://api.rafaar.me/api/v1/spotify/now-playing"
-  ).then((res) => res.json())
-  const topTracks = await fetch(
-    "https://api.rafaar.me/api/v1/spotify/top-tracks?limit=5"
-  ).then((res) => res.json())
+  const [{ nowPlaying, topTracks }] = await Promise.all([
+    fetch("https://api.rafaar.me/api/v1/personal/dynamic").then((res) =>
+      res.json()
+    ),
+  ])
+
+  const { gallery, projects } = await getAll()
 
   return {
     props: {
       nowPlaying,
       topTracks,
+      gallery,
+      projects,
     },
   }
 }
 
-export default function Home({ nowPlaying, topTracks }) {
-  console.log(topTracks)
-
+export default function Home({ nowPlaying, topTracks, gallery, projects }) {
   return (
     <>
       <DefaultLayout>
@@ -40,12 +42,20 @@ export default function Home({ nowPlaying, topTracks }) {
           <Hero />
           <SocialMedia />
         </section>
-        <section className="-mx-6 flex flex-col items-center justify-center overflow-clip py-6 sm:-mx-12 md:overflow-visible lg:-mx-24 ">
-          <ProjectImage />
-          <span className="my-12 text-sm text-primary-600 dark:text-primary-300">
-            Photo By Unsplash
-          </span>
-        </section>
+
+        {gallery && (
+          <section className="-mx-6 flex flex-col items-center justify-center overflow-clip py-6 sm:-mx-12 md:overflow-visible lg:-mx-24 ">
+            <div className="relative inset-x-0 flex justify-center gap-5  py-12 sm:gap-8">
+              {gallery.map((item, idx) => (
+                <GalleryImage key={idx} {...item} />
+              ))}
+            </div>
+
+            <span className="my-12 text-sm text-primary-600 dark:text-primary-300">
+              Photo By Unsplash
+            </span>
+          </section>
+        )}
 
         <section className="sm:px-8 ">
           <div className="mx-auto max-w-7xl ">
@@ -87,16 +97,18 @@ export default function Home({ nowPlaying, topTracks }) {
           ))}
         </>
 
-        <section>
-          <div className="py-6">
-            <h1>Portfolio</h1>
-            <div className="md:grid-cols-auto my-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-              {Portfolio.map((portfolio, idx) => (
-                <PortfolioCard key={idx} {...portfolio} />
-              ))}
+        {projects && (
+          <section>
+            <div className="py-6">
+              <h1>Portfolio</h1>
+              <div className="md:grid-cols-auto my-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                {projects.map((project, idx) => (
+                  <PortfolioCard key={idx} {...project} />
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {nowPlaying?.isPlaying && (
           <section>
@@ -106,9 +118,9 @@ export default function Home({ nowPlaying, topTracks }) {
 
         {topTracks && (
           <section className="my-4 flex flex-col gap-4">
-            <h1>Top Tracks</h1>
+            <h3>Top Tracks</h3>
             <div className="flex flex-wrap gap-2 ">
-              {topTracks?.tracks?.map((track, idx) => (
+              {topTracks?.map((track, idx) => (
                 <TopTrack key={idx} {...track} />
               ))}
             </div>

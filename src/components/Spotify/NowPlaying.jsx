@@ -4,6 +4,7 @@ import Image from "@/components/Image"
 import { SpotifyIcon } from "@/icons"
 
 import Link from "../Link"
+import LinkTo from "./LinkTo"
 
 export default function NowPlaying({ songUrl, songImage, title, artist }) {
   const { data: dominantColor } = usePalette(songImage, 2, "hex", {
@@ -32,7 +33,7 @@ export default function NowPlaying({ songUrl, songImage, title, artist }) {
               />
               <p className="font-bold">Now Playing</p>
             </div>
-            <div className="flex flex-1 flex-col gap-2">
+            <div className="b  flex flex-1 flex-col gap-2">
               <h3 style={{ color: dominantColor ? dominantColor[1] : "black" }}>
                 {title}
               </h3>
@@ -44,7 +45,7 @@ export default function NowPlaying({ songUrl, songImage, title, artist }) {
               </h4>
             </div>
           </div>
-          <div className="relative w-1/2 rounded-r-lg md:w-40">
+          <div className="relative w-1/2 rounded-r-lg  md:w-40">
             <Image
               src={songImage}
               alt={title}
@@ -60,28 +61,12 @@ export default function NowPlaying({ songUrl, songImage, title, artist }) {
                 } 0%, rgba(255, 255, 255, 0) 100%)`,
               }}
             ></div>
-            <Link
-              href={songUrl}
-              className="absolute inset-0 z-10 flex h-full items-end justify-end p-2 opacity-0 transition-opacity duration-300 group-hover/nowPlaying:opacity-100"
-              rel="noopener noreferrer"
-            >
-              <div className="absolute bottom-4 flex items-center justify-end gap-1 rounded-full bg-black/30 p-1  backdrop-blur-xl  ">
-                <div>
-                  <SpotifyIcon
-                    className="scale-[0.7]"
-                    fill={dominantColor ? dominantColor[1] : "black"}
-                  />
-                </div>
-                <p
-                  className="text-xs font-medium line-clamp-1"
-                  style={{
-                    color: dominantColor ? dominantColor[1] : "black",
-                  }}
-                >
-                  Open in Spotify
-                </p>
-              </div>
-            </Link>
+
+            <LinkTo
+              url={songUrl}
+              color={dominantColor ? dominantColor[1] : "black"}
+              className="absolute bottom-4 right-4 justify-between group-hover/nowPlaying:opacity-100"
+            />
           </div>
         </div>
       </div>
