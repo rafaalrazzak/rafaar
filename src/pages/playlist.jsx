@@ -1,7 +1,8 @@
-import { useState } from "react"
-import Image from "next/image"
-import { DefaultLayout } from "@/layout"
 import { MagnifyingGlassIcon, PlusSmallIcon } from "@heroicons/react/24/outline"
+import Image from "next/image"
+import { useState } from "react"
+
+import { DefaultLayout } from "@/layout"
 
 const API_URL = "https://api.rafaar.me/api/v1/spotify/"
 
@@ -99,8 +100,8 @@ export default function Playlist() {
 
           {results.length > 0 && (
             <div className="my-4 flex flex-col gap-4 lg:flex-row lg:flex-wrap">
-              {results.map((result) => (
-                <Song {...result} />
+              {results.map((result, idx) => (
+                <Song key={idx} {...result} />
               ))}
             </div>
           )}
