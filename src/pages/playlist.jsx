@@ -2,8 +2,8 @@ import { MagnifyingGlassIcon, PlusSmallIcon } from "@heroicons/react/24/outline"
 import Image from "next/image"
 import { useState } from "react"
 
-import { DefaultLayout } from "@/layout"
 import { SEO } from "@/components/SEO"
+import { DefaultLayout } from "@/layout"
 
 const API_URL = "https://api.rafaar.me/api/v1/spotify/"
 
