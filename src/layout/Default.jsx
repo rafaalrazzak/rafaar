@@ -1,6 +1,6 @@
 import Container from "@/components/Container"
 import Header from "@/components/Header"
-import {twclsx} from "@/libs/twclsx"
+import { twclsx } from "@/libs/twclsx"
 export const DefaultLayout = ({ children, className: addClassName }) => {
   return (
     <>

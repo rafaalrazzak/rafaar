@@ -1,4 +1,4 @@
-import {useState} from "react"
+import { useState } from "react"
 import Image from "next/image"
 import { DefaultLayout } from "@/layout"
 import { MagnifyingGlassIcon, PlusSmallIcon } from "@heroicons/react/24/outline"
@@ -6,9 +6,7 @@ import { MagnifyingGlassIcon, PlusSmallIcon } from "@heroicons/react/24/outline"
 const API_URL = "https://api.rafaar.me/api/v1/spotify/"
 
 function Song({ title, artist, songImage, songUri }) {
-
-  
-const handleAdd = async (e) => {
+  const handleAdd = async (e) => {
     e.preventDefault()
     const response = await fetch(
       `${API_URL}add-to-playlist?songUri=${songUri}`,
@@ -21,8 +19,6 @@ const handleAdd = async (e) => {
     ).then((res) => res.json())
     alert(response?.message)
   }
-
-
 
   return (
     <div className="flex flex-1 items-center justify-between gap-2 rounded-md bg-primary-50 p-3 dark:bg-primary-700">
@@ -53,18 +49,18 @@ const handleAdd = async (e) => {
 
 export default function Playlist() {
   const [songSearch, setSongSearch] = useState("")
-const [results, setResults] = useState([])
+  const [results, setResults] = useState([])
 
-const handleSearch = async (e) => {
-  e.preventDefault()
-  setResults(
-    await fetch(`${API_URL}search?q=${songSearch}`).then((res) => res.json())
-  )
-}
+  const handleSearch = async (e) => {
+    e.preventDefault()
+    setResults(
+      await fetch(`${API_URL}search?q=${songSearch}`).then((res) => res.json())
+    )
+  }
 
-const handleChange = (e) => {
-  setSongSearch(e.target.value)
-}
+  const handleChange = (e) => {
+    setSongSearch(e.target.value)
+  }
 
   return (
     <DefaultLayout>
@@ -104,12 +100,12 @@ const handleChange = (e) => {
           {results.length > 0 && (
             <div className="my-4 flex flex-col gap-4 lg:flex-row lg:flex-wrap">
               {results.map((result) => (
-                <Song  {...result} />
+                <Song {...result} />
               ))}
             </div>
           )}
         </form>
       </div>
     </DefaultLayout>
-  );
+  )
 }
