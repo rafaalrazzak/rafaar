@@ -2,6 +2,7 @@ import { MagnifyingGlassIcon, PlusSmallIcon } from "@heroicons/react/24/outline"
 import Image from "next/image"
 import { useState } from "react"
 
+import { SEO } from "@/components/SEO"
 import { DefaultLayout } from "@/layout"
 
 const API_URL = "https://api.rafaar.me/api/v1/spotify/"
@@ -22,7 +23,7 @@ function Song({ title, artist, songImage, songUri }) {
   }
 
   return (
-    <div className="flex flex-1 items-center justify-between gap-2 rounded-md bg-primary-50 p-3 dark:bg-primary-700">
+    <div className="flex w-full items-center justify-between gap-2 rounded-md bg-primary-50 p-3 dark:bg-primary-700">
       <div className="flex gap-2">
         <Image
           src={songImage}
@@ -65,6 +66,7 @@ export default function Playlist() {
 
   return (
     <DefaultLayout>
+      <SEO title="Playlist" />
       <div className="my-24 flex flex-col gap-4">
         <h1>Made for Me</h1>
         <iframe
@@ -82,17 +84,17 @@ export default function Playlist() {
       <div className="flex flex-col gap-4">
         <h3>Add song to the playlist</h3>
         <form className="flex flex-col gap-2 rounded-xl bg-primary-100 p-6 dark:bg-primary-800">
-          <div className="inline-flex items-center gap-2 ">
+          <div className="flex items-center gap-2">
             <input
               onChange={handleChange}
               type="search"
               placeholder="Search song"
-              className="flex flex-1 bg-transparent focus:outline-none"
+              className="flex w-48 flex-1 rounded-full bg-transparent px-3 py-2 transition-colors duration-300 ease-linear focus:bg-green-500 focus:text-white focus:outline-none focus:placeholder:text-white md:w-auto"
             />
             <button
               type={"submit"}
               onClick={handleSearch}
-              className=" rounded-full bg-green-500 px-3 py-1"
+              className="flex rounded-full bg-green-500 p-3"
             >
               <MagnifyingGlassIcon className="h-4 text-white" />
             </button>
