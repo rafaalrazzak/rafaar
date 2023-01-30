@@ -13,6 +13,7 @@ function Song({ title, artist, songImage, songUri }) {
     const response = await fetch(
       `${API_URL}add-to-playlist?songUri=${songUri}`,
       {
+        mode: "cors",
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -56,7 +57,9 @@ export default function Playlist() {
   const handleSearch = async (e) => {
     e.preventDefault()
     setResults(
-      await fetch(`${API_URL}search?q=${songSearch}`).then((res) => res.json())
+      await fetch(`${API_URL}search?q=${songSearch}`, {
+        mode: "cors",
+      }).then((res) => res.json())
     )
   }
 
@@ -65,9 +68,9 @@ export default function Playlist() {
   }
 
   return (
-    <DefaultLayout>
+    <DefaultLayout className="flex flex-col gap-4">
       <SEO title="Playlist" />
-      <div className="my-24 flex flex-col gap-4">
+      <div className="flex flex-col  gap-4 lg:my-24">
         <h1>Made for Me</h1>
         <iframe
           title="Made for Me"
