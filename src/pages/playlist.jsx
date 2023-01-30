@@ -3,6 +3,7 @@ import Image from "next/image"
 import { useState } from "react"
 
 import { DefaultLayout } from "@/layout"
+import { SEO } from "@/components/SEO"
 
 const API_URL = "https://api.rafaar.me/api/v1/spotify/"
 
@@ -65,6 +66,7 @@ export default function Playlist() {
 
   return (
     <DefaultLayout>
+      <SEO title="Playlist" />
       <div className="my-24 flex flex-col gap-4">
         <h1>Made for Me</h1>
         <iframe
