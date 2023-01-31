@@ -4,7 +4,6 @@ import { useState } from "react"
 import { SEO } from "@/components/SEO"
 import AddSong from "@/components/Spotify/AddSong"
 
-
 import { DefaultLayout } from "@/layout"
 
 export default function Playlist() {
