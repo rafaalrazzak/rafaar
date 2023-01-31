@@ -3,6 +3,8 @@ import { useState } from "react"
 
 import { SEO } from "@/components/SEO"
 import AddSong from "@/components/Spotify/AddSong"
+
+
 import { DefaultLayout } from "@/layout"
 
 export default function Playlist() {
@@ -31,7 +33,7 @@ export default function Playlist() {
           title="Made for Me"
           src="https://open.spotify.com/embed/playlist/5R5IdlSxHI3a5aTRTSYyUr?&theme=white"
           width="100%"
-          height={352}
+          height={500}
           frameBorder={0}
           allowFullScreen
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
