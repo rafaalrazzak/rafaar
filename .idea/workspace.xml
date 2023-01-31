@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="88e2d9b3-f517-4091-90bd-0efb71afd19e" name="Changes" comment="Top Tracks Section">
-      <change afterPath="$PROJECT_DIR$/src/pages/playlist.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.prettierrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/.prettierrc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layout/Default.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layout/Default.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/playlist.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/playlist.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/welcome.jsx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +49,7 @@
     &quot;eslint.code.style.apply.dismiss&quot;: &quot;true&quot;,
     &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;16.17.0&quot;,
     &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;16.18.4&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/RAF/coding/Github/api&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/RAF/coding/Github/personal-web&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -128,6 +126,9 @@
       <workItem from="1675080943799" duration="3559000" />
       <workItem from="1675084540953" duration="366000" />
       <workItem from="1675085347161" duration="73000" />
+      <workItem from="1675152811739" duration="20000" />
+      <workItem from="1675152855264" duration="631000" />
+      <workItem from="1675154806716" duration="2603000" />
     </task>
     <task id="LOCAL-00001" summary="add: Ambient Blur in background, PortfolioCard.jsx fix:Header">
       <created>1674458189059</created>
