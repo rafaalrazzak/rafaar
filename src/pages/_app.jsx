@@ -1,6 +1,7 @@
 import "../styles/globals.css"
 
 import { Inter } from "@next/font/google"
+import clsx from "clsx"
 import { AnimatePresence, domAnimation, LazyMotion, m } from "framer-motion"
 import { ThemeProvider } from "next-themes"
 import { Provider } from "react-wrap-balancer"
@@ -31,7 +32,7 @@ function MyApp({ Component, pageProps, router }) {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className={inter.className}
+            className={clsx(inter.className, "scrollbar-hide")}
           >
             <Provider>
               <Component {...pageProps} />

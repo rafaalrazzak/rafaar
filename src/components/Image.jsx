@@ -6,7 +6,6 @@ function Image({ className: addClassName, ...rest }) {
   const [isLoading, setIsLoading] = useState(true)
   return (
     <NextImage
-      {...rest}
       quality={isLoading ? "1" : "75"}
       className={clsx(
         "duration-700 ease-in-out ",
@@ -16,6 +15,8 @@ function Image({ className: addClassName, ...rest }) {
         addClassName
       )}
       onLoadingComplete={() => setIsLoading(!isLoading)}
+      alt="Image"
+      {...rest}
     />
   )
 }
