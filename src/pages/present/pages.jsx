@@ -8,3 +8,7 @@ export { default as ProfilPerusahaan } from "./profil-perusahaan"
 export { default as TableOfContent } from "./table-of-content"
 export { default as WaktuTempat } from "./waktu-tempat"
 export { default as Website } from "./website"
+
+export default function Pages() {
+  return <h1>Hellos</h1>
+}

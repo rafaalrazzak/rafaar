@@ -1,9 +1,5 @@
 import clsx from "clsx"
-export default function IconText({
-  icon,
-  text,
-  ...props
-}) {
+export default function IconText({ icon, text, ...props }) {
   return (
     <div
       className={clsx(

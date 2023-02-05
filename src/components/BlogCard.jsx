@@ -1,5 +1,3 @@
-import React from "react"
-
 import { ArrowRightIcon } from "@/icons"
 import { dateFormat } from "@/utils/dateFormat"
 

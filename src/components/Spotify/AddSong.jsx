@@ -4,7 +4,7 @@ import Image from "next/image"
 export default function AddSong({ title, artist, songImage, songUri }) {
   const handleAdd = async (e) => {
     e.preventDefault()
-     await fetch(
+    await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}add-to-playlist?songUri=${songUri}`,
       {
         method: "POST",
