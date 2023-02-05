@@ -3,14 +3,8 @@ import {
   ArrowRightIcon,
   Bars3Icon,
 } from "@heroicons/react/24/outline"
-import {
-  createElement,
-  lazy,
-  Suspense,
-  useCallback,
-  useEffect,
-  useState,
-} from "react"
+import dynamic from "next/dynamic"
+import { createElement, useCallback, useEffect, useState } from "react"
 
 import {
   DropdownMenu,
@@ -19,20 +13,18 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-const Cover = lazy(() => import("./cover"))
-const TableOfContent = lazy(() => import("./table-of-content"))
-const LatarBelakang = lazy(() => import("./latar-belakang"))
-const JaringanKomputer = lazy(() => import("./jaringan-komputer"))
-const Komunikasi = lazy(() => import("./komunikasi"))
-const Manfaat = lazy(() => import("./manfaat"))
-const ProfilPerusahaan = lazy(() => import("./profil-perusahaan"))
-const ProfilPenulis = lazy(() => import("./profil-penulis"))
-const WaktuTempat = lazy(() => import("./waktu-tempat"))
-const Website = lazy(() => import("./website"))
+const Cover = dynamic(() => import("./cover"))
+const LatarBelakang = dynamic(() => import("./latar-belakang"))
+const JaringanKomputer = dynamic(() => import("./jaringan-komputer"))
+const Komunikasi = dynamic(() => import("./komunikasi"))
+const Manfaat = dynamic(() => import("./manfaat"))
+const ProfilPerusahaan = dynamic(() => import("./profil-perusahaan"))
+const ProfilPenulis = dynamic(() => import("./profil-penulis"))
+const WaktuTempat = dynamic(() => import("./waktu-tempat"))
+const Website = dynamic(() => import("./website"))
 
 const Pages = {
   Cover,
-  TableOfContent,
   LatarBelakang,
   JaringanKomputer,
   Komunikasi,
@@ -45,7 +37,6 @@ const Pages = {
 
 const PageList = [
   "Cover",
-  "TableOfContent",
   "ProfilPenulis",
   "ProfilPerusahaan",
   "LatarBelakang",
@@ -56,7 +47,7 @@ const PageList = [
 ]
 
 const RenderPage = ({ page }) => {
-  return <Suspense>{createElement(Pages[page])}</Suspense>
+  return <>{createElement(Pages[page])}</>
 }
 
 export default function Present() {

@@ -1,154 +1,116 @@
-const tableOfContents = [
-  {
-    title: "Profil Penulis",
-    page: "profil-penulis",
-    content: {
-      card: {
-        title: "Profile Penulis",
-        content: {
-          table: [
-            {
-              title: "Nama",
-              value: "Rafa Al Razzak",
-            },
-            {
-              title: "NISN",
-              value: "0057680592",
-            },
-            {
-              title: "Alamat",
-              value:
-                "Jl. Kerkop, Kp. Kebon Kopi,  RT. 02 / RW.10, Kel. Puspanegara, Kec. Citeureup, Kab. Bogor",
-            },
-          ],
-        },
-      },
-    },
+// Section Image
+const Cover = {
+  container: {
+    bg: "/ppt/background/4-dark@1.5x.png",
   },
-  {
-    title: "Profil Perusahaan",
-    page: "profil-perusahaan",
-    content: {
-      card: {
-        title: "Profile Perusahaan",
-        content: {
-          table: [
-            {
-              title: "Nama Perusahaan/Instansi",
-              value: "Dinas Pemadam Kebakaran Kota Depok",
-            },
-            {
-              title: "Bidang Usaha",
-              value: "Pemadam Kebakaran",
-            },
-            {
-              title: "Alamat",
-              value: "Jl. Boulevard Grand Depok City, Depok",
-            },
-            {
-              title: "Kepala Dinas",
-              value: "Drs. R. Gandara Budiana",
-            },
-            {
-              title: "Pembimbing",
-              value: "Nurahman, Atmaja",
-            },
-          ],
-        },
-      },
-    },
+  content: {
+    title: [
+      "Laporan Praktek Kerja Industri",
+      "Dinas Pemadam Kebakaran Kota Depok",
+    ],
+    image: "/ppt/logo-alas.png",
+    footer: ["SMK AL-ASIYAH", "CIBINONG"],
   },
-  {
-    title: "Latar Belakang Prakerin",
-    page: "latar-belakang",
-    content:
-      "Praktik Kerja Lapangan (PKL) merupakan program penyelenggara pendidikan yang di rancang untuk memudahkan para siswa mencapai keterampilan masing-masing. Dalam Pelaksanaan PKL, pemberian pengalaman belajar sebagian diberikan oleh dunia usaha.",
-  },
-  {
-    title: "Manfaat Prakerin",
-    page: "manfaat",
-    content: {
-      list: [
-        "Mengenlkan siswa-siswi pada pekerjaanlapangan di dunia industry dan usaha sehingga pada saatnya mereka terjun ke lapangan pekerjaan yang sesungguhnya dapat beradaptasi dengan cepat.",
-        "Menambah keterampilan, pengetahuan, gagasan-gagasan seputar dunia usaha serta industri yang professional dan handal.",
-        "Mengasah keterampilan yang diberikan sekolah menengah kejuruan (SMK).",
-      ],
-    },
-  },
-  {
-    title: "Waktu dan Tempat Prakerin",
-    page: "waktu-tempat",
-    content: {
-      card: {
-        title: "Waktu dan Tempat Prakerin",
-        content: {
-          tanggal: "13 Desember 2022-13 Januari 2023",
-          waktu: "07.30-14.30",
-          tempat: "Dinas Pemadam Kebakaran Kota Depok",
-        },
-      },
-    },
-  },
-  {
-    title: "Kajian Teoritis",
-    theory: "Jaringan Komputer",
-    page: "jaringan-komputer",
-    content: {
-      value:
-        "Jaringan komputer adalah kumpulan perangkat yang terhubung untuk berbagi sumber daya dan informasi.",
-      listTitle: "Jaringan dibagi menjadi tiga tipe:",
-      list: [
-        "Personal Area Network (PAN)",
-        "Local Area Network (LAN)",
-        "Wide Area Network (WAN)",
-      ],
-    },
-  },
-  {
-    title: "Kajian Teoritis",
-    theory: "Website",
-    page: "website",
-    content: {
-      value:
-        "Website adalah halaman web yang tersimpan di server dan bisa diakses melalui internet menggunakan browser.",
-      image: "/ppt/thum/website@4x.png",
-    },
-  },
-]
+}
 
-const ToS = [
-  {
+// Section Card
+const ProfilPenulis = {
+  container: {
+    bg: "/ppt/background/hero-dark.png",
+  },
+  content: {
     title: "Profil Penulis",
-    page: "profil-penulis",
+    table: [
+      ["Nama", ":", "Rafa Al Razzak"],
+      ["NIS", ":", "0057680592"],
+      ["Kelas", ":", "XI TKJ 3"],
+      [
+        "Alamat",
+        ":",
+        "Jl. Kerkop, Kp. Kebon Kopi, RT. 02 / RW.10, Kel. Puspanegara, Kec. Citeureup, Kab. Bogor",
+      ],
+    ],
   },
-  {
-    title: "Profil Perusahaan",
-    page: "profil-perusahaan",
-  },
-  {
-    title: "Latar Belakang Prakerin",
-    page: "latar-belakang",
-  },
-  {
-    title: "Manfaat Prakerin",
-    page: "manfaat",
-  },
-  {
-    title: "Waktu dan Tempat Prakerin",
-    page: "waktu-tempat",
-  },
-  {
-    title: "Jaringan Komputer",
-    page: "jaringan-komputer",
-  },
-  {
-    title: "Website",
-    page: "website",
-  },
-  {
-    title: "Komunikasi",
-    page: "komunikasi",
-  },
-]
+}
 
-export { tableOfContents, ToS }
+// Section Card
+const ProfilPerusahaan = {
+  container: {
+    bg: "/ppt/background/5-dark@1.5x.png",
+    bgImg: "/ppt/background/damkar-gdc-bg.png",
+    cardBg: "tealSky",
+    cardBgPoss: "toR",
+  },
+  content: {
+    title: "Profil Perusahaan",
+    table: [
+      ["Nama Perusahaan", ":", "Dinas Pemadam Kebakaran Kota Depok"],
+      ["Bidang Usaha", ":", "Pemadam Kebakaran"],
+      ["Alamat", ":", "Jl. Boulevard Grand Depok City, Depok"],
+      ["Kepala Dinas", ":", "Drs. R. Gandara Budiana"],
+      ["Pembimbing", ":", "Nurahman, Atmaja"],
+    ],
+  },
+}
+
+// Section Text
+const LatarBelakang = {
+  container: {
+    bg: "/ppt/background/5-dark@1.5x.png",
+  },
+  content: {
+    title: "Latar Belakang Prakerin",
+    description:
+      "Praktik Kerja Lapangan (PKL) merupakan program penyelenggara pendidikan yang di rancang untuk memudahkan para siswa mencapai keterampilan masing-masing. Dalam Pelaksanaan PKL, pemberian pengalaman belajar sebagian diberikan oleh dunia usaha",
+    align: "text-center",
+  },
+}
+
+// Section Text
+const Manfaat = {
+  container: {
+    bg: "/ppt/background/6-dark@1.5x.png",
+  },
+  content: {
+    title: "Manfaat",
+    list: [
+      "Mengenlkan siswa-siswi pada pekerjaanlapangan di dunia industry dan usaha sehingga pada saatnya mereka terjun ke lapangan pekerjaan yang sesungguhnya dapat beradaptasi dengan cepat.",
+      "Menambah keterampilan, pengetahuan, gagasan-gagasan seputar dunia usaha serta industri yang professional dan handal.",
+      "Mengasah keterampilan yang diberikan sekolah menengah kejuruan (SMK)",
+    ],
+    align: "text-center",
+  },
+}
+
+const WaktuTempat = {
+  container: {
+    bg: "/ppt/background/7-dark@1.5x.png",
+  },
+  content: {
+    title: "Waktu dan Tempat",
+    icon: [
+      {
+        title: "13 Desember 2022-13 Januari 2023",
+        icon: "CalendarDaysIcon",
+      },
+      {
+        title: "07.30-14.30",
+        icon: "ClockIcon",
+      },
+      {
+        title: "Dinas Pemadam Kebakaran Kota Depok",
+        icon: "MapPinIcon",
+      },
+    ],
+    align: "text-center",
+  },
+}
+
+export default Object.assign({
+  Cover,
+  ProfilPenulis,
+  ProfilPerusahaan,
+  LatarBelakang,
+  Manfaat,
+  WaktuTempat,
+})

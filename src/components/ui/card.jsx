@@ -3,11 +3,17 @@ import clsx from "clsx"
 
 import Image from "@/components/Image"
 
-function Card({ children, className: addClassName, bg, img, ...props }) {
+function Card({
+  bg = "bg-gradient-to-r from-pink-600 to-purple-600",
+  className: addClassName,
+  children,
+  img,
+  ...props
+}) {
   return (
     <div
       className={clsx(
-        "relative mx-auto flex min-h-screen max-w-screen-sm items-center justify-center",
+        "relative mx-auto flex max-w-screen-sm items-center justify-center",
         addClassName
       )}
       {...props}
@@ -17,7 +23,7 @@ function Card({ children, className: addClassName, bg, img, ...props }) {
           <div
             className={clsx(
               "duration-1500 absolute -inset-0.5 -m-3 animate-tilt rounded-lg  opacity-75 blur-xl  transition",
-              bg || "bg-gradient-to-r from-pink-600 to-purple-600"
+              bg
             )}
           />
         )}
@@ -46,14 +52,14 @@ function ImageCard({ src, title, className: addClassName, ...props }) {
     <Card
       img
       className={clsx(
-        "flex flex-col items-center justify-center p-0 ",
+        "flex flex-col items-center justify-center p-0",
         addClassName
       )}
       {...props}
     >
       <div
         className={
-          "flex w-full  items-center border-b border-gray-800 px-4 py-2"
+          "flex w-full items-center border-b border-gray-800 px-4 py-2"
         }
       >
         <div className={"flex items-center gap-2"}>
