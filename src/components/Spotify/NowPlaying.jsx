@@ -3,7 +3,6 @@ import { usePalette } from "color-thief-react"
 import Image from "@/components/Image"
 import { SpotifyIcon } from "@/icons"
 
-import Link from "../Link"
 import LinkTo from "./LinkTo"
 
 export default function NowPlaying({ songUrl, songImage, title, artist }) {

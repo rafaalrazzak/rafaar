@@ -1,5 +1,3 @@
-import Balancer from "react-wrap-balancer"
-
 import motion from "@/components/motion/text"
 import { Section } from "@/components/section"
 export default function JaringanKomputer() {

@@ -2,7 +2,6 @@ import clsx from "clsx"
 export default function IconText({
   icon,
   text,
-  className: addClassName,
   ...props
 }) {
   return (

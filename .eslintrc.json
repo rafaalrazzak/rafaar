@@ -30,8 +30,8 @@
   ],
   "rules": {
     "react/prop-types": "off",
-    "no-unused-vars": "error",
     "react/react-in-jsx-scope": "off",
+    "no-unused-vars": "error",
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error"
   }

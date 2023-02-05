@@ -2,7 +2,7 @@ import Balancer from "react-wrap-balancer"
 
 import motion from "@/components/motion/text"
 import { Section } from "@/components/section"
-import { Card, ImageCard } from "@/components/ui/card"
+import { ImageCard } from "@/components/ui/card"
 export default function Komunikasi() {
   return (
     <Section

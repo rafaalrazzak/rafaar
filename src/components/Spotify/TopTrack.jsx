@@ -2,9 +2,7 @@ import { usePalette } from "color-thief-react"
 import Balancer from "react-wrap-balancer"
 
 import Image from "@/components/Image"
-import { SpotifyIcon } from "@/icons"
 
-import Link from "../Link"
 import LinkTo from "./LinkTo"
 
 export default function TopTrack({ songUrl, songImage, title, artist }) {

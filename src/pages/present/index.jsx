@@ -12,16 +12,12 @@ import {
   useState,
 } from "react"
 
-import Link from "@/components/Link"
-import { SectionNavigator } from "@/components/Section"
-import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { ToS } from "@/data/ppt/TableOfContents"
 
 const Cover = lazy(() => import("./cover"))
 const TableOfContent = lazy(() => import("./table-of-content"))

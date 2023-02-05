@@ -1,7 +1,7 @@
 import Image from "@/components/image"
 import motion from "@/components/motion/text"
 import { Section } from "@/components/section"
-export default function Cover({ children, ...props }) {
+export default function Cover() {
   return (
     <Section id="cover" bg="/ppt/background/4-dark@1.5x.png">
       <div className={"flex flex-col items-center justify-center gap-10"}>

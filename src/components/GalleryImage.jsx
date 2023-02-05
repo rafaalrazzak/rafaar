@@ -1,10 +1,8 @@
 import clsx from "clsx"
 
-import Project from "@/data/Project"
-
 import Image from "./Image"
 
-function GalleryImage({ id, image, title }) {
+function GalleryImage({ id, image }) {
   return (
     <div
       className={clsx(

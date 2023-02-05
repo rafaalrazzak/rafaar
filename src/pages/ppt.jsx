@@ -4,7 +4,6 @@ import {
   ClockIcon,
   MapPinIcon,
 } from "@heroicons/react/24/outline"
-import { TypeAnimation } from "react-type-animation"
 import Balancer from "react-wrap-balancer"
 
 import Image from "@/components/Image"
