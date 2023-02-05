@@ -1,5 +1,5 @@
-import { Section } from "@/components/section"
 import motion from "@/components/motion/text"
+import { Section } from "@/components/section"
 export default function LatarBelakang() {
   return (
     <Section id="latar-belakang" bg="/ppt/background/5-dark@1.5x.png">

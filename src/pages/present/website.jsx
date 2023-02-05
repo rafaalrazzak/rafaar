@@ -1,8 +1,8 @@
 import Balancer from "react-wrap-balancer"
 
-import { Section } from "@/components/section"
-import { Card, ImageCard } from "@/components/ui/card"
 import motion from "@/components/motion/text"
+import { Section } from "@/components/section"
+import { ImageCard } from "@/components/ui/card"
 export default function Website() {
   return (
     <Section id="website" bg="/ppt/background/hero-dark.png" center={false}>

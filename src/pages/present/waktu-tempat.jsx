@@ -4,9 +4,9 @@ import {
   MapPinIcon,
 } from "@heroicons/react/24/outline"
 
+import motion from "@/components/motion/text"
 import { Section } from "@/components/section"
 import { Card } from "@/components/ui/card"
-import motion from "@/components/motion/text"
 export default function WaktuTempat() {
   return (
     <Section id="waktu-tempat" bg="/ppt/background/7-dark@1.5x.png">

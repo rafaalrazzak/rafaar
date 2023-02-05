@@ -7,7 +7,7 @@
     "turbo": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "next lint --ext js,jsx,ts,tsx",
     "prettier": "eslint --fix && prettier --write ."
   },
   "dependencies": {
