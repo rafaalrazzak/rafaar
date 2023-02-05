@@ -1,8 +1,9 @@
-import Link from "@/components/link"
+import Link from "@/components/Link"
 import motion from "@/components/motion/text"
 import { Section } from "@/components/Section"
 import { Card } from "@/components/ui/card"
 import { ToS } from "@/data/ppt/TableOfContents"
+
 export default function TableOfContent() {
   return (
     <Section id="table-content">
