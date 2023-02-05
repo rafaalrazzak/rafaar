@@ -1,6 +1,7 @@
-import Image from "@/components/image"
+import Image from "@/components/Image"
 import motion from "@/components/motion/text"
-import { Section } from "@/components/section"
+import { Section } from "@/components/Section"
+
 export default function Cover() {
   return (
     <Section id="cover" bg="/ppt/background/4-dark@1.5x.png">

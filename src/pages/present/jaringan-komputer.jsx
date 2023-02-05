@@ -1,5 +1,6 @@
 import motion from "@/components/motion/text"
-import { Section } from "@/components/section"
+import { Section } from "@/components/Section"
+
 export default function JaringanKomputer() {
   return (
     <Section
