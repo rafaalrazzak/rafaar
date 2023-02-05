@@ -1,7 +1,7 @@
 import Balancer from "react-wrap-balancer"
 
 import motion from "@/components/motion/text"
-import { Section } from "@/components/section"
+import { Section } from "@/components/Section"
 import { ImageCard } from "@/components/ui/card"
 export default function Website() {
   return (

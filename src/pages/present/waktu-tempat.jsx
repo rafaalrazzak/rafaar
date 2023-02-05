@@ -5,7 +5,7 @@ import {
 } from "@heroicons/react/24/outline"
 
 import motion from "@/components/motion/text"
-import { Section } from "@/components/section"
+import { Section } from "@/components/Section"
 import { Card } from "@/components/ui/card"
 export default function WaktuTempat() {
   return (
