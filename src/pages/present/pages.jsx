@@ -5,7 +5,6 @@ export { default as LatarBelakang } from "./latar-belakang"
 export { default as Manfaat } from "./manfaat"
 export { default as ProfilPenulis } from "./profil-penulis"
 export { default as ProfilPerusahaan } from "./profil-perusahaan"
-export { default as TableOfContent } from "./table-of-content"
 export { default as WaktuTempat } from "./waktu-tempat"
 export { default as Website } from "./website"
 
