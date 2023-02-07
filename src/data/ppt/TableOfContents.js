@@ -38,8 +38,10 @@ const ProfilPerusahaan = {
   container: {
     bg: "/ppt/background/5-dark@1.5x.png",
     bgImg: "/ppt/background/damkar-gdc-bg.png",
-    cardBg: "tealSky",
-    cardBgPoss: "toR",
+    gradientBg: {
+      color: "tealSky",
+      possition: "toR",
+    },
   },
   content: {
     title: "Profil Perusahaan",
@@ -106,6 +108,71 @@ const WaktuTempat = {
   },
 }
 
+const Website = {
+  container: {
+    bg: "/ppt/background/hero-dark.png",
+    center: false,
+  },
+  content: {
+    title: "Website",
+    subtitle: "Kajian Teoritis",
+    description:
+      "Website adalah halaman web yang tersimpan di server dan bisa diakses melalui internet menggunakan browser.",
+    image: "/ppt/thum/website@4x.png",
+    cardImage: true,
+    flex: true,
+    contentAlign: "justify-between",
+  },
+}
+const Komunikasi = {
+  container: {
+    bg: "/ppt/background/4-dark@1.5x.png",
+    center: false,
+  },
+  content: {
+    title: "Bagaimana Cara Berkomunikasi Pada Web?",
+    subtitle: "Kajian Teoritis",
+    description:
+      "Ada berbagai macam protokol yang digunakan pada web untuk berkomunikasi, diantaranya:",
+    list: [
+      "HTTP untuk mentransfer halaman web, gambar, dan file lainnya pada website.",
+      "HTTPS adalah versi aman dari HTTP.",
+      "WS untuk mentransfer data secara interaktif.",
+      "SMTP untuk mentransfer email.",
+    ],
+    image: "/ppt/thum/http.png",
+    imageBg: "bg-gradient-to-t from-teal-500 to-yellow-500",
+    imageTitle: "fetch(http://api.request)",
+    cardImage: true,
+    flex: true,
+    contentAlign: "justify-between",
+    order: "last",
+  },
+}
+const TemanKerja = {
+  container: {
+    bg: "/ppt/background/4-dark@1.5x.png",
+    center: false,
+  },
+  content: {
+    title: "Teman Kerja",
+    subtitle: "Kajian Teoritis",
+    description:
+      "Dinas Komunikasi dan Informatika (Diskominfo) Kota Depok sedang melakukan sosialisasi untuk Aplikasi Teman Kerja, yaitu e-office yang dikembangkan untuk membantu Perangkat Daerah (PD) melakukan pekerjaan kantor, seperti pengelolaan surat masuk dan keluar. Ini merupakan komitmen pemerintah untuk mengurangi penggunaan kertas dan mewujudkan papperless office.",
+    image: "/ppt/thum/teman-kerja-depok@4x.png",
+    gradientBg: {
+      color: "purplePink",
+      possition: "toTR",
+    },
+    imageBg: "bg-gradient-to-tr from-teal-500 to-purple-500",
+    imageTitle: "https://temankerja.depok.go.id",
+    cardImage: true,
+    flex: true,
+    contentAlign: "justify-between",
+    order: "last",
+  },
+}
+
 export default Object.assign({
   Cover,
   ProfilPenulis,
@@ -113,4 +180,7 @@ export default Object.assign({
   LatarBelakang,
   Manfaat,
   WaktuTempat,
+  Website,
+  Komunikasi,
+  TemanKerja,
 })

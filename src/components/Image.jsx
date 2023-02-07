@@ -9,9 +9,7 @@ function Image({ className: addClassName, ...rest }) {
       quality={isLoading ? "1" : "75"}
       className={clsx(
         "duration-700 ease-in-out ",
-        isLoading
-          ? "scale-110 blur-2xl grayscale"
-          : "scale-100 blur-0 grayscale-0",
+        { "opacity-0": isLoading },
         addClassName
       )}
       onLoadingComplete={() => setIsLoading(!isLoading)}

@@ -35,7 +35,7 @@ function Card({
         >
           <div
             className={clsx(
-              "flex flex-col items-center justify-center gap-6 rounded-xl bg-black",
+              "flex flex-col items-center justify-center overflow-clip rounded-xl bg-black",
               !img && "p-12"
             )}
           >
@@ -86,9 +86,9 @@ function ImageCard({ src, title, className: addClassName, ...props }) {
       <Image
         src={src}
         alt={"Images"}
-        className={clsx("rounded-xl")}
+        className={clsx("aspect-video object-cover")}
         width={800}
-        height={700}
+        height={600}
       />
     </Card>
   )

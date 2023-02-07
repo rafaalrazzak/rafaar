@@ -22,6 +22,7 @@ const ProfilPerusahaan = dynamic(() => import("./profil-perusahaan"))
 const ProfilPenulis = dynamic(() => import("./profil-penulis"))
 const WaktuTempat = dynamic(() => import("./waktu-tempat"))
 const Website = dynamic(() => import("./website"))
+const TemanKerja = dynamic(() => import("./teman-kerja"))
 
 const Pages = {
   Cover,
@@ -33,6 +34,7 @@ const Pages = {
   ProfilPenulis,
   WaktuTempat,
   Website,
+  TemanKerja,
 }
 
 const PageList = [
@@ -44,6 +46,7 @@ const PageList = [
   "WaktuTempat",
   "Website",
   "Komunikasi",
+  "TemanKerja",
 ]
 
 const RenderPage = ({ page }) => {
@@ -114,7 +117,7 @@ export default function Present() {
     <>
       <RenderPage page={page} />
 
-      <div className="fixed bottom-0 left-0 right-0 m-4  ">
+      <div className="fixed bottom-0 left-0 right-0 z-[99] m-4  ">
         <div className="mx-auto flex w-48 justify-center gap-4 rounded-xl border border-white/40 bg-black/50 px-4 py-2 backdrop-blur-sm backdrop-filter">
           <div className="flex gap-2">
             <button
