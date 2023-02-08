@@ -99,7 +99,7 @@ function Section({
 
       <div
         className={clsx(
-          "z-10 mx-auto flex items-center justify-center gap-4",
+          "z-10 mx-auto flex items-center justify-center gap-4 p-4",
           childClassName
         )}
       >
