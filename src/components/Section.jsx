@@ -5,6 +5,8 @@ import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
 import Balancer from "react-wrap-balancer"
 
+import generatedTables from "@/libs/generatedTables"
+
 import DynamicHeroIcons from "./DynamicHeroIcons"
 import Image from "./Image"
 import Link from "./Link"
@@ -50,7 +52,9 @@ function Section({
   children,
   bg,
   bgImg,
+  bgImgOpacity = "opacity-10",
   className: addClassName,
+  childClassName,
   center = true,
   ...props
 }) {
@@ -69,7 +73,7 @@ function Section({
         },
       }}
       className={clsx(
-        "relative flex h-screen  w-screen snap-start bg-black  text-3xl text-white",
+        "relative flex h-screen  w-screen bg-black  text-3xl text-white",
         { "items-center justify-center": center },
         addClassName
       )}
@@ -77,21 +81,25 @@ function Section({
     >
       <div
         className={
-          "absolute top-0 left-0 h-full w-full bg-cover bg-center bg-no-repeat opacity-80"
+          `absolute top-0 left-0 h-full w-full bg-cover bg-center bg-no-repeat opacity-80 transition-opacity`
         }
-        style={bg && { backgroundImage: `url(${bg})` }}
       >
+
+          {bg && (
+            <Image src={bg} layout="fill" objectFit="cover" alt="Image" />
+          )}
+
         {bgImg && (
           <div
             className={
-              "-z-1 absolute top-0 right-0 h-full w-1/2 bg-cover bg-center bg-no-repeat opacity-10 mix-blend-overlay brightness-[0.4]"
+              clsx("-z-1 absolute top-0 right-0 h-full w-1/2 bg-cover bg-center bg-no-repeat mix-blend-screen", bgImgOpacity, "brightness-50", "after:absolute after:inset-0 after:bg-gradient-to-r after:from-black after:via-transparent")
             }
             style={{ backgroundImage: `url(${bgImg})` }}
           />
         )}
       </div>
 
-      <div className="z-10 mx-auto flex items-center justify-center">
+      <div className={clsx("z-10 mx-auto flex items-center justify-center gap-4", childClassName)}>
         {children}
       </div>
     </motion.section>
@@ -99,31 +107,27 @@ function Section({
 }
 
 function SectionImage({
-  container: { bg, center = false },
+  frontMatter: { bg, bgImg, center = false },
   content: {
     title,
     subTitle,
     description,
     image,
     imageBg,
-    gradientBg,
     imageTitle,
     list,
     order,
     footer,
     flex,
     cardImage = false,
-    contentAlign = "justify-center",
   },
   align,
   children,
 }) {
   return (
     <Section
-      bg={colorAmbient({
-        color: gradientBg?.color,
-        possition: gradientBg?.possition,
-      })}
+      bg={bg}
+      bgImg={bgImg}
       center={center}
     >
       <div
@@ -185,8 +189,8 @@ function SectionImage({
 }
 
 function SectionCard({
-  container: { bg, bgImg, cardBg, cardBgPoss, gradientBg, center = true },
-  content: { title, table, icon },
+  frontMatter: { title, table, bg, bgImg, gradientBg, center = true },
+  content: { icon } = [],
 }) {
   return (
     <Section bg={bg} center={center} bgImg={bgImg}>
@@ -196,7 +200,8 @@ function SectionCard({
           possition: gradientBg?.possition,
         })}
       >
-        <motionText.h1>{title}</motionText.h1>
+       <div className="flex justify-center flex-col gap-4 items-center">
+         <motionText.h1>{title}</motionText.h1>
 
         {icon && (
           <div className="flex flex-col gap-2">
@@ -212,48 +217,60 @@ function SectionCard({
         {table && (
           <table className="table-auto text-base text-gray-300 ">
             <tbody className="w-64">
-              {table.map((tableContent) => (
-                <tr key={tableContent}>
-                  {tableContent.map((cell) => (
-                    <td className="px-4 py-2" key={cell}>
-                      {cell}
-                    </td>
-                  ))}
+             {generatedTables(table).map((row) => (
+                <tr key={row[0]}>
+                  <td>{row[0]}</td>
+                  <td className="px-2">:</td>
+                  <td>{row[1]}</td>
                 </tr>
-              ))}
+             ))}
             </tbody>
           </table>
         )}
+       </div>
       </Card>
     </Section>
   )
 }
 
 function SectionText({
-  container: { bg, center = true },
-  content: { title, description, list, align },
+  frontMatter: {title, titleAlign, description, listTitle, list, bg, bgImg, bgImgOpacity, center = true } = [],
+  children,
 }) {
   return (
-    <Section bg={bg} center={center}>
+    <Section bg={bg} center={center} bgImg={bgImg} bgImgOpacity={bgImgOpacity}>
       <div className={clsx("flex max-w-3xl flex-col gap-4")}>
-        <motionText.h1 className={clsx(align)}>{title}</motionText.h1>
-
-        {description && (
-          <motionText.p className="text-base text-gray-300">
-            <Balancer>{description}</Balancer>
-          </motionText.p>
-        )}
-
+        <motionText.h1 className={titleAlign}>{title}</motionText.h1>
         {list && (
-          <ul className="list-disc space-y-4">
+          <ul className="list-disc space-y-4 text-base text-gray-300">
+            <motionText.p className="font-semibold">
+              {listTitle}
+            </motionText.p>
             {list.map((content) => (
-              <li key={content} className="text-base text-gray-300">
+              <li key={content} className="ml-4 ">
                 {content}
               </li>
             ))}
           </ul>
         )}
+        {children}
       </div>
+    </Section>
+  )
+}
+
+function SectionVideo({frontMatter, children}) {
+
+  const props ={
+    bg: frontMatter.bg,
+    bgImg: frontMatter.bgImg,
+    bgImgOpacity: frontMatter.bgImgOpacity,
+    center: frontMatter.center,
+  }
+
+  return (
+    <Section childClassName={clsx({"flex-col": frontMatter.flexCol})} {...props}>
+      {children}
     </Section>
   )
 }
@@ -318,4 +335,4 @@ const SectionNavigator = () => {
   )
 }
 
-export { Section, SectionCard, SectionImage, SectionNavigator, SectionText }
+export { Section, SectionCard, SectionImage, SectionNavigator, SectionText, SectionVideo }

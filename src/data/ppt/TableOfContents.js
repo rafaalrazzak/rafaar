@@ -108,6 +108,25 @@ const WaktuTempat = {
   },
 }
 
+const JaringanKomputer = {
+  container: {
+    bg: "/ppt/background/8-dark@1.5x.png",
+    center: false,
+  },
+  content: {
+    title: "Jaringan Komputer",
+    subtitle: "Kajian Teoritis",
+    description:
+      "Jaringan komputer adalah kumpulan perangkat yang terhubung untuk berbagi sumber daya dan informasi.",
+    listTitle: "Jaringan Komputer Terdiri Dari:",
+    list: [
+      "Personal Area Network (PAN)",
+      "Local Area Network (LAN)",
+      "Wide Area Network (WAN)",
+    ],
+  },
+}
+
 const Website = {
   container: {
     bg: "/ppt/background/hero-dark.png",
@@ -173,6 +192,23 @@ const TemanKerja = {
   },
 }
 
+const WhyPHP = {
+  container: {
+    bg: "/ppt/background/5-dark@1.5x.png",
+    bgImg: "/ppt/background/go.id.png",
+    bgImgOpacity: "opacity-30",
+    gradientBg: {
+      color: "tealSky",
+      possition: "toR",
+    },
+  },
+  content: {
+    title: "Mengapa Web Pemerintah Dominan Menggunakan PHP?",
+    description:
+      "PHP adalah bahasa pemrograman populer untuk website dinamis, mudah digunakan, dan murah tetapi rentan serangan hacker jika tidak ditulis dengan benar. Faktor seperti kode tidak aman, plugin tidak aman, dan konfigurasi server yang tidak aman dapat membuat website PHP rentan terhadap serangan hacker.",
+  },
+}
+
 export default Object.assign({
   Cover,
   ProfilPenulis,
@@ -180,7 +216,9 @@ export default Object.assign({
   LatarBelakang,
   Manfaat,
   WaktuTempat,
+  JaringanKomputer,
   Website,
   Komunikasi,
   TemanKerja,
+  WhyPHP,
 })

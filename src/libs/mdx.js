@@ -1,34 +1,49 @@
-// read files md
-const fs = require("fs")
-const path = require("path")
-const matter = require("gray-matter")
+import fs from "fs"
+import { bundleMDX } from "mdx-bundler"
+import path from "path"
 
-const mdx = require("@mdx-js/mdx")
+const root = process.cwd()
 
-const mdxOptions = {
-  remarkPlugins: [],
-  rehypePlugins: [],
-  compilers: [],
-}
+const getFileBySlug = async (type, slug) => {
+  const [mdxPath, mdPath] = [
+    path.join(root, "src", type, `${slug}.mdx`),
+    path.join(root, "src", type, `${slug}.md`),
+  ]
 
-const getFiles = (dir) => {
-  const files = fs.readdirSync(dir)
-  const mdxFiles = files.filter((file) => path.extname(file) === ".mdx")
-  return mdxFiles
-}
+  const source = fs.existsSync(mdxPath)
+    ? fs.readFileSync(mdxPath, "utf8")
+    : fs.readFileSync(mdPath, "utf8")
 
-const getFileBySlug = (dir, file) => {
-  const mdxPath = path.join(dir, file)
-  return fs.readFileSync(mdxPath, "utf-8")
-}
+  const { code, frontmatter } = await bundleMDX({
+    source,
+    cwd: path.join(root, "src", type),
+    grayMatterOptions: (options) => {
+      options.engines = {
+        yaml: (s) =>
+          require("js-yaml").load(s, {
+            schema: require("js-yaml").JSON_SCHEMA,
+          }),
+      }
+      return options
+    },
+    esbuildOptions: (options) => {
+      options.loader = {
+        ...options.loader,
+        ".js": "jsx",
+      }
+      return options
+    },
+  })
 
-const mdxToJsx = async (mdxSource) => {
-  const jsx = await mdx(mdxSource, mdxOptions)
-  return jsx
+  return {
+    mdxSource: code,
+    frontMatter: {
+      fileName: fs.existsSync(mdxPath) ? `${slug}.mdx` : `${slug}.md`,
+      ...frontmatter,
+    },
+  }
 }
 
 module.exports = {
-  getFiles,
   getFileBySlug,
-  mdxToJsx,
 }

@@ -1,23 +1,21 @@
-import { MDXRemote } from "next-mdx-remote"
-import { serialize } from "next-mdx-remote/serialize"
 
-import MarkdownContent from "@/components/MarkdownContent"
-import { getFileBySlug, getFiles } from "@/libs/mdx"
+import { MDXLayoutRenderer } from '@/components/MDXComponents'
+import { getFileBySlug } from "@/libs/mdx"
 
 export async function getStaticProps() {
-  const source = getFileBySlug("./src/md", "hello.mdx")
+  const {mdxSource, frontMatter} = await getFileBySlug("md", "latar-belakang")
 
-  const mdxSource = await serialize(source, { parseFrontmatter: true })
 
   return {
     props: {
       mdxSource,
-      source,
+      frontMatter,
     },
   }
 }
 
-export default function Hello({ mdxSource, source }) {
+export default function Hello({ mdxSource, frontMatter }) {
 
-  return <MDXRemote {...mdxSource} />
+
+  return <MDXLayoutRenderer layout={frontMatter.layout} mdxSource={mdxSource} frontMatter={frontMatter}/>
 }

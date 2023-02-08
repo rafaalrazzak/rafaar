@@ -23,6 +23,7 @@ const ProfilPenulis = dynamic(() => import("./profil-penulis"))
 const WaktuTempat = dynamic(() => import("./waktu-tempat"))
 const Website = dynamic(() => import("./website"))
 const TemanKerja = dynamic(() => import("./teman-kerja"))
+const WhyPHP = dynamic(() => import("./why-php"))
 
 const Pages = {
   Cover,
@@ -35,6 +36,7 @@ const Pages = {
   WaktuTempat,
   Website,
   TemanKerja,
+  WhyPHP,
 }
 
 const PageList = [
@@ -44,9 +46,11 @@ const PageList = [
   "LatarBelakang",
   "Manfaat",
   "WaktuTempat",
+  "JaringanKomputer",
   "Website",
   "Komunikasi",
   "TemanKerja",
+  "WhyPHP",
 ]
 
 const RenderPage = ({ page }) => {

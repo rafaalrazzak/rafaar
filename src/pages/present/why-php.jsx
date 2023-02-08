@@ -1,11 +1,11 @@
 import { SectionText } from "@/components/Section"
 import { SEO } from "@/components/SEO"
 import TableOfContents from "@/data/ppt/TableOfContents"
-export default function JaringanKomputer() {
+export default function WhyPHP() {
   return (
     <>
-      <SEO title="Jaringan Komputer" />
-      <SectionText {...TableOfContents.JaringanKomputer} />
+      <SEO title="Why PHP" />
+      <SectionText {...TableOfContents.WhyPHP} />
     </>
   )
 }
