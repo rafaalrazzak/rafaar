@@ -3,11 +3,7 @@ import { cva } from "class-variance-authority"
 import clsx from "clsx"
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
-import Balancer from "react-wrap-balancer"
 
-import generatedTables from "@/libs/generatedTables"
-
-import DynamicHeroIcons from "./DynamicHeroIcons"
 import Image from "./Image"
 import Link from "./Link"
 import motionText from "./motion/text"
