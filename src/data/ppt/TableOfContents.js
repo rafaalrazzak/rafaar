@@ -183,7 +183,6 @@ const TemanKerja = {
       color: "purplePink",
       possition: "toTR",
     },
-    imageBg: "bg-gradient-to-tr from-teal-500 to-purple-500",
     imageTitle: "https://temankerja.depok.go.id",
     cardImage: true,
     flex: true,
@@ -197,10 +196,6 @@ const WhyPHP = {
     bg: "/ppt/background/5-dark@1.5x.png",
     bgImg: "/ppt/background/go.id.png",
     bgImgOpacity: "opacity-30",
-    gradientBg: {
-      color: "tealSky",
-      possition: "toR",
-    },
   },
   content: {
     title: "Mengapa Web Pemerintah Dominan Menggunakan PHP?",

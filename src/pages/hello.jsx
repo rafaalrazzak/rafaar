@@ -1,10 +1,8 @@
-
-import { MDXLayoutRenderer } from '@/components/MDXComponents'
+import { MDXLayoutRenderer } from "@/components/md/MDXComponents"
 import { getFileBySlug } from "@/libs/mdx"
 
 export async function getStaticProps() {
-  const {mdxSource, frontMatter} = await getFileBySlug("md", "latar-belakang")
-
+  const { mdxSource, frontMatter } = await getFileBySlug("md", "why-php")
 
   return {
     props: {
@@ -15,7 +13,11 @@ export async function getStaticProps() {
 }
 
 export default function Hello({ mdxSource, frontMatter }) {
-
-
-  return <MDXLayoutRenderer layout={frontMatter.layout} mdxSource={mdxSource} frontMatter={frontMatter}/>
+  return (
+    <MDXLayoutRenderer
+      layout={frontMatter.layout}
+      mdxSource={mdxSource}
+      frontMatter={frontMatter}
+    />
+  )
 }
