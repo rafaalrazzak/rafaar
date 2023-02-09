@@ -1,10 +1,13 @@
 import fs from "fs"
+import matter from "gray-matter"
 import { bundleMDX } from "mdx-bundler"
 import path from "path"
 
+import getAllFilesRecursively from "./files"
+
 const root = process.cwd()
 
-const getFileBySlug = async (type, slug) => {
+async function getFileBySlug(type, slug) {
   const [mdxPath, mdPath] = [
     path.join(root, "src", type, `${slug}.mdx`),
     path.join(root, "src", type, `${slug}.md`),
@@ -45,7 +48,7 @@ const getFileBySlug = async (type, slug) => {
   }
 }
 
-const getAllFiles = async (type) => {
+async function getAllFiles(type) {
   const source = path.join(root, "src", type)
   const files = fs.readdirSync(source)
   const mdxFiles = files.map((fileName) => {
@@ -55,7 +58,58 @@ const getAllFiles = async (type) => {
   return Promise.all(mdxFiles)
 }
 
+async function getAllFilesFrontMatter(folder) {
+  const prefixPaths = path.join(root, "src", folder)
+
+  const files = getAllFilesRecursively(prefixPaths).filter(
+    (path) => (path.match(/\./g) || []).length === 1
+  )
+
+  const allFrontMatter = []
+
+  files.forEach((file) => {
+    const fileName = file.slice(prefixPaths.length + 1).replace(/\\/g, "/")
+    if (path.extname(fileName) !== ".md" && path.extname(fileName) !== ".mdx") {
+      return
+    }
+    const source = fs.readFileSync(file, "utf8")
+    const { data: frontmatter } = matter(source)
+
+    allFrontMatter.push({
+      slug: formatSlug(fileName),
+      ...frontmatter,
+    })
+  })
+
+  return allFrontMatter.sort((a, b) => (a.page > b.page ? 1 : -1))
+}
+function getFiles(type, otherLocale = "") {
+  const prefixPaths = path.join(root, "src", type)
+  const files =
+    otherLocale === ""
+      ? getAllFilesRecursively(prefixPaths).filter(
+          (path) => (path.match(/\./g) || []).length === 1
+        )
+      : getAllFilesRecursively(prefixPaths).filter((path) =>
+          path.includes(`.${otherLocale}.md`)
+        )
+
+  // Only want to return blog/path and ignore root, replace is needed to work on Windows
+  return files.map((file) =>
+    file.slice(prefixPaths.length + 1).replace(/\\/g, "/")
+  )
+}
+
+function formatSlug(slug) {
+  // return slug.replace(/\.(mdx|md)/, '')
+  // take the main root of slug e.g. post-name in post-name.en.mdx
+  return slug.split(".")[0]
+}
+
 module.exports = {
   getFileBySlug,
   getAllFiles,
+  getAllFilesFrontMatter,
+  getFiles,
+  formatSlug,
 }
