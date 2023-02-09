@@ -14,7 +14,7 @@ const getFileBySlug = async (type, slug) => {
     ? fs.readFileSync(mdxPath, "utf8")
     : fs.readFileSync(mdPath, "utf8")
 
-  const { code, frontmatter } = await bundleMDX({
+  const { code: mdxSource, frontmatter } = await bundleMDX({
     source,
     cwd: path.join(root, "src", type),
     grayMatterOptions: (options) => {
@@ -36,14 +36,26 @@ const getFileBySlug = async (type, slug) => {
   })
 
   return {
-    mdxSource: code,
+    mdxSource,
     frontMatter: {
+      slug,
       fileName: fs.existsSync(mdxPath) ? `${slug}.mdx` : `${slug}.md`,
       ...frontmatter,
     },
   }
 }
 
+const getAllFiles = async (type) => {
+  const source = path.join(root, "src", type)
+  const files = fs.readdirSync(source)
+  const mdxFiles = files.map((fileName) => {
+    return getFileBySlug(type, fileName.replace(".mdx", "").replace(".md", ""))
+  })
+
+  return Promise.all(mdxFiles)
+}
+
 module.exports = {
   getFileBySlug,
+  getAllFiles,
 }

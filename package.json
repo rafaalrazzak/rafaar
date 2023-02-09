@@ -25,6 +25,7 @@
     "color-thief-react": "^2.1.0",
     "colorthief": "^2.3.2",
     "framer-motion": "^8.5.4",
+    "gray-matter": "^4.0.3",
     "jotai": "^1.13.1",
     "js-yaml": "^4.1.0",
     "lucide-react": "^0.109.0",
