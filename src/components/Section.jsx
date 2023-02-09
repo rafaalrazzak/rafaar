@@ -78,7 +78,9 @@ function Section({
       <div
         className={`absolute top-0 left-0 h-full w-full bg-cover bg-center bg-no-repeat opacity-80 transition-opacity`}
       >
-        {bg && <Image src={bg} layout="fill" objectFit="cover" alt="Image" />}
+        {bg && (
+          <Image src={bg} layout="fill" className="object-cover" alt="Image" />
+        )}
 
         {bgImg && (
           <div
@@ -185,15 +187,19 @@ function SectionText({
     bg,
     bgImg,
     bgImgOpacity,
-    center = true,
+    center = false,
   } = [],
   children,
 }) {
   return (
     <Section bg={bg} center={false} bgImg={bgImg} bgImgOpacity={bgImgOpacity}>
-      <div className={clsx("flex max-w-3xl flex-col gap-4")}>
-        <motionText.h4>{subTitle}</motionText.h4>
-        <motionText.h1 className={titleAlign}>{title}</motionText.h1>
+      <div
+        className={clsx("flex max-w-3xl flex-col gap-4", {
+          "items-center": center,
+        })}
+      >
+        {subTitle && <motionText.h4>{subTitle}</motionText.h4>}
+        {title && <motionText.h1 className={titleAlign}>{title}</motionText.h1>}
         {children}
       </div>
     </Section>

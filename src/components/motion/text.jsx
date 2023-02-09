@@ -25,7 +25,6 @@ function h2({ children, ...props }) {
       {children}
     </motion.h2>
   )
-
 }
 
 function h3({ children, ...props }) {
@@ -66,40 +65,47 @@ function h5({ children, ...props }) {
 
 function p({ children, ...props }) {
   return (
-    <motion.p variants={FADE_DOWN_ANIMATION_VARIANTS} className="text-base text-gray-300" {...props}>
+    <motion.p
+      variants={FADE_DOWN_ANIMATION_VARIANTS}
+      className="text-base text-gray-300"
+      {...props}
+    >
       <Balancer>{children}</Balancer>
     </motion.p>
   )
 }
 
-function ol({
-  children,
-  ...props
-}){
+function ol({ children, ...props }) {
   return (
-    <motion.ol variants={FADE_DOWN_ANIMATION_VARIANTS} {...props} className="list-disc space-y-4">
+    <motion.ol
+      variants={FADE_DOWN_ANIMATION_VARIANTS}
+      {...props}
+      className="list-disc space-y-4"
+    >
       {children}
     </motion.ol>
   )
 }
 
-function ul({
-  children,
-  ...props
-}){
+function ul({ children, ...props }) {
   return (
-    <motion.ul variants={FADE_DOWN_ANIMATION_VARIANTS} {...props} className="list-disc space-y-4">
+    <motion.ul
+      variants={FADE_DOWN_ANIMATION_VARIANTS}
+      {...props}
+      className="list-disc space-y-4"
+    >
       {children}
     </motion.ul>
   )
 }
 
-function li({
-  children,
-  ...props
-}) {
+function li({ children, ...props }) {
   return (
-    <motion.li variants={FADE_DOWN_ANIMATION_VARIANTS} {...props} className="text-base text-gray-300">
+    <motion.li
+      variants={FADE_DOWN_ANIMATION_VARIANTS}
+      {...props}
+      className="text-base text-gray-300"
+    >
       {children}
     </motion.li>
   )
@@ -137,6 +143,18 @@ function td({ children, ...props }) {
   )
 }
 
-
-
-export default Object.assign({ h1, h2,  h3, h4, h5, p, li, ol, ul, th, td, tr, tb })
+export default Object.assign({
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  p,
+  li,
+  ol,
+  ul,
+  th,
+  td,
+  tr,
+  tb,
+})
