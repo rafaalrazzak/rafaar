@@ -1,52 +1,40 @@
 /** @type {import('tailwindcss').Config} */
 
-// const defaultTheme = require("tailwindcss/defaultTheme");
+		// const defaultTheme = require("tailwindcss/defaultTheme");
 const colors = require("tailwindcss/colors")
 
 module.exports = {
-  content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx}",
-    "./src/components/**/*.{js,ts,jsx,tsx}",
-    "./src/layout/**/*.{js,ts,jsx,tsx}",
-    "./src/icons/**/*.{js,ts,jsx,tsx}",
-  ],
-  darkMode: "class",
-  theme: {
-    extend: {
-      backgroundImage: {
-        "og-pattern": "url('/pattern/circuit-board.svg')",
-      },
-      colors: {
-        primary: colors.zinc,
-        secondary: colors.teal,
-        theme: colors.zinc,
-      },
-      animation: {
-        tilt: "tilt 10s infinite linear",
-      },
-      keyframes: {
-        tilt: {
-          "0%, 50%, 100%": {
-            // transform: 'rotate(0deg)',
-            opacity: 0,
-          },
-          "25%": {
-            // transform: 'rotate(0.5deg)',
-            opacity: 0.25,
-          },
-          "75%": {
-            // transform: 'rotate(-0.5deg)',
-            opacity: 0.5,
-          },
-        },
-      },
-    },
-  },
-  plugins: [
-    require("@tailwindcss/aspect-ratio"),
-    require("@tailwindcss/typography"),
-    require("@tailwindcss/line-clamp"),
-    require("tailwind-scrollbar-hide"),
-    require("tailwindcss-animate"),
-  ],
+	content: ["./src/pages/**/*.{js,ts,jsx,tsx}", "./src/components/**/*.{js,ts,jsx,tsx}", "./src/layout/**/*.{js,ts,jsx,tsx}", "./src/icons/**/*.{js,ts,jsx,tsx}",],
+	darkMode: "class",
+	theme: {
+		extend: {
+			cursor: {
+				"default": "url(/cursor/anya.png), default",
+				"pointer": "url(/cursor/pointer.png), pointer",
+				"text": "url(/cursor/select.png), text",
+				"not-allowed": "url(/cursor/disable.png), not-allowed",
+			},
+			backgroundImage: {
+				"og-pattern": "url('/pattern/circuit-board.svg')",
+			}, colors: {
+				primary: colors.zinc, secondary: colors.teal, theme: colors.zinc,
+			}, animation: {
+				tilt: "tilt 10s infinite linear",
+			}, keyframes: {
+				tilt: {
+					"0%, 50%, 100%": {
+						// transform: 'rotate(0deg)',
+						opacity: 0,
+					}, "25%": {
+						// transform: 'rotate(0.5deg)',
+						opacity: 0.25,
+					}, "75%": {
+						// transform: 'rotate(-0.5deg)',
+						opacity: 0.5,
+					},
+				},
+			},
+		},
+	},
+	plugins: [require("@tailwindcss/aspect-ratio"), require("@tailwindcss/typography"), require("@tailwindcss/line-clamp"), require("tailwind-scrollbar-hide"), require("tailwindcss-animate"),],
 }

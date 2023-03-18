@@ -3,77 +3,81 @@
 @tailwind utilities;
 
 @layer base {
-  ::-webkit-scrollbar {
-    display: none;
-  }
+    ::-webkit-scrollbar {
+        display: none;
+    }
 
-  ::selection {
-    @apply bg-secondary-300 text-theme-900 dark:bg-secondary-700 dark:text-primary-100;
-  }
+    ::selection {
+        @apply bg-secondary-300 text-theme-900 dark:bg-secondary-700 dark:text-primary-100;
+    }
 
-  h1 {
-    @apply text-3xl font-bold md:text-4xl;
-  }
+    h1 {
+        @apply text-3xl font-bold md:text-4xl;
+    }
 
-  h2 {
-    @apply text-2xl font-bold  md:text-3xl;
-  }
+    h2 {
+        @apply text-2xl font-bold  md:text-3xl;
+    }
 
-  h3 {
-    @apply text-xl font-bold text-theme-800 dark:text-theme-100 md:text-2xl;
-  }
+    h3 {
+        @apply text-xl font-bold text-theme-800 dark:text-theme-100 md:text-2xl;
+    }
 
-  h4 {
-    @apply text-lg font-bold text-theme-800 dark:text-theme-100 md:text-xl;
-  }
-  h5 {
-    @apply font-bold text-theme-800 dark:text-theme-100 md:text-lg;
-  }
+    h4 {
+        @apply text-lg font-bold text-theme-800 dark:text-theme-100 md:text-xl;
+    }
 
-  .text-gradient {
-    @apply bg-clip-text  text-transparent;
-  }
+    h5 {
+        @apply font-bold text-theme-800 dark:text-theme-100 md:text-lg;
+    }
 
-  html {
-    @apply scroll-smooth;
-  }
+    .text-gradient {
+        @apply bg-clip-text  text-transparent;
+    }
 
-  body {
-    @apply bg-theme-50 text-theme-700 antialiased dark:bg-theme-900 dark:text-theme-200;
-  }
+    html {
+        @apply scroll-smooth;
+    }
 
-  html.dark {
-    @apply brightness-[0.98];
-  }
+    body {
+        cursor: url("/cursor/anya.png") 30 30, auto;
+        @apply bg-theme-50 text-theme-700 antialiased dark:bg-theme-900 dark:text-theme-200;
+    }
 
-  :is(a, button) {
-    @apply outline-none;
-  }
+    html.dark {
+        @apply brightness-[0.98];
+    }
 
-  :is(a, button) {
-    @apply outline-none ring-primary-500 ring-offset-1 ring-offset-theme-50
-    transition-all focus-visible:ring dark:ring-primary-400 dark:ring-offset-theme-900;
-  }
+    :is(a, button) {
+        @apply outline-none;
+    }
 
-  .accessible {
-    @apply ring-primary-400 transition-all duration-150 hover:ring dark:ring-theme-600;
-  }
-  .content-auto {
-    content-visibility: auto;
-  }
+    :is(a, button) {
+        @apply outline-none ring-primary-500 ring-offset-1 ring-offset-theme-50
+        transition-all focus-visible:ring dark:ring-primary-400 dark:ring-offset-theme-900;
+    }
 
-  .border-toast {
-    @apply border-black;
-  }
-  .dark .border-toast {
-    border-image: linear-gradient(to bottom right, #3b82f6, #14b8a6) 1;
-  }
+    .accessible {
+        @apply ring-primary-400 transition-all duration-150 hover:ring dark:ring-theme-600;
+    }
 
-  img {
-    -webkit-user-drag: none;
-  }
+    .content-auto {
+        content-visibility: auto;
+    }
 
-  .social-icon {
-    @apply h-6 w-6 fill-primary-500 transition duration-300 hover:fill-secondary-500 dark:fill-primary-400 dark:hover:fill-secondary-500;
-  }
+    .border-toast {
+        @apply border-black;
+    }
+
+    .dark .border-toast {
+        border-image: linear-gradient(to bottom right, #3b82f6, #14b8a6) 1;
+    }
+
+    img {
+        -webkit-user-drag: none;
+    }
+
+    .social-icon {
+        @apply h-6 w-6 fill-primary-500 transition duration-300 hover:fill-secondary-500 dark:fill-primary-400 dark:hover:fill-secondary-500;
+    }
 }
