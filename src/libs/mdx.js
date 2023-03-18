@@ -93,16 +93,12 @@ function getFiles(type, otherLocale = "") {
       : getAllFilesRecursively(prefixPaths).filter((path) =>
           path.includes(`.${otherLocale}.md`)
         )
-
-  // Only want to return blog/path and ignore root, replace is needed to work on Windows
   return files.map((file) =>
     file.slice(prefixPaths.length + 1).replace(/\\/g, "/")
   )
 }
 
 function formatSlug(slug) {
-  // return slug.replace(/\.(mdx|md)/, '')
-  // take the main root of slug e.g. post-name in post-name.en.mdx
   return slug.split(".")[0]
 }
 
