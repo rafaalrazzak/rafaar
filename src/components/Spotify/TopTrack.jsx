@@ -12,7 +12,7 @@ export default function TopTrack({songUrl, songImage, title, artist}){
 
 	return (
 			<div
-					className="group/topTrack relative flex max-h-32 w-[20rem] grow items-center overflow-clip rounded-xl ring-2 ring-white drop-shadow-sm dark:ring-primary-900  "
+					className="group/topTrack relative flex max-h-64 w-[20rem] grow items-center overflow-clip rounded-xl ring-2 ring-white drop-shadow-sm dark:ring-primary-900  "
 					style={{
 						background: dominantColor ? dominantColor[0] : "rgba(255, 255, 255, 0.1)",
 					}}

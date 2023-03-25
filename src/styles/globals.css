@@ -40,7 +40,6 @@
     }
 
     body {
-        cursor: url("/cursor/anya.png") 30 30, auto;
         @apply bg-theme-50 text-theme-700 antialiased dark:bg-theme-900 dark:text-theme-200;
     }
 

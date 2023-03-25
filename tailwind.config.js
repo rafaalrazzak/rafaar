@@ -8,12 +8,6 @@ module.exports = {
 	darkMode: "class",
 	theme: {
 		extend: {
-			cursor: {
-				"default": "url(/cursor/anya.png), default",
-				"pointer": "url(/cursor/pointer.png), pointer",
-				"text": "url(/cursor/select.png), text",
-				"not-allowed": "url(/cursor/disable.png), not-allowed",
-			},
 			backgroundImage: {
 				"og-pattern": "url('/pattern/circuit-board.svg')",
 			}, colors: {

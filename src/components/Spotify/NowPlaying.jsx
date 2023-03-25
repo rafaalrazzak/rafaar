@@ -56,14 +56,13 @@ export default function NowPlaying({songUrl, songImage, title, artist}){
 										background: `linear-gradient(90deg, ${dominantColor ? dominantColor[0] : "#00000"} 0%, rgba(255, 255, 255, 0) 100%)`,
 									}}
 							></div>
-
-							<LinkTo
-									url={songUrl}
-									color={dominantColor ? dominantColor[1] : "black"}
-									className="absolute bottom-4 right-4 justify-between group-hover/nowPlaying:opacity-100"
-							/>
 						</div>
 					</div>
 				</div>
+				<LinkTo
+						url={songUrl}
+						color={dominantColor ? dominantColor[1] : "black"}
+						className="absolute top-4 right-4 justify-between group-hover/nowPlaying:opacity-100"
+				/>
 			</div>)
 }
