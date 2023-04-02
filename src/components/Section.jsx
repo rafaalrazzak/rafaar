@@ -78,9 +78,7 @@ function Section({
       <div
         className={`absolute top-0 left-0 h-full w-full bg-cover bg-center bg-no-repeat opacity-80 transition-opacity`}
       >
-        {bg && (
-          <Image src={bg} className="object-cover" alt="Image" fill/>
-        )}
+        {bg && <Image src={bg} className="object-cover" alt="Image" fill />}
 
         {bgImg && (
           <div
