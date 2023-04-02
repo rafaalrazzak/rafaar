@@ -11,7 +11,7 @@ export default function NowPlaying({ songUrl, songImage, title, artist }) {
   })
 
   return (
-    <div className="group/nowPlaying relative flex items-center overflow-clip  rounded-xl">
+    <div className="group/nowPlaying relative flex flex-1 items-center overflow-clip  rounded-xl">
       <div className="flex w-full flex-1 gap-3">
         <div
           className="relative flex w-full flex-1 justify-between rounded-xl"

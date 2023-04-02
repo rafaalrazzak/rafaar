@@ -111,21 +111,17 @@ export default function Home({ nowPlaying, topTracks, gallery, projects }) {
           </section>
         )}
 
-        <div
-          className={twclsx("grid grid-cols-1 gap-2", {
-            "lg:grid-cols-2": nowPlaying?.isPlaying,
-          })}
-        >
+        <div className="flex flex-col">
           {nowPlaying?.isPlaying && (
-            <section className="my-4 flex shrink flex-col gap-4">
+            <section className=" my-4 flex flex-col gap-4">
               <h3>Now Playing</h3> <NowPlaying {...nowPlaying} />
             </section>
           )}
 
           {topTracks && (
-            <section className="my-4  flex flex-col gap-4 ">
+            <section className="my-4 flex flex-col gap-4 ">
               <h3>Top Tracks</h3>
-              <div className="flex flex flex-1 flex-wrap gap-2 lg:flex-nowrap ">
+              <div className="flex flex-1 flex-wrap gap-2 lg:flex-nowrap ">
                 {topTracks?.map((track, idx) => (
                   <TopTrack key={idx} {...track} />
                 ))}
