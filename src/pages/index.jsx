@@ -13,8 +13,6 @@ import TopTrack from "@/components/Spotify/TopTrack"
 import ToolsSection from "@/components/ToolsSection"
 import Tools from "@/data/Tools"
 import { DefaultLayout } from "@/layout"
-import { twclsx } from "@/libs/twclsx"
-
 export async function getServerSideProps() {
   const [{ nowPlaying, topTracks }] = await Promise.all([
     fetch("https://api.rafaar.me/api/v1/personal/dynamic").then((res) =>
