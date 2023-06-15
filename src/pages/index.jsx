@@ -14,11 +14,9 @@ import ToolsSection from "@/components/ToolsSection"
 import Tools from "@/data/Tools"
 import { DefaultLayout } from "@/layout"
 export async function getServerSideProps() {
-  const [{ nowPlaying, topTracks }] = await Promise.all([
-    fetch("https://api.rafaar.me/api/v1/personal/dynamic").then((res) =>
-      res.json()
-    ),
-  ])
+  const res = await fetch("https://api.rafaar.me/api/v1/personal/dynamic")
+
+  const { nowPlaying, topTracks } = await res.json()
 
   const { gallery, projects } = await getAll()
 

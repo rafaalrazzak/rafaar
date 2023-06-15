@@ -24,7 +24,7 @@ export const SEO = ({ ...props }) => {
 
   const thumb = props.thumb || DEFAULT_THUMB
 
-  const url = siteMetadata.SITE_URL + router.pathname
+  const url = siteMetadata.SITE_URL + router.asPath
   return (
     <NextSeo
       {...props}

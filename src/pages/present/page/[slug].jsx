@@ -41,7 +41,7 @@ export default function Blog({ post, prev, next, allPosts }) {
     <>
       <SEO
         title={frontMatter?.title || "raf"}
-        thumb={`https://s.vercel.app/api?url=https://www.rafaar.my.id/present/page/${frontMatter.slug}&width=1200&height=630`}
+        // thumb={`https://s.vercel.app/api?url=https://www.rafaar.my.id/present/page/${frontMatter.slug}&width=1200&height=630`}
       />
       <MDXLayoutRenderer
         layout={frontMatter.layout}
