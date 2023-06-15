@@ -11,11 +11,12 @@ export default function Playlist() {
 
   const handleSearch = async (e) => {
     e.preventDefault()
-    setResults(
-      await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}search?q=${songSearch}`
-      ).then((res) => res.json())
-    )
+
+    const searchedSong = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/spotify/search?q=${songSearch}`
+    ).then((res) => res.json())
+
+    setResults(searchedSong)
   }
 
   const handleChange = (e) => {
@@ -29,10 +30,9 @@ export default function Playlist() {
         <h1>Made for Me</h1>
         <iframe
           title="Made for Me"
-          src="https://open.spotify.com/embed/playlist/5R5IdlSxHI3a5aTRTSYyUr?&theme=white"
+          src="https://open.spotify.com/embed/playlist/5R5IdlSxHI3a5aTRTSYyUr?&theme=dark"
           width="100%"
           height={500}
-          frameBorder={0}
           allowFullScreen
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           loading="lazy"

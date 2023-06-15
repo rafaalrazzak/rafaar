@@ -5,7 +5,7 @@ export default function AddSong({ title, artist, songImage, songUri }) {
   const handleAdd = async (e) => {
     e.preventDefault()
     await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}add-to-playlist?songUri=${songUri}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/spotify/add-to-playlist?songUri=${songUri}`,
       {
         method: "POST",
         headers: {
