@@ -37,7 +37,7 @@ function Header() {
             <h1 className=" hidden text-lg font-semibold sm:flex ">rafaar.</h1>
           </div>
           {mdscreen ? (
-            <div className="hidden items-center gap-6 rounded-full bg-white/90 py-2 px-4 text-sm text-primary-800 shadow-lg shadow-primary-800/5 ring-1 ring-primary-900/5 backdrop-blur-lg backdrop-filter dark:bg-primary-800/90 dark:text-primary-200 dark:ring-white/10 sm:flex ">
+            <div className="hidden items-center gap-6 rounded-full bg-white/90 px-4 py-2 text-sm text-primary-800 shadow-lg shadow-primary-800/5 ring-1 ring-primary-900/5 backdrop-blur-lg backdrop-filter dark:bg-primary-800/90 dark:text-primary-200 dark:ring-white/10 sm:flex ">
               {AppRoute.map((route) => (
                 <Navbar.Item
                   key={route.name}

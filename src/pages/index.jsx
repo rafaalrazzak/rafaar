@@ -1,6 +1,6 @@
 import { getAll } from "@vercel/edge-config"
 
-import BlogCard from "@/components/BlogCard"
+// import BlogCard from "@/components/BlogCard"
 import DynamicIcon from "@/components/DynamicIcon"
 import GalleryImage from "@/components/GalleryImage"
 import Hero from "@/components/Hero"
