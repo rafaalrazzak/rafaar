@@ -1,4 +1,5 @@
 import { getAll } from "@vercel/edge-config"
+import { useEffect, useState } from "react"
 
 import DynamicIcon from "@/components/DynamicIcon"
 import GalleryImage from "@/components/GalleryImage"
@@ -15,17 +16,10 @@ import { DefaultLayout } from "@/layout"
 
 export async function getServerSideProps() {
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/personal/dynamic`
-    )
-    const { nowPlaying, topTracks } = await response.json()
-
     const { gallery, projects } = await getAll()
 
     return {
       props: {
-        nowPlaying,
-        topTracks,
         gallery,
         projects,
       },
@@ -34,8 +28,6 @@ export async function getServerSideProps() {
     console.error("Error fetching data:", error)
     return {
       props: {
-        nowPlaying: {},
-        topTracks: [],
         gallery: [],
         projects: [],
       },
@@ -43,7 +35,27 @@ export async function getServerSideProps() {
   }
 }
 
-export default function Home({ nowPlaying, topTracks, gallery, projects }) {
+export default function Home({ gallery, projects }) {
+  const [nowPlaying, setNowPlaying] = useState({})
+  const [topTracks, setTopTracks] = useState([])
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/personal/dynamic`
+        )
+        const { nowPlaying, topTracks } = await response.json()
+        setNowPlaying(nowPlaying)
+        setTopTracks(topTracks)
+      } catch (error) {
+        console.error("Error fetching nowPlaying and topTracks:", error)
+      }
+    }
+
+    fetchData()
+  }, [])
+
   return (
     <DefaultLayout>
       <SEO title="Hello" />
