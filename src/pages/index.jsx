@@ -57,7 +57,7 @@ export default function Home({ nowPlaying, topTracks, gallery, projects }) {
           </section>
         )}
 
-        <section className="sm:px-8 ">
+        {/* <section className="sm:px-8 ">
           <div className="mx-auto max-w-7xl ">
             <div className="s mx-auto  grid grid-cols-1 gap-4 lg:grid-cols-3 ">
               <BlogCard
@@ -80,7 +80,7 @@ export default function Home({ nowPlaying, topTracks, gallery, projects }) {
               />
             </div>
           </div>
-        </section>
+        </section> */}
 
         <>
           {Tools.map((tool) => (

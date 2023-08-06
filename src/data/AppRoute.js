@@ -8,14 +8,14 @@ const APP_ROUTE = [
     path: "/about",
     name: "About Me",
   },
-  {
-    path: "/portfolio",
-    name: "Portfolio",
-  },
-  {
-    path: "/blog",
-    name: "Blog",
-  },
+  // {
+  //   path: "/portfolio",
+  //   name: "Portfolio",
+  // },
+  // {
+  //   path: "/blog",
+  //   name: "Blog",
+  // },
 ]
 
 export const ADDT_ROUTE = [
