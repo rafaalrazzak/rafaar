@@ -1,5 +1,5 @@
-import { Inter } from "@next/font/google"
 import { ImageResponse } from "@vercel/og"
+import { Inter } from "next/font/google"
 
 const inter = Inter({
   subsets: ["latin"],

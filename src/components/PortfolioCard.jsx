@@ -37,14 +37,14 @@ export default function PortfolioCard({
 
           <Link
             href={link}
-            className="absolute top-2 right-3 inline-flex cursor-pointer rounded-full bg-black/40 p-2 backdrop-blur-xl"
+            className="absolute right-3 top-2 inline-flex cursor-pointer rounded-full bg-black/40 p-2 backdrop-blur-xl"
           >
             <ArrowTopRightOnSquareIcon className="h-4 w-4 hover:text-teal-400" />
           </Link>
         </div>
         <div className="absolute bottom-4 z-10 flex w-full flex-1 flex-col  px-2 pr-8">
           <Balancer className="font-bold text-white">{title}</Balancer>
-          <Balancer className="text-xs leading-relaxed text-primary-400 line-clamp-2">
+          <Balancer className="line-clamp-2 text-xs leading-relaxed text-primary-400">
             {description}
           </Balancer>
         </div>
