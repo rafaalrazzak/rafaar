@@ -121,7 +121,7 @@ export default function Home({ gallery, projects }) {
       {topTracks.length > 0 && (
         <section className="my-4 flex flex-col gap-4">
           <h3>Top Tracks</h3>
-          <div className="flex flex-wrap gap-2 ">
+          <div className="flex flex-col flex-wrap gap-2 lg:flex-row ">
             {topTracks.map((track, idx) => (
               <TopTrack key={idx} {...track} />
             ))}

@@ -23,7 +23,7 @@ export default function TopTrack({ songUrl, songImage, title, artist }) {
       <Image
         src={songImage}
         alt={title}
-        className="aspect-square rounded-r-lg bg-contain bg-center object-cover  object-center "
+        className="aspect-square round`ed-r-lg bg-contain bg-center object-cover  object-center "
         fill
         sizes="(max-width: 800px) 100vw, (max-width: 1200px) 50vw, 40vw"
       />
