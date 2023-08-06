@@ -15,18 +15,18 @@ import Tools from "@/data/Tools"
 import { DefaultLayout } from "@/layout"
 
 export async function getServerSideProps() {
-  // const [{ nowPlaying, topTracks }] = await Promise.all([
-  //   fetch(`${process.env.NEXT_PUBLIC_API_URL}/personal/dynamic`).then((res) =>
-  //     res.json()
-  //   ),
-  // ])
+  const [{ nowPlaying, topTracks }] = await Promise.all([
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/personal/dynamic`).then((res) =>
+      res.json()
+    ),
+  ])
 
   const { gallery, projects } = await getAll()
 
   return {
     props: {
-      // nowPlaying,
-      // topTracks,
+      nowPlaying,
+      topTracks,
       gallery,
       projects,
     },
