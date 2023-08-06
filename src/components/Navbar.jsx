@@ -21,14 +21,14 @@ function Item({ href, children, className }) {
     <li
       className={clsx(
         "text-sm font-semibold transition-colors ease-in-out hover:text-secondary-500",
-        className
+        className,
       )}
     >
       <Link
         href={href}
         className={clsx(
           thisPage && "relative flex text-secondary-500",
-          "justify-center"
+          "justify-center",
         )}
       >
         {children}

@@ -12,7 +12,7 @@ import { useEffect } from "react"
 export const useClickOutside = (
   /* A React.RefObject<T> that is used to attach a ref to a React element of type T. */
   refObject,
-  handler
+  handler,
 ) => {
   useEffect(() => {
     /**

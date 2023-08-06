@@ -29,7 +29,7 @@ const useMediaQuery = function (query) {
     function () {
       return setMatches(isMatch(query))
     },
-    [isMatch, query]
+    [isMatch, query],
   )
   // we run side effect whenever media query has change
   ;(0, react.useEffect)(
@@ -44,7 +44,7 @@ const useMediaQuery = function (query) {
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     },
-    [query]
+    [query],
   )
   return matches
 }

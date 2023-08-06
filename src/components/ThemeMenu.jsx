@@ -27,7 +27,7 @@ export const ThemeMenu = (props) => {
   ]
 
   const activeIndex = themesList.findIndex(
-    (theme) => theme.value === props.theme
+    (theme) => theme.value === props.theme,
   )
 
   const handleKeyDown = useCallback(
@@ -53,7 +53,7 @@ export const ThemeMenu = (props) => {
         props.onClose()
       }
     },
-    [props]
+    [props],
   )
 
   useEffect(() => {
@@ -85,7 +85,7 @@ export const ThemeMenu = (props) => {
         "absolute z-50",
         mdscreen
           ? "-left-28 right-0 top-8 rounded-xl border border-primary-400 bg-white/90 shadow-lg shadow-primary-800/5 ring-1 ring-primary-900/5 backdrop-blur transition dark:border-primary-500 dark:bg-primary-800/90 dark:shadow-none dark:ring-white/10 dark:hover:ring-white/20 md:-left-28"
-          : "flex w-full"
+          : "flex w-full",
       )}
     >
       <ul
@@ -96,7 +96,7 @@ export const ThemeMenu = (props) => {
         className={twclsx(
           mdscreen
             ? "flex flex-col gap-2 rounded-lg p-2.5"
-            : "flex w-full items-center justify-between gap-2 p-2.5"
+            : "flex w-full items-center justify-between gap-2 p-2.5",
         )}
       >
         {themesList.map((theme, index) => (
@@ -110,9 +110,9 @@ export const ThemeMenu = (props) => {
               "h-5 p-4 text-sm font-semibold transition md:h-5 md:text-base",
               "hover:bg-primary-200 dark:hover:bg-theme-700",
               "text-theme-700 dark:text-theme-200",
-              "focus-visible:outline-none focus-visible:bg-primary-200 dark:focus-visible:bg-primary-500 focus-visible:ring-1 focus-visible:ring-secondary-500",
+              "focus-visible:bg-primary-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-secondary-500 dark:focus-visible:bg-primary-500",
               props.theme === theme.value &&
-                "text-secondary-400 dark:text-secondary-500"
+                "text-secondary-400 dark:text-secondary-500",
             )}
             key={theme.value}
             onClick={props.changeTheme(theme.value)}

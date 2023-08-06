@@ -27,7 +27,7 @@ export const DrawerButton = () => {
         className={twclsx(
           "accesible z-50",
           "md:hidden",
-          "h-10 w-10 rounded-lg text-lg"
+          "h-10 w-10 rounded-lg text-lg",
         )}
         onClick={changeState}
       >

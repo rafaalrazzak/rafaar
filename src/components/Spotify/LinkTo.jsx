@@ -9,7 +9,7 @@ export default function LinkTo({ color, url, className: addClassName }) {
       href={url}
       className={twclsx(
         "relative flex cursor-pointer opacity-0 transition-opacity duration-300 ",
-        addClassName
+        addClassName,
       )}
       rel="noopener noreferrer"
     >
@@ -18,7 +18,7 @@ export default function LinkTo({ color, url, className: addClassName }) {
           <SpotifyIcon className="scale-[0.7]" fill={color} />
         </div>
         <p
-          className="text-xs font-medium line-clamp-1"
+          className="line-clamp-1 text-xs font-medium"
           style={{
             color: color,
           }}

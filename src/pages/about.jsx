@@ -7,7 +7,7 @@ import { base64 } from "@/utils/encrypt"
 
 export async function getServerSideProps() {
   const res = await fetch(
-    "https://api.github.com/repos/rafaalrazzak/rafalrazzak/contents/README.md"
+    "https://api.github.com/repos/rafaalrazzak/rafalrazzak/contents/README.md",
   )
 
   const data = await res.json()
@@ -23,7 +23,7 @@ export default function About({ content }) {
   return (
     <DefaultLayout>
       <SEO title="About" />
-      <div className="prose prose-slate mx-auto flex-col justify-center py-16 prose-img:rounded dark:prose-invert">
+      <div className="prose prose-slate mx-auto flex-col justify-center py-16 dark:prose-invert prose-img:rounded">
         <MDXRemote {...content} />
       </div>
     </DefaultLayout>
