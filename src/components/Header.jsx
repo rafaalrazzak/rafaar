@@ -18,7 +18,7 @@ function Header() {
     <header
       className={twclsx(
         " sticky top-0 z-[24] h-[86px]  w-full  items-center bg-primary-100/20  px-6 backdrop-blur-lg backdrop-filter transition-all duration-300 ease-in-out dark:bg-primary-800/20 sm:fixed sm:bg-transparent sm:backdrop-blur-none sm:dark:bg-transparent md:px-12",
-        visible && isOpen && "bg-primary-100/20 dark:bg-primary-800/20",
+        visible && isOpen && "bg-primary-100/20 dark:bg-primary-800/20"
       )}
     >
       <Navbar className="relative flex flex-1 items-center  ">

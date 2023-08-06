@@ -13,8 +13,8 @@ export default function Playlist() {
     e.preventDefault()
     setResults(
       await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}search?q=${songSearch}`,
-      ).then((res) => res.json()),
+        `${process.env.NEXT_PUBLIC_API_URL}search?q=${songSearch}`
+      ).then((res) => res.json())
     )
   }
 

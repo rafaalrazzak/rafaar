@@ -14,7 +14,7 @@ export const useKeyboard = (keys, callback, node = null) => {
         callbackRef.current(event)
       }
     },
-    [keys],
+    [keys]
   )
 
   useEffect(() => {

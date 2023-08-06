@@ -7,7 +7,7 @@ import { base64 } from "@/utils/encrypt"
 
 export async function getServerSideProps() {
   const res = await fetch(
-    "https://api.github.com/repos/rafaalrazzak/rafalrazzak/contents/README.md",
+    "https://api.github.com/repos/rafaalrazzak/rafalrazzak/contents/README.md"
   )
 
   const data = await res.json()

@@ -18,7 +18,7 @@ export const useTheme = () => {
         closeDropdown()
       }
     },
-    [setTheme, closeDropdown],
+    [setTheme, closeDropdown]
   )
 
   useEffect(() => {

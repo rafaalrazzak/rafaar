@@ -13,7 +13,7 @@ function Image({ className: addClassName, ...rest }) {
         isLoading
           ? "scale-110 blur-2xl grayscale"
           : "scale-100 blur-0 grayscale-0",
-        addClassName,
+        addClassName
       )}
       onLoadingComplete={() => setIsLoading(!isLoading)}
     />

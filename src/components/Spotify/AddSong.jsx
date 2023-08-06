@@ -11,7 +11,7 @@ export default function AddSong({ title, artist, songImage, songUri }) {
         headers: {
           "Content-Type": "application/json",
         },
-      },
+      }
     )
       .then((res) => res.json())
       .then((data) => alert(data.message))

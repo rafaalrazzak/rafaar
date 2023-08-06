@@ -12,7 +12,7 @@ function GalleryImage({ id, image, title }) {
         {
           "-rotate-2 hover:-rotate-12 ": id % 2 === 0,
           "rotate-2 hover:rotate-12": id % 2 === 1,
-        },
+        }
       )}
     >
       <Image

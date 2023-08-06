@@ -9,7 +9,7 @@ export default function LinkTo({ color, url, className: addClassName }) {
       href={url}
       className={twclsx(
         "relative flex cursor-pointer opacity-0 transition-opacity duration-300 ",
-        addClassName,
+        addClassName
       )}
       rel="noopener noreferrer"
     >

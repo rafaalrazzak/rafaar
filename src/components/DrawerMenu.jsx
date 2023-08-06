@@ -43,7 +43,7 @@ export const DrawerMenu = () => {
         "fixed inset-0 z-20",
         "h-screen w-screen backdrop-blur",
         "bg-primary-50 dark:bg-primary-900",
-        "md:hidden",
+        "md:hidden"
       )}
     >
       <nav className={twclsx("layout", "flex  flex-col", "my-24")}>
@@ -59,7 +59,7 @@ export const DrawerMenu = () => {
                   "border-b py-4 font-medium",
                   pathname === prop.path
                     ? "border-primary-600 text-theme-900 dark:border-primary-500 dark:text-theme-100"
-                    : "border-theme-200 text-theme-700 dark:border-theme-800 dark:text-theme-300",
+                    : "border-theme-200 text-theme-700 dark:border-theme-800 dark:text-theme-300"
                 )}
               >
                 {prop.name}
