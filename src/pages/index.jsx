@@ -16,7 +16,7 @@ import { DefaultLayout } from "@/layout"
 
 export async function getServerSideProps() {
   const [{ nowPlaying, topTracks }] = await Promise.all([
-    fetch("https://api.rafaar.me/api/v1/personal/dynamic").then((res) =>
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/personal/dynamic`).then((res) =>
       res.json()
     ),
   ])

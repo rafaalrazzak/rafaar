@@ -2,7 +2,6 @@ import { usePalette } from "color-thief-react"
 import Balancer from "react-wrap-balancer"
 
 import Image from "@/components/Image"
-import { SpotifyIcon } from "@/icons"
 
 import Link from "../Link"
 import LinkTo from "./LinkTo"
@@ -14,7 +13,7 @@ export default function TopTrack({ songUrl, songImage, title, artist }) {
 
   return (
     <div
-      className="group/nowPlaying  top-24 flex max-h-32 w-[20rem] grow items-center overflow-clip rounded-xl ring-2 ring-white drop-shadow-sm dark:ring-primary-900  "
+      className="group/nowPlaying top-24 flex h-32 grow items-center overflow-clip rounded-xl ring-2 ring-white drop-shadow-sm dark:ring-primary-900  "
       style={{
         background: dominantColor
           ? dominantColor[0]

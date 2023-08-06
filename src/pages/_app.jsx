@@ -1,7 +1,7 @@
 import "../styles/globals.css"
 
-import { Inter } from "@next/font/google"
 import { AnimatePresence, domAnimation, LazyMotion, m } from "framer-motion"
+import { Inter } from "next/font/google"
 import { ThemeProvider } from "next-themes"
 import { Provider } from "react-wrap-balancer"
 
@@ -31,7 +31,7 @@ function MyApp({ Component, pageProps, router }) {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className={inter.className}
+            className={(inter.className, "overflow-hidden")}
           >
             <Provider>
               <Component {...pageProps} />
