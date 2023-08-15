@@ -10,7 +10,6 @@
             "@/data/*": ["data/*"],
             "@/utils/*": ["utils/*"],
             "@/libs/*": ["libs/*"],
-            "@/hooks/*": ["hooks/*"]
         }
     }
 }

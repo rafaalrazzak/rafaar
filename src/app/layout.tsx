@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import { twclsx } from "@/libs/twclsx";
 import Container from "@/components/Container";
 import { getMetaPage } from "@/libs/metapage/metaPage";
-// import Header from "@/components/Header";
 
 const inter = Inter({
     subsets: ["latin"],
