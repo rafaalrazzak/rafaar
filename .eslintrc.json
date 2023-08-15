@@ -17,12 +17,10 @@
             "jsx": true
         }
     },
-    "plugins": ["react", "eslint-plugin-simple-import-sort", "prettier", "simple-import-sort"],
+    "plugins": ["react", "prettier"],
     "rules": {
         "react/prop-types": "off",
         "react/react-in-jsx-scope": "off",
-        "simple-import-sort/imports": "error",
-        "simple-import-sort/exports": "error",
         "prettier/prettier": "warn"
     }
 }
