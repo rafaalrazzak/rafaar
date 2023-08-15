@@ -68,6 +68,6 @@
     }
 
     .social-icon {
-        @apply h-6 w-6  transition duration-300 hover:fill-secondary-500 fill-primary-400 hover:fill-secondary-500;
+        @apply h-6 w-6  transition duration-300  fill-primary-400 hover:fill-secondary-500;
     }
 }

@@ -13,7 +13,7 @@ export const metadata = getMetaPage();
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     return (
-        <body className={twclsx(inter.className, "bg-black text-white")}>
+        <body className={twclsx(inter.className, "bg-black text-white overflow-x-hidden")}>
             {/* <Header /> */}
             <Container className="group/bg relative mt-12 md:mt-0">
                 <main className="absolute inset-0 animate-tilt rounded-lg bg-gradient-to-r from-teal-600 to-sky-600 opacity-30 blur-xl transition duration-1000 group-hover/bg:opacity-100 group-hover/bg:duration-200" />
