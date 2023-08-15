@@ -3,71 +3,71 @@
 @tailwind utilities;
 
 @layer base {
-  ::selection {
-    @apply bg-secondary-300 text-theme-900 dark:bg-secondary-700 dark:text-primary-100;
-  }
-  h1 {
-    @apply text-3xl font-bold md:text-4xl;
-  }
+    ::selection {
+        @apply bg-secondary-700 text-primary-100;
+    }
+    h1 {
+        @apply text-3xl font-bold md:text-4xl;
+    }
 
-  h2 {
-    @apply text-2xl font-bold  md:text-3xl;
-  }
+    h2 {
+        @apply text-2xl font-bold  md:text-3xl;
+    }
 
-  h3 {
-    @apply text-xl font-bold text-theme-800 dark:text-theme-100 md:text-2xl;
-  }
+    h3 {
+        @apply text-xl font-bold text-theme-100 md:text-2xl;
+    }
 
-  h4 {
-    @apply text-lg font-bold text-theme-800 dark:text-theme-100 md:text-xl;
-  }
-  h5 {
-    @apply font-bold text-theme-800 dark:text-theme-100 md:text-lg;
-  }
+    h4 {
+        @apply text-lg font-bold text-theme-100 md:text-xl;
+    }
+    h5 {
+        @apply font-bold text-theme-100 md:text-lg;
+    }
 
-  .text-gradient {
-    @apply bg-clip-text  text-transparent;
-  }
+    .text-gradient {
+        @apply bg-clip-text text-transparent;
+    }
 
-  body {
-    @apply bg-theme-50 text-theme-700 antialiased dark:bg-theme-900 dark:text-theme-200;
-  }
+    body {
+        @apply antialiased bg-theme-900 text-theme-200;
+    }
 
-  html.dark {
-    @apply brightness-[0.98];
-  }
+    html.dark {
+        @apply brightness-[0.98];
+    }
 
-  :is(a, button) {
-    @apply outline-none;
-  }
+    :is(a, button) {
+        @apply outline-none;
+    }
 
-  :is(a, button) {
-    @apply outline-none ring-primary-500 ring-offset-1 ring-offset-theme-50
-    transition-all focus-visible:ring dark:ring-primary-400 dark:ring-offset-theme-900;
-  }
+    :is(a, button) {
+        @apply outline-none  ring-offset-1
+    transition-all focus-visible:ring ring-primary-400 ring-offset-theme-900;
+    }
 
-  .accessible {
-    @apply ring-primary-400 transition-all duration-150 hover:ring dark:ring-theme-600;
-  }
-  .content-auto {
-    content-visibility: auto;
-  }
+    .accessible {
+        @apply transition-all duration-150 hover:ring ring-theme-600;
+    }
+    .content-auto {
+        content-visibility: auto;
+    }
 
-  .border-toast {
-    @apply border-black;
-  }
-  .dark .border-toast {
-    border-image: linear-gradient(to bottom right, #3b82f6, #14b8a6) 1;
-  }
-  img {
-    -webkit-user-drag: none;
-    -khtml-user-drag: none;
-    -moz-user-drag: none;
-    -o-user-drag: none;
-    user-drag: none;
-  }
+    .border-toast {
+        @apply border-black;
+    }
+    .dark .border-toast {
+        border-image: linear-gradient(to bottom right, #3b82f6, #14b8a6) 1;
+    }
+    img {
+        -webkit-user-drag: none;
+        -khtml-user-drag: none;
+        -moz-user-drag: none;
+        -o-user-drag: none;
+        user-drag: none;
+    }
 
-  .social-icon {
-    @apply h-6 w-6 fill-primary-500 transition duration-300 hover:fill-secondary-500 dark:fill-primary-400 dark:hover:fill-secondary-500;
-  }
+    .social-icon {
+        @apply h-6 w-6  transition duration-300 hover:fill-secondary-500 fill-primary-400 hover:fill-secondary-500;
+    }
 }
