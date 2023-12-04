@@ -28,7 +28,7 @@
         "tailwind-merge": "^1.14.0"
     },
     "devDependencies": {
-        "@raflymln/eslint-config": "^1.1.4",
+        "@raflymln/eslint-config": "^1.2.1",
         "@raflymln/prettier-config": "^1.0.0",
         "@tailwindcss/aspect-ratio": "^0.4.2",
         "@tailwindcss/typography": "^0.5.9",
