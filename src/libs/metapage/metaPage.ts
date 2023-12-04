@@ -20,7 +20,7 @@ export const getMetaPage = (): Metadata => {
             ],
         },
         robots: {
-            index: false,
+            index: true,
             follow: true,
         },
         twitter: {

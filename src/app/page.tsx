@@ -14,8 +14,6 @@ interface GetAll {
     projects: PortfolioCardProps[];
 }
 
-export const revalidate = 60 * 3; // 3 minutes
-
 export default async function Page() {
     const { gallery, projects } = await getAll<GetAll>();
 
