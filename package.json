@@ -21,7 +21,7 @@
         "@next/mdx": "^13.5.6",
         "@vercel/edge-config": "^0.2.1",
         "clsx": "^2.0.0",
-        "framer-motion": "^10.16.12",
+        "framer-motion": "^10.16.16",
         "next": "13.5.6",
         "react": "18.2.0",
         "react-dom": "18.2.0",
@@ -32,14 +32,14 @@
         "@raflymln/prettier-config": "^1.0.0",
         "@tailwindcss/aspect-ratio": "^0.4.2",
         "@tailwindcss/typography": "^0.5.10",
-        "@types/node": "^20.10.2",
-        "@types/react": "^18.2.41",
+        "@types/node": "^20.10.4",
+        "@types/react": "^18.2.43",
         "autoprefixer": "^10.4.16",
         "eslint": "^8.55.0",
         "postcss": "^8.4.32",
         "prettier": "^3.1.0",
-        "tailwindcss": "^3.3.5",
-        "typescript": "^5.3.2",
+        "tailwindcss": "^3.3.6",
+        "typescript": "^5.3.3",
         "vercel": "^31.4.0"
     }
 }
