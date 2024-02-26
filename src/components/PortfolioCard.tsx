@@ -3,6 +3,7 @@ import DynamicIcon from "@/components/DynamicIcon";
 import Image from "@/components/Image";
 import Link from "@/components/Link";
 import Tooltip from "@/components/Tooltip";
+import React from 'react';
 
 export interface PortfolioCardProps {
     title: string;
@@ -13,6 +14,7 @@ export interface PortfolioCardProps {
 }
 
 export default function PortfolioCard({ title, description, cover, link, stacks }: PortfolioCardProps) {
+
     return (
         <div className="sticky top-24">
             <div className=" relative  flex h-64 w-full flex-col justify-between overflow-clip rounded-xl bg-cover bg-center px-4  py-2 text-white ring-2 transition-all duration-300 ease-in-out after:absolute  after:inset-0 after:bg-gradient-to-t after:from-black after:to-transparent ring-primary-900">

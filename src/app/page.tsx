@@ -9,13 +9,11 @@ import SocialMedia from "@/components/SocialMedia";
 import ToolsSection from "@/components/ToolsSection";
 import { tools } from "@/data/tools";
 
-interface GetAll {
-    gallery: GalleryProps[];
-    projects: PortfolioCardProps[];
-}
-
 export default async function Page() {
-    const { gallery, projects } = await getAll<GetAll>();
+    const { gallery, projects } = await getAll();
+
+    const galleryData = gallery as unknown as GalleryProps[]
+    const projectsData = projects as unknown as PortfolioCardProps[]
 
     return (
         <>
@@ -24,10 +22,10 @@ export default async function Page() {
                 <SocialMedia />
             </section>
 
-            {gallery.length > 0 && (
+            {galleryData.length > 0 && (
                 <section className="-mx-6 flex flex-col items-center justify-center overflow-clip py-6 sm:-mx-12 md:overflow-visible lg:-mx-24 ">
                     <div className="relative inset-x-0 flex justify-center gap-5  py-12 sm:gap-8">
-                        {gallery.map((item, idx) => (
+                        {galleryData.map((item, idx) => (
                             <GalleryImage key={idx} {...item} />
                         ))}
                     </div>
@@ -44,11 +42,11 @@ export default async function Page() {
                 </ToolsSection>
             ))}
 
-            {projects.length > 0 && (
+            {projectsData.length > 0 && (
                 <section className="py-6">
                     <h1>Portfolio</h1>
                     <div className="md:grid-cols-auto my-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-                        {projects.map((project, idx) => (
+                        {projectsData.map((project, idx) => (
                             <PortfolioCard key={idx} {...project} />
                         ))}
                     </div>
