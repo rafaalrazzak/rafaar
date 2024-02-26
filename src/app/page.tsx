@@ -19,7 +19,7 @@ export default async function Page() {
 
     return (
         <>
-            <section className="sm:mt-12">
+            <section>
                 <Hero />
                 <SocialMedia />
             </section>

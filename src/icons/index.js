@@ -12,6 +12,7 @@ export { default as HTMLIcon } from "./Html";
 export { default as IllustratorIcon } from "./Illustrator";
 export { default as InstagramIcon } from "./Instagram";
 export { default as JavaScriptIcon } from "./JavaScript";
+export { default as LinkedinIcon } from "./Linkedin";
 export { default as MailIcon } from "./Mail";
 export { default as MongoDBIcon } from "./MongoDB";
 export { default as MoonIcon } from "./Moon";
