@@ -14,12 +14,12 @@ const Languages: Category = {
 
 const Technologies: Category = {
     title: "Technologies",
-    item: ["ReactJs", "NextJs", "Sass", "TailwindCSS", "HeadlessUI", "Supabase", "Firebase", "GraphQL", "MongoDB"],
+    item: ["React.js", "Next.js", "Sass", "TailwindCSS", "HeadlessUI", "Supabase", "Firebase", "GraphQL", "MongoDB"],
 };
 
 const SoftwareAndTools: Category = {
     title: "Software and Tools",
-    item: ["Photoshop", "Illustrator", "Premiere Pro", "Figma", "NodeJs", "NGINX", "VSCode", "Git", "Vercel", "Netlify", "Heroku"],
+    item: ["Photoshop", "Illustrator", "Premiere Pro", "Figma", "Node.js", "NGINX", "VSCode", "Git", "Vercel", "Netlify", "Heroku"],
 };
 
 export const tools = [Languages, Technologies, SoftwareAndTools];

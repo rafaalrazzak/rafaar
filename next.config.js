@@ -22,7 +22,7 @@ const nextConfig = {
                 protocol: "https",
                 hostname: "cdn.kita.blue",
             },
-        ]
-    }
+        ],
+    },
 };
 module.exports = nextConfig;

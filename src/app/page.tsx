@@ -12,8 +12,8 @@ import { tools } from "@/data/tools";
 export default async function Page() {
     const { gallery, projects } = await getAll();
 
-    const galleryData = gallery as unknown as GalleryProps[]
-    const projectsData = projects as unknown as PortfolioCardProps[]
+    const galleryData = gallery as unknown as GalleryProps[];
+    const projectsData = projects as unknown as PortfolioCardProps[];
 
     return (
         <>

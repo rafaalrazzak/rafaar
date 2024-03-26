@@ -5,7 +5,8 @@ interface DynamicIconProps extends React.SVGProps<SVGSVGElement> {
 }
 
 const DynamicIcon = ({ name, ...props }: DynamicIconProps) => {
-    const newName = name.replace(" ", "");
+    const newName = name.replace(" ", "").replace(".", "");
+
     const Icon = Icons[newName + "Icon"];
     return <Icon {...props} />;
 };
