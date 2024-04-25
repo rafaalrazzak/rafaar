@@ -3,16 +3,15 @@ import GalleryImage from "@/components/GalleryImage";
 import Hero from "@/components/Hero";
 import IconText from "@/components/IconText";
 import PortfolioCard from "@/components/PortfolioCard";
-import SocialMedia from "@/components/SocialMedia";
 import ToolsSection from "@/components/ToolsSection";
 import { tools } from "@/data/tools";
 import { getGallery, getProjects } from "@/libs/api";
 
-export const runtime = 'edge';
+export const runtime = "edge";
 
 export default async function Page() {
-    const gallery = await getGallery()
-    const projects = await getProjects()
+    const gallery = await getGallery();
+    const projects = await getProjects();
 
     return (
         <>
