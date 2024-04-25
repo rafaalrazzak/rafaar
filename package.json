@@ -8,7 +8,8 @@
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
-        "prettier": "eslint --fix && prettier --write ."
+        "prettier": "eslint --fix && prettier --write .",
+        "pages": "npx @cloudflare/next-on-pages@1"
     },
     "prettier": "@raflymln/prettier-config",
     "eslintConfig": {

@@ -5,7 +5,7 @@ function Hero() {
     return (
         <div className="flex  flex-1 items-center justify-between">
             <div className="flex max-w-lg flex-col gap-6 py-6">
-                <h2 className="text-gradient bg-gradient-to-r from-teal-500 to-teal-800 text-5xl font-bold">Front-End Developer, Designer</h2>
+                <h2 className="text-gradient bg-gradient-to-r from-teal-500 to-teal-800 text-5xl font-bold box-decoration-clone">Front-End Developer, Designer</h2>
                 <p className="text-primary-400">{siteMetadata.SELF_DESCRIPTION}</p>
             </div>
             <div className="relative hidden overflow-hidden rounded-xl md:block">
