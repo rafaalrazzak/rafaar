@@ -23,6 +23,7 @@ export { default as NGINXIcon } from "./Nginx";
 export { default as NodejsIcon } from "./Nodejs";
 export { default as PhotoshopIcon } from "./Photoshop";
 export { default as PremiereProIcon } from "./PremierePro";
+export { default as PrismaIcon } from "./Prisma";
 export { default as ReactjsIcon } from "./React";
 export { default as SassIcon } from "./Sass";
 export { default as SpotifyIcon } from "./Spotify";
