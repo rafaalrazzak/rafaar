@@ -7,7 +7,9 @@ import ToolsSection from "@/components/ToolsSection";
 import { tools } from "@/data/tools";
 import { getGallery, getProjects } from "@/libs/api";
 
-export const runtime = "edge";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+
+export const revalidate = 3600;
 
 export default async function Page() {
     const gallery = await getGallery();
@@ -18,14 +20,19 @@ export default async function Page() {
             <Hero />
 
             {gallery.length > 0 && (
-                <section className="flex flex-col items-center justify-center overflow-clip py-2 md:overflow-visible">
-                    <div className="relative inset-x-0 flex justify-center gap-5 py-12 sm:gap-8">
-                        {gallery.map((item, idx) => (
-                            <GalleryImage key={idx} {...item} />
-                        ))}
-                    </div>
+                <section className="flex flex-col items-center gap-6">
+                    <ScrollArea className="w-full h-full whitespace-nowrap">
+                        <div className="flex w-max gap-4">
+                            {gallery.map((item, idx) => (
+                                <figure key={idx} className="shrink-0 my-12">
+                                    <GalleryImage {...item} />
+                                </figure>
+                            ))}
+                        </div>
+                        <ScrollBar orientation="horizontal" />
+                    </ScrollArea>
 
-                    <span className="text-sm text-primary-700">Photos By Unsplash</span>
+                    <span className="text-sm text-primary-700">Photos by me</span>
                 </section>
             )}
 

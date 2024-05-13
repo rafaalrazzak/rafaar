@@ -33,10 +33,6 @@
         @apply antialiased bg-theme-900 text-theme-200;
     }
 
-    html.dark {
-        @apply brightness-[0.98];
-    }
-
     :is(a, button) {
         @apply outline-none;
     }
@@ -53,12 +49,6 @@
         content-visibility: auto;
     }
 
-    .border-toast {
-        @apply border-black;
-    }
-    .dark .border-toast {
-        border-image: linear-gradient(to bottom right, #3b82f6, #14b8a6) 1;
-    }
     img {
         -webkit-user-drag: none;
         -khtml-user-drag: none;
