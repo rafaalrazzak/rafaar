@@ -9,6 +9,7 @@ import { getGallery, getProjects } from "@/libs/api";
 
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
+export const runtime = "edge";
 export const revalidate = 3600;
 
 export default async function Page() {
