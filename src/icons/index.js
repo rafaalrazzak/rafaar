@@ -1,6 +1,7 @@
 export { default as ArrowDownIcon } from "./ArrowDown";
 export { default as ArrowRightIcon } from "./ArrowRight";
 export { default as AstroIcon } from "./Astro";
+export { default as BunIcon } from "./Bun";
 export { default as CSSIcon } from "./Css";
 export { default as FigmaIcon } from "./Figma";
 export { default as FirebaseIcon } from "./Firebase";
@@ -26,6 +27,7 @@ export { default as PremiereProIcon } from "./PremierePro";
 export { default as PrismaIcon } from "./Prisma";
 export { default as ReactjsIcon } from "./React";
 export { default as SassIcon } from "./Sass";
+export { default as SolidIcon } from "./Solid";
 export { default as SpotifyIcon } from "./Spotify";
 export { default as SunIcon } from "./Sun";
 export { default as SupabaseIcon } from "./Supabase";
