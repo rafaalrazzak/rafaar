@@ -1,14 +1,14 @@
-import * as Icons from "@/icons";
+import * as Icons from '@/icons';
 
 interface DynamicIconProps extends React.SVGProps<SVGSVGElement> {
-    name: string;
-    size?: number;
+  name: string;
+  size?: number;
 }
 
 const DynamicIcon = ({ name, ...props }: DynamicIconProps) => {
-    const newName = name.replace(" ", "").replace(".", "");
+  const newName = name.replace(' ', '').replace('.', '');
 
-    const Icon = Icons[newName + "Icon"];
-    return <Icon {...props} />;
+  const Icon = Icons[newName + 'Icon'];
+  return <Icon {...props} />;
 };
 export default DynamicIcon;

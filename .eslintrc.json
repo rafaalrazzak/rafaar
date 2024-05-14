@@ -1,26 +1,11 @@
 {
-    "settings": {
-        "react": {
-            "version": "detect"
-        }
-    },
-    "env": {
-        "browser": true,
-        "es2021": true,
-        "node": true
-    },
-    "extends": ["next", "next/core-web-vitals", "prettier", "eslint-config-prettier"],
-    "parserOptions": {
-        "ecmaVersion": "latest",
-        "sourceType": "module",
-        "ecmaFeatures": {
-            "jsx": true
-        }
-    },
-    "plugins": ["react", "prettier"],
-    "rules": {
-        "react/prop-types": "off",
-        "react/react-in-jsx-scope": "off",
-        "prettier/prettier": "warn"
-    }
+  "extends": ["next"],
+  "plugins": ["simple-import-sort", "import"],
+  "rules": {
+    "simple-import-sort/imports": "warn",
+    "simple-import-sort/exports": "warn",
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error"
+  }
 }
