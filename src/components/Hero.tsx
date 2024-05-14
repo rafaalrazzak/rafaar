@@ -1,6 +1,8 @@
+import Link from 'next/link';
+
 import siteMetadata from '@/data/siteMetadata';
 import { socialMedia } from '@/data/socialMedia';
-import Link from 'next/link';
+
 import { Button, ShimmerButton } from './ui/button';
 
 function Hero() {

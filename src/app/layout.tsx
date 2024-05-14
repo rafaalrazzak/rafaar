@@ -1,5 +1,7 @@
 import '../styles/globals.css';
+
 import { Inter } from 'next/font/google';
+
 import Analytics from '@/components/Analytics';
 import Container from '@/components/Container';
 import Navbar from '@/components/Navbar';

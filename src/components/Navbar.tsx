@@ -1,10 +1,12 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
+
 import APP_ROUTE from '@/data/AppRoute';
+import { cn } from '@/libs/utils';
+
 import Link from './Link';
 import { Button } from './ui/button';
-import { usePathname } from 'next/navigation';
-import { cn } from '@/libs/utils';
 
 export default function Navbar() {
   const pathname = usePathname();

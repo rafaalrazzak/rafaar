@@ -1,11 +1,13 @@
-import { Button } from '@/components/ui/button';
-import { cn } from '@/libs/utils';
 import { ArrowRightIcon } from '@radix-ui/react-icons';
 import { ReactNode } from 'react';
-import Link from './Link';
+
+import { Button } from '@/components/ui/button';
+import { cn } from '@/libs/utils';
+import { Project } from '@/types';
+
 import DynamicIcon from './DynamicIcon';
 import IconText from './IconText';
-import { Project } from '@/types';
+import Link from './Link';
 
 const BentoGrid = ({
   children,

@@ -1,20 +1,19 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-// import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import { Badge } from '@/components/ui/badge';
-// import { CommandMenu } from "@/components/command-menu";
-import { Metadata } from 'next';
-import { Section } from '@/components/Section';
 import { GlobeIcon, MailIcon } from 'lucide-react';
+import { Metadata } from 'next';
+import Image from 'next/image';
+
+import DynamicIcon from '@/components/DynamicIcon';
+import IconText from '@/components/IconText';
+import { Section } from '@/components/Section';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { RESUME_DATA } from '@/data/resumeData';
-import { getProjects } from '@/libs/api';
 import { tools } from '@/data/tools';
-import IconText from '@/components/IconText';
-import DynamicIcon from '@/components/DynamicIcon';
-import Image from '@/components/Image';
+import { getProjects } from '@/libs/api';
 import { getFavicon } from '@/libs/utils';
+
 import Print from './Print';
-// import { ProjectCard } from "@/components/project-card";
 
 export const metadata: Metadata = {
   title: `${RESUME_DATA.name} | ${RESUME_DATA.about}`,
@@ -116,11 +115,11 @@ export default async function Page() {
                       </a>
 
                       <span className='inline-flex gap-x-1'>
-                        {work.badges.map((badge) => (
+                        {work.badges.map((badge, idx) => (
                           <Badge
+                            key={idx}
                             variant='secondary'
                             className='align-middle text-xs'
-                            key={badge}
                           >
                             {badge}
                           </Badge>
@@ -186,10 +185,16 @@ export default async function Page() {
           <div className='grid grid-cols-1 gap-3 md:grid-cols-2 print:grid-cols-2 print:gap-2'>
             {projects.map(({ link, title, description, stacks }) => {
               return (
-                <div className='flex flex-col overflow-hidden rounded-xl border border-primary-600 p-3'>
+                <div
+                  key={title}
+                  className='flex flex-col overflow-hidden rounded-xl border border-primary-600 p-3'
+                >
                   <div className='flex flex-col gap-2'>
                     {link && (
-                      <img
+                      <Image
+                        width={16}
+                        height={16}
+                        alt={title}
                         src={getFavicon(link)}
                         className='inline-block h-4 w-4'
                       />

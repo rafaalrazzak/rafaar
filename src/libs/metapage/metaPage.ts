@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
+
 import siteMetadata from '@/data/siteMetadata';
+
 export const getMetaPage = (): Metadata => {
   return {
     title: siteMetadata.SITE_NAME,

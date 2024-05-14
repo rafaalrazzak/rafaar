@@ -1,4 +1,4 @@
-import { XIcon, InstagramIcon, GithubIcon, LinkedinIcon } from '@/icons';
+import { GithubIcon, InstagramIcon, LinkedinIcon, XIcon } from '@/icons';
 
 const socialMedia = [
   {

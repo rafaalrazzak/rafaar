@@ -1,5 +1,6 @@
-import { cn } from '@/libs/utils';
 import React from 'react';
+
+import { cn } from '@/libs/utils';
 
 export interface SectionProps extends React.HTMLAttributes<HTMLDivElement> {}
 

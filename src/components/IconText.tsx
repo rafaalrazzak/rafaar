@@ -1,5 +1,6 @@
 import { cn } from '@/libs/utils';
-import { buttonVariants, ButtonProps } from './ui/button';
+
+import { ButtonProps, buttonVariants } from './ui/button';
 
 interface IconTextProps extends ButtonProps {
   icon: React.ReactNode;

@@ -1,10 +1,10 @@
 'use client';
 
 import clsx from 'clsx';
+import { useCallback } from 'react';
+import { toast } from 'sonner';
 
 import Image from './Image';
-import { toast } from 'sonner';
-import { useCallback } from 'react';
 
 export interface GalleryProps {
   id: number;

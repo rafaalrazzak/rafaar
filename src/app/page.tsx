@@ -1,15 +1,13 @@
+import { BentoCard, BentoGrid } from '@/components/BentoGrid';
 import DynamicIcon from '@/components/DynamicIcon';
 import GalleryImage from '@/components/GalleryImage';
 import Hero from '@/components/Hero';
 import IconText from '@/components/IconText';
+import Image from '@/components/Image';
 import ToolsSection from '@/components/ToolsSection';
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { tools } from '@/data/tools';
 import { getGallery, getProjects } from '@/libs/api';
-
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
-
-import { BentoCard, BentoGrid } from '@/components/BentoGrid';
-import Image from '@/components/Image';
 
 export const runtime = 'edge';
 export const revalidate = 3600;
