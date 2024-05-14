@@ -2,6 +2,7 @@ import * as Icons from "@/icons";
 
 interface DynamicIconProps extends React.SVGProps<SVGSVGElement> {
     name: string;
+    size?: number;
 }
 
 const DynamicIcon = ({ name, ...props }: DynamicIconProps) => {

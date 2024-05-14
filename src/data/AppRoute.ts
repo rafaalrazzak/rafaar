@@ -5,8 +5,8 @@ const APP_ROUTE = [
     },
 
     {
-        path: "/about",
-        name: "About Me",
+        path: "/cv",
+        name: "Read CV",
     },
     // {
     //   path: "/portfolio",

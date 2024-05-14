@@ -1,15 +1,16 @@
-import clsx from "clsx";
+import { cn } from "@/libs/utils";
+import { buttonVariants, ButtonProps } from "./ui/button";
 
-interface IconTextProps extends React.HTMLAttributes<HTMLDivElement> {
+interface IconTextProps extends ButtonProps {
     icon: React.ReactNode;
     text: string;
 }
 
-export default function IconText({ icon, text, className: addClassName, ...props }: IconTextProps) {
+export default function IconText({ icon, text, className, variant, size }: IconTextProps) {
     return (
-        <div className={clsx("flex items-center gap-2 rounded-xl px-4 py-2 bg-primary-800")} {...props}>
+        <div className={cn("flex gap-2 text-sm", buttonVariants({ variant, size, className }))}>
             {icon}
-            <p className="text-sm font-semibold text-primary-300">{text}</p>
+            <p className="font-semibold text-primary-300">{text}</p>
         </div>
     );
 }

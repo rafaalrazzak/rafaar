@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import { Inter } from "next/font/google";
 import Analytics from "@/components/Analytics";
 import Container from "@/components/Container";
+import Navbar from "@/components/Navbar";
 import { Toaster } from "@/components/ui/sonner";
 import { getMetaPage } from "@/libs/metapage/metaPage";
 import { cn } from "@/libs/utils";
@@ -14,12 +15,13 @@ export const metadata = getMetaPage();
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     return (
-        <html>
+        <html className="relative scroll-my-24">
+            <Navbar />
             <body className={cn(inter.className, "bg-primary-900 text-white overflow-x-hidden")}>
                 <Analytics />
                 <Toaster />
                 <Container>
-                    <main className={cn("min-h-screen py-12")}>{children}</main>
+                    <main className={cn("min-h-screens my-16")}>{children}</main>
                 </Container>
             </body>
         </html>

@@ -61,3 +61,7 @@
         @apply size-6  transition duration-300  fill-primary-400 hover:fill-secondary-500;
     }
 }
+
+.print-force-new-page {
+    page-break-before: always;
+}

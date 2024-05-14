@@ -1,0 +1,63 @@
+import { Button } from "@/components/ui/button";
+import { cn } from "@/libs/utils";
+import { ArrowRightIcon } from "@radix-ui/react-icons";
+import { ReactNode } from "react";
+import Link from "./Link";
+import DynamicIcon from "./DynamicIcon";
+import IconText from "./IconText";
+import { Project } from "@/types";
+
+const BentoGrid = ({ children, className }: { children: ReactNode; className?: string }) => {
+    return <div className={cn("grid w-full auto-rows-[22rem] grid-cols-2 gap-4", className)}>{children}</div>;
+};
+
+export type BentoCardProps = {
+    className?: string;
+    background: ReactNode;
+    Icon?: any;
+    cta: string;
+} & Project;
+
+const BentoCard = ({ title, className, background, Icon, description, stacks, link, cta }: BentoCardProps) => (
+    <div
+        className={cn(
+            "group relative col-span-2 flex flex-col justify-between overflow-hidden rounded-xl",
+            "transform-gpu bg-primary-950 border border-primary-800 [box-shadow:0_-20px_80px_-20px_#ffffff1f_inset]",
+            className
+        )}
+    >
+        <div>{background}</div>
+        <div className="pointer-events-none z-10 flex transform-gpu flex-col gap-3 p-6 transition-all duration-300 group-hover:-translate-y-10 -mt-24">
+            {Icon && <Icon className="h-12 w-12 origin-left transform-gpu text-primary-700 transition-all duration-300 ease-in-out group-hover:scale-75" />}
+
+            {stacks && (
+                <div className="flex gap-2 flex-wrap">
+                    {stacks.map((stack, idx) => (
+                        <IconText size="xs" key={idx} className="group/stacks text-xs" icon={<DynamicIcon size={14} name={stack} />} text={stack} />
+                    ))}
+                </div>
+            )}
+
+            <div className="flex flex-col gap-1">
+                <h3 className="text-base font-semibold text-primary-300 dark:text-primary-300">{title}</h3>
+                <p className="max-w-lg text-balance text-xs text-primary-400">{description}</p>
+            </div>
+        </div>
+
+        <div
+            className={cn(
+                "pointer-events-none absolute bottom-0 flex w-full translate-y-10 transform-gpu flex-row items-center p-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
+            )}
+        >
+            <Button variant="ghost" asChild size="sm" className="pointer-events-auto">
+                <Link href={link}>
+                    {cta}
+                    <ArrowRightIcon className="ml-2 h-4 w-4" />
+                </Link>
+            </Button>
+        </div>
+        <div className="pointer-events-none absolute inset-0 transform-gpu transition-all duration-300 group-hover:bg-primary-950/[.03]" />
+    </div>
+);
+
+export { BentoCard, BentoGrid };
