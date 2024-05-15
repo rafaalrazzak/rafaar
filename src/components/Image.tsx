@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import NextImage, { ImageProps } from 'next/image';
 
 function Image({ ...rest }: ImageProps) {

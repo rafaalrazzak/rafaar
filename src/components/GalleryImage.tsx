@@ -29,12 +29,13 @@ function GalleryImage({ id, image, title }: GalleryProps) {
       )}
     >
       <Image
+        quality={50}
         src={image}
         width={200}
         height={200}
         alt={title}
         className='absolute inset-0 h-full bg-cover object-cover'
-        sizes='(max-width: 800px) 100vw, (max-width: 1200px) 50vw, 40vw'
+        sizes='(max-width: 500px) 100vw, (max-width: 700px) 50vw, 40vw'
       />
     </button>
   );
