@@ -67,8 +67,8 @@ export default async function Page() {
                       src={project.cover}
                       alt={project.title}
                       className='after:via-primary-950after:to-transparent relative inset-0 top-0 size-full object-cover object-center  after:absolute after:inset-0 after:z-10 after:bg-gradient-to-t after:from-primary-950'
-                      width={1200}
-                      height={600}
+                      width={600}
+                      height={300}
                       sizes='(max-width: 800px) 100vw, (max-width: 1200px) 50vw, 40vw'
                     />
                   </div>

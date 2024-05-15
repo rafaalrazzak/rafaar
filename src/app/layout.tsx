@@ -17,7 +17,7 @@ export const metadata = getMetaPage();
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html className='relative scroll-my-24'>
+    <html className='relative scroll-my-24' lang='en'>
       <Navbar />
       <body
         className={cn(

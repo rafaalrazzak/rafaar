@@ -126,10 +126,23 @@ export default async function Page() {
                         ))}
                       </span>
                     </h5>
+
                     <div className='text-sm tabular-nums text-primary-400'>
                       {work.start} - {work.end}
                     </div>
                   </div>
+
+                  {work.link && (
+                    <a
+                      href={work.link}
+                      className='hidden font-mono text-xs underline print:flex'
+                    >
+                      {work.link
+                        ?.replace('https://', '')
+                        .replace('www.', '')
+                        .replace('/', '')}
+                    </a>
+                  )}
 
                   <h4 className='font-mono text-sm leading-none'>
                     {work.title}
@@ -214,12 +227,15 @@ export default async function Page() {
                           title
                         )}
                       </div>
-                      <div className='hidden font-mono text-xs underline print:flex'>
+                      <a
+                        href={link}
+                        className='hidden font-mono text-xs underline print:flex'
+                      >
                         {link
                           ?.replace('https://', '')
                           .replace('www.', '')
                           .replace('/', '')}
-                      </div>
+                      </a>
                       <div className='font-mono text-xs text-primary-400'>
                         {description}
                       </div>
