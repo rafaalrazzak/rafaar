@@ -11,7 +11,7 @@ export const projects = [
   {
     title: 'Secret Message',
     description: 'ssttt...🤫 ',
-    url: 'https://l.kta.blue/x',
+    url: 'https://l.kta.blue/secret',
     icon: MessagesSquare,
   },
 ] satisfies Project[];
