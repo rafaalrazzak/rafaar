@@ -8,7 +8,7 @@ export const getMetaPage = (): Metadata => {
     description: siteMetadata.SELF_DESCRIPTION,
     metadataBase: new URL(siteMetadata.SITE_URL),
     icons: {
-      icon: '/logo-dark.svg',
+      icon: '/logo.svg',
     },
     openGraph: {
       siteName: siteMetadata.SITE_NAME,

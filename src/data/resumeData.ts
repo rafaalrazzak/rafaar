@@ -10,12 +10,11 @@ export const RESUME_DATA = {
     'Front-end developer and designer from Indonesia. I love to create beautiful and functional web applications.',
   summary:
     "As a front-end web developer, I specialize in using React and Next.js to create dynamic and responsive user interfaces. With a strong foundation in HTML, CSS, and JavaScript, I build modular and maintainable code using React's component-based approach. Next.js enhances performance by enabling server-side rendering for faster-loading pages. I'm committed to staying updated on the latest developments in React and Next.js to deliver efficient and engaging web applications that meet industry standards. My goal is to create elegant digital solutions that elevate the overall user experience.",
-  avatarUrl:
-    'https://www.rafaar.my.id/_next/image?url=%2Frafaar.jpg&w=256&q=100',
-  ogImage: 'https://www.rafaar.my.id/twitter-card.png',
+  avatarUrl: 'https://cdn.kita.blue/rafaar%2Fme.png',
+  ogImage: 'https://www.rafaar.my.id/thumbnail.png',
   personalWebsiteUrl: 'https://rafaar.my.id',
   contact: {
-    email: 'contact.rafaalrazzak@gmail.com ',
+    email: 'rafaar@kita.blue ',
     social: socialMedia,
   },
   education: [
@@ -60,6 +59,20 @@ export const RESUME_DATA = {
         label: 'osis.matick.me',
         href: 'https://osis.matick.me/',
       },
+    },
+  ],
+  passions: [
+    {
+      name: 'React.js',
+      url: 'https://react.dev',
+    },
+    {
+      name: 'Next.js',
+      url: 'https://nextjs.org',
+    },
+    {
+      name: 'TailwindCSS',
+      url: 'https://tailwindcss.com',
     },
   ],
 } as const;

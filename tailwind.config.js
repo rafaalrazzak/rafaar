@@ -23,6 +23,7 @@ module.exports = {
         tilt: 'tilt 10s infinite linear',
         'spin-around': 'spin-around calc(var(--speed) * 2) infinite linear',
         slide: 'slide var(--speed) ease-in-out infinite alternate',
+        border: 'border 4s ease infinite',
       },
       keyframes: {
         tilt: {
@@ -56,6 +57,15 @@ module.exports = {
         slide: {
           to: {
             transform: 'translate(calc(100cqw - 100%), 0)',
+          },
+        },
+        border: {
+          '0%, 100%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+        },
+        shimmer: {
+          '100%': {
+            transform: 'translateX(100%)',
           },
         },
       },
