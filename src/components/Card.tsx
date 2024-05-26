@@ -35,7 +35,7 @@ export function Card({ url, i, title, description, icon: Icon }: CardProps) {
       target='_blank'
       rel='noopener noreferrer'
       className={
-        'animate-border relative isolate flex w-full items-center overflow-hidden rounded-2xl bg-gradient-to-r from-white/10 via-white/30 to-white/10 p-px text-white shadow-xl shadow-black/5 before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:border-t before:border-rose-100/10 before:bg-gradient-to-r before:from-transparent before:via-rose-100/10 before:to-transparent '
+        'relative isolate flex w-full animate-border items-center overflow-hidden rounded-2xl bg-gradient-to-r from-white/10 via-white/30 to-white/10 p-px text-white shadow-xl shadow-black/5 before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:border-t before:border-rose-100/10 before:bg-gradient-to-r before:from-transparent before:via-rose-100/10 before:to-transparent '
       }
     >
       <motion.div

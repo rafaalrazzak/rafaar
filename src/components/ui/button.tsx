@@ -21,7 +21,7 @@ const buttonVariants = cva(
           'hover:bg-zinc-100 hover:text-zinc-900 dark:hover:bg-zinc-800 dark:hover:text-zinc-50',
         link: 'text-zinc-900 underline-offset-4 hover:underline dark:text-zinc-50',
         gradient:
-          'bg-gradient-to-r from-teal-500 to-teal-800 text-zinc-50 hover:from-teal-600 hover:to-teal-700 dark:from-teal-900 dark:to-teal-800 dark:hover:from-teal-900 dark:hover:to-teal-700',
+          'bg-gradient-to-r from-teal-600 to-teal-400 bg-clip-text font-semibold text-transparent hover:underline',
       },
       size: {
         default: 'h-10 px-4 py-2',

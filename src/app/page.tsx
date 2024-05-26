@@ -4,6 +4,7 @@ import GalleryImage from '@/components/GalleryImage';
 import Hero from '@/components/Hero';
 import IconText from '@/components/IconText';
 import Image from '@/components/Image';
+import Navbar from '@/components/Navbar';
 import ToolsSection from '@/components/ToolsSection';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { tools } from '@/data/tools';
@@ -17,7 +18,8 @@ export default async function Page() {
   const projects = await getProjects();
 
   return (
-    <>
+    <main className='my-16'>
+      <Navbar />
       <Hero />
 
       {gallery.length > 0 && (
@@ -78,6 +80,6 @@ export default async function Page() {
           </BentoGrid>
         </section>
       )}
-    </>
+    </main>
   );
 }

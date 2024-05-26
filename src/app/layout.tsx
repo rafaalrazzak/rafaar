@@ -4,7 +4,6 @@ import { Inter } from 'next/font/google';
 
 import Analytics from '@/components/Analytics';
 import Container from '@/components/Container';
-import Navbar from '@/components/Navbar';
 import { Toaster } from '@/components/ui/sonner';
 import { getMetaPage } from '@/libs/metapage/metaPage';
 import { cn } from '@/libs/utils';
@@ -18,7 +17,6 @@ export const metadata = getMetaPage();
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html className='relative scroll-my-24' lang='en'>
-      <Navbar />
       <body
         className={cn(
           inter.className,
@@ -27,9 +25,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       >
         <Analytics />
         <Toaster />
-        <Container>
-          <main className={cn('min-h-screens my-16')}>{children}</main>
-        </Container>
+        <main className='min-h-screen'>
+          <Container>{children}</Container>
+        </main>
       </body>
     </html>
   );
