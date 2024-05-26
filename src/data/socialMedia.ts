@@ -3,22 +3,22 @@ import { GithubIcon, InstagramIcon, LinkedinIcon, XIcon } from '@/icons';
 const socialMedia = [
   {
     name: 'X',
-    url: 'https://l.rafaar.my.id/x',
+    url: 'https://l.kta.blue/x',
     icon: XIcon,
   },
   {
     name: 'Instagram',
-    url: 'https://l.rafaar.my.id/instagram',
+    url: 'https://l.kta.blue/instagram',
     icon: InstagramIcon,
   },
   {
     name: 'Github',
-    url: 'https://l.rafaar.my.id/github',
+    url: 'https://l.kta.blue/github',
     icon: GithubIcon,
   },
   {
     name: 'Linkedin',
-    url: 'https://l.rafaar.my.id/linkedin',
+    url: 'https://l.kta.blue/linkedin',
     icon: LinkedinIcon,
   },
 ];
