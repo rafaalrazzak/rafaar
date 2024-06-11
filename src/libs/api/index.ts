@@ -50,10 +50,10 @@ export async function getNowPlaying() {
 export async function getTopSongs() {
   try {
     const response = await fetch(API_URL + '/spotify/top-tracks', {
-      cache: 'no-store',
-      // next: {
-      //   revalidate: 3600 * 24 * 2, // 2 days
-      // }
+      // cache: 'no-store',
+      next: {
+        revalidate: 3600 * 24 * 2, // 2 days
+      }
     });
     if (!response.ok) {
       throw new Error(`Error fetching top songs: ${response.statusText}`);
