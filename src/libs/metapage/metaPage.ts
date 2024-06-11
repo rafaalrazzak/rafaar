@@ -4,7 +4,10 @@ import siteMetadata from '@/data/siteMetadata';
 
 export const getMetaPage = (): Metadata => {
   return {
-    title: siteMetadata.SITE_NAME,
+    title: {
+      absolute: siteMetadata.SITE_NAME,
+      template: '%s | ' + 'rafaar',
+    },
     description: siteMetadata.SELF_DESCRIPTION,
     metadataBase: new URL(siteMetadata.SITE_URL),
     icons: {
