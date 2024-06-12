@@ -1,7 +1,7 @@
 import { GalleryProps } from '@/components/GalleryImage';
 import { NowPlaying, Project, TopSong } from '@/types';
 
-const API_URL = 'https://api-v2.rafaar.my.id';
+const API_URL = 'https://api-v2-lst9deezl-rafa-al-razzaks-projects.vercel.app';
 
 export async function getProjects() {
   try {
@@ -49,11 +49,11 @@ export async function getNowPlaying() {
 
 export async function getTopSongs() {
   try {
-    const response = await fetch(API_URL + '/spotify/top-tracks', {
+    const response = await fetch(API_URL + '/spotify/top-tracks?limit=8', {
       // cache: 'no-store',
       next: {
         revalidate: 3600 * 24 * 2, // 2 days
-      }
+      },
     });
     if (!response.ok) {
       throw new Error(`Error fetching top songs: ${response.statusText}`);
@@ -63,5 +63,34 @@ export async function getTopSongs() {
   } catch (error) {
     console.error('Failed to fetch top songs:', error);
     return []; // Return an empty array or handle the error as needed
+  }
+}
+
+export async function searchSongs(query: string) {
+  try {
+    const response = await fetch(API_URL + `/spotify/search?q=${query}`);
+    if (!response.ok) {
+      throw new Error(`Error searching songs: ${response.statusText}`);
+    }
+    const data = await response.json();
+    return data as TopSong[];
+  } catch (error) {
+    console.error('Failed to search songs:', error);
+    return []; // Return an empty array or handle the error as needed
+  }
+}
+
+export async function addSongToPlaylist(songUri: string) {
+  try {
+    const response = await fetch(API_URL + `/spotify/playlist/${songUri}`, {
+      method: 'POST',
+    });
+    if (!response.ok) {
+      throw new Error(`Error adding song to playlist: ${response.statusText}`);
+    }
+    return true;
+  } catch (error) {
+    console.error('Failed to add song to playlist:', error);
+    return false;
   }
 }

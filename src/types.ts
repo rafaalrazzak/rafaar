@@ -31,6 +31,7 @@ export type NowPlaying = {
 export type TopSong = {
   artist: string;
   songUrl: string;
+  songUri: string;
   title: string;
   songImage: string;
   colors: Colors;

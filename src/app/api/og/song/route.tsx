@@ -93,12 +93,11 @@ const Container: React.FC<ContainerProps> = ({
   </main>
 );
 
-
-
 export async function GET() {
   const topSongs: Song[] = await getTopSongs();
 
-    const response = <Container
+  const response = (
+    <Container
       backgroundColor={topSongs[0].colors.dark}
       image={topSongs[0].songImage}
       textColor='white'
@@ -106,7 +105,7 @@ export async function GET() {
       title={topSongs[0].title}
       artist={topSongs[0].artist}
     />
-
+  );
 
   return new ImageResponse(response, { width: 1200, height: 630 });
 }
