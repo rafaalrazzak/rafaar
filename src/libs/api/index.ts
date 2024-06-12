@@ -1,7 +1,7 @@
 import { GalleryProps } from '@/components/GalleryImage';
 import { NowPlaying, Project, TopSong } from '@/types';
 
-const API_URL = 'https://api-v2-lst9deezl-rafa-al-razzaks-projects.vercel.app';
+const API_URL = 'https://api-v2.rafaar.my.id';
 
 export async function getProjects() {
   try {
