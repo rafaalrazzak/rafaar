@@ -6,9 +6,11 @@ import { socialMedia } from '@/data/socialMedia';
 
 import Projects from './projects';
 
-export default function LinksPage() {
-  const { passions } = RESUME_DATA;
+export const metadata = {
+  title: 'Links',
+};
 
+export default function LinksPage() {
   return (
     <main className='mx-auto flex max-w-xl flex-col items-center gap-12 md:gap-8'>
       <Header
@@ -21,18 +23,7 @@ export default function LinksPage() {
           <div className='flex flex-col gap-1'>
             <h1 className='text-xl font-bold'>Rafa Al Razzak</h1>
 
-            <p className='text-sm'>
-              Frontend Web Developer with experience in{' '}
-              {passions.map((passion, i) => (
-                <span key={i}>
-                  <Link className='p-0' variant='gradient' href={passion.url}>
-                    {passion.name}
-                  </Link>
-                  {i !== passions.length - 1 && ', '} {/* Conditional comma */}
-                </span>
-              ))}
-              . Passionate about crafting modern web applications.
-            </p>
+            <p className='text-sm text-primary-300'>{RESUME_DATA.about}</p>
           </div>
 
           <div className='flex flex-wrap gap-2'>

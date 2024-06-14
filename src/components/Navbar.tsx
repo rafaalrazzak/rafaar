@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 
-import APP_ROUTE from '@/data/AppRoute';
+import { APP_ROUTE } from '@/data/appRoute';
 import { cn } from '@/libs/utils';
 
 import Link from './Link';
@@ -21,7 +21,7 @@ export default function Navbar() {
             key={i}
             href={item.path}
             className={cn(
-              `px-0 text-primary-300 ${isCurrentPath(item.path) ? 'font-bold text-primary-100' : 'text-primary-400'}`
+              `px-0 text-xs text-primary-300 md:text-base ${isCurrentPath(item.path) ? 'font-bold text-primary-100' : 'text-primary-400'}`
             )}
           >
             {item.name}

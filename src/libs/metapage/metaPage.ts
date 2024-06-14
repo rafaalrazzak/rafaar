@@ -6,7 +6,8 @@ export const getMetaPage = (): Metadata => {
   return {
     title: {
       absolute: siteMetadata.SITE_NAME,
-      template: '%s | ' + 'rafaar',
+      default: 'Hello',
+      template: '%s — rafaar',
     },
     description: siteMetadata.SELF_DESCRIPTION,
     metadataBase: new URL(siteMetadata.SITE_URL),

@@ -1,4 +1,4 @@
-import { LucideIcon, MessagesSquare } from 'lucide-react';
+import { LucideIcon, MessagesSquare, MusicIcon } from 'lucide-react';
 
 export type Project = {
   title: string;
@@ -13,5 +13,11 @@ export const projects = [
     description: 'ssttt...🤫 ',
     url: 'https://l.kta.blue/secret',
     icon: MessagesSquare,
+  },
+  {
+    title: 'Songs',
+    description: 'What are you listening to?',
+    url: 'https://l.kta.blue/songs',
+    icon: MusicIcon,
   },
 ] satisfies Project[];

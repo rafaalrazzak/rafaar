@@ -8,6 +8,7 @@ export { default as FigmaIcon } from './Figma';
 export { default as FirebaseIcon } from './Firebase';
 export { default as GitIcon } from './Git';
 export { default as GithubIcon } from './Github';
+export { default as GlobeIcon } from './Globe';
 export { default as GraphQLIcon } from './GraphQL';
 export { default as HTMLIcon } from './Html';
 export { default as IllustratorIcon } from './Illustrator';

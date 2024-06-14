@@ -1,4 +1,4 @@
-const APP_ROUTE = [
+export const APP_ROUTE = [
   {
     path: '/',
     name: 'Home',
@@ -8,14 +8,14 @@ const APP_ROUTE = [
     path: '/cv',
     name: 'Read CV',
   },
-  // {
-  //   path: "/portfolio",
-  //   name: "Portfolio",
-  // },
-  // {
-  //   path: "/blog",
-  //   name: "Blog",
-  // },
+  {
+    path: '/links',
+    name: 'Links',
+  },
+  {
+    path: '/songs',
+    name: 'Songs',
+  },
 ];
 
 export const ADDT_ROUTE = [
@@ -37,5 +37,3 @@ export const ADDT_ROUTE = [
     name: 'Certificate',
   },
 ];
-
-export default APP_ROUTE;

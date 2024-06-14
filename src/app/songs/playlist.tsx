@@ -1,6 +1,6 @@
 'use client';
 
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Search } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -45,12 +45,12 @@ export function Playlist() {
     <div className='my-12 flex flex-col gap-4 rounded-xl border border-primary-800 bg-primary-950 px-4 py-8'>
       <div className='flex justify-between'>
         <div className='flex flex-col gap-2'>
-          <h1>Playlist</h1>
-          <p>Feel free to add your favorite songs to the playlist.</p>
+          <h3>Playlist</h3>
+          <p className="text-primary-300">Feel free to add your favorite songs to the playlist.</p>
         </div>
 
         <Link href='https://l.kta.blue/spotify-playlist' target='_blank'>
-          <ExternalLink />
+          <ExternalLink size={18} />
         </Link>
       </div>
 
@@ -58,12 +58,12 @@ export function Playlist() {
         <div className='flex gap-2'>
           <Input
             type='text'
-            placeholder='Search song'
+            placeholder='Search your favorite songs'
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <Button type='submit' disabled={isSearching}>
-            Search
+          <Button type='submit' disabled={isSearching} aria-label="Search Button">
+            <Search size={16}/>
           </Button>
         </div>
       </form>

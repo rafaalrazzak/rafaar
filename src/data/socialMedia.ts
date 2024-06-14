@@ -1,6 +1,17 @@
-import { GithubIcon, InstagramIcon, LinkedinIcon, XIcon } from '@/icons';
+import {
+  GithubIcon,
+  GlobeIcon,
+  InstagramIcon,
+  LinkedinIcon,
+  XIcon,
+} from '@/icons';
 
 const socialMedia = [
+  {
+    name: 'Website',
+    url: 'https://l.kta.blue/web',
+    icon: GlobeIcon,
+  },
   {
     name: 'X',
     url: 'https://l.kta.blue/x',

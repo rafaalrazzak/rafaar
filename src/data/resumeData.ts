@@ -7,7 +7,7 @@ export const RESUME_DATA = {
   location: 'Bogor, Indonesia',
   locationLink: 'https://www.google.com/maps/place/Bogor',
   about:
-    'Front-end developer and designer from Indonesia. I love to create beautiful and functional web applications.',
+    'Fullstack developer and designer from Indonesia. I love to create beautiful and functional web applications.',
   summary:
     "As a front-end web developer, I specialize in using React and Next.js to create dynamic and responsive user interfaces. With a strong foundation in HTML, CSS, and JavaScript, I build modular and maintainable code using React's component-based approach. Next.js enhances performance by enabling server-side rendering for faster-loading pages. I'm committed to staying updated on the latest developments in React and Next.js to deliver efficient and engaging web applications that meet industry standards. My goal is to create elegant digital solutions that elevate the overall user experience.",
   avatarUrl: 'https://cdn.kita.blue/rafaar%2Fme.png',

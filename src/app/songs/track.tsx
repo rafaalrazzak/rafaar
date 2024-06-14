@@ -54,8 +54,10 @@ export function Track({
       >
         <div className='flex h-full w-full flex-col justify-end gap-3 p-2'>
           <div className='flex-flex-col gap-1'>
-            <h5 className='line-clamp-2 text-balance'>{title}</h5>
-            <p className='text-xs text-primary-200'>{artist}</p>
+            <h6 className='line-clamp-2 text-balance text-sm font-semibold md:text-base'>
+              {title}
+            </h6>
+            <p className='line-clamp-1 text-xs text-primary-200 md:line-clamp-2'>{artist}</p>
           </div>
 
           {asRequest && (
