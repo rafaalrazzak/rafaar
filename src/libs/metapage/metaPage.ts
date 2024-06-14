@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import siteMetadata from '@/data/siteMetadata';
+import siteMetadata from '@/data/site-metadata';
 
 export const getMetaPage = (): Metadata => {
   return {
