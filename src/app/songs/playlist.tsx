@@ -46,7 +46,9 @@ export function Playlist() {
       <div className='flex justify-between'>
         <div className='flex flex-col gap-2'>
           <h3>Playlist</h3>
-          <p className="text-primary-300">Feel free to add your favorite songs to the playlist.</p>
+          <p className='text-primary-300'>
+            Feel free to add your favorite songs to the playlist.
+          </p>
         </div>
 
         <Link href='https://l.kta.blue/spotify-playlist' target='_blank'>
@@ -62,8 +64,12 @@ export function Playlist() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <Button type='submit' disabled={isSearching} aria-label="Search Button">
-            <Search size={16}/>
+          <Button
+            type='submit'
+            disabled={isSearching}
+            aria-label='Search Button'
+          >
+            <Search size={16} />
           </Button>
         </div>
       </form>

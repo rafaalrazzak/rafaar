@@ -1,8 +1,8 @@
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import Link from '@/components/Link';
-import { RESUME_DATA } from '@/data/resumeData';
-import { socialMedia } from '@/data/socialMedia';
+import { RESUME_DATA } from '@/data/resume-data';
+import { socialMedia } from '@/data/social-media';
 
 import Projects from './projects';
 

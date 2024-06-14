@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-import siteMetadata from '@/data/siteMetadata';
-import { socialMedia } from '@/data/socialMedia';
+import siteMetadata from '@/data/site-metadata';
+import { socialMedia } from '@/data/social-media';
 
 import { Button, ShimmerButton } from './ui/button';
 
@@ -17,14 +17,10 @@ function Hero() {
           {siteMetadata.SELF_DESCRIPTION}
         </p>
         <div className='flex gap-2'>
-          {socialMedia.map((socialMedia, index) => (
-            <Link key={index} href={socialMedia.url}>
-              <Button
-                key={socialMedia.name}
-                className=' text-white'
-                size='icon'
-              >
-                <socialMedia.icon className='size-4 fill-current' />
+          {socialMedia.map((social, index) => (
+            <Link key={index} href={social.url}>
+              <Button key={social.name} className=' text-white' size='icon'>
+                <social.icon className='size-4 fill-current' />
               </Button>
             </Link>
           ))}

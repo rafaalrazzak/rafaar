@@ -57,7 +57,9 @@ export function Track({
             <h6 className='line-clamp-2 text-balance text-sm font-semibold md:text-base'>
               {title}
             </h6>
-            <p className='line-clamp-1 text-xs text-primary-200 md:line-clamp-2'>{artist}</p>
+            <p className='line-clamp-1 text-xs text-primary-200 md:line-clamp-2'>
+              {artist}
+            </p>
           </div>
 
           {asRequest && (

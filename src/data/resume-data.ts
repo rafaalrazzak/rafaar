@@ -1,5 +1,5 @@
 // import { Tako, OSIS } from "@/images/logos";
-import { socialMedia } from './socialMedia';
+import { socialMedia } from './social-media';
 
 export const RESUME_DATA = {
   name: 'Rafa Al Razzak',

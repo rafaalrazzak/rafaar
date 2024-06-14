@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 
-import { APP_ROUTE } from '@/data/appRoute';
+import { APP_ROUTE } from '@/data/app-route';
 import { cn } from '@/libs/utils';
 
 import Link from './Link';
