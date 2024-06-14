@@ -6,7 +6,6 @@ import { APP_ROUTE } from '@/data/appRoute';
 import { cn } from '@/libs/utils';
 
 import Link from './Link';
-import { Button } from './ui/button';
 
 export default function Navbar() {
   const pathname = usePathname();
