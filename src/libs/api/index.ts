@@ -50,9 +50,8 @@ export async function getNowPlaying() {
 export async function getTopSongs() {
   try {
     const response = await fetch(API_URL + '/spotify/top-tracks?limit=8', {
-      cache: 'force-cache',
       next: {
-        revalidate: 172800 // 2 days
+        revalidate: 3600
       },
     });
     if (!response.ok) {
