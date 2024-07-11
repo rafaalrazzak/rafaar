@@ -1,4 +1,10 @@
-export default function ToolsSection({ title, children }) {
+export default function ToolsSection({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
   return (
     <section className='flex flex-col gap-2'>
       <div className='flex flex-col gap-4 py-6 '>

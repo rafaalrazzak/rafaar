@@ -1,5 +1,43 @@
-// import { Tako, OSIS } from "@/images/logos";
+import { differenceInMonths, differenceInYears, format } from 'date-fns';
+
 import { socialMedia } from './social-media';
+
+// Define work start and end dates
+const dateWorks = {
+  tako: {
+    start: new Date('2023-06-01'),
+    end: 'Present', // Use 'Present' or specify end date as string
+  },
+};
+
+// Function to calculate duration in years and months using date-fns
+function calculateDuration(start: Date, end: Date | string): string {
+  let endDate: Date;
+
+  if (typeof end === 'string' && end.toLowerCase() === 'present') {
+    endDate = new Date(); // Assume 'Present' means current date
+  } else {
+    endDate = typeof end === 'string' ? new Date(end) : end;
+  }
+
+  const years = differenceInYears(endDate, start);
+  const months = differenceInMonths(endDate, start) % 12;
+
+  const yearString = years > 0 ? `${years} year${years !== 1 ? 's' : ''}` : '';
+  const monthString =
+    months > 0 ? `${months} month${months !== 1 ? 's' : ''}` : '';
+
+  if (years > 0 && months > 0) {
+    return `${yearString} and ${monthString}`;
+  } else {
+    return yearString || monthString;
+  }
+}
+
+// Format date into string (yyyy format)
+function formatDate(date: Date): string {
+  return format(date, 'yyyy');
+}
 
 export const RESUME_DATA = {
   name: 'Rafa Al Razzak',
@@ -7,20 +45,20 @@ export const RESUME_DATA = {
   location: 'Bogor, Indonesia',
   locationLink: 'https://www.google.com/maps/place/Bogor',
   about:
-    'Fullstack developer and designer from Indonesia. I love to create beautiful and functional web applications.',
+    'Full-stack developer and designer from Indonesia. I love to create beautiful and functional web applications.',
   summary:
-    "As a front-end web developer, I specialize in using React and Next.js to create dynamic and responsive user interfaces. With a strong foundation in HTML, CSS, and JavaScript, I build modular and maintainable code using React's component-based approach. Next.js enhances performance by enabling server-side rendering for faster-loading pages. I'm committed to staying updated on the latest developments in React and Next.js to deliver efficient and engaging web applications that meet industry standards. My goal is to create elegant digital solutions that elevate the overall user experience.",
+    "I'm a full-stack developer specializing in creating elegant digital solutions that drive results. Whether it's a simple website or a complex application, I take a holistic approach to development, ensuring that both the user interface and underlying infrastructure are optimized for performance and reliability. My expertise in React, Next.js, HTML, CSS, JavaScript/TypeScript, Bun, Node.js, Hono, Express, and PostgreSQL allows me to tailor solutions to your specific needs. By staying ahead of industry trends, I can deliver modern, efficient web applications with minimal bugs and a focus on enhancing the user experience.",
   avatarUrl: 'https://cdn.kita.blue/rafaar%2Fme.png',
   ogImage: 'https://www.rafaar.my.id/thumbnail.png',
   personalWebsiteUrl: 'https://rafaar.my.id',
   contact: {
-    email: 'rafaar@kita.blue ',
+    email: 'rafaar@kita.blue',
     social: socialMedia,
   },
   education: [
     {
       school: 'SMK Al-Asiyah',
-      degree: 'Computer and Network Enginering',
+      degree: 'Computer and Network Engineering',
       start: '2021',
       end: '2024',
     },
@@ -29,50 +67,18 @@ export const RESUME_DATA = {
     {
       company: 'Tako',
       link: 'https://tako.id',
-      badges: ['Remote'],
-      title: 'Front End Developer',
-      // logo: Tako,
-      start: '2023',
-      end: 'Present',
+      badges: [
+        'Remote',
+        // Duration
+        `${calculateDuration(dateWorks.tako.start, dateWorks.tako.end)}`,
+      ],
+      title: 'Full-stack Developer',
+      logo: 'https://tako.id/icon.png',
+      color: '#37a2ea',
+      start: formatDate(dateWorks.tako.start),
+      end: dateWorks.tako.end,
       description:
-        'Your Hobby Makes Money! Come make money from your hobby and build a community like your favorite creator!',
-    },
-  ],
-  skills: [
-    'HTML',
-    'CSS',
-    'JavaScript',
-    'TypeScript',
-    'React/Next.js',
-    'Tailwind CSS',
-    'Node.js',
-    'GraphQL',
-    'PostgreSQL',
-  ],
-  projects: [
-    {
-      title: 'OSIS SMK Al-Asiyah',
-      techStack: ['Side Project', 'TypeScript', 'Next.js', 'React', 'Supabase'],
-      description: 'A website of Student Council SMK Al-Asiyah',
-      // logo: OSIS,
-      link: {
-        label: 'osis.matick.me',
-        href: 'https://osis.matick.me/',
-      },
-    },
-  ],
-  passions: [
-    {
-      name: 'React.js',
-      url: 'https://react.dev',
-    },
-    {
-      name: 'Next.js',
-      url: 'https://nextjs.org',
-    },
-    {
-      name: 'TailwindCSS',
-      url: 'https://tailwindcss.com',
+        'Pengen dapet penghasilan lebih dari hanya sekedar membuat konten? Langsung aja join Tako sekarang!',
     },
   ],
 } as const;

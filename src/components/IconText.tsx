@@ -22,7 +22,7 @@ export default function IconText({
       )}
     >
       {icon}
-      <p className='font-semibold text-primary-300'>{text}</p>
+      <p className='font-semibold'>{text}</p>
     </div>
   );
 }

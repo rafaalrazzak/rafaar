@@ -13,13 +13,13 @@ function Hero() {
           Rafa Al Razzak
         </h2>
 
-        <p className='text-sm text-primary-400 md:text-base'>
+        <p className='text-sm text-muted-foreground md:text-base'>
           {siteMetadata.SELF_DESCRIPTION}
         </p>
         <div className='flex gap-2'>
           {socialMedia.map((social, index) => (
             <Link key={index} href={social.url}>
-              <Button key={social.name} className=' text-white' size='icon'>
+              <Button key={social.name} size='icon'>
                 <social.icon className='size-4 fill-current' />
               </Button>
             </Link>

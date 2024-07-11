@@ -48,14 +48,14 @@ const BentoCard = ({
   <div
     className={cn(
       'group relative col-span-2 flex flex-col justify-between overflow-hidden rounded-xl',
-      'transform-gpu border border-primary-800 bg-primary-950 [box-shadow:0_-20px_80px_-20px_#ffffff1f_inset]',
+      'bg-primary-950 transform-gpu border border-muted [box-shadow:0_-20px_80px_-20px_#ffffff1f_inset]',
       className
     )}
   >
     <div>{background}</div>
     <div className='pointer-events-none z-10 -mt-24 flex transform-gpu flex-col gap-3 p-6 transition-all duration-300 group-hover:-translate-y-10 sm:-mt-64 lg:-mt-24'>
       {Icon && (
-        <Icon className='h-12 w-12 origin-left transform-gpu text-primary-700 transition-all duration-300 ease-in-out group-hover:scale-75' />
+        <Icon className='text-primary-700 h-12 w-12 origin-left transform-gpu transition-all duration-300 ease-in-out group-hover:scale-75' />
       )}
 
       {stacks && (
@@ -73,10 +73,10 @@ const BentoCard = ({
       )}
 
       <div className='flex flex-col gap-1'>
-        <h3 className='text-base font-semibold text-primary-300 dark:text-primary-300'>
+        <h3 className='text-primary-300 dark:text-primary-300 text-base font-semibold'>
           {title}
         </h3>
-        <p className='max-w-lg text-balance text-xs text-primary-400'>
+        <p className='max-w-lg text-balance text-xs text-muted-foreground'>
           {description}
         </p>
       </div>
@@ -97,7 +97,7 @@ const BentoCard = ({
         <ArrowRightIcon className='ml-2 h-4 w-4' />
       </Link>
     </div>
-    <div className='pointer-events-none absolute inset-0 transform-gpu transition-all duration-300 group-hover:bg-primary-950/[.03]' />
+    <div className='group-hover:bg-primary-950/[.03] pointer-events-none absolute inset-0 transform-gpu transition-all duration-300' />
   </div>
 );
 

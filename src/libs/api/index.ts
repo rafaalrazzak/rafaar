@@ -51,7 +51,7 @@ export async function getTopSongs() {
   try {
     const response = await fetch(API_URL + '/spotify/top-tracks?limit=8', {
       next: {
-        revalidate: 3600
+        revalidate: 3600,
       },
     });
     if (!response.ok) {

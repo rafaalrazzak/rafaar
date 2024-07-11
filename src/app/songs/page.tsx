@@ -35,7 +35,7 @@ export default async function Songs() {
         <section className='my-12 flex flex-col gap-4'>
           <Link
             href={nowPlaying.songUrl}
-            className='flex aspect-video h-40 items-center justify-between gap-4 rounded-xl bg-primary-800 p-4 text-white hover:ring-1 hover:ring-primary-500'
+            className='bg-primary-800 hover:ring-primary-500 flex aspect-video h-40 items-center justify-between gap-4 rounded-xl p-4 text-white hover:ring-1'
             style={{
               backgroundImage: `linear-gradient(to right, ${nowPlaying.colors.dark}, transparent), url(${nowPlaying.songImage})`,
               backgroundSize: 'cover',

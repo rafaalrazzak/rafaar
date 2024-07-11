@@ -5,21 +5,19 @@ import * as React from 'react';
 import { cn } from '@/libs/utils';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center whitespace-nowrap rounded-xl text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-zinc-950 dark:focus-visible:ring-zinc-300 transition-colors duration-200 ease-in-out',
+  'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
-        default:
-          'bg-zinc-800 text-zinc-50 hover:bg-zinc-700/90 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-50/90',
+        default: 'bg-muted text-muted-foreground hover:bg-muted/90',
         destructive:
-          'bg-red-500 text-zinc-50 hover:bg-red-500/90 dark:bg-red-900 dark:text-zinc-50 dark:hover:bg-red-900/90',
+          'bg-destructive text-destructive-foreground hover:bg-destructive/90',
         outline:
-          'border border-zinc-200 bg-white hover:bg-zinc-100 hover:text-zinc-900 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:bg-zinc-800 dark:hover:text-zinc-50',
+          'border border-muted bg-background hover:bg-accent hover:text-accent-foreground',
         secondary:
-          'bg-zinc-100 text-zinc-900 hover:bg-zinc-100/80 dark:bg-zinc-800 dark:text-zinc-50 dark:hover:bg-zinc-800/80',
-        ghost:
-          'hover:bg-zinc-100 hover:text-zinc-900 dark:hover:bg-zinc-800 dark:hover:text-zinc-50',
-        link: 'text-zinc-900 underline-offset-4 hover:underline dark:text-zinc-50',
+          'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+        ghost: 'hover:bg-accent hover:text-accent-foreground',
+        link: 'text-primary underline-offset-4 hover:underline',
         gradient:
           'bg-gradient-to-r from-teal-600 to-teal-400 bg-clip-text font-semibold text-transparent hover:underline',
       },
@@ -97,7 +95,7 @@ const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonProps>(
           } as React.CSSProperties
         }
         className={cn(
-          'group relative z-0 flex cursor-pointer items-center justify-center overflow-hidden whitespace-nowrap border border-white/10 px-6 py-3 text-white [background:var(--bg)] [border-radius:var(--radius)] dark:text-black',
+          'group relative z-0 flex cursor-pointer items-center justify-center overflow-hidden whitespace-nowrap border border-white/10 px-6 py-3 text-primary-foreground [background:var(--bg)] [border-radius:var(--radius)] ',
           'transform-gpu transition-transform duration-300 ease-in-out active:translate-y-[1px]',
           className
         )}

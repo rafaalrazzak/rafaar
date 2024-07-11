@@ -23,20 +23,16 @@ export default async function Page() {
       <Hero />
 
       {gallery.length > 0 && (
-        <section className='flex flex-col items-center gap-6'>
-          <ScrollArea className='h-full w-full whitespace-nowrap'>
-            <div className='flex w-max gap-4'>
-              {gallery.map((item, idx) => (
-                <figure key={idx} className='my-12 shrink-0'>
-                  <GalleryImage {...item} />
-                </figure>
-              ))}
-            </div>
-            <ScrollBar orientation='horizontal' />
-          </ScrollArea>
-
-          <span className='text-sm text-primary-700'>Photos by me</span>
-        </section>
+        <ScrollArea className='h-full w-full whitespace-nowrap'>
+          <div className='flex w-max gap-4'>
+            {gallery.map((item, idx) => (
+              <figure key={idx} className='my-12 shrink-0'>
+                <GalleryImage {...item} />
+              </figure>
+            ))}
+          </div>
+          <ScrollBar orientation='horizontal' />
+        </ScrollArea>
       )}
 
       {tools.map((tool) => (
@@ -64,11 +60,11 @@ export default async function Page() {
                 cta='Learn more'
                 className='col-span-2 md:col-span-1'
                 background={
-                  <div className='relative flex bg-cover bg-center ring-primary-900  after:absolute after:inset-0 after:bg-gradient-to-t after:from-primary-950 after:to-transparent'>
+                  <div className='relative flex bg-cover bg-center ring-muted after:absolute after:inset-0 after:bg-gradient-to-t after:from-background after:to-transparent'>
                     <Image
                       src={project.cover}
                       alt={project.title}
-                      className='after:via-primary-950after:to-transparent relative inset-0 top-0 size-full object-cover object-center  after:absolute after:inset-0 after:z-10 after:bg-gradient-to-t after:from-primary-950'
+                      className='relative inset-0 top-0 size-full object-cover object-center after:absolute after:inset-0 after:z-10 after:bg-gradient-to-t after:from-background after:via-background after:to-transparent'
                       width={600}
                       height={300}
                       sizes='(max-width: 800px) 100vw, (max-width: 1200px) 50vw, 40vw'

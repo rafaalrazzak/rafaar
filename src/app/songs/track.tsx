@@ -46,7 +46,7 @@ export function Track({
   return (
     <Wrapper href={asLink ? songUrl : ''} passHref={asLink}>
       <div
-        className='flex aspect-square size-full items-center gap-4 overflow-hidden rounded-xl bg-primary-800 text-white hover:ring-1 hover:ring-primary-500 md:size-full'
+        className='bg-primary-800 hover:ring-primary-500 flex aspect-square size-full items-center gap-4 overflow-hidden rounded-xl text-white hover:ring-1 md:size-full'
         style={{
           backgroundImage: `linear-gradient(to top, ${colors?.dark ?? 'transparent'}, transparent), url(${songImage})`,
           backgroundSize: 'cover',
@@ -57,7 +57,7 @@ export function Track({
             <h6 className='line-clamp-2 text-balance text-sm font-semibold md:text-base'>
               {title}
             </h6>
-            <p className='line-clamp-1 text-xs text-primary-200 md:line-clamp-2'>
+            <p className='text-primary-200 line-clamp-1 text-xs md:line-clamp-2'>
               {artist}
             </p>
           </div>

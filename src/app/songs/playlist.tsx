@@ -42,11 +42,11 @@ export function Playlist() {
   };
 
   return (
-    <div className='my-12 flex flex-col gap-4 rounded-xl border border-primary-800 bg-primary-950 px-4 py-8'>
+    <div className='bg-primary-950 my-12 flex flex-col gap-4 rounded-xl border border-muted px-4 py-8'>
       <div className='flex justify-between'>
         <div className='flex flex-col gap-2'>
           <h3>Playlist</h3>
-          <p className='text-primary-300'>
+          <p className='text-primary'>
             Feel free to add your favorite songs to the playlist.
           </p>
         </div>

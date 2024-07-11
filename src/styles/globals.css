@@ -2,27 +2,82 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --background: 0 0% 95%;
+  --foreground: 0 0% 0%;
+  --card: 0 0% 90%;
+  --card-foreground: 0 0% 10%;
+  --popover: 0 0% 95%;
+  --popover-foreground: 0 95% 0%;
+  --primary: 0 6% 18%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 10% 70%;
+  --secondary-foreground: 0 0% 0%;
+  --muted: -38 10% 85%;
+  --muted-foreground: 0 0% 35%;
+  --accent: -38 10% 80%;
+  --accent-foreground: 0 0% 10%;
+  --destructive: 0 50% 30%;
+  --destructive-foreground: 0 0% 90%;
+  --border: 0 20% 50%;
+  --input: 0 20% 18%;
+  --ring: 0 6% 18%;
+  --radius: 0.5rem;
+}
+.dark {
+  --background: 0 10% 5%;
+  --foreground: 0 0% 90%;
+  --card: 0 0% 0%;
+  --card-foreground: 0 0% 90%;
+  --popover: 0 10% 5%;
+  --popover-foreground: 0 0% 90%;
+  --primary: 0 6% 95%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 10% 10%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: -38 10% 15%;
+  --muted-foreground: 0 0% 60%;
+  --accent: -38 10% 15%;
+  --accent-foreground: 0 0% 90%;
+  --destructive: 0 50% 30%;
+  --destructive-foreground: 0 0% 90%;
+  --border: 0 20% 18%;
+  --input: 0 20% 18%;
+  --ring: 0 6% 18%;
+  --radius: 0.5rem;
+}
+
 @layer base {
   ::selection {
-    @apply bg-secondary-700 text-primary-100;
+    @apply bg-accent text-primary;
   }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  a {
+    @apply font-sans text-primary;
+  }
+
   h1 {
     @apply text-3xl font-bold md:text-4xl;
   }
 
   h2 {
-    @apply text-2xl font-bold  md:text-3xl;
+    @apply text-2xl font-bold md:text-3xl;
   }
 
   h3 {
-    @apply text-xl font-bold text-theme-100 md:text-2xl;
+    @apply text-xl font-bold md:text-2xl;
   }
 
   h4 {
-    @apply text-lg font-bold text-theme-100 md:text-xl;
+    @apply text-lg font-bold md:text-xl;
   }
   h5 {
-    @apply font-bold text-theme-100 md:text-lg;
+    @apply font-bold md:text-lg;
   }
 
   .text-gradient {
@@ -30,35 +85,24 @@
   }
 
   body {
-    @apply bg-theme-900 text-theme-200 antialiased;
+    @apply bg-background text-primary-foreground antialiased;
+  }
+
+  /* Apply color variables to other elements */
+  ::selection {
+    @apply bg-secondary text-secondary-foreground;
   }
 
   :is(a, button) {
-    @apply outline-none;
-  }
-
-  :is(a, button) {
-    @apply outline-none  ring-primary-400
-    ring-offset-1 ring-offset-theme-900 transition-all focus-visible:ring;
+    @apply outline-none ring-primary ring-offset-1 ring-offset-background transition-all focus-visible:ring;
   }
 
   .accessible {
-    @apply ring-theme-600 transition-all duration-150 hover:ring;
-  }
-  .content-auto {
-    content-visibility: auto;
-  }
-
-  img {
-    -webkit-user-drag: none;
-    -khtml-user-drag: none;
-    -moz-user-drag: none;
-    -o-user-drag: none;
-    user-drag: none;
+    @apply ring-muted-foreground transition-all duration-150 hover:ring;
   }
 
   .social-icon {
-    @apply size-6  fill-primary-400 transition  duration-300 hover:fill-secondary-500;
+    @apply fill-primary transition duration-300 hover:fill-secondary;
   }
 }
 

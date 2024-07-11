@@ -23,13 +23,15 @@ export default function LinksPage() {
           <div className='flex flex-col gap-1'>
             <h1 className='text-xl font-bold'>Rafa Al Razzak</h1>
 
-            <p className='text-sm text-primary-300'>{RESUME_DATA.about}</p>
+            <p className='text-sm text-secondary-foreground'>
+              {RESUME_DATA.about}
+            </p>
           </div>
 
           <div className='flex flex-wrap gap-2'>
             {socialMedia.map((social) => (
               <Link key={social.url} href={social.url} size='icon'>
-                <social.icon className='size-4 fill-current text-white' />
+                <social.icon className='size-4 fill-current' />
               </Link>
             ))}
           </div>
