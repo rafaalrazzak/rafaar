@@ -248,7 +248,7 @@ export default async function Page() {
                       href={link}
                       className='hidden text-sm underline print:flex'
                     >
-                      `${link?.replace(/https:\/\/|www\.|\//g, '')}`
+                      {link?.replace(/https:\/\/|www\.|\//g, '')}
                     </a>
                     <div className='text-sm text-muted-foreground'>
                       {description}
