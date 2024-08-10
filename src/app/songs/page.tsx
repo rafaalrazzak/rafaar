@@ -7,6 +7,7 @@ import Navbar from '@/components/Navbar';
 import { Badge } from '@/components/ui/badge';
 import { getNowPlaying, getTopSongs } from '@/libs/api';
 
+import NowPlayingClient from './now-playing';
 import { Playlist } from './playlist';
 import { Track } from './track';
 
@@ -31,49 +32,13 @@ export default async function Songs() {
       <Navbar />
       <Hero />
 
-      {nowPlaying && (
-        <section className='my-12 flex flex-col gap-4'>
-          <Link
-            href={nowPlaying.songUrl}
-            className='bg-primary-800 hover:ring-primary-500 flex aspect-video h-40 items-center justify-between gap-4 rounded-xl p-4 text-white hover:ring-1'
-            style={{
-              backgroundImage: `linear-gradient(to right, ${nowPlaying.colors.dark}, transparent), url(${nowPlaying.songImage})`,
-              backgroundSize: 'cover',
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center',
-            }}
-          >
-            <div className='flex flex-col gap-2'>
-              <Badge
-                className='w-fit rounded-full font-sans'
-                style={{
-                  backgroundColor: nowPlaying.colors.lighter,
-                  color: nowPlaying.colors.dark,
-                }}
-              >
-                Now Playing
-              </Badge>
-              <div
-                style={{
-                  color: nowPlaying.colors.lighter,
-                }}
-              >
-                <h3 className='line-clamp-2 text-balance text-current'>
-                  {nowPlaying.title}
-                </h3>
-                <p className='text-sm'>{nowPlaying.artist}</p>
-              </div>
-            </div>
-          </Link>
-        </section>
-      )}
+      <NowPlayingClient />
 
       <Playlist />
 
       {topSongs?.length > 0 && (
         <section className='my-12 flex flex-col gap-4'>
           <h1>Top Songs</h1>
-
           <div className='grid grid-cols-2 gap-2 md:grid-cols-4'>
             {topSongs.map((song, idx) => (
               <Track key={idx} {...song} asLink />

@@ -25,7 +25,10 @@ export type NowPlaying = {
   songImage: string;
   progress: string;
   duration: string;
+  progressMs: number;
+  durationMs: number;
   colors: Colors;
+  canvasUrl?: string;
 } | null;
 
 export type TopSong = {
