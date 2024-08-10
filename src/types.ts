@@ -29,6 +29,7 @@ export type NowPlaying = {
   durationMs: number;
   colors: Colors;
   canvasUrl?: string;
+  lyrics?: LyricSegment[];
 } | null;
 
 export type TopSong = {
@@ -39,3 +40,9 @@ export type TopSong = {
   songImage: string;
   colors: Colors;
 };
+
+
+export type LyricSegment = {
+  start: string;
+  lyrics: string;
+}

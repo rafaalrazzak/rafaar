@@ -109,3 +109,17 @@
 .print-force-new-page {
   page-break-before: always;
 }
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  width: 4px;
+  background-color: #2a2a2a;
+  border-radius: 999px;
+}

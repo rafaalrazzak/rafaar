@@ -12,3 +12,14 @@ export function getFavicon(url: string) {
 }
 
 export const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
+/**
+ * Converts milliseconds to a MM:SS format.
+ * @param ms - Time in milliseconds.
+ * @returns Formatted time string in MM:SS format.
+ */
+export function parseToMinutesSeconds(ms: number): string {
+  const minutes = Math.floor(ms / 60000);
+  const seconds = Math.floor((ms % 60000) / 1000);
+  return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+}
