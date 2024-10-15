@@ -32,7 +32,7 @@ export default function Career() {
     <div className="min-h-screen flex items-center justify-center p-4">
       <div className="w-full max-w-4xl bg-gray-800 rounded-xl shadow-2xl overflow-hidden">
         <div className="p-8">
-          <h1 className="text-4xl font-bold text-center text-gray-100 mb-8">Rafa's Grows</h1>
+          <h1 className="text-4xl font-bold text-center text-gray-100 mb-8">Rafa&lsquo;s Grows</h1>
           <div className="relative h-[400px]">
             <AnimatePresence mode="wait">
               <motion.div
