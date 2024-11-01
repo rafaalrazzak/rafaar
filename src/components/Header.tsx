@@ -17,7 +17,7 @@ export function Header({ avatar, cover }: { cover: string; avatar?: boolean }) {
           src='https://cdn.kita.blue/rafaar/me.jpg'
           width={300}
           height={300}
-          className='border-background absolute -bottom-10 left-4 size-20 rounded-full border-4 md:-bottom-6 lg:h-[80px] lg:w-[80px]'
+          className='absolute -bottom-10 left-4 size-20 rounded-full border-4 border-background md:-bottom-6 lg:h-[80px] lg:w-[80px]'
         />
       )}
     </div>

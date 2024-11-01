@@ -21,9 +21,9 @@ function GalleryImage({ id, image, title }: GalleryProps) {
     <button
       onClick={handleToast}
       className={clsx(
-        'relative aspect-[9/10] h-64 w-48 flex-none overflow-clip rounded-xl transition-all duration-300  hover:scale-[1.1] sm:rounded-2xl',
+        'relative aspect-[9/10] h-64 w-48 flex-none overflow-clip rounded-xl transition-all duration-300 hover:scale-[1.1] sm:rounded-2xl',
         {
-          '-rotate-2 hover:-rotate-12 ': id % 2 === 0,
+          '-rotate-2 hover:-rotate-12': id % 2 === 0,
           'rotate-2 hover:rotate-12': id % 2 === 1,
         }
       )}

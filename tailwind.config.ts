@@ -53,6 +53,8 @@ module.exports = {
         'spin-around': 'spin-around calc(var(--speed) * 2) infinite linear',
         slide: 'slide var(--speed) ease-in-out infinite alternate',
         border: 'border 4s ease infinite',
+        blink: 'blink 1s step-start infinite',
+        fadeLoop: 'fadeLoop 4s ease-in-out infinite',
       },
       keyframes: {
         tilt: {
@@ -69,6 +71,7 @@ module.exports = {
             opacity: 0.5,
           },
         },
+
         'spin-around': {
           '0%': {
             transform: 'translateZ(0) rotate(0)',
@@ -96,6 +99,14 @@ module.exports = {
           '100%': {
             transform: 'translateX(100%)',
           },
+        },
+        blink: {
+          '50%': { opacity: '0' },
+        },
+        fadeLoop: {
+          '0%': { opacity: '0' },
+          '50%': { opacity: '1' },
+          '100%': { opacity: '0' },
         },
       },
     },

@@ -100,10 +100,6 @@
   .accessible {
     @apply ring-muted-foreground transition-all duration-150 hover:ring;
   }
-
-  .social-icon {
-    @apply fill-primary transition duration-300 hover:fill-secondary;
-  }
 }
 
 .print-force-new-page {
@@ -122,4 +118,11 @@
   width: 4px;
   background-color: #2a2a2a;
   border-radius: 999px;
+}
+
+/* Custom animation for the ASCII art lines */
+.fade-loop {
+  @apply animate-fadeLoop opacity-0;
+  white-space: pre;
+  letter-spacing: 1.5px;
 }

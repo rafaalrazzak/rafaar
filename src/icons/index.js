@@ -1,14 +1,17 @@
+export { default as AdobeCCIcon } from './AdobeCC';
 export { default as ArrowDownIcon } from './ArrowDown';
 export { default as ArrowRightIcon } from './ArrowRight';
 export { default as AstroIcon } from './Astro';
 export { default as BunIcon } from './Bun';
 export { default as CSSIcon } from './Css';
+export { default as DockerIcon } from './Docker';
 export { default as DrizzleIcon } from './Drizzle';
 export { default as FigmaIcon } from './Figma';
 export { default as FirebaseIcon } from './Firebase';
 export { default as GitIcon } from './Git';
 export { default as GithubIcon } from './Github';
 export { default as GlobeIcon } from './Globe';
+export { default as GoIcon } from './Go';
 export { default as GraphQLIcon } from './GraphQL';
 export { default as HTMLIcon } from './Html';
 export { default as IllustratorIcon } from './Illustrator';

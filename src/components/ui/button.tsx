@@ -20,6 +20,7 @@ const buttonVariants = cva(
         link: 'text-primary underline-offset-4 hover:underline',
         gradient:
           'bg-gradient-to-r from-teal-600 to-teal-400 bg-clip-text font-semibold text-transparent hover:underline',
+        none: 'bg-transparent text-primary-foreground',
       },
       size: {
         default: 'h-10 px-4 py-2',
@@ -95,7 +96,7 @@ const ShimmerButton = React.forwardRef<HTMLButtonElement, ShimmerButtonProps>(
           } as React.CSSProperties
         }
         className={cn(
-          'group relative z-0 flex cursor-pointer items-center justify-center overflow-hidden whitespace-nowrap border border-white/10 px-6 py-3 text-primary-foreground [background:var(--bg)] [border-radius:var(--radius)] ',
+          'group relative z-0 flex cursor-pointer items-center justify-center overflow-hidden whitespace-nowrap border border-white/10 px-6 py-3 text-primary-foreground [background:var(--bg)] [border-radius:var(--radius)]',
           'transform-gpu transition-transform duration-300 ease-in-out active:translate-y-[1px]',
           className
         )}

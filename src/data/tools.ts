@@ -1,46 +1,35 @@
 // Define the interfaces for the data structures
 
+import { RESUME_DATA } from './resume-data';
+
 interface Category {
   title: string;
-  item: string[];
+  item: readonly string[];
 }
 
 // Define the categories
 
 const Languages: Category = {
   title: 'Languages',
-  item: ['TypeScript', 'JavaScript', 'HTML', 'CSS'],
+  item: RESUME_DATA.languages,
 };
 
 const Technologies: Category = {
   title: 'Technologies',
-  item: [
-    'React.js',
-    'Next.js',
-    'Astro',
-    'Solid',
-    'TailwindCSS',
-    'Supabase',
-    'Firebase',
-    'GraphQL',
-    'MongoDB',
-    'Prisma',
-    'Drizzle',
-  ],
+  item: RESUME_DATA.tools,
 };
 
 const SoftwareAndTools: Category = {
   title: 'Software and Tools',
   item: [
-    'Photoshop',
-    'Illustrator',
-    'Premiere Pro',
-    'Figma',
-    'Node.js',
+    'Adobe CC',
     'Bun',
+    'Node.js',
+    'Figma',
     'VSCode',
     'Git',
     'Vercel',
+    'Docker',
   ],
 };
 
