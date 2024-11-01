@@ -199,7 +199,7 @@ export default async function Page() {
                   className='group/tools'
                   icon={
                     <DynamicIcon
-                      className='fill-primary'
+                      className='fill-muted-foreground'
                       size={16}
                       name={item}
                     />
@@ -216,7 +216,7 @@ export default async function Page() {
             {projects.map(({ link, title, description, stacks }) => (
               <div
                 key={title}
-                className=' flex flex-col gap-3 overflow-hidden rounded-xl border border-muted p-3'
+                className='flex flex-col gap-3 overflow-hidden rounded-xl border border-muted p-3'
               >
                 <div className='flex flex-col gap-2'>
                   {link && (

@@ -32,39 +32,26 @@ export default function SvgAsciiLogo() {
   ];
 
   return (
-    <div className='fixed inset-0 flex items-center justify-center overflow-hidden px-4 lg:p-12'>
+    <div className='fixed inset-0 -z-10 flex items-center justify-center overflow-hidden bg-background'>
       <svg
         width='100%'
         height='100%'
+        className='h-full w-full p-12 opacity-10'
         viewBox='0 0 1000 500'
         preserveAspectRatio='xMidYMid meet'
         xmlns='http://www.w3.org/2000/svg'
       >
-        <style>
-          {`
-            .line {
-              opacity: 0;
-              animation: fadeLoop 4s ease-in-out infinite;
-              white-space: pre;
-              letter-spacing: 1.5px;
-            }
-            ${asciiArtLines.map((_, i) => `.line-${i} { animation-delay: ${i * 0.1}s; }`).join('\n')}
-            @keyframes fadeLoop {
-              0%, 100% { opacity: 0; }
-              50% { opacity: 1; }
-            }
-          `}
-        </style>
         {asciiArtLines.map((line, index) => (
           <text
             key={index}
             x='50%'
             y={50 + index * 20}
-            className={`line line-${index}`}
+            className='fade-loop fill-primary text-base sm:text-lg'
+            style={{
+              animationDelay: `${index * 0.1}s`,
+            }}
             textAnchor='middle'
-            fill='rgba(255, 255, 255, 0.1)'
             fontFamily='monospace'
-            fontSize='16'
           >
             {line}
           </text>

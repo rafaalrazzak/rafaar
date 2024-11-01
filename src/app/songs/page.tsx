@@ -1,10 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import { Metadata } from 'next';
-import Link from 'next/link';
 
 import Hero from '@/components/Hero';
 import Navbar from '@/components/Navbar';
-import { Badge } from '@/components/ui/badge';
 import { getNowPlaying, getTopSongs } from '@/libs/api';
 
 import NowPlayingClient from './now-playing';
@@ -19,13 +17,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Songs',
     description: 'Listen to my top songs and what I am currently listening to.',
-    images: [{ url: 'https://rafaar.my.id/api/og/song' }],
   },
 };
 
 export default async function Songs() {
   const topSongs = await getTopSongs();
-  const nowPlaying = await getNowPlaying();
 
   return (
     <main className='my-16'>

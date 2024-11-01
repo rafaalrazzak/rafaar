@@ -48,6 +48,7 @@ export const RESUME_DATA = {
     'Full-stack developer and designer from Indonesia. I love to create beautiful and functional web applications.',
   summary:
     "I'm a full-stack developer specializing in creating elegant digital solutions that drive results. Whether it's a simple website or a complex application, I take a holistic approach to development, ensuring that both the user interface and underlying infrastructure are optimized for performance and reliability. My expertise in React, Next.js, HTML, CSS, JavaScript/TypeScript, Bun, Node.js, Hono, Express, and PostgreSQL allows me to tailor solutions to your specific needs. By staying ahead of industry trends, I can deliver modern, efficient web applications with minimal bugs and a focus on enhancing the user experience.",
+  skills: ['Design Engineering', 'Full-stack Developer'],
   avatarUrl: 'https://cdn.kita.blue/rafaar/me.jpg',
   ogImage: 'https://www.rafaar.my.id/thumbnail.png',
   personalWebsiteUrl: 'https://rafaar.my.id',
@@ -80,5 +81,20 @@ export const RESUME_DATA = {
       description:
         'Pengen dapet penghasilan lebih dari hanya sekedar membuat konten? Langsung aja join Tako sekarang!',
     },
+  ],
+  languages: ['Go', 'JavaScript', 'TypeScript', 'HTML', 'CSS'],
+  tools: [
+    'Bun',
+    'React.js',
+    'Next.js',
+    'Astro',
+    'Solid',
+    'TailwindCSS',
+    'Supabase',
+    'Firebase',
+    'GraphQL',
+    'MongoDB',
+    'Prisma',
+    'Drizzle',
   ],
 } as const;

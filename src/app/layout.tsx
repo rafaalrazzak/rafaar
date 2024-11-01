@@ -1,10 +1,13 @@
-import '../styles/globals.css';
+import '@/styles/globals.css';
+
 import { Inter } from 'next/font/google';
+
 import Analytics from '@/components/Analytics';
 import Container from '@/components/Container';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { Toaster } from '@/components/ui/sonner';
 import { getMetaPage } from '@/libs/metapage/metaPage';
+
 import AsciiLogoBackground from './ascii';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -17,7 +20,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
           <Analytics />
           <Toaster />
-          <main className='relative flex min-h-screen items-center justify-center'>
+          <main className='flex flex-col items-center justify-center'>
             <AsciiLogoBackground />
             <Container>{children}</Container>
           </main>

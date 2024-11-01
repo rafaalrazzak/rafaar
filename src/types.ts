@@ -41,8 +41,7 @@ export type TopSong = {
   colors: Colors;
 };
 
-
 export type LyricSegment = {
   start: string;
   lyrics: string;
-}
+};

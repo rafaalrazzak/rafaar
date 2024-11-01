@@ -1,6 +1,6 @@
 {
-  "name": "personal-web",
-  "version": "1.2.0",
+  "name": "@rafaar/site",
+  "version": "2.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
