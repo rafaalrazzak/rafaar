@@ -140,7 +140,7 @@ export default function MainPageClient() {
       'こんにちは',
       '안녕하세요',
     ],
-    300
+    500
   );
 
   const memoizedContent = useMemo(
