@@ -1,7 +1,7 @@
 'use client';
 import { motion } from 'framer-motion';
 import { MailIcon } from 'lucide-react';
-import { useId } from 'react';
+import { useEffect, useId, useState } from 'react';
 
 import Link from '@/components/Link';
 import { Button } from '@/components/ui/button';
@@ -18,7 +18,22 @@ const variants = {
 
 export default function MainPageClient() {
   const id = useId();
+  const [displayedText, setDisplayedText] = useState('');
+  const fullText = 'Rafa Al Razzak';
+  
+  useEffect(() => {
+    let currentIndex = 0;
+    let direction = 1; // 1 for forward, -1 for backward
+    const intervalId = setInterval(() => {
+      setDisplayedText(fullText.slice(0, currentIndex + 1));
+      currentIndex += direction;
+      if (currentIndex === fullText.length || currentIndex === 0) {
+        direction *= -1; // Reverse direction
+      }
+    }, 100);
 
+    return () => clearInterval(intervalId);
+  }, []);
   const renderSection = (title: string, items: readonly string[]) => (
     <motion.section variants={variants.item} className='flex flex-col gap-4'>
       <h2 className='text-xl font-semibold text-primary'>{title}</h2>
@@ -44,7 +59,7 @@ export default function MainPageClient() {
     >
       <motion.div variants={variants.item} className='flex flex-col gap-4'>
         <h1 className='relative flex items-center text-2xl font-bold text-primary'>
-          Rafa Al Razzak
+          Hello, I'm {displayedText}
           <div className='ml-1 h-[1.5rem] w-[0.5rem] animate-blink bg-primary' />
         </h1>
         <div className='flex flex-wrap gap-3'>
