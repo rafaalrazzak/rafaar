@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { MailIcon } from 'lucide-react';
 import { useMemo } from 'react';
 
@@ -8,6 +8,7 @@ import Link from '@/components/Link';
 import { RESUME_DATA } from '@/data/resume-data';
 import { socialMedia } from '@/data/social-media';
 import { useTypewriter } from '@/hooks/use-typewritter';
+import { useTextChangeRandom } from '@/hooks/use-text-change-random';
 
 const ANIMATION_VARIANTS = {
   container: {
@@ -23,6 +24,24 @@ const ANIMATION_VARIANTS = {
       opacity: 1,
       y: 0,
       transition: { duration: 0.5 },
+    },
+  },
+  title: {
+    initial: {
+      opacity: 0,
+      y: 20,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+    },
+    exit: {
+      opacity: 0,
+      y: -20,
+    },
+    transition: {
+      duration: 0.3,
+      ease: 'easeInOut',
     },
   },
 };
@@ -62,7 +81,7 @@ const WorkItem = ({ work }: { work: (typeof RESUME_DATA.work)[0] }) => (
     href={work.link}
     variant='none'
     size='none'
-    className='flex flex-col flex-wrap items-start gap-1 p-1 transition-colors hover:bg-muted/50'
+    className='flex flex-col flex-wrap items-start gap-1'
   >
     <div className='flex items-center gap-2'>
       <img
@@ -110,6 +129,19 @@ const SocialLinks = () => (
 
 export default function MainPageClient() {
   const displayedText = useTypewriter('Rafa Al Razzak', 300);
+  const sayHello = useTextChangeRandom(
+    [
+      'Hello',
+      'Halo',
+      'Hola',
+      'Sampurasun',
+      'Bonjour',
+      'Ciao',
+      'こんにちは',
+      '안녕하세요',
+    ],
+    300
+  );
 
   const memoizedContent = useMemo(
     () => (
@@ -118,10 +150,27 @@ export default function MainPageClient() {
           variants={ANIMATION_VARIANTS.item}
           className='flex flex-col gap-4'
         >
-          <h1 className='relative flex items-center text-2xl font-bold text-primary'>
-            Hello, I&apos;m {displayedText}
-            <div className='ml-1 h-[1.5rem] w-[0.5rem] animate-blink bg-primary' />
-          </h1>
+          <div className='flex flex-col'>
+            <AnimatePresence mode='wait'>
+              <motion.span
+                key={sayHello}
+                initial='initial'
+                animate='animate'
+                exit='exit'
+                variants={ANIMATION_VARIANTS.title}
+                className='relative inline-block items-center text-xl font-bold text-primary'
+              >
+                {sayHello}
+              </motion.span>
+            </AnimatePresence>
+            <h1 className='flex items-center'>
+              <motion.span className='mr-2'>I&apos;m</motion.span>
+              <span key={displayedText} className='inline-block'>
+                {displayedText}
+              </span>
+              <div className='ml-1 h-[1.5rem] w-[0.5rem] animate-blink bg-primary' />
+            </h1>
+          </div>
 
           <div className='flex flex-wrap gap-3'>
             {RESUME_DATA.skills.map((skill) => (
@@ -143,7 +192,7 @@ export default function MainPageClient() {
         <Section title='Technologies and Tools' items={RESUME_DATA.tools} />
       </>
     ),
-    [displayedText]
+    [displayedText, sayHello]
   );
 
   return (
