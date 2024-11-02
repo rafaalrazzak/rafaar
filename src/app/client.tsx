@@ -119,7 +119,7 @@ export default function MainPageClient() {
           className='flex flex-col gap-4'
         >
           <h1 className='relative flex items-center text-2xl font-bold text-primary'>
-            Hello, I'm {displayedText}
+            Hello, I&apos;m {displayedText}
             <div className='ml-1 h-[1.5rem] w-[0.5rem] animate-blink bg-primary' />
           </h1>
 
