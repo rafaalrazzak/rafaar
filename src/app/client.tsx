@@ -109,7 +109,7 @@ const SocialLinks = () => (
 );
 
 export default function MainPageClient() {
-  const displayedText = useTypewriter('Rafa Al Razzak', 100);
+  const displayedText = useTypewriter('Rafa Al Razzak', 300);
 
   const memoizedContent = useMemo(
     () => (
