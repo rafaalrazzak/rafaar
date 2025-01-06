@@ -7,7 +7,7 @@ export const NOW_PLAYING_URL = API_URL + '/spotify/now-playing';
 
 export async function getProjects() {
   try {
-    const response = await fetch(API_URL + '/projects');
+    const response = await fetch(API_URL + '/internal/projects');
     if (!response.ok) {
       throw new Error(`Error fetching projects: ${response.statusText}`);
     }
