@@ -45,10 +45,10 @@ export const RESUME_DATA = {
   location: 'Bogor, Indonesia',
   locationLink: 'https://www.google.com/maps/place/Bogor',
   about:
-    'Full-stack developer and designer from Indonesia. I love to create beautiful and functional web applications.',
+    'Full-stack engineer and designer crafting beautiful, functional web applications from Indonesia.',
   summary:
-    "I'm a full-stack developer specializing in creating elegant digital solutions that drive results. Whether it's a simple website or a complex application, I take a holistic approach to development, ensuring that both the user interface and underlying infrastructure are optimized for performance and reliability. My expertise in React, Next.js, HTML, CSS, JavaScript/TypeScript, Bun, Node.js, Hono, Express, and PostgreSQL allows me to tailor solutions to your specific needs. By staying ahead of industry trends, I can deliver modern, efficient web applications with minimal bugs and a focus on enhancing the user experience.",
-  skills: ['Design Engineering', 'Full-stack Developer'],
+    "I build elegant digital solutions that work. My expertise spans front-end and back-end development, with a focus on React, TypeScript, and Node.js ecosystems. I create fast, reliable applications that users love to use.",
+  skills: ['Design Engineer', 'Full-stack Engineer'],
   avatarUrl: 'https://cdn.kita.blue/rafaar/me.jpg',
   ogImage: 'https://www.rafaar.my.id/thumbnail.png',
   personalWebsiteUrl: 'https://rafaar.my.id',
