@@ -68,7 +68,7 @@ const Section = ({
     className='flex flex-col gap-4'
   >
     <SectionTitle>{title}</SectionTitle>
-    <div className='flex flex-wrap gap-3'>
+    <div className='flex flex-wrap gap-2'>
       {items.map((item) => (
         <Skill key={`${title}-${item}`}>{item}</Skill>
       ))}
@@ -172,7 +172,7 @@ export default function MainPageClient() {
             </h1>
           </div>
 
-          <div className='flex flex-wrap gap-3'>
+          <div className='flex flex-wrap gap-2'>
             {RESUME_DATA.skills.map((skill) => (
               <Skill key={skill}>{skill}</Skill>
             ))}
