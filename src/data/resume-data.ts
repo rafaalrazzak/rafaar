@@ -47,7 +47,7 @@ export const RESUME_DATA = {
   about:
     'Full-stack engineer and designer crafting beautiful, functional web applications from Indonesia.',
   summary:
-    "I build elegant digital solutions that work. My expertise spans front-end and back-end development, with a focus on React, TypeScript, and Node.js ecosystems. I create fast, reliable applications that users love to use.",
+    'I build elegant digital solutions that work. My expertise spans front-end and back-end development, with a focus on React, TypeScript, and Node.js ecosystems. I create fast, reliable applications that users love to use.',
   skills: ['Design Engineer', 'Full-stack Engineer'],
   avatarUrl: 'https://cdn.kita.blue/rafaar/me.jpg',
   ogImage: 'https://www.rafaar.my.id/thumbnail.png',
@@ -73,7 +73,7 @@ export const RESUME_DATA = {
         // Duration
         `${calculateDuration(dateWorks.tako.start, dateWorks.tako.end)}`,
       ],
-      title: 'Full-stack Developer',
+      title: 'Full-stack Engineer',
       logo: 'https://tako.id/icon.png',
       color: '#37a2ea',
       start: formatDate(dateWorks.tako.start),
@@ -84,17 +84,39 @@ export const RESUME_DATA = {
   ],
   languages: ['Go', 'JavaScript', 'TypeScript', 'HTML', 'CSS'],
   tools: [
+    // Design Tools
+    'Figma',
+    'Adobe CC',
+
+    // Build Tools & Runtime
     'Bun',
+    'Node.js',
+
+    // Frontend Frameworks
     'React.js',
     'Next.js',
     'Astro',
     'Solid',
+
+    // Styling
     'TailwindCSS',
+
+    // Databases & Backend
     'Supabase',
     'Firebase',
     'GraphQL',
     'MongoDB',
+
+    // Database Tools
     'Prisma',
     'Drizzle',
+
+    // Development Environment
+    'VSCode',
+    'Git',
+
+    // Deployment & Infrastructure
+    'Vercel',
+    'Docker',
   ],
 } as const;

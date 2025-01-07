@@ -19,18 +19,4 @@ const Technologies: Category = {
   item: RESUME_DATA.tools,
 };
 
-const SoftwareAndTools: Category = {
-  title: 'Software and Tools',
-  item: [
-    'Adobe CC',
-    'Bun',
-    'Node.js',
-    'Figma',
-    'VSCode',
-    'Git',
-    'Vercel',
-    'Docker',
-  ],
-};
-
-export const tools = [Languages, Technologies, SoftwareAndTools];
+export const tools = [Languages, Technologies];
