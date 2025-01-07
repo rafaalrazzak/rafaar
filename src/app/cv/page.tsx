@@ -191,12 +191,12 @@ export default async function Page() {
           title='Skills and Tools'
           className='print-force-new-page print:pt-12'
         >
-          <div className='flex flex-wrap gap-1'>
+          <div className='flex flex-wrap gap-2'>
             {tools.flatMap((tool) =>
               tool.item.map((item, idx) => (
                 <IconText
                   key={idx}
-                  className='group/tools'
+                  className='group/tools rounded-full'
                   icon={
                     <DynamicIcon
                       className='fill-muted-foreground'
