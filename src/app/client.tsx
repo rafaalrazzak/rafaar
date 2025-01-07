@@ -158,7 +158,7 @@ export default function MainPageClient() {
                 animate='animate'
                 exit='exit'
                 variants={ANIMATION_VARIANTS.title}
-                className='relative font-normal italic inline-block items-center text-xl text-primary'
+                className='relative inline-block items-center text-xl font-normal italic text-primary'
               >
                 {sayHello}
               </motion.span>
