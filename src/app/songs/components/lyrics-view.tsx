@@ -1,58 +1,138 @@
-import { useEffect, useRef, useState } from 'react';
-import { NowPlaying } from '@/types';
+'use client';
 
-type LyricsContent = {
-  Lead: {
-    Syllables: Array<{
-      Text: string;
-      StartTime: number;
-      EndTime: number;
-      IsPartOfWord: boolean;
-    }>;
-  };
-  OppositeAligned: boolean;
-};
+import { NowPlaying, Syllable } from '@/types';
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+  memo,
+  useMemo,
+} from 'react';
 
-const LyricsPlayer = ({ data }: { data: NowPlaying }) => {
-  const [activeLine, setActiveLine] = useState<number>(-1);
-  const [activeWord, setActiveWord] = useState<number>(-1);
+// Types for component props
+interface LyricWordProps {
+  word: Syllable[];
+  isActive: boolean;
+  isPast: boolean;
+}
+
+interface StyleProps {
+  darker: string;
+}
+
+// Styles extracted to constant to prevent recreating on each render
+const STYLES = {
+  WORD_BASE: 'lyrics-word ml-2 inline-block',
+  WORD_STATES: {
+    active: 'lyrics-word-active',
+    past: 'lyrics-word-past',
+    future: 'lyrics-word-future',
+  },
+  LINE_BASE: 'lyric-line',
+  LINE_STATES: {
+    active: 'lyric-line-active py-6',
+    past: 'lyric-line-past py-3',
+    future: 'lyric-line-future py-3',
+  },
+} as const;
+
+// Background gradient component
+const BackgroundGradient = memo(({ darker }: StyleProps) => (
+  <div
+    className='absolute inset-0 rounded-xl opacity-90'
+    style={{
+      background: `linear-gradient(180deg, ${darker}00 0%, ${darker}95 10%, ${darker}95 90%, ${darker}00 100%)`,
+      backdropFilter: 'blur(16px)',
+    }}
+  />
+));
+
+BackgroundGradient.displayName = 'BackgroundGradient';
+
+// Optimized word component
+const LyricWord = memo(({ word, isActive, isPast }: LyricWordProps) => {
+  const state = isActive ? 'active' : isPast ? 'past' : 'future';
+
+  return (
+    <span className={`${STYLES.WORD_BASE} ${STYLES.WORD_STATES[state]}`}>
+      {word.map((syllable) => syllable.Text).join('')}
+    </span>
+  );
+});
+
+LyricWord.displayName = 'LyricWord';
+
+// Main component
+const LyricsPlayer: React.FC<{ data: NowPlaying }> = memo(({ data }) => {
+  const [activeLine, setActiveLine] = useState(-1);
+  const [activeWord, setActiveWord] = useState(-1);
+  const [isScrolling, setIsScrolling] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isScrolling, setIsScrolling] = useState<boolean>(false);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout>(null);
 
-  if(!data.lyrics) return null;
+  // Validate lyrics data
+  if (!data?.lyrics?.Content?.length) return null;
 
+  // Memoized words processing with early returns and optimizations
+  const processWords = useCallback((syllables: Syllable[]): Syllable[][] => {
+    if (!syllables?.length) return [];
+
+    return syllables
+      .reduce<Syllable[][]>(
+        (acc, syllable, index) => {
+          const currentWord = acc[acc.length - 1] || [];
+          currentWord.push(syllable);
+
+          if (!syllable.IsPartOfWord || index === syllables.length - 1) {
+            return [...acc.slice(0, -1), currentWord, []];
+          }
+
+          return [...acc.slice(0, -1), currentWord];
+        },
+        [[]]
+      )
+      .filter((word) => word.length);
+  }, []);
+
+  // Debounced scroll handler
+  const handleScroll = useCallback(() => {
+    setIsScrolling(true);
+    scrollTimeoutRef.current && clearTimeout(scrollTimeoutRef.current);
+    scrollTimeoutRef.current = setTimeout(() => setIsScrolling(false), 1000);
+  }, []);
+
+  // Optimized lyrics update logic
   useEffect(() => {
-    if (!data.lyrics) return;
+    if (!data.lyrics?.Content) return;
 
     const currentTimeInSeconds = data.progressMs / 1000;
 
     const updateLyrics = () => {
-      const newLineIndex = data.lyrics.Content.findIndex((content) => {
+      const newLineIndex = data.lyrics?.Content.findIndex((content) => {
         const syllables = content.Lead.Syllables;
-        if (syllables.length === 0) return false;
-
-        const lineStart = syllables[0].StartTime;
-        const lineEnd = syllables[syllables.length - 1].EndTime;
-
         return (
-          currentTimeInSeconds >= lineStart && currentTimeInSeconds <= lineEnd
+          syllables.length > 0 &&
+          currentTimeInSeconds >= syllables[0].StartTime &&
+          currentTimeInSeconds <= syllables[syllables.length - 1].EndTime
         );
       });
 
+      // Update active line and scroll if needed
       if (newLineIndex !== activeLine) {
-        setActiveLine(newLineIndex);
-        if (newLineIndex >= 0 && containerRef.current && !isScrolling) {
-          const lineElement = document.getElementById(`line-${newLineIndex}`);
-          lineElement?.scrollIntoView({
+        setActiveLine(newLineIndex !== undefined ? newLineIndex : -1);
+        if (newLineIndex !== undefined && newLineIndex >= 0 && containerRef.current && !isScrolling) {
+          document.getElementById(`line-${newLineIndex}`)?.scrollIntoView({
             behavior: 'smooth',
             block: 'center',
           });
         }
       }
 
-      if (newLineIndex >= 0) {
-        const syllables = data.lyrics.Content[newLineIndex]?.Lead?.Syllables;
-        if (syllables) {
+      // Update active word
+      if (newLineIndex !== undefined && newLineIndex >= 0) {
+        const syllables = data.lyrics?.Content[newLineIndex]?.Lead?.Syllables;
+        if (syllables?.length) {
           const syllableIndex = syllables.findIndex(
             (syl) =>
               currentTimeInSeconds >= syl.StartTime &&
@@ -60,37 +140,63 @@ const LyricsPlayer = ({ data }: { data: NowPlaying }) => {
           );
 
           if (syllableIndex >= 0) {
-            let wordStartIndex = 0;
-            for (let i = 0; i <= syllableIndex; i++) {
-              if (!syllables[i].IsPartOfWord && i > 0) {
-                wordStartIndex = i;
-              }
-            }
+            const wordStartIndex = syllables
+              .slice(0, syllableIndex + 1)
+              .reduce(
+                (start, syl, i) => (!syl.IsPartOfWord && i > 0 ? i : start),
+                0
+              );
+
             setActiveWord(wordStartIndex);
           }
         }
       }
     };
 
-    updateLyrics();
     const intervalId = setInterval(updateLyrics, 50);
+    return () => {
+      clearInterval(intervalId);
+      scrollTimeoutRef.current && clearTimeout(scrollTimeoutRef.current);
+    };
+  }, [data.progressMs, data.lyrics, activeLine, isScrolling]);
 
-    return () => clearInterval(intervalId);
-  }, [data.progressMs, data.lyrics, activeLine, activeWord, isScrolling]);
+  // Memoize content rendering
+  const renderedContent = useMemo(
+    () =>
+      data.lyrics?.Content.map((content, lineIndex) => {
+        const isActive = lineIndex === activeLine;
+        const isPast = lineIndex < activeLine;
+        const words = processWords(content.Lead.Syllables);
 
-  const handleScroll = () => {
-    setIsScrolling(true);
-    const timeout = setTimeout(() => setIsScrolling(false), 1000);
-    return () => clearTimeout(timeout);
-  };
+        const lineState = isActive ? 'active' : isPast ? 'past' : 'future';
+        const alignment = content.OppositeAligned ? 'text-right' : 'text-left';
 
-  if (!data.lyrics) return null;
+        return (
+          <div
+            key={lineIndex}
+            id={`line-${lineIndex}`}
+            className={`${STYLES.LINE_BASE} ${STYLES.LINE_STATES[lineState]} ${alignment}`}
+          >
+            <div className='inline-block'>
+              {words.map((word, wordIndex) => (
+                <LyricWord
+                  key={wordIndex}
+                  word={word}
+                  isActive={isActive && wordIndex === activeWord}
+                  isPast={isPast || (isActive && wordIndex < activeWord)}
+                />
+              ))}
+            </div>
+          </div>
+        );
+      }),
+    [data.lyrics.Content, activeLine, activeWord, processWords]
+  );
 
   return (
     <div className='relative mx-auto w-full'>
       <style jsx>{`
         .lyrics-word {
-          display: inline-block;
           font-size: 1.5rem;
           font-weight: 500;
           transition:
@@ -98,57 +204,22 @@ const LyricsPlayer = ({ data }: { data: NowPlaying }) => {
             opacity 200ms ease-out;
           will-change: transform, opacity;
         }
-
         .lyrics-word-active {
           color: #ffffff;
           transform: scale(1.12);
           font-weight: 600;
           opacity: 1;
         }
-
         .lyrics-word-past {
           color: rgba(255, 255, 255, 0.75);
           opacity: 0.6;
           transform: scale(1);
         }
-
         .lyrics-word-future {
           color: rgba(255, 255, 255, 0.4);
           opacity: 0.5;
           transform: scale(1);
         }
-
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-
-        .hide-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-
-        .lyric-line {
-          transition:
-            opacity 300ms ease,
-            transform 300ms ease-out;
-          will-change: transform, opacity;
-        }
-
-        .lyric-line-active {
-          opacity: 1;
-          transform: translateY(0);
-        }
-
-        .lyric-line-past {
-          opacity: 0.5;
-          transform: translateY(10px);
-        }
-
-        .lyric-line-future {
-          opacity: 0.4;
-          transform: translateY(10px);
-        }
-
         .lyrics-container {
           mask-image: linear-gradient(
             to bottom,
@@ -157,82 +228,40 @@ const LyricsPlayer = ({ data }: { data: NowPlaying }) => {
             black 90%,
             transparent 100%
           );
-          -webkit-mask-image: linear-gradient(
-            to bottom,
-            transparent 0%,
-            black 10%,
-            black 90%,
-            transparent 100%
-          );
+        }
+        .lyric-line {
+          transition:
+            opacity 300ms ease,
+            transform 300ms ease-out;
+          will-change: transform, opacity;
+        }
+        .lyric-line-active {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        .lyric-line-past {
+          opacity: 0.5;
+          transform: translateY(10px);
+        }
+        .lyric-line-future {
+          opacity: 0.4;
+          transform: translateY(10px);
         }
       `}</style>
 
-      <div
-        className='absolute inset-0 rounded-xl opacity-90'
-        style={{
-          background: `linear-gradient(180deg, ${data.colors.darker}00 0%, ${data.colors.darker}95 10%, ${data.colors.darker}95 90%, ${data.colors.darker}00 100%)`,
-          backdropFilter: 'blur(16px)',
-        }}
-      />
+      <BackgroundGradient darker={data.colors.darker} />
 
       <div
         ref={containerRef}
         onScroll={handleScroll}
         className='hide-scrollbar lyrics-container relative h-[calc(100vh-16rem)] overflow-y-auto'
       >
-        {data.lyrics.Content.map((content, lineIndex) => {
-          const isActive = lineIndex === activeLine;
-          const isPast = lineIndex < activeLine;
-          const isFuture = lineIndex > activeLine;
-
-          const words: Array<Array<(typeof content.Lead.Syllables)[0]>> = [];
-          let currentWord: typeof content.Lead.Syllables = [];
-
-          content.Lead.Syllables.forEach((syllable, index) => {
-            currentWord.push(syllable);
-            if (
-              !syllable.IsPartOfWord ||
-              index === content.Lead.Syllables.length - 1
-            ) {
-              words.push(currentWord);
-              currentWord = [];
-            }
-          });
-
-          return (
-            <div
-              key={lineIndex}
-              id={`line-${lineIndex}`}
-              className={`lyric-line transition-all duration-300 ${
-                isActive
-                  ? 'lyric-line-active py-6'
-                  : isPast
-                    ? 'lyric-line-past py-3'
-                    : 'lyric-line-future py-3'
-              } ${content.OppositeAligned ? 'text-right' : 'text-left'}`}
-            >
-              <div className='inline-block'>
-                {words.map((word, wordIndex) => (
-                  <span
-                    key={wordIndex}
-                    className={`lyrics-word ml-2 inline-block transition-all duration-150 ${
-                      isActive && wordIndex === activeWord
-                        ? 'lyrics-word-active'
-                        : isPast || (isActive && wordIndex < activeWord)
-                          ? 'lyrics-word-past'
-                          : 'lyrics-word-future'
-                    }`}
-                  >
-                    {word.map((syllable) => syllable.Text).join('')}
-                  </span>
-                ))}
-              </div>
-            </div>
-          );
-        })}
+        {renderedContent}
       </div>
     </div>
   );
-};
+});
+
+LyricsPlayer.displayName = 'LyricsPlayer';
 
 export default LyricsPlayer;
