@@ -21,22 +21,6 @@ interface StyleProps {
   darker: string;
 }
 
-// Styles extracted to constant to prevent recreating on each render
-const STYLES = {
-  WORD_BASE: 'lyrics-word ml-2 inline-block',
-  WORD_STATES: {
-    active: 'lyrics-word-active',
-    past: 'lyrics-word-past',
-    future: 'lyrics-word-future',
-  },
-  LINE_BASE: 'lyric-line',
-  LINE_STATES: {
-    active: 'lyric-line-active py-6',
-    past: 'lyric-line-past py-3',
-    future: 'lyric-line-future py-3',
-  },
-} as const;
-
 // Background gradient component
 const BackgroundGradient = memo(({ darker }: StyleProps) => (
   <div
@@ -55,7 +39,15 @@ const LyricWord = memo(({ word, isActive, isPast }: LyricWordProps) => {
   const state = isActive ? 'active' : isPast ? 'past' : 'future';
 
   return (
-    <span className={`${STYLES.WORD_BASE} ${STYLES.WORD_STATES[state]}`}>
+    <span
+      className={`lyrics-word ml-2 inline-block transition-all duration-200 ${
+        state === 'active'
+          ? 'scale-110 transform font-semibold text-white opacity-100'
+          : state === 'past'
+            ? 'scale-100 transform text-white/60 opacity-90'
+            : 'scale-100 transform text-white/40 opacity-40'
+      }`}
+    >
       {word.map((syllable) => syllable.Text).join('')}
     </span>
   );
@@ -65,14 +57,21 @@ LyricWord.displayName = 'LyricWord';
 
 // Main component
 const LyricsPlayer: React.FC<{ data: NowPlaying }> = memo(({ data }) => {
+  // Early return if no lyrics data
+  if (!data?.lyrics?.Content?.length) return null;
+
   const [activeLine, setActiveLine] = useState(-1);
   const [activeWord, setActiveWord] = useState(-1);
   const [isScrolling, setIsScrolling] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollTimeoutRef = useRef<NodeJS.Timeout>(null);
 
-  // Validate lyrics data
-  if (!data?.lyrics?.Content?.length) return null;
+  // Reset state if song changes
+  useEffect(() => {
+    setActiveLine(-1);
+    setActiveWord(-1);
+    setIsScrolling(false);
+  }, [data]); // This effect will run whenever the song data changes
 
   // Memoized words processing with early returns and optimizations
   const processWords = useCallback((syllables: Syllable[]): Syllable[][] => {
@@ -104,8 +103,6 @@ const LyricsPlayer: React.FC<{ data: NowPlaying }> = memo(({ data }) => {
 
   // Optimized lyrics update logic
   useEffect(() => {
-    if (!data.lyrics?.Content) return;
-
     const currentTimeInSeconds = data.progressMs / 1000;
 
     const updateLyrics = () => {
@@ -121,7 +118,12 @@ const LyricsPlayer: React.FC<{ data: NowPlaying }> = memo(({ data }) => {
       // Update active line and scroll if needed
       if (newLineIndex !== activeLine) {
         setActiveLine(newLineIndex !== undefined ? newLineIndex : -1);
-        if (newLineIndex !== undefined && newLineIndex >= 0 && containerRef.current && !isScrolling) {
+        if (
+          newLineIndex !== undefined &&
+          newLineIndex >= 0 &&
+          containerRef.current &&
+          !isScrolling
+        ) {
           document.getElementById(`line-${newLineIndex}`)?.scrollIntoView({
             behavior: 'smooth',
             block: 'center',
@@ -175,7 +177,13 @@ const LyricsPlayer: React.FC<{ data: NowPlaying }> = memo(({ data }) => {
           <div
             key={lineIndex}
             id={`line-${lineIndex}`}
-            className={`${STYLES.LINE_BASE} ${STYLES.LINE_STATES[lineState]} ${alignment}`}
+            className={`lyric-line py-3 text-2xl transition-all duration-300 ${
+              lineState === 'active'
+                ? 'translate-y-0 transform opacity-100'
+                : lineState === 'past'
+                  ? 'translate-y-2 transform opacity-20'
+                  : 'translate-y-2 transform opacity-40'
+            } ${alignment}`}
           >
             <div className='inline-block'>
               {words.map((word, wordIndex) => (
@@ -195,66 +203,12 @@ const LyricsPlayer: React.FC<{ data: NowPlaying }> = memo(({ data }) => {
 
   return (
     <div className='relative mx-auto w-full'>
-      <style jsx>{`
-        .lyrics-word {
-          font-size: 1.5rem;
-          font-weight: 500;
-          transition:
-            transform 200ms ease-out,
-            opacity 200ms ease-out;
-          will-change: transform, opacity;
-        }
-        .lyrics-word-active {
-          color: #ffffff;
-          transform: scale(1.12);
-          font-weight: 600;
-          opacity: 1;
-        }
-        .lyrics-word-past {
-          color: rgba(255, 255, 255, 0.75);
-          opacity: 0.6;
-          transform: scale(1);
-        }
-        .lyrics-word-future {
-          color: rgba(255, 255, 255, 0.4);
-          opacity: 0.5;
-          transform: scale(1);
-        }
-        .lyrics-container {
-          mask-image: linear-gradient(
-            to bottom,
-            transparent 0%,
-            black 10%,
-            black 90%,
-            transparent 100%
-          );
-        }
-        .lyric-line {
-          transition:
-            opacity 300ms ease,
-            transform 300ms ease-out;
-          will-change: transform, opacity;
-        }
-        .lyric-line-active {
-          opacity: 1;
-          transform: translateY(0);
-        }
-        .lyric-line-past {
-          opacity: 0.5;
-          transform: translateY(10px);
-        }
-        .lyric-line-future {
-          opacity: 0.4;
-          transform: translateY(10px);
-        }
-      `}</style>
-
       <BackgroundGradient darker={data.colors.darker} />
 
       <div
         ref={containerRef}
         onScroll={handleScroll}
-        className='hide-scrollbar lyrics-container relative h-[calc(100vh-16rem)] overflow-y-auto'
+        className='hide-scrollbar lyrics-container relative h-[calc(100vh-24rem)] overflow-y-auto'
       >
         {renderedContent}
       </div>
