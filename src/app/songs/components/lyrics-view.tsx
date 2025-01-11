@@ -93,6 +93,8 @@ const LyricsPlayer: React.FC<{ data: NowPlaying }> = memo(({ data }) => {
 
     const updateLyrics = () => {
       const newLineIndex = data.lyrics?.Content.findIndex((content) => {
+        if (!content.Lead.Syllables) return false;
+
         const syllables = content.Lead.Syllables;
         return (
           syllables.length > 0 &&
