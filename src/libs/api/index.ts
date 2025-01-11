@@ -3,7 +3,7 @@ import { NowPlaying, Project, TopSong } from '@/types';
 
 const API_URL = 'https://api-v2.rafaar.my.id';
 
-export const NOW_PLAYING_URL = API_URL + '/spotify/now-playing';
+export const NOW_PLAYING_URL = API_URL + '/internal/spotify/now-playing';
 
 export async function getProjects() {
   try {
