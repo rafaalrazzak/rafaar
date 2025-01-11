@@ -29,8 +29,8 @@ export type NowPlaying = {
   durationMs: number;
   colors: Colors;
   canvasUrl?: string;
-  lyrics?: LyricSegment[];
-} | null;
+  lyrics?: Lyrics;
+};
 
 export type TopSong = {
   artist: string;
@@ -41,7 +41,28 @@ export type TopSong = {
   colors: Colors;
 };
 
-export type LyricSegment = {
-  start: string;
-  lyrics: string;
-};
+export interface Lyrics {
+  StartTime: number
+  EndTime: number
+  Type: string
+  Content: Content[]
+}
+
+export interface Content {
+  Type: string
+  OppositeAligned: boolean
+  Lead: Lead
+}
+
+export interface Lead {
+  Syllables: Syllable[]
+  StartTime: number
+  EndTime: number
+}
+
+export interface Syllable {
+  Text: string
+  IsPartOfWord: boolean
+  StartTime: number
+  EndTime: number
+}

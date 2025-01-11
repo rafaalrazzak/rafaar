@@ -5,7 +5,7 @@ import Hero from '@/components/Hero';
 import Navbar from '@/components/Navbar';
 import { getNowPlaying, getTopSongs } from '@/libs/api';
 
-import NowPlayingClient from './now-playing';
+import NowPlayingClient from './now-playing-client';
 import { Playlist } from './playlist';
 import { Track } from './track';
 
