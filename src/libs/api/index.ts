@@ -51,11 +51,14 @@ export async function getNowPlaying() {
 
 export async function getTopSongs() {
   try {
-    const response = await fetch(API_URL + '/internal/spotify/top-tracks?limit=8', {
-      next: {
-        revalidate: 3600,
-      },
-    });
+    const response = await fetch(
+      API_URL + '/internal/spotify/top-tracks?limit=8',
+      {
+        next: {
+          revalidate: 3600,
+        },
+      }
+    );
     if (!response.ok) {
       throw new Error(`Error fetching top songs: ${response.statusText}`);
     }
@@ -69,7 +72,9 @@ export async function getTopSongs() {
 
 export async function searchSongs(query: string) {
   try {
-    const response = await fetch(API_URL + `/internal/spotify/search?q=${query}`);
+    const response = await fetch(
+      API_URL + `/internal/spotify/search?q=${query}`
+    );
     if (!response.ok) {
       throw new Error(`Error searching songs: ${response.statusText}`);
     }
@@ -83,9 +88,12 @@ export async function searchSongs(query: string) {
 
 export async function addSongToPlaylist(songUri: string) {
   try {
-    const response = await fetch(API_URL + `/internal/spotify/playlist/${songUri}`, {
-      method: 'POST',
-    });
+    const response = await fetch(
+      API_URL + `/internal/spotify/playlist/${songUri}`,
+      {
+        method: 'POST',
+      }
+    );
     if (!response.ok) {
       throw new Error(`Error adding song to playlist: ${response.statusText}`);
     }

@@ -7,8 +7,8 @@ import { useMemo } from 'react';
 import Link from '@/components/Link';
 import { RESUME_DATA } from '@/data/resume-data';
 import { socialMedia } from '@/data/social-media';
-import { useTypewriter } from '@/hooks/use-typewritter';
 import { useTextChangeRandom } from '@/hooks/use-text-change-random';
+import { useTypewriter } from '@/hooks/use-typewritter';
 
 const ANIMATION_VARIANTS = {
   container: {

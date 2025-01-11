@@ -1,12 +1,13 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 import useSWR from 'swr';
+
 import { Badge } from '@/components/ui/badge';
 import { NOW_PLAYING_URL } from '@/libs/api';
 import { fetcher } from '@/libs/utils';
 import { NowPlaying } from '@/types';
-import dynamic from 'next/dynamic';
 
 // Dynamically import the LyricsPlayer with no SSR
 const LyricsPlayer = dynamic(() => import('./components/lyrics-view'), {
@@ -47,11 +48,7 @@ export default function NowPlayingClient() {
   };
 
   if (isLoading || !nowPlaying) {
-    return (
-      <div className='my-12 flex h-40 items-center justify-center rounded-xl bg-secondary'>
-        <p className='text-muted-foreground'>Loading...</p>
-      </div>
-    );
+    return null;
   }
 
   const progress = (currentTime / nowPlaying.durationMs) * 100;
@@ -114,12 +111,15 @@ export default function NowPlayingClient() {
       </div>
 
       {nowPlaying.lyrics && (
-        <div className='relative flex flex-col gap-3 overflow-clip rounded-xl p-8'
-            style={{
-                background: `${nowPlaying.colors.darker}`
-            }}
+        <div
+          className='relative flex flex-col gap-3 overflow-clip rounded-xl p-8'
+          style={{
+            background: `${nowPlaying.colors.darker}`,
+          }}
         >
-          <h3 className='text-lg font-semibold text-primary-foreground'>Lyrics</h3>
+          <h3 className='text-lg font-semibold text-primary-foreground'>
+            Lyrics
+          </h3>
           <LyricsPlayer data={nowPlaying} />
         </div>
       )}

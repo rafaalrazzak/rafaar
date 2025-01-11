@@ -1,16 +1,16 @@
 'use client';
 
-import { NowPlaying, Syllable } from '@/types';
 import React, {
+  memo,
+  useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
-  useCallback,
-  memo,
-  useMemo,
 } from 'react';
 
-// Types for component props
+import { NowPlaying, Syllable } from '@/types';
+
 interface LyricWordProps {
   word: Syllable[];
   isActive: boolean;
@@ -21,7 +21,6 @@ interface StyleProps {
   darker: string;
 }
 
-// Background gradient component
 const BackgroundGradient = memo(({ darker }: StyleProps) => (
   <div
     className='absolute inset-0 rounded-xl opacity-90'
@@ -31,10 +30,8 @@ const BackgroundGradient = memo(({ darker }: StyleProps) => (
     }}
   />
 ));
-
 BackgroundGradient.displayName = 'BackgroundGradient';
 
-// Optimized word component
 const LyricWord = memo(({ word, isActive, isPast }: LyricWordProps) => {
   const state = isActive ? 'active' : isPast ? 'past' : 'future';
 
@@ -52,41 +49,26 @@ const LyricWord = memo(({ word, isActive, isPast }: LyricWordProps) => {
     </span>
   );
 });
-
 LyricWord.displayName = 'LyricWord';
 
-// Main component
 const LyricsPlayer: React.FC<{ data: NowPlaying }> = memo(({ data }) => {
-  // Early return if no lyrics data
-  if (!data?.lyrics?.Content?.length) return null;
-
+  // Hooks
   const [activeLine, setActiveLine] = useState(-1);
   const [activeWord, setActiveWord] = useState(-1);
   const [isScrolling, setIsScrolling] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollTimeoutRef = useRef<NodeJS.Timeout>(null);
 
-  // Reset state if song changes
-  useEffect(() => {
-    setActiveLine(-1);
-    setActiveWord(-1);
-    setIsScrolling(false);
-  }, [data]); // This effect will run whenever the song data changes
-
-  // Memoized words processing with early returns and optimizations
   const processWords = useCallback((syllables: Syllable[]): Syllable[][] => {
     if (!syllables?.length) return [];
-
     return syllables
       .reduce<Syllable[][]>(
         (acc, syllable, index) => {
           const currentWord = acc[acc.length - 1] || [];
           currentWord.push(syllable);
-
           if (!syllable.IsPartOfWord || index === syllables.length - 1) {
             return [...acc.slice(0, -1), currentWord, []];
           }
-
           return [...acc.slice(0, -1), currentWord];
         },
         [[]]
@@ -94,14 +76,18 @@ const LyricsPlayer: React.FC<{ data: NowPlaying }> = memo(({ data }) => {
       .filter((word) => word.length);
   }, []);
 
-  // Debounced scroll handler
   const handleScroll = useCallback(() => {
     setIsScrolling(true);
     scrollTimeoutRef.current && clearTimeout(scrollTimeoutRef.current);
     scrollTimeoutRef.current = setTimeout(() => setIsScrolling(false), 1000);
   }, []);
 
-  // Optimized lyrics update logic
+  useEffect(() => {
+    setActiveLine(-1);
+    setActiveWord(-1);
+    setIsScrolling(false);
+  }, [data.songUri]);
+
   useEffect(() => {
     const currentTimeInSeconds = data.progressMs / 1000;
 
@@ -115,7 +101,6 @@ const LyricsPlayer: React.FC<{ data: NowPlaying }> = memo(({ data }) => {
         );
       });
 
-      // Update active line and scroll if needed
       if (newLineIndex !== activeLine) {
         setActiveLine(newLineIndex !== undefined ? newLineIndex : -1);
         if (
@@ -131,7 +116,6 @@ const LyricsPlayer: React.FC<{ data: NowPlaying }> = memo(({ data }) => {
         }
       }
 
-      // Update active word
       if (newLineIndex !== undefined && newLineIndex >= 0) {
         const syllables = data.lyrics?.Content[newLineIndex]?.Lead?.Syllables;
         if (syllables?.length) {
@@ -162,7 +146,6 @@ const LyricsPlayer: React.FC<{ data: NowPlaying }> = memo(({ data }) => {
     };
   }, [data.progressMs, data.lyrics, activeLine, isScrolling]);
 
-  // Memoize content rendering
   const renderedContent = useMemo(
     () =>
       data.lyrics?.Content.map((content, lineIndex) => {
@@ -198,8 +181,10 @@ const LyricsPlayer: React.FC<{ data: NowPlaying }> = memo(({ data }) => {
           </div>
         );
       }),
-    [data.lyrics.Content, activeLine, activeWord, processWords]
+    [data.lyrics?.Content, activeLine, activeWord, processWords]
   );
+
+  if (!data?.lyrics?.Content?.length) return null;
 
   return (
     <div className='relative mx-auto w-full'>
@@ -215,7 +200,6 @@ const LyricsPlayer: React.FC<{ data: NowPlaying }> = memo(({ data }) => {
     </div>
   );
 });
-
 LyricsPlayer.displayName = 'LyricsPlayer';
 
 export default LyricsPlayer;

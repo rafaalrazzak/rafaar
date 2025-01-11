@@ -42,27 +42,27 @@ export type TopSong = {
 };
 
 export interface Lyrics {
-  StartTime: number
-  EndTime: number
-  Type: string
-  Content: Content[]
+  StartTime: number;
+  EndTime: number;
+  Type: string;
+  Content: Content[];
 }
 
 export interface Content {
-  Type: string
-  OppositeAligned: boolean
-  Lead: Lead
+  Type: string;
+  OppositeAligned: boolean;
+  Lead: Lead;
 }
 
 export interface Lead {
-  Syllables: Syllable[]
-  StartTime: number
-  EndTime: number
+  Syllables: Syllable[];
+  StartTime: number;
+  EndTime: number;
 }
 
 export interface Syllable {
-  Text: string
-  IsPartOfWord: boolean
-  StartTime: number
-  EndTime: number
+  Text: string;
+  IsPartOfWord: boolean;
+  StartTime: number;
+  EndTime: number;
 }
