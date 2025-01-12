@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { NOW_PLAYING_URL } from '@/libs/api';
 import { fetcher } from '@/libs/utils';
 import { NowPlaying } from '@/types';
+
 import { Backdrop } from './components/lyrics-backdrop';
 
 // Dynamically import the LyricsPlayer with no SSR

@@ -1,6 +1,9 @@
-import { Content, NowPlaying, Syllable } from '@/types';
+"use client";
+
+import { AnimatePresence,motion } from 'framer-motion';
 import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+
+import { Content, NowPlaying, Syllable } from '@/types';
 
 // Optimized hooks with better performance
 const useWordProcessor = () => {
