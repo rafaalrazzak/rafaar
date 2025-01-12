@@ -15,3 +15,5 @@ export const Backdrop = memo(({ color }: { color: string }) => (
     }}
   />
 ));
+
+Backdrop.displayName = 'Backdrop';
