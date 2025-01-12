@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo } from 'react';
 
 export const Backdrop = memo(({ color }: { color: string }) => (
   <div

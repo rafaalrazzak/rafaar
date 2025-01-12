@@ -137,20 +137,20 @@ const Word = memo(
     <motion.span
       initial={false}
       animate={{
-        opacity: isPast ? 0.8 : isActive ? 1 : 1,
-        scale: isActive ? 1.05 : 1,
+        opacity: isPast ? 0.9 : isActive ? 1 : 0.7,
+        scale: isActive ? 1.1 : 1,
       }}
       transition={{
         duration: 0.2,
-        ease: [0.23, 1, 0.32, 1], // Custom easing for smoother animation
+        ease: [0.23, 1, 0.32, 1],
       }}
       className={`inline-block origin-center font-light will-change-transform ${
         isActive
-          ? 'font-normal text-white'
+          ? 'font-bold text-white'
           : isPast
-            ? 'text-white/60'
-            : 'text-white/40'
-      } `}
+            ? 'text-white/80'
+            : 'text-white/60'
+      }`}
     >
       {syllables.map((s) => s.Text).join('')}
     </motion.span>

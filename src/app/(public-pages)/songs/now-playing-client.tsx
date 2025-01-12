@@ -118,7 +118,7 @@ export default function NowPlayingClient({ showLyrics = true }) {
             background: `${nowPlaying.colors.darker}`,
           }}
         >
-          <h3 className='text-lg font-semibold text-primary-foreground z-10'>
+          <h3 className='z-10 text-lg font-semibold text-primary-foreground'>
             Lyrics
           </h3>
           <Backdrop color={nowPlaying.colors.darker} />
