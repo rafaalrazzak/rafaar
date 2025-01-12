@@ -8,13 +8,14 @@ import { Badge } from '@/components/ui/badge';
 import { NOW_PLAYING_URL } from '@/libs/api';
 import { fetcher } from '@/libs/utils';
 import { NowPlaying } from '@/types';
+import { Backdrop } from './components/lyrics-backdrop';
 
 // Dynamically import the LyricsPlayer with no SSR
 const LyricsPlayer = dynamic(() => import('./components/lyrics-view'), {
   ssr: false,
 });
 
-export default function NowPlayingClient() {
+export default function NowPlayingClient({ showLyrics = true }) {
   const { data: nowPlaying, isLoading } = useSWR<NowPlaying>(
     NOW_PLAYING_URL,
     fetcher,
@@ -110,16 +111,17 @@ export default function NowPlayingClient() {
         </div>
       </div>
 
-      {nowPlaying.lyrics && (
+      {showLyrics && nowPlaying.lyrics && (
         <div
-          className='relative flex flex-col gap-3 overflow-clip rounded-xl p-8'
+          className='relative flex flex-col gap-6 overflow-clip rounded-xl p-8'
           style={{
             background: `${nowPlaying.colors.darker}`,
           }}
         >
-          <h3 className='text-lg font-semibold text-primary-foreground'>
+          <h3 className='text-lg font-semibold text-primary-foreground z-10'>
             Lyrics
           </h3>
+          <Backdrop color={nowPlaying.colors.darker} />
           <LyricsPlayer data={nowPlaying} />
         </div>
       )}

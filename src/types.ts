@@ -15,7 +15,16 @@ type Colors = {
   lighter: string;
 };
 
-export type NowPlaying = {
+export type TopSong = {
+  artist: string;
+  songUrl: string;
+  songUri: string;
+  title: string;
+  songImage: string;
+  colors: Colors;
+};
+
+export interface NowPlaying {
   isPlaying: boolean;
   title: string;
   artist: string;
@@ -28,18 +37,9 @@ export type NowPlaying = {
   progressMs: number;
   durationMs: number;
   colors: Colors;
+  lyrics: Lyrics;
   canvasUrl?: string;
-  lyrics?: Lyrics;
-};
-
-export type TopSong = {
-  artist: string;
-  songUrl: string;
-  songUri: string;
-  title: string;
-  songImage: string;
-  colors: Colors;
-};
+}
 
 export interface Lyrics {
   StartTime: number;
@@ -51,10 +51,20 @@ export interface Lyrics {
 export interface Content {
   Type: string;
   OppositeAligned: boolean;
-  Lead: Lead;
+  Lead?: Lead;
+  Text?: string;
+  StartTime?: number;
+  EndTime?: number;
+  Background?: Background[];
 }
 
 export interface Lead {
+  Syllables: Syllable[];
+  StartTime: number;
+  EndTime: number;
+}
+
+export interface Background {
   Syllables: Syllable[];
   StartTime: number;
   EndTime: number;
