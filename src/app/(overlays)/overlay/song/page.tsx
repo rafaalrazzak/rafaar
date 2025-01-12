@@ -1,12 +1,10 @@
-'use client';
-import { useSearchParams } from 'next/navigation';
-
-import NowPlayingClient from '../../../(public-pages)/songs/now-playing-client';
+import { Suspense } from 'react';
+import { OverlaySongClient } from './overlay-client';
 
 export default function OverlaySong() {
-  const searchParams = useSearchParams();
-
-  const isDisabledLyrics = searchParams.get('disabledLyrics');
-
-  return <NowPlayingClient showLyrics={!isDisabledLyrics} />;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <OverlaySongClient />
+    </Suspense>
+  );
 }
