@@ -74,7 +74,7 @@ export const RESUME_DATA = {
         `${calculateDuration(dateWorks.tako.start, dateWorks.tako.end)}`,
       ],
       title: 'Full-stack Engineer',
-      logo: 'https://tako.id/icon.png',
+      logo: '/tako.png',
       color: '#37a2ea',
       start: formatDate(dateWorks.tako.start),
       end: dateWorks.tako.end,
