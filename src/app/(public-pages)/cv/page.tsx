@@ -42,7 +42,7 @@ export default async function Page() {
   return (
     <main className='container relative mx-auto my-12 scroll-my-12 overflow-auto py-4 md:p-16 print:p-12'>
       <Navbar />
-      <Section className='mx-auto flex w-full max-w-2xl flex-col gap-8 bg-background print:gap-12'>
+      <Section className='mx-auto flex w-full max-w-2xl flex-col gap-8 print:gap-12'>
         <div className='flex items-center justify-between gap-4'>
           <div className='flex flex-1 flex-col gap-4'>
             <h1 className='text-2xl font-bold'>{RESUME_DATA.name}</h1>
