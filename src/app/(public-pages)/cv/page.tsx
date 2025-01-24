@@ -111,7 +111,7 @@ export default async function Page() {
           {RESUME_DATA.work.map((work) => (
             <div
               key={work.company}
-              className='flex flex-col gap-2 overflow-hidden rounded-xl border border-muted p-3'
+              className='flex flex-col gap-2 overflow-hidden rounded-xl border border-muted bg-background p-3'
               style={{
                 backgroundImage: `linear-gradient(90deg, ${work.color} 0%, ${work.color} 3px, transparent 1px, transparent 100%)`,
               }}
