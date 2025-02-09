@@ -1,8 +1,8 @@
 'use client';
 
+import { motion, useAnimation, type Variants } from 'framer-motion';
 import type React from 'react';
 import { useEffect, useRef } from 'react';
-import { motion, useAnimation, type Variants } from 'framer-motion';
 
 interface RevealTextProps {
   children: React.ReactNode;

@@ -1,11 +1,13 @@
 'use client';
 
-import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FrameComponent } from './FrameComponent';
-import { Slider } from '@/components/ui/slider';
+import { useState } from 'react';
+
 import { Button } from '@/components/ui/button';
+import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
+
+import { FrameComponent } from './FrameComponent';
 
 interface Frame {
   id: number;

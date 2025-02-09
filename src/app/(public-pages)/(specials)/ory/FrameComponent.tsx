@@ -1,7 +1,8 @@
 'use client';
-import { Slider } from '@/components/ui/slider';
 import Image from 'next/image';
 import { useEffect, useRef } from 'react';
+
+import { Slider } from '@/components/ui/slider';
 
 interface FrameComponentProps {
   image: string;

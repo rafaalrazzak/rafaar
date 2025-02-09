@@ -1,9 +1,11 @@
 'use client';
 
-import { useState, useRef } from 'react';
-import DynamicFrameLayout from './DynamicFrameLayout';
-import { RevealText } from '@/components/RevealText';
 import { Bonheur_Royale } from 'next/font/google';
+import { useRef, useState } from 'react';
+
+import { RevealText } from '@/components/RevealText';
+
+import DynamicFrameLayout from './DynamicFrameLayout';
 
 export const bonheurRoyale = Bonheur_Royale({
   weight: ['400'],
@@ -45,8 +47,8 @@ export default function Home() {
                 <RevealText delay={0.3}>
                   <p>
                     Suaramu adalah lagu pengantar tidur bagi angka-angka yang
-                    resah, kutemukan puisi dalam caramu menyusun "jika-maka"
-                    seperti seniman merangkai dawai.
+                    resah, kutemukan puisi dalam caramu menyusun
+                    &quot;jika-maka&quot; seperti seniman merangkai dawai.
                   </p>
                 </RevealText>
                 <RevealText delay={0.4}>
@@ -69,7 +71,7 @@ export default function Home() {
             </div>
             <RevealText delay={0.6}>
               <p>
-                Kebaikanmu itu orbit yang hangat— mengitariku diam-diam,
+                Kebaikanmu itu orbit yang hangat—mengitariku diam-diam,
                 mengajari gravitasi tentang cara menahan langit tanpa
                 mencengkeram.
               </p>
@@ -79,15 +81,15 @@ export default function Home() {
                 Oryza, kita mungkin dua bilangan prima yang saling mencari di
                 labirin kalkulus, atau dua partikel cahaya yang tiba-tiba
                 menemukan resonansi.
-              </p>{' '}
+              </p>
             </RevealText>
             <RevealText delay={0.8}>
               <p>
                 Biarkan waktu berhenti sejenak: di sini, di antara ruang kita,
-                di mana "aku" dan "kamu" bisa jadi koma yang tertunda dalam
-                kalimat tak terucap— atau mungkin tanda sama dengan yang
-                akhirnya berani diselesaikan.
-              </p>{' '}
+                di mana &quot;aku&quot; dan &quot;kamu&quot; bisa jadi koma yang
+                tertunda dalam kalimat tak terucap— atau mungkin tanda sama
+                dengan yang akhirnya berani diselesaikan.
+              </p>
             </RevealText>
           </div>
         </div>

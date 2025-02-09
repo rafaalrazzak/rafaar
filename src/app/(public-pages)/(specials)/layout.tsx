@@ -8,6 +8,7 @@ import { Toaster } from '@/components/ui/sonner';
 import { getMetaPage } from '@/libs/metapage/metaPage';
 
 import AsciiLogoBackground from '../ascii';
+
 export const metadata = getMetaPage();
 
 const inter = Inter({ subsets: ['latin'] });
