@@ -7,7 +7,7 @@ import { RevealText } from '@/components/RevealText';
 
 import DynamicFrameLayout from './DynamicFrameLayout';
 
-export const bonheurRoyale = Bonheur_Royale({
+const bonheurRoyale = Bonheur_Royale({
   weight: ['400'],
   subsets: ['latin'],
 });
