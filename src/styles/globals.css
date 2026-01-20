@@ -1,128 +1,148 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
+/* Light Theme - Default */
 :root {
-  --background: 0 0% 95%;
-  --foreground: 0 0% 0%;
-  --card: 0 0% 90%;
-  --card-foreground: 0 0% 10%;
-  --popover: 0 0% 95%;
-  --popover-foreground: 0 95% 0%;
-  --primary: 0 6% 18%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 0 10% 70%;
-  --secondary-foreground: 0 0% 0%;
-  --muted: -38 10% 85%;
-  --muted-foreground: 0 0% 35%;
-  --accent: -38 10% 80%;
-  --accent-foreground: 0 0% 10%;
-  --destructive: 0 50% 30%;
-  --destructive-foreground: 0 0% 90%;
-  --border: 0 20% 50%;
-  --input: 0 20% 18%;
-  --ring: 0 6% 18%;
-  --radius: 0.5rem;
+  --color-background: oklch(1 0 0);
+  --color-foreground: oklch(0.09 0 0);
+  --color-card: oklch(0.99 0 0);
+  --color-card-foreground: oklch(0.09 0 0);
+  --color-muted: oklch(0.97 0 0);
+  --color-muted-foreground: oklch(0.48 0 0);
+  --color-border: oklch(0.93 0 0);
+  --color-primary: oklch(0.09 0 0);
+  --color-primary-foreground: oklch(1 0 0);
+  --color-accent: oklch(0.96 0 0);
+  --color-accent-foreground: oklch(0.09 0 0);
+  --color-ring: oklch(0.09 0 0);
 }
+
+/* Dark Theme - Using .dark class */
 .dark {
-  --background: 0 10% 5%;
-  --foreground: 0 0% 90%;
-  --card: 0 0% 0%;
-  --card-foreground: 0 0% 90%;
-  --popover: 0 10% 5%;
-  --popover-foreground: 0 0% 90%;
-  --primary: 0 6% 95%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 0 10% 10%;
-  --secondary-foreground: 0 0% 100%;
-  --muted: -38 10% 15%;
-  --muted-foreground: 0 0% 60%;
-  --accent: -38 10% 15%;
-  --accent-foreground: 0 0% 90%;
-  --destructive: 0 50% 30%;
-  --destructive-foreground: 0 0% 90%;
-  --border: 0 20% 18%;
-  --input: 0 20% 18%;
-  --ring: 0 6% 18%;
-  --radius: 0.5rem;
+  --color-background: oklch(0.09 0 0);
+  --color-foreground: oklch(0.98 0 0);
+  --color-card: oklch(0.12 0 0);
+  --color-card-foreground: oklch(0.98 0 0);
+  --color-muted: oklch(0.15 0 0);
+  --color-muted-foreground: oklch(0.58 0 0);
+  --color-border: oklch(0.20 0 0);
+  --color-primary: oklch(0.98 0 0);
+  --color-primary-foreground: oklch(0.09 0 0);
+  --color-accent: oklch(0.18 0 0);
+  --color-accent-foreground: oklch(0.98 0 0);
+  --color-ring: oklch(0.98 0 0);
 }
 
-@layer base {
-  ::selection {
-    @apply bg-accent text-primary;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  a {
-    @apply font-sans text-primary;
-  }
-
-  h1 {
-    @apply text-3xl font-bold md:text-4xl;
-  }
-
-  h2 {
-    @apply text-2xl font-bold md:text-3xl;
-  }
-
-  h3 {
-    @apply text-xl font-bold md:text-2xl;
-  }
-
-  h4 {
-    @apply text-lg font-bold md:text-xl;
-  }
-  h5 {
-    @apply font-bold md:text-lg;
-  }
-
-  .text-gradient {
-    @apply bg-clip-text text-transparent;
-  }
-
-  body {
-    @apply bg-background text-primary-foreground antialiased;
-  }
-
-  /* Apply color variables to other elements */
-  ::selection {
-    @apply bg-secondary text-secondary-foreground;
-  }
-
-  :is(a, button) {
-    @apply outline-none ring-primary ring-offset-1 ring-offset-background transition-all focus-visible:ring;
-  }
-
-  .accessible {
-    @apply ring-muted-foreground transition-all duration-150 hover:ring;
-  }
+/* Base styles */
+* {
+  border-color: var(--color-border);
 }
 
-.print-force-new-page {
-  page-break-before: always;
+::selection {
+  background-color: var(--color-foreground);
+  color: var(--color-background);
 }
 
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue',
+    Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'kern' 1, 'liga' 1;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--color-foreground);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Scrollbar */
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background-color: transparent;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  width: 4px;
-  background-color: #2a2a2a;
-  border-radius: 999px;
+  background: var(--color-border);
+  border-radius: 4px;
+  transition: background 0.2s ease;
 }
 
-/* Custom animation for the ASCII art lines */
-.fade-loop {
-  @apply animate-fadeLoop opacity-0;
-  white-space: pre;
-  letter-spacing: 1.5px;
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted-foreground);
+}
+
+/* Focus visible */
+:focus-visible {
+  outline: 2px solid var(--color-ring);
+  outline-offset: 2px;
+}
+
+/* Smooth transitions for theme changes */
+*,
+*::before,
+*::after {
+  transition-property: background-color, border-color, color, fill, stroke, opacity;
+  transition-duration: 0.4s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Faster transitions for interactive elements */
+button,
+a,
+input,
+select,
+textarea {
+  transition-duration: 0.2s;
+}
+
+/* Smooth theme transition for body */
+body {
+  transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Smooth transitions for headings */
+h1, h2, h3, h4, h5, h6 {
+  transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Disable transitions for animations and transforms */
+@keyframes {
+  * {
+    transition: none !important;
+  }
+}
+
+/* Tailwind theme integration */
+@theme {
+  --color-background: oklch(1 0 0);
+  --color-foreground: oklch(0.09 0 0);
+  --color-card: oklch(0.99 0 0);
+  --color-card-foreground: oklch(0.09 0 0);
+  --color-muted: oklch(0.97 0 0);
+  --color-muted-foreground: oklch(0.48 0 0);
+  --color-border: oklch(0.93 0 0);
+  --color-primary: oklch(0.09 0 0);
+  --color-primary-foreground: oklch(1 0 0);
+  --color-accent: oklch(0.96 0 0);
+  --color-accent-foreground: oklch(0.09 0 0);
+  --color-ring: oklch(0.09 0 0);
 }

@@ -1,0 +1,24 @@
+---
+import { socialMedia } from '@/data/social-media';
+import Button from './ui/Button.astro';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div class={className}>
+  {socialMedia.map((social) => (
+    <Button
+      href={social.url}
+      variant="outline"
+      size="icon"
+      class="size-10"
+    >
+      <social.icon className="size-4 fill-current" />
+      <span class="sr-only">{social.name}</span>
+    </Button>
+  ))}
+</div>

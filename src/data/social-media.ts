@@ -1,37 +1,30 @@
-import {
-  GithubIcon,
-  GlobeIcon,
-  InstagramIcon,
-  LinkedinIcon,
-  XIcon,
-} from '@/icons';
+import type { SocialMedia } from '@/types';
+import { Github, Instagram, Linkedin, Spotify, X } from '@/icons';
 
-const socialMedia = [
+export const socialMedia: SocialMedia[] = [
   {
-    name: 'Website',
-    url: 'https://l.kta.blue/web',
-    icon: GlobeIcon,
+    name: 'GitHub',
+    url: 'https://github.com/rafaalrazzak',
+    icon: Github,
   },
   {
-    name: 'X',
-    url: 'https://l.kta.blue/x',
-    icon: XIcon,
+    name: 'LinkedIn',
+    url: 'https://www.linkedin.com/in/rafaalrazzak',
+    icon: Linkedin,
   },
   {
     name: 'Instagram',
-    url: 'https://l.kta.blue/instagram',
-    icon: InstagramIcon,
+    url: 'https://instagram.com/rafaalrazzak',
+    icon: Instagram,
   },
   {
-    name: 'Github',
-    url: 'https://l.kta.blue/github',
-    icon: GithubIcon,
+    name: 'X',
+    url: 'https://x.com/rafaalrazzak',
+    icon: X,
   },
   {
-    name: 'Linkedin',
-    url: 'https://l.kta.blue/linkedin',
-    icon: LinkedinIcon,
+    name: 'Spotify',
+    url: 'https://open.spotify.com/user/rafaalrazzak',
+    icon: Spotify,
   },
 ];
-
-export { socialMedia };

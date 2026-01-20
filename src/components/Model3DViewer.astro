@@ -1,0 +1,994 @@
+---
+interface Props {
+  modelUrl: string;
+  height?: string;
+  enableGlare?: boolean;
+  alt?: string;
+  cameraOrbit?: string;
+  cameraTarget?: string;
+  fieldOfView?: string;
+  exposure?: string;
+  shadowIntensity?: string;
+  shadowSoftness?: string;
+}
+
+const {
+  modelUrl,
+  height = '100vh',
+  enableGlare = true,
+  alt = 'A 3D model',
+  cameraOrbit = '75deg 65deg 180%',
+  cameraTarget = 'auto auto auto',
+  fieldOfView = '35deg',
+  exposure = '0.9',
+  shadowIntensity = '0.3',
+  shadowSoftness = '1.5',
+} = Astro.props;
+---
+
+<script
+  type="module"
+  src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"
+></script>
+
+<model-viewer
+  id="animated-model"
+  src={modelUrl}
+  alt={alt}
+  camera-controls
+  touch-action="pan-y"
+  auto-rotate
+  auto-rotate-delay="0"
+  rotation-per-second="15deg"
+  tone-mapping="neutral"
+  camera-orbit={cameraOrbit}
+  camera-target={cameraTarget}
+  field-of-view={fieldOfView}
+  exposure={exposure}
+  shadow-intensity={shadowIntensity}
+  shadow-softness={shadowSoftness}
+  min-camera-orbit="auto auto 150%"
+  max-camera-orbit="auto auto 250%"
+  interpolation-decay="200"
+  interaction-prompt="none"
+  style={`height: ${height}; width: 100%; opacity: 0.75; mix-blend-mode: screen; transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), filter 0.6s cubic-bezier(0.4, 0, 0.2, 1);`}
+  class="fixed inset-0 z-[2] transition-all duration-500 model-viewer-custom"
+>
+</model-viewer>
+
+<script is:inline>
+  // Initialize 3D model viewer
+  function init3DModel() {
+    const modelViewer = document.querySelector('#animated-model');
+    
+    if (!modelViewer) return;
+    
+    let time = 0;
+    let animationId = null;
+    
+    const animateCamera = () => {
+      time += 0.005;
+      
+      // Create organic camera movement
+      const theta = 75 + Math.sin(time * 0.8) * 15; // Horizontal orbit: 60-90deg
+      const phi = 65 + Math.cos(time * 0.6) * 10; // Vertical orbit: 55-75deg
+      const radius = 180 + Math.sin(time * 0.4) * 20; // Distance: 160-200%
+      
+      modelViewer.cameraOrbit = `${theta}deg ${phi}deg ${radius}%`;
+      
+      animationId = requestAnimationFrame(animateCamera);
+    };
+    
+    // Start animation after model loads
+    const startAnimation = () => {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
+      setTimeout(() => animateCamera(), 1000);
+    };
+    
+    if (modelViewer.loaded) {
+      startAnimation();
+    } else {
+      modelViewer.addEventListener('load', startAnimation, { once: true });
+    }
+
+    // Theme change handler with smooth transitions
+    const updateTheme = () => {
+      const isDark = document.documentElement.classList.contains('dark');
+      
+      // Add transition class
+      modelViewer.style.transition = 'opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), filter 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+      
+      if (isDark) {
+        // Dark theme settings
+        modelViewer.exposure = '0.9';
+        modelViewer.shadowIntensity = '0.3';
+        modelViewer.style.opacity = '0.75';
+        modelViewer.style.mixBlendMode = 'screen';
+        modelViewer.style.filter = 'none';
+      } else {
+        // Light theme settings
+        modelViewer.exposure = '1.2';
+        modelViewer.shadowIntensity = '0.6';
+        modelViewer.style.opacity = '0.6';
+        modelViewer.style.mixBlendMode = 'normal';
+        modelViewer.style.filter = 'grayscale(0.3) contrast(1.1)';
+      }
+    };
+
+    // Initial theme setup
+    updateTheme();
+
+    // Watch for theme changes
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+    
+    // Cleanup function
+    return () => {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
+      observer.disconnect();
+    };
+  }
+
+  // Initialize on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init3DModel);
+  } else {
+    init3DModel();
+  }
+
+  // Re-initialize after page navigation
+  document.addEventListener('astro:page-load', () => {
+    init3DModel();
+  });
+</script>
+
+{
+  enableGlare && (
+    <>
+      {/* Space background using theme colors */}
+      <div class="pointer-events-none fixed inset-0 z-[-1] overflow-hidden space-bg">
+        {/* Stars using theme foreground color */}
+        {Array.from({ length: 80 }).map(() => (
+          <div
+            class="absolute rounded-full star"
+            style={`
+              top: ${Math.random() * 100}%;
+              left: ${Math.random() * 100}%;
+              width: ${0.5 + Math.random() * 1}px;
+              height: ${0.5 + Math.random() * 1}px;
+              animation: twinkle ${4 + Math.random() * 5}s ease-in-out infinite ${Math.random() * 6}s;
+            `}
+          />
+        ))}
+
+        {Array.from({ length: 25 }).map(() => (
+          <div
+            class="absolute rounded-full star"
+            style={`
+              top: ${Math.random() * 100}%;
+              left: ${Math.random() * 100}%;
+              width: ${1 + Math.random() * 1.5}px;
+              height: ${1 + Math.random() * 1.5}px;
+              animation: twinkle ${3 + Math.random() * 4}s ease-in-out infinite ${Math.random() * 5}s;
+            `}
+          />
+        ))}
+
+        {Array.from({ length: 12 }).map(() => (
+          <div
+            class="absolute rounded-full star"
+            style={`
+              top: ${Math.random() * 100}%;
+              left: ${Math.random() * 100}%;
+              width: ${1.5 + Math.random() * 2}px;
+              height: ${1.5 + Math.random() * 2}px;
+              animation: twinkle-bright ${3 + Math.random() * 4}s ease-in-out infinite ${Math.random() * 4}s;
+            `}
+          />
+        ))}
+
+        {/* Nebula clouds using theme muted color */}
+        <div class="absolute inset-0">
+          <div
+            class="absolute nebula"
+            style="
+              top: 15%;
+              left: 20%;
+              width: 600px;
+              height: 600px;
+              background: radial-gradient(circle, var(--color-muted) 0%, transparent 70%);
+              filter: blur(100px);
+              animation: nebula-drift-1 50s ease-in-out infinite;
+            "
+          />
+
+          <div
+            class="absolute nebula"
+            style="
+              bottom: 20%;
+              right: 25%;
+              width: 700px;
+              height: 700px;
+              background: radial-gradient(circle, var(--color-muted) 0%, transparent 70%);
+              filter: blur(110px);
+              animation: nebula-drift-2 60s ease-in-out infinite 8s;
+            "
+          />
+
+          <div
+            class="absolute nebula"
+            style="
+              top: 45%;
+              right: 15%;
+              width: 550px;
+              height: 550px;
+              background: radial-gradient(circle, var(--color-muted) 0%, transparent 70%);
+              filter: blur(95px);
+              animation: nebula-drift-3 55s ease-in-out infinite 15s;
+            "
+          />
+        </div>
+      </div>
+    </>
+  )
+}
+
+{/* Glare effects using theme colors */}
+<div class="pointer-events-none fixed inset-0 z-[1] glare">
+  {/* Soft ambient glow */}
+  <div
+    class="absolute inset-0"
+    style="
+        background: radial-gradient(
+          ellipse 1000px 800px at 50% 50%,
+          transparent 30%,
+          var(--color-muted) 50%,
+          transparent 75%
+        );
+        animation: rim-pulse 10s ease-in-out infinite;
+      "
+  >
+  </div>
+
+  {/* Directional lights */}
+  <div
+    class="absolute"
+    style="
+        top: 20%;
+        right: 20%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle at center, var(--color-muted) 0%, transparent 70%);
+        filter: blur(90px);
+        animation: light-reflect-1 12s ease-in-out infinite;
+      "
+  >
+  </div>
+
+  <div
+    class="absolute"
+    style="
+        bottom: 25%;
+        left: 25%;
+        width: 550px;
+        height: 550px;
+        background: radial-gradient(circle at center, var(--color-muted) 0%, transparent 70%);
+        filter: blur(80px);
+        animation: light-reflect-2 14s ease-in-out infinite 3s;
+      "
+  >
+  </div>
+
+  <div
+    class="absolute"
+    style="
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 700px;
+        height: 700px;
+        background: radial-gradient(circle at center, var(--color-muted) 0%, transparent 65%);
+        filter: blur(70px);
+        animation: center-highlight 8s ease-in-out infinite;
+      "
+  >
+  </div>
+
+  {/* Lightning effects using theme foreground */}
+  <div
+    class="absolute lightning"
+    style="
+        top: 35%;
+        right: 30%;
+        width: 400px;
+        height: 2px;
+        background: linear-gradient(90deg, transparent 0%, var(--color-foreground) 50%, transparent 100%);
+        filter: blur(8px);
+        animation: lightning-flash-1 8s ease-in-out infinite;
+        transform-origin: center;
+      "
+  >
+  </div>
+
+  <div
+    class="absolute lightning"
+    style="
+        top: 55%;
+        left: 25%;
+        width: 350px;
+        height: 2px;
+        background: linear-gradient(90deg, transparent 0%, var(--color-foreground) 50%, transparent 100%);
+        filter: blur(6px);
+        animation: lightning-flash-2 10s ease-in-out infinite 2s;
+        transform-origin: center;
+      "
+  >
+  </div>
+
+  <div
+    class="absolute lightning"
+    style="
+        top: 48%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 2px;
+        height: 450px;
+        background: linear-gradient(180deg, transparent 0%, var(--color-foreground) 50%, transparent 100%);
+        filter: blur(7px);
+        animation: lightning-flash-3 12s ease-in-out infinite 4s;
+      "
+  >
+  </div>
+
+  {/* Radial bursts */}
+  <div
+    class="absolute lightning"
+    style="
+        top: 40%;
+        right: 35%;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle at center, var(--color-muted) 0%, transparent 60%);
+        filter: blur(25px);
+        animation: lightning-burst-1 7s ease-in-out infinite;
+      "
+  >
+  </div>
+
+  <div
+    class="absolute lightning"
+    style="
+        top: 58%;
+        left: 32%;
+        width: 180px;
+        height: 180px;
+        background: radial-gradient(circle at center, var(--color-muted) 0%, transparent 60%);
+        filter: blur(20px);
+        animation: lightning-burst-2 9s ease-in-out infinite 3s;
+      "
+  >
+  </div>
+
+  {/* Edge glows */}
+  <div
+    class="absolute lightning"
+    style="
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(25deg);
+        width: 600px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent 0%, var(--color-foreground) 50%, transparent 100%);
+        filter: blur(4px);
+        animation: lightning-edge-1 6s ease-in-out infinite 1s;
+      "
+  >
+  </div>
+
+  <div
+    class="absolute lightning"
+    style="
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-35deg);
+        width: 550px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent 0%, var(--color-foreground) 50%, transparent 100%);
+        filter: blur(3px);
+        animation: lightning-edge-2 8s ease-in-out infinite 2.5s;
+      "
+  >
+  </div>
+</div>
+
+
+
+<style>
+  /* Model viewer custom styling */
+  .model-viewer-custom {
+    --poster-color: transparent;
+  }
+
+  /* Space background using theme colors */
+  .space-bg {
+    background: linear-gradient(to bottom, 
+      var(--color-background),
+      var(--color-muted),
+      var(--color-accent)
+    );
+    transition: background 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Stars using theme colors */
+  .star {
+    background: var(--color-foreground);
+    opacity: 0.2;
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                background 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  :global(.dark) .star {
+    opacity: 0.6;
+  }
+
+  /* Lightning using theme colors */
+  .lightning {
+    opacity: 0.15;
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  :global(.dark) .lightning {
+    opacity: 0.5;
+  }
+
+  /* Glare using theme colors */
+  .glare {
+    opacity: 0.2;
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  :global(.dark) .glare {
+    opacity: 0.6;
+  }
+
+  /* Nebula using theme colors */
+  .nebula {
+    opacity: 0.08;
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  :global(.dark) .nebula {
+    opacity: 0.3;
+  }
+
+  /* Star twinkling */
+  @keyframes twinkle {
+    0%, 100% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.3);
+    }
+  }
+
+  @keyframes twinkle-bright {
+    0%, 100% {
+      opacity: 0.5;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.6);
+    }
+  }
+
+  /* Nebula drift */
+  @keyframes nebula-drift-1 {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1) rotate(0deg);
+      opacity: 0.04;
+    }
+    33% {
+      transform: translate(40px, -25px) scale(1.08) rotate(15deg);
+      opacity: 0.06;
+    }
+    66% {
+      transform: translate(60px, -40px) scale(1.12) rotate(30deg);
+      opacity: 0.08;
+    }
+  }
+
+  @keyframes nebula-drift-2 {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1) rotate(0deg);
+      opacity: 0.03;
+    }
+    40% {
+      transform: translate(-35px, 35px) scale(1.12) rotate(-20deg);
+      opacity: 0.05;
+    }
+    70% {
+      transform: translate(-50px, 50px) scale(1.18) rotate(-35deg);
+      opacity: 0.07;
+    }
+  }
+
+  @keyframes nebula-drift-3 {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1) rotate(0deg);
+      opacity: 0.025;
+    }
+    35% {
+      transform: translate(30px, 40px) scale(1.06) rotate(12deg);
+      opacity: 0.04;
+    }
+    65% {
+      transform: translate(45px, 55px) scale(1.1) rotate(25deg);
+      opacity: 0.055;
+    }
+  }
+
+  /* Black hole event horizon */
+  @keyframes event-horizon {
+    from {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+
+  /* Accretion disk rotation */
+  @keyframes rotate-disk-1 {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes rotate-disk-2 {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(-360deg);
+    }
+  }
+
+  /* Gravitational lensing */
+  @keyframes lensing-pulse {
+    0%,
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0.6;
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.05);
+      opacity: 0.9;
+    }
+  }
+
+  /* Light distortion rays */
+  @keyframes light-ray-1 {
+    0%,
+    100% {
+      opacity: 0.3;
+      height: 700px;
+    }
+    50% {
+      opacity: 0.6;
+      height: 800px;
+    }
+  }
+
+  @keyframes light-ray-2 {
+    0%,
+    100% {
+      opacity: 0.25;
+      height: 700px;
+    }
+    50% {
+      opacity: 0.5;
+      height: 750px;
+    }
+  }
+
+  @keyframes light-ray-3 {
+    0%,
+    100% {
+      opacity: 0.2;
+      height: 700px;
+    }
+    50% {
+      opacity: 0.45;
+      height: 780px;
+    }
+  }
+
+  /* Photon sphere */
+  @keyframes photon-sphere {
+    0%,
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0.5;
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.1);
+      opacity: 0.8;
+    }
+  }
+
+  /* Clean glare animations */
+  @keyframes rim-pulse {
+    0%,
+    100% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+
+  @keyframes light-reflect-1 {
+    0%,
+    100% {
+      opacity: 0.3;
+      transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+    25% {
+      opacity: 0.5;
+      transform: translate(-15px, 15px) scale(1.08) rotate(5deg);
+    }
+    50% {
+      opacity: 0.6;
+      transform: translate(-25px, 25px) scale(1.12) rotate(10deg);
+    }
+    75% {
+      opacity: 0.45;
+      transform: translate(-10px, 10px) scale(1.05) rotate(3deg);
+    }
+  }
+
+  @keyframes light-reflect-2 {
+    0%,
+    100% {
+      opacity: 0.25;
+      transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+    30% {
+      opacity: 0.4;
+      transform: translate(18px, -12px) scale(1.06) rotate(-4deg);
+    }
+    60% {
+      opacity: 0.5;
+      transform: translate(25px, -18px) scale(1.1) rotate(-8deg);
+    }
+    80% {
+      opacity: 0.35;
+      transform: translate(12px, -8px) scale(1.04) rotate(-2deg);
+    }
+  }
+
+  @keyframes center-highlight {
+    0%,
+    100% {
+      opacity: 0.3;
+      transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    }
+    20% {
+      opacity: 0.5;
+      transform: translate(-50%, -50%) scale(1.1) rotate(15deg);
+    }
+    40% {
+      opacity: 0.6;
+      transform: translate(-50%, -50%) scale(1.18) rotate(30deg);
+    }
+    60% {
+      opacity: 0.55;
+      transform: translate(-50%, -50%) scale(1.15) rotate(45deg);
+    }
+    80% {
+      opacity: 0.4;
+      transform: translate(-50%, -50%) scale(1.08) rotate(60deg);
+    }
+  }
+
+  /* Lightning glare animations - more unique patterns */
+  @keyframes lightning-flash-1 {
+    0%,
+    100% {
+      opacity: 0;
+      transform: scaleX(0.3) translateX(-50px);
+    }
+    8% {
+      opacity: 0.9;
+      transform: scaleX(1.4) translateX(20px);
+    }
+    11% {
+      opacity: 0.2;
+      transform: scaleX(0.6) translateX(-10px);
+    }
+    14% {
+      opacity: 0.7;
+      transform: scaleX(1.1) translateX(5px);
+    }
+    17% {
+      opacity: 0;
+      transform: scaleX(0.4) translateX(-30px);
+    }
+    20%,
+    95% {
+      opacity: 0;
+      transform: scaleX(0.3) translateX(-50px);
+    }
+  }
+
+  @keyframes lightning-flash-2 {
+    0%,
+    100% {
+      opacity: 0;
+      transform: scaleX(0.4) translateX(40px) rotate(5deg);
+    }
+    15% {
+      opacity: 0.8;
+      transform: scaleX(1.3) translateX(-15px) rotate(-3deg);
+    }
+    19% {
+      opacity: 0.15;
+      transform: scaleX(0.7) translateX(10px) rotate(2deg);
+    }
+    23% {
+      opacity: 0.6;
+      transform: scaleX(1) translateX(-5px) rotate(-1deg);
+    }
+    27% {
+      opacity: 0;
+      transform: scaleX(0.5) translateX(25px) rotate(4deg);
+    }
+    30%,
+    95% {
+      opacity: 0;
+      transform: scaleX(0.4) translateX(40px) rotate(5deg);
+    }
+  }
+
+  @keyframes lightning-flash-3 {
+    0%,
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scaleY(0.4) translateY(-40px);
+    }
+    5% {
+      opacity: 0.7;
+      transform: translate(-50%, -50%) scaleY(1.25) translateY(15px);
+    }
+    9% {
+      opacity: 0.1;
+      transform: translate(-50%, -50%) scaleY(0.65) translateY(-8px);
+    }
+    12% {
+      opacity: 0.5;
+      transform: translate(-50%, -50%) scaleY(1.05) translateY(5px);
+    }
+    16% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scaleY(0.5) translateY(-25px);
+    }
+    20%,
+    95% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scaleY(0.4) translateY(-40px);
+    }
+  }
+
+  @keyframes lightning-burst-1 {
+    0%,
+    100% {
+      opacity: 0;
+      transform: scale(0.3) rotate(0deg);
+      filter: blur(15px) hue-rotate(0deg);
+    }
+    8% {
+      opacity: 0.9;
+      transform: scale(1.5) rotate(45deg);
+      filter: blur(30px) hue-rotate(10deg);
+    }
+    12% {
+      opacity: 0.3;
+      transform: scale(0.8) rotate(90deg);
+      filter: blur(20px) hue-rotate(5deg);
+    }
+    16% {
+      opacity: 0.6;
+      transform: scale(1.2) rotate(135deg);
+      filter: blur(25px) hue-rotate(8deg);
+    }
+    20% {
+      opacity: 0;
+      transform: scale(0.4) rotate(180deg);
+      filter: blur(15px) hue-rotate(0deg);
+    }
+    25%,
+    95% {
+      opacity: 0;
+      transform: scale(0.3) rotate(0deg);
+      filter: blur(15px) hue-rotate(0deg);
+    }
+  }
+
+  @keyframes lightning-burst-2 {
+    0%,
+    100% {
+      opacity: 0;
+      transform: scale(0.4) rotate(180deg);
+      filter: blur(12px) hue-rotate(0deg);
+    }
+    18% {
+      opacity: 0.8;
+      transform: scale(1.4) rotate(225deg);
+      filter: blur(28px) hue-rotate(-8deg);
+    }
+    23% {
+      opacity: 0.25;
+      transform: scale(0.75) rotate(270deg);
+      filter: blur(18px) hue-rotate(-4deg);
+    }
+    27% {
+      opacity: 0.55;
+      transform: scale(1.15) rotate(315deg);
+      filter: blur(23px) hue-rotate(-6deg);
+    }
+    32% {
+      opacity: 0;
+      transform: scale(0.5) rotate(360deg);
+      filter: blur(12px) hue-rotate(0deg);
+    }
+    35%,
+    95% {
+      opacity: 0;
+      transform: scale(0.4) rotate(180deg);
+      filter: blur(12px) hue-rotate(0deg);
+    }
+  }
+
+  @keyframes lightning-edge-1 {
+    0%,
+    100% {
+      opacity: 0;
+      width: 300px;
+      transform: translate(-50%, -50%) rotate(25deg) skewX(0deg);
+    }
+    10% {
+      opacity: 0.8;
+      width: 700px;
+      transform: translate(-50%, -50%) rotate(30deg) skewX(5deg);
+    }
+    14% {
+      opacity: 0.2;
+      width: 450px;
+      transform: translate(-50%, -50%) rotate(27deg) skewX(-3deg);
+    }
+    18% {
+      opacity: 0.5;
+      width: 620px;
+      transform: translate(-50%, -50%) rotate(28deg) skewX(2deg);
+    }
+    22% {
+      opacity: 0;
+      width: 350px;
+      transform: translate(-50%, -50%) rotate(25deg) skewX(0deg);
+    }
+    25%,
+    95% {
+      opacity: 0;
+      width: 300px;
+      transform: translate(-50%, -50%) rotate(25deg) skewX(0deg);
+    }
+  }
+
+  @keyframes lightning-edge-2 {
+    0%,
+    100% {
+      opacity: 0;
+      width: 280px;
+      transform: translate(-50%, -50%) rotate(-35deg) skewX(0deg);
+    }
+    22% {
+      opacity: 0.7;
+      width: 650px;
+      transform: translate(-50%, -50%) rotate(-38deg) skewX(-4deg);
+    }
+    27% {
+      opacity: 0.18;
+      width: 420px;
+      transform: translate(-50%, -50%) rotate(-36deg) skewX(2deg);
+    }
+    31% {
+      opacity: 0.45;
+      width: 580px;
+      transform: translate(-50%, -50%) rotate(-37deg) skewX(-1deg);
+    }
+    35% {
+      opacity: 0;
+      width: 320px;
+      transform: translate(-50%, -50%) rotate(-35deg) skewX(0deg);
+    }
+    38%,
+    95% {
+      opacity: 0;
+      width: 280px;
+      transform: translate(-50%, -50%) rotate(-35deg) skewX(0deg);
+    }
+  }
+
+  @keyframes rotate-gradient {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes edge-glow-h {
+    0%,
+    100% {
+      opacity: 0.3;
+      width: 600px;
+    }
+    50% {
+      opacity: 0.6;
+      width: 700px;
+    }
+  }
+
+  @keyframes edge-glow-v {
+    0%,
+    100% {
+      opacity: 0.25;
+      height: 600px;
+    }
+    50% {
+      opacity: 0.5;
+      height: 700px;
+    }
+  }
+
+  @keyframes specular-1 {
+    0%,
+    100% {
+      opacity: 0;
+      transform: scale(0);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.5);
+    }
+  }
+
+  @keyframes specular-2 {
+    0%,
+    100% {
+      opacity: 0;
+      transform: scale(0);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.3);
+    }
+  }
+</style>

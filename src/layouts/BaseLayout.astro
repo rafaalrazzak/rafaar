@@ -1,0 +1,135 @@
+---
+import '@/styles/globals.css';
+import { ViewTransitions } from 'astro:transitions';
+import siteMetadata from '@/data/site-metadata';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = siteMetadata.SITE_NAME, 
+  description = siteMetadata.SITE_DESCRIPTION 
+} = Astro.props;
+
+const fullTitle = title === siteMetadata.SITE_NAME ? title : `${title} — rafaar`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    
+    <!-- Theme initialization - MUST be first to prevent flickering -->
+    <script is:inline>
+      (function() {
+        const getTheme = () => {
+          const savedTheme = localStorage.getItem('theme');
+          
+          if (savedTheme === 'light' || savedTheme === 'dark') {
+            return savedTheme;
+          }
+          
+          // Default to system preference
+          return window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? 'dark'
+            : 'light';
+        };
+
+        const theme = getTheme();
+        document.documentElement.classList.toggle('dark', theme === 'dark');
+        
+        // Set color scheme meta tag
+        document.documentElement.style.colorScheme = theme;
+      })();
+    </script>
+    
+    <!-- Prevent flash of unstyled content -->
+    <style is:inline>
+      html {
+        color-scheme: light dark;
+      }
+      
+      html:not(.dark) {
+        color-scheme: light;
+      }
+      
+      html.dark {
+        color-scheme: dark;
+      }
+    </style>
+    
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={siteMetadata.SITE_URL} />
+    <meta property="og:image" content={`${siteMetadata.SITE_URL}${siteMetadata.TWITTER_CARD}`} />
+    <meta property="og:type" content="website" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content={siteMetadata.TWITER_USERNAME} />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteMetadata.SITE_URL}${siteMetadata.TWITTER_CARD}`} />
+    
+    <ViewTransitions />
+    
+    <!-- Persist theme across page transitions -->
+    <script is:inline>
+      // Persist theme class during ViewTransitions
+      document.addEventListener('astro:before-swap', (ev) => {
+        // Preserve the dark class on the new document
+        const isDark = document.documentElement.classList.contains('dark');
+        if (isDark) {
+          ev.newDocument.documentElement.classList.add('dark');
+        } else {
+          ev.newDocument.documentElement.classList.remove('dark');
+        }
+        
+        // Set color scheme
+        ev.newDocument.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
+      });
+    </script>
+  </head>
+  <body class="bg-background text-foreground antialiased">
+    <slot />
+    
+    <!-- System theme change listener -->
+    <script is:inline>
+      // Listen for system theme changes if user prefers system
+      if (!localStorage.getItem('theme') || localStorage.getItem('theme') === 'system') {
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        mediaQuery.addEventListener('change', (e) => {
+          if (localStorage.getItem('theme') === 'system') {
+            document.documentElement.classList.toggle('dark', e.matches);
+          }
+        });
+      }
+      
+      // Re-apply theme on page navigation (for ViewTransitions)
+      document.addEventListener('astro:after-swap', () => {
+        const getTheme = () => {
+          const savedTheme = localStorage.getItem('theme');
+          
+          if (savedTheme === 'light' || savedTheme === 'dark') {
+            return savedTheme;
+          }
+          
+          return window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? 'dark'
+            : 'light';
+        };
+
+        const theme = getTheme();
+        document.documentElement.classList.toggle('dark', theme === 'dark');
+      });
+    </script>
+  </body>
+</html>

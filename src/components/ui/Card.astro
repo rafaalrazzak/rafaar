@@ -1,0 +1,26 @@
+---
+import { cn } from '@/libs/utils';
+
+interface Props {
+  class?: string;
+  href?: string;
+}
+
+const { class: className, href } = Astro.props;
+const Component = href ? 'a' : 'div';
+---
+
+<Component
+  href={href}
+  target={href ? '_blank' : undefined}
+  rel={href ? 'noopener noreferrer' : undefined}
+  class={cn(
+    'group block p-6 rounded-lg',
+    'border border-border/50 bg-card/50 backdrop-blur-sm',
+    'transition-all duration-300 ease-out',
+    href && 'hover:border-foreground/20 hover:bg-card/80 hover:shadow-sm hover:-translate-y-0.5',
+    className
+  )}
+>
+  <slot />
+</Component>

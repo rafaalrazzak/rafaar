@@ -1,0 +1,25 @@
+---
+import { cn } from '@/libs/utils';
+
+interface Props {
+  src: string;
+  alt: string;
+  class?: string;
+  size?: 'sm' | 'md' | 'lg';
+}
+
+const { src, alt, class: className, size = 'md' } = Astro.props;
+
+const sizes = {
+  sm: 'size-12',
+  md: 'size-24',
+  lg: 'size-28',
+};
+---
+
+<img
+  src={src}
+  alt={alt}
+  class={cn('rounded-full object-cover', sizes[size], className)}
+  loading="lazy"
+/>

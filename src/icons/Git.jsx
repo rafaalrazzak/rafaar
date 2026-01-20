@@ -3,7 +3,7 @@ const Git = ({ size = '24', ...props }) => (
     width={size}
     height={size}
     viewBox='0 0 24 24'
-    fill='#F05032'
+    fill='currentColor'
     xmlns='http://www.w3.org/2000/svg'
     {...props}
   >

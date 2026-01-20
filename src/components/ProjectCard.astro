@@ -1,0 +1,20 @@
+---
+import type { Project } from '@/types';
+import Card from './ui/Card.astro';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<Card href={project.url} class="flex items-center gap-4">
+  <div class="size-12 flex items-center justify-center rounded-lg bg-muted shrink-0">
+    <project.icon className="size-6 text-muted-foreground" />
+  </div>
+  <div class="flex-1 min-w-0">
+    <h3 class="font-semibold truncate">{project.title}</h3>
+    <p class="text-sm text-muted-foreground line-clamp-2">{project.description}</p>
+  </div>
+</Card>

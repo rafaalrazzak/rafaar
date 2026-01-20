@@ -1,0 +1,48 @@
+---
+import type { Work } from '@/types';
+
+interface Props {
+  work: Work;
+}
+
+const { work } = Astro.props;
+---
+
+<div
+  class="rounded-xl border p-4 space-y-3 transition-colors hover:bg-muted/30"
+  style={`border-left: 3px solid ${work.color}`}
+>
+  <div class="flex items-start gap-3">
+    <img
+      src={work.logo}
+      alt={work.company}
+      class="size-10 rounded-lg object-cover"
+      loading="lazy"
+    />
+    <div class="flex-1 space-y-2">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+        <a
+          href={work.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-semibold hover:underline"
+        >
+          {work.company}
+        </a>
+        <span class="text-sm text-muted-foreground whitespace-nowrap">
+          {work.start} - {work.end}
+        </span>
+      </div>
+      <p class="text-sm font-medium">{work.title}</p>
+      <div class="flex flex-wrap gap-1 text-xs text-muted-foreground">
+        {work.badges.map((badge, idx) => (
+          <>
+            <span>{badge}</span>
+            {idx < work.badges.length - 1 && <span>·</span>}
+          </>
+        ))}
+      </div>
+      <p class="text-sm text-muted-foreground leading-relaxed">{work.description}</p>
+    </div>
+  </div>
+</div>

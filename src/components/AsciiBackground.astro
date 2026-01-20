@@ -1,0 +1,310 @@
+---
+// Tako octopus logo ASCII art with clean animations and glare effects
+---
+
+<div class="ascii-wrapper">
+  <!-- Light beams -->
+  <div class="light-beam beam-1"></div>
+  <div class="light-beam beam-2"></div>
+  <div class="light-beam beam-3"></div>
+  <div class="light-beam beam-4"></div>
+  
+  <!-- Glare effects -->
+  <div class="glare glare-1"></div>
+  <div class="glare glare-2"></div>
+  <div class="glare glare-3"></div>
+  
+  <pre>                                    000000000000000000000000000                                     
+                              000000000000000000000000000000000000000                               
+                          000000000000000000000000000000000000000000000000                          
+                      0000000000000000000000000000000000000000000000000000000                       
+                   000000000000000000000000000          000000000000000000000000                    
+                 00000000000000000000                           0000000000000000000                 
+               0000000000000000                                      0000000000000000               
+             000000000000000                                             00000000000000             
+           0000000000000                                                    0000000000000           
+         0000000000000      000000                               000000       0000000000000         
+        000000000000        000000                               0000000        000000000000        
+       00000000000          000000         00000000000000        000000           00000000000       
+      0000000000                        0000000000000000000                         0000000000      
+     0000000000                        0000000000000000000000                        0000000000     
+    000000000                         000000000000000000000000                         000000000    
+   000000000         00000           00000000         00000000            00000         000000000   
+  000000000         0000000         00000000           00000000          000000          000000000  
+  000000000         0000000         0000000             0000000          000000          000000000  
+ 000000000          0000000         0000000             0000000          000000           000000000 
+ 00000000           0000000         00000000           00000000         0000000            00000000 
+000000000           00000000         00000000         00000000          0000000            000000000
+000000000            00000000        000000000000 000000000000         00000000            000000000
+00000000             000000000        00000000000000000000000        000000000              00000000
+00000000      00000   0000000000        0000000000000000000         000000000   000000      00000000
+00000000     000000    0000000000         000000000000000         0000000000    000000      00000000
+00000000      00000      00000000000          00000000         000000000000     00000       00000000
+ 000000                   0000000000000                     0000000000000                     00000 
+                            0000000000000                 0000000000000                             
+    00000000                  00000000000000           0000000000000                00000000000     
+ 00000000000000000000            0000000000000       0000000000000           00000000000000000000   
+ 0000000000000000000000000          000000000000   000000000000        000000000000000000000000000  
+ 000000000000000000000000000000        0000000000 0000000000       0000000000000000000000000000000  
+ 000000000000000000000000000000000       00000000000000000       00000000000000000000000000000000   
+  0000000          00000000000000000       0000000000000      000000000000000000         00000000   
+  00000000               00000000000000     0000000000      00000000000000              00000000    
+   000000000                 000000000000     0000000     000000000000             0000000000000    
+   000000000000000000          00000000000      0000    00000000000          000000000000000000     
+    000000000000000000000         000000000            0000000000        000000000000000000000      
+     000000000000000000000000      0000000000         000000000      0000000000000000000000000      
+      0000000000000000000000000      00000000        00000000      00000000000000000000000000       
+       000000000  000000000000000     00000000      00000000     0000000000000000  000000000        
+        0000000000     000000000000    00000000    00000000    0000000000000     0000000000         
+         00000000000      00000000000   0000000    0000000   000000000000      0000000000           
+           00000000000      0000000000   0000000  00000000  0000000000       00000000000            
+            000000000000      000000000  0000000  0000000   00000000      000000000000              
+              0000000000000    000000000 0000000  0000000  00000000     0000000000000               
+                00000000000000  00000000 0000000  0000000 00000000   00000000000000                 
+                  000000000000000000000000000000  0000000 0000000000000000000000                    
+                     000000000000000000000000000  0000000000000000000000000000                      
+                       0000000000000000000000000  0000000000000000000000000                         
+                           000000000000000000000   00000000000000000000                             
+                               0000000000000000    00000000000000000                                
+                                     000000000      000000000                                       </pre>
+</div>
+
+<style>
+  .ascii-wrapper {
+    z-index: 0;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    inset: 0;
+    pointer-events: none;
+    user-select: none;
+    overflow: hidden;
+  }
+
+  /* Light beams */
+  .light-beam {
+    position: absolute;
+    width: 120px;
+    height: 100%;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(100, 116, 139, 0.15) 0%,
+      rgba(100, 116, 139, 0.08) 30%,
+      rgba(100, 116, 139, 0.03) 60%,
+      transparent 100%
+    );
+    filter: blur(25px);
+    opacity: 0;
+    animation: beamSweep 18s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    transform-origin: center;
+    mix-blend-mode: screen;
+    will-change: transform, opacity;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .light-beam {
+      background: radial-gradient(
+        ellipse at center,
+        rgba(255, 255, 255, 0.12) 0%,
+        rgba(255, 255, 255, 0.06) 30%,
+        rgba(255, 255, 255, 0.03) 60%,
+        transparent 100%
+      );
+      filter: blur(30px);
+    }
+  }
+
+  .beam-1 {
+    left: 15%;
+    animation-delay: 0s;
+    width: 100px;
+  }
+
+  .beam-2 {
+    left: 35%;
+    animation-delay: 4.5s;
+    width: 140px;
+  }
+
+  .beam-3 {
+    left: 60%;
+    animation-delay: 9s;
+    width: 110px;
+  }
+
+  .beam-4 {
+    left: 85%;
+    animation-delay: 13.5s;
+    width: 130px;
+  }
+
+  @keyframes beamSweep {
+    0%, 100% {
+      opacity: 0;
+      transform: translateX(-80px) scaleY(0.7) rotate(-2deg);
+    }
+    50% {
+      opacity: 1;
+      transform: translateX(80px) scaleY(1) rotate(2deg);
+    }
+  }
+
+  /* Glare effects */
+  .glare {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle at center,
+      rgba(255, 255, 255, 0.3) 0%,
+      rgba(255, 255, 255, 0.1) 30%,
+      transparent 70%
+    );
+    filter: blur(40px);
+    opacity: 0;
+    mix-blend-mode: overlay;
+    will-change: transform, opacity;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .glare {
+      background: radial-gradient(
+        circle at center,
+        rgba(255, 255, 255, 0.2) 0%,
+        rgba(255, 255, 255, 0.08) 30%,
+        transparent 70%
+      );
+      filter: blur(50px);
+    }
+  }
+
+  .glare-1 {
+    top: 20%;
+    left: 30%;
+    animation: glareFloat 14s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    animation-delay: 0s;
+  }
+
+  .glare-2 {
+    top: 60%;
+    right: 25%;
+    width: 250px;
+    height: 250px;
+    animation: glareFloat 16s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    animation-delay: 5s;
+  }
+
+  .glare-3 {
+    bottom: 30%;
+    left: 50%;
+    width: 180px;
+    height: 180px;
+    animation: glareFloat 12s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    animation-delay: 8s;
+  }
+
+  @keyframes glareFloat {
+    0%, 100% {
+      opacity: 0;
+      transform: translate(0, 0) scale(0.8);
+    }
+    25% {
+      opacity: 0.6;
+      transform: translate(-30px, -20px) scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: translate(0, -40px) scale(1.1);
+    }
+    75% {
+      opacity: 0.6;
+      transform: translate(30px, -20px) scale(1);
+    }
+  }
+
+  /* ASCII art */
+  pre {
+    font-family: 'Courier New', monospace;
+    font-size: clamp(0.3rem, 0.8vw, 0.7rem);
+    line-height: 1;
+    color: currentColor;
+    opacity: 0.12;
+    white-space: pre;
+    margin: 0;
+    text-align: center;
+    filter: drop-shadow(0 0 20px rgba(100, 116, 139, 0.4)) 
+            drop-shadow(0 0 40px rgba(100, 116, 139, 0.3));
+    animation: rotate3D 35s cubic-bezier(0.4, 0, 0.2, 1) infinite,
+               gentlePulse 22s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    transform-origin: center;
+    transform-style: preserve-3d;
+    perspective: 1200px;
+    will-change: transform, opacity;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    pre {
+      opacity: 0.15;
+      filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.15)) 
+              drop-shadow(0 0 50px rgba(255, 255, 255, 0.10));
+    }
+  }
+
+  @keyframes rotate3D {
+    0%, 100% {
+      transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    }
+    50% {
+      transform: rotateX(8deg) rotateY(180deg) rotateZ(2deg);
+    }
+  }
+
+  @keyframes gentlePulse {
+    0%, 100% {
+      opacity: 0.12;
+      filter: drop-shadow(0 0 20px rgba(100, 116, 139, 0.4)) 
+              drop-shadow(0 0 40px rgba(100, 116, 139, 0.3));
+    }
+    50% {
+      opacity: 0.20;
+      filter: drop-shadow(0 0 30px rgba(100, 116, 139, 0.5)) 
+              drop-shadow(0 0 60px rgba(100, 116, 139, 0.4));
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    @keyframes gentlePulse {
+      0%, 100% {
+        opacity: 0.15;
+        filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.15)) 
+                drop-shadow(0 0 50px rgba(255, 255, 255, 0.10));
+      }
+      50% {
+        opacity: 0.25;
+        filter: drop-shadow(0 0 35px rgba(255, 255, 255, 0.20)) 
+                drop-shadow(0 0 70px rgba(255, 255, 255, 0.15));
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    pre {
+      font-size: clamp(0.2rem, 0.5vw, 0.4rem);
+    }
+    
+    .light-beam {
+      width: 60px !important;
+      filter: blur(15px);
+    }
+
+    .glare {
+      width: 120px !important;
+      height: 120px !important;
+      filter: blur(25px);
+    }
+  }
+</style>

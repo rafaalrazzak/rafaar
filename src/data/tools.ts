@@ -1,22 +1,22 @@
-// Define the interfaces for the data structures
-
-import { RESUME_DATA } from './resume-data';
-
-interface Category {
-  title: string;
-  item: readonly string[];
-}
-
-// Define the categories
-
-const Languages: Category = {
-  title: 'Languages',
-  item: RESUME_DATA.languages,
-};
-
-const Technologies: Category = {
-  title: 'Technologies',
-  item: RESUME_DATA.tools,
-};
-
-export const tools = [Languages, Technologies];
+export const tools = [
+  {
+    category: 'Design',
+    item: ['Figma', 'Adobe CC'],
+  },
+  {
+    category: 'Runtime',
+    item: ['Bun', 'Node.js'],
+  },
+  {
+    category: 'Frontend',
+    item: ['React.js', 'Next.js', 'Astro', 'Solid', 'TailwindCSS'],
+  },
+  {
+    category: 'Backend',
+    item: ['Supabase', 'Firebase', 'GraphQL', 'MongoDB', 'Prisma', 'Drizzle'],
+  },
+  {
+    category: 'DevOps',
+    item: ['VSCode', 'Git', 'Vercel', 'Docker'],
+  },
+] as const;

@@ -1,0 +1,112 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import Section from '@/components/ui/Section.astro';
+import Badge from '@/components/ui/Badge.astro';
+import Card from '@/components/ui/Card.astro';
+import { RESUME_DATA } from '@/data/resume-data';
+import { tools } from '@/data/tools';
+import { GlobeIcon, MailIcon } from 'lucide-react';
+
+const allTools = tools.flatMap((tool) => tool.item);
+---
+
+<MainLayout
+  title={`${RESUME_DATA.name} | CV`}
+  description={RESUME_DATA.summary}
+>
+  <div class="container mx-auto max-w-5xl px-6 py-20">
+    <div class="space-y-20">
+      <!-- Header -->
+      <section class="max-w-3xl space-y-8">
+        <div class="space-y-6">
+          <h1 class="text-5xl font-medium tracking-tight md:text-6xl">
+            {RESUME_DATA.name}
+          </h1>
+          <p class="text-lg leading-relaxed text-muted-foreground md:text-xl">
+            {RESUME_DATA.summary}
+          </p>
+        </div>
+
+        <div class="flex flex-wrap gap-x-6 gap-y-3 text-sm">
+          <a
+            href={RESUME_DATA.locationLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <GlobeIcon className="size-4" />
+            <span>{RESUME_DATA.location}</span>
+          </a>
+          {
+            RESUME_DATA.contact.email && (
+              <a
+                href={`mailto:${RESUME_DATA.contact.email}`}
+                class="inline-flex items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <MailIcon className="size-4" />
+                <span>{RESUME_DATA.contact.email}</span>
+              </a>
+            )
+          }
+        </div>
+      </section>
+
+      <!-- Work Experience -->
+      <Section title="Work Experience">
+        <div class="space-y-3">
+          {
+            RESUME_DATA.work.map((work) => (
+              <Card href={work.link}>
+                <div class="space-y-4">
+                  <div class="flex items-start justify-between gap-4">
+                    <div class="flex-1 space-y-1">
+                      <h3 class="font-medium text-foreground">
+                        {work.company}
+                      </h3>
+                      <p class="text-sm text-muted-foreground">{work.title}</p>
+                    </div>
+                    <span class="whitespace-nowrap text-sm text-muted-foreground">
+                      {work.start}—{work.end}
+                    </span>
+                  </div>
+                  <p class="text-sm leading-relaxed text-muted-foreground">
+                    {work.description}
+                  </p>
+                  <div class="flex flex-wrap gap-2">
+                    {work.badges.map((badge) => (
+                      <Badge>{badge}</Badge>
+                    ))}
+                  </div>
+                </div>
+              </Card>
+            ))
+          }
+        </div>
+      </Section>
+
+      <!-- Education -->
+      <Section title="Education">
+        {
+          RESUME_DATA.education.map((edu) => (
+            <div class="space-y-1">
+              <div class="flex items-start justify-between gap-4">
+                <h3 class="font-medium">{edu.school}</h3>
+                <span class="whitespace-nowrap text-sm text-muted-foreground">
+                  {edu.start}—{edu.end}
+                </span>
+              </div>
+              <p class="text-sm text-muted-foreground">{edu.degree}</p>
+            </div>
+          ))
+        }
+      </Section>
+
+      <!-- Skills -->
+      <Section title="Skills & Tools">
+        <div class="flex flex-wrap gap-2">
+          {allTools.map((tool) => <Badge>{tool}</Badge>)}
+        </div>
+      </Section>
+    </div>
+  </div>
+</MainLayout>

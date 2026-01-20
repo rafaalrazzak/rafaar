@@ -1,0 +1,62 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import Section from '@/components/ui/Section.astro';
+import Card from '@/components/ui/Card.astro';
+import { RESUME_DATA } from '@/data/resume-data';
+import { projects } from '@/data/links/projects';
+---
+
+<MainLayout title="Links">
+  <div class="container mx-auto max-w-5xl px-6 py-20">
+    <div class="space-y-20">
+      <!-- Header -->
+      <section class="max-w-3xl space-y-8">
+        <div class="space-y-6">
+          <h1 class="text-5xl font-medium tracking-tight md:text-6xl">Links</h1>
+          <p class="text-lg leading-relaxed text-muted-foreground md:text-xl">
+            Connect with me across the web.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap gap-x-6 gap-y-3 text-sm">
+          {
+            RESUME_DATA.contact.social.map((social) => (
+              <a
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <social.icon className="size-4 fill-current" />
+                <span>{social.name}</span>
+              </a>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- Projects -->
+      <Section title="Projects">
+        <div class="space-y-3">
+          {
+            projects.map((project) => (
+              <Card href={project.url}>
+                <div class="flex items-start gap-4">
+                  <div class="flex size-12 shrink-0 items-center justify-center rounded-lg bg-muted/50">
+                    <project.icon className="size-6 text-muted-foreground" />
+                  </div>
+                  <div class="flex-1 space-y-1">
+                    <h3 class="font-medium text-foreground">{project.title}</h3>
+                    <p class="text-sm text-muted-foreground">
+                      {project.description}
+                    </p>
+                  </div>
+                </div>
+              </Card>
+            ))
+          }
+        </div>
+      </Section>
+    </div>
+  </div>
+</MainLayout>

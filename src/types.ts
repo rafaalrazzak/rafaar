@@ -1,78 +1,54 @@
-export type Project = {
-  cover: string;
-  created_at: string;
+import type { LucideIcon } from 'lucide-react';
+
+export interface Project {
+  title: string;
   description: string;
-  id: number;
+  url: string;
+  icon: LucideIcon;
+}
+
+export interface SocialMedia {
+  name: string;
+  url: string;
+  icon: React.ComponentType<{ className?: string }>;
+}
+
+export interface Work {
+  company: string;
   link: string;
-  stacks: string[];
+  badges: string[];
   title: string;
-};
-
-type Colors = {
-  dark: string;
-  darker: string;
-  light: string;
-  lighter: string;
-};
-
-export type TopSong = {
-  artist: string;
-  songUrl: string;
-  songUri: string;
-  title: string;
-  songImage: string;
-  colors: Colors;
-};
-
-export interface NowPlaying {
-  isPlaying: boolean;
-  title: string;
-  artist: string;
-  isPause: boolean;
-  songUrl: string;
-  songUri: string;
-  songImage: string;
-  progress: string;
-  duration: string;
-  progressMs: number;
-  durationMs: number;
-  colors: Colors;
-  lyrics: Lyrics;
-  canvasUrl?: string;
+  logo: string;
+  color: string;
+  start: string;
+  end: string;
+  description: string;
 }
 
-export interface Lyrics {
-  StartTime: number;
-  EndTime: number;
-  Type: string;
-  Content: Content[];
+export interface Education {
+  school: string;
+  degree: string;
+  start: string;
+  end: string;
 }
 
-export interface Content {
-  Type: string;
-  OppositeAligned: boolean;
-  Lead?: Lead;
-  Text?: string;
-  StartTime?: number;
-  EndTime?: number;
-  Background?: Background[];
-}
-
-export interface Lead {
-  Syllables: Syllable[];
-  StartTime: number;
-  EndTime: number;
-}
-
-export interface Background {
-  Syllables: Syllable[];
-  StartTime: number;
-  EndTime: number;
-}
-
-export interface Syllable {
-  Text: string;
-  IsPartOfWord: boolean;
-  StartTime: number;
-  EndTime: number;
+export interface ResumeData {
+  name: string;
+  initials: string;
+  location: string;
+  locationLink: string;
+  about: string;
+  summary: string;
+  skills: readonly string[];
+  avatarUrl: string;
+  ogImage: string;
+  personalWebsiteUrl: string;
+  contact: {
+    email: string;
+    social: SocialMedia[];
+  };
+  education: readonly Education[];
+  work: readonly Work[];
+  languages: readonly string[];
+  tools: readonly string[];
 }
