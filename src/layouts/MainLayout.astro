@@ -13,11 +13,13 @@ const { title, description } = Astro.props;
 
 <BaseLayout title={title} description={description}>
   <div class="relative flex min-h-screen flex-col">
-    <Model3DViewer 
-      modelUrl="/models/logo.glb" 
-      height="100vh"
-      enableGlare
-    />
+    <div transition:persist="3d-model">
+      <Model3DViewer 
+        modelUrl="/models/logo.glb" 
+        height="100vh"
+        enableGlare
+      />
+    </div>
 
     <Navbar class="relative z-50" />
     <main class="relative z-10 flex-1">
