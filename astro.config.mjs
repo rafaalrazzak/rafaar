@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 
 export default defineConfig({
   output: 'static',
+  trailingSlash: 'never',
   integrations: [react()],
   vite: {
     plugins: [tailwindcss()],

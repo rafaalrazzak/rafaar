@@ -73,6 +73,23 @@ const fullTitle = title === siteMetadata.SITE_NAME ? title : `${title} — rafaa
         ev.newDocument.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
       });
     </script>
+    <script is:inline>
+      const normalizeTrailingSlash = () => {
+        const { pathname, search, hash } = window.location;
+        if (pathname.length > 1 && pathname.endsWith('/')) {
+          const normalized = pathname.replace(/\/+$/, '');
+          history.replaceState(history.state, '', `${normalized}${search}${hash}`);
+        }
+      };
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', normalizeTrailingSlash, { once: true });
+      } else {
+        normalizeTrailingSlash();
+      }
+
+      document.addEventListener('astro:after-swap', normalizeTrailingSlash);
+    </script>
   </head>
   <body class="bg-background text-foreground antialiased">
     <slot />

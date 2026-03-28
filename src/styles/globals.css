@@ -149,6 +149,7 @@
     @apply border border-border/70 bg-background/70 text-foreground shadow-sm backdrop-blur-sm;
   }
 
+
   .dark .glass-panel {
     @apply border-white/12 bg-zinc-950/54 shadow-2xl shadow-black/35;
   }
