@@ -1,0 +1,19 @@
+---
+import { Card } from '@almach/ui';
+import { cn } from '@/libs/utils';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<Card
+  className={cn(
+    'border border-white/60 bg-white/52 shadow-lg shadow-slate-900/8 backdrop-blur-2xl backdrop-saturate-150 transition-all duration-300 ease-out hover:border-foreground/20 hover:shadow-xl hover:shadow-slate-900/12 dark:border-white/15 dark:bg-zinc-950/58 dark:shadow-black/30',
+    className,
+  )}
+>
+  <slot />
+</Card>

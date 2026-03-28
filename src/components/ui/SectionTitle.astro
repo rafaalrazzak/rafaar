@@ -1,0 +1,14 @@
+---
+import { cn } from '@/libs/utils';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<h2 class={cn('meta-heading', className)}>
+  <slot />
+</h2>
+

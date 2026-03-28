@@ -17,8 +17,8 @@ const {
   height = "100vh",
   enableGlare = true,
   alt = "3D logo",
-  cameraOrbit = "75deg 65deg 180%",
-  cameraTarget = "auto auto auto",
+  cameraOrbit = "0deg 72deg 200%",
+  cameraTarget = "0m 0.08m 0m",
   fieldOfView = "35deg",
   exposure = "0.92",
   shadowIntensity = "0.34",
@@ -28,10 +28,22 @@ const {
 
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
 
+<style is:global>
+  #animated-model {
+    --progress-bar-height: 0px;
+  }
+
+  #animated-model::part(default-progress-bar),
+  #animated-model::part(default-progress-mask) {
+    display: none;
+  }
+</style>
+
 <model-viewer
   id="animated-model"
   src={modelUrl}
   alt={alt}
+  loading="eager"
   auto-rotate
   auto-rotate-delay="0"
   rotation-per-second="12deg"
@@ -49,57 +61,94 @@ const {
   min-camera-orbit="auto auto 150%"
   max-camera-orbit="auto auto 250%"
   interpolation-decay="200"
-  class="model-viewer-custom fixed inset-0 z-[2]"
-  style={`height:${height};width:100%;transition:opacity .35s ease,filter .35s ease,transform .35s ease;`}
+  class="fixed inset-0 z-[3] pointer-events-none [--poster-color:transparent]"
+  style={`height:${height};width:100%;`}
 >
 </model-viewer>
 
 {
   enableGlare && (
-    <div class="scene-glow pointer-events-none fixed inset-0 z-[1]">
-      <div class="scene-vignette"></div>
-      <div class="scene-ambient"></div>
+    <div class="scene-glow pointer-events-none fixed inset-0 z-[2]">
+      <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_28%,color-mix(in_oklab,var(--color-foreground)_6%,transparent)_85%)] opacity-55 dark:opacity-50"></div>
+      <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,color-mix(in_oklab,var(--color-muted)_65%,transparent)_0%,transparent_72%)] opacity-45 dark:opacity-40"></div>
+      <div class="pointer-events-none absolute inset-x-0 bottom-[-6rem] h-[20rem] bg-[radial-gradient(60%_45%_at_50%_50%,rgba(15,23,42,0.22),transparent)] dark:bg-[radial-gradient(60%_45%_at_50%_50%,rgba(2,6,23,0.52),transparent)]"></div>
     </div>
   )
 }
 
 <script is:inline>
+  function setObserver(viewer) {
+    if (window.__modelThemeObserver) return window.__modelThemeObserver;
+    const observer = new MutationObserver(() => applyViewerTheme(viewer));
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    window.__modelThemeObserver = observer;
+    return observer;
+  }
+
   function applyViewerTheme(viewer) {
     const isDark = document.documentElement.classList.contains("dark");
+    const isLoaded = viewer.dataset.loaded === "true";
+    const targetOpacity = isDark ? "0.9" : "0.72";
+    const targetFilter = isDark
+      ? "saturate(1.05)"
+      : "brightness(1.08) contrast(0.88) saturate(0.72) drop-shadow(0 20px 28px rgba(15,23,42,0.12))";
 
     if (isDark) {
       viewer.exposure = "0.92";
-      viewer.shadowIntensity = "0.34";
-      viewer.shadowSoftness = "1.4";
-      viewer.style.opacity = "0.76";
-      viewer.style.mixBlendMode = "screen";
-      viewer.style.filter = "none";
-      viewer.style.transform = "translateZ(0)";
+      viewer.shadowIntensity = "0.42";
+      viewer.shadowSoftness = "1.25";
     } else {
-      viewer.exposure = "1.03";
-      viewer.shadowIntensity = "0.58";
-      viewer.shadowSoftness = "0.95";
-      viewer.style.opacity = "0.58";
-      viewer.style.mixBlendMode = "normal";
-      viewer.style.filter =
-        "brightness(1.18) contrast(0.8) saturate(0.6) drop-shadow(0 16px 24px rgba(15,23,42,0.1))";
-      viewer.style.transform = "translateZ(0)";
+      viewer.exposure = "1";
+      viewer.shadowIntensity = "0.5";
+      viewer.shadowSoftness = "0.9";
     }
+
+    viewer.style.mixBlendMode = "normal";
+    viewer.style.opacity = isLoaded ? targetOpacity : "0";
+    viewer.style.filter = isLoaded ? targetFilter : "blur(6px) saturate(0.88)";
+    viewer.style.transform = isLoaded
+      ? "translate3d(0, 10vh, 0) scale(1)"
+      : "translate3d(0, 13vh, 0) scale(0.985)";
+    viewer.style.willChange = "opacity, filter, transform";
+    viewer.style.transition =
+      "opacity .9s cubic-bezier(.22,1,.36,1), filter .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1)";
   }
 
   function initModelViewerThemeSync() {
     const viewer = document.getElementById("animated-model");
     if (!viewer) return;
 
-    applyViewerTheme(viewer);
+    if (!viewer.dataset.enterInit) {
+      viewer.dataset.enterInit = "true";
+      viewer.dataset.loaded = "false";
+      viewer.addEventListener(
+        "load",
+        () => {
+          viewer.dataset.loaded = "true";
+          applyViewerTheme(viewer);
+        },
+        { once: true },
+      );
 
-    const observer = new MutationObserver(() => applyViewerTheme(viewer));
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+      // Fallback in case load event was missed after persisted navigation.
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          if (viewer.dataset.loaded !== "true") {
+            viewer.dataset.loaded = "true";
+            applyViewerTheme(viewer);
+          }
+        });
+      });
+    }
+
+    applyViewerTheme(viewer);
+    const observer = setObserver(viewer);
 
     document.addEventListener(
       "astro:before-swap",
       () => {
         observer.disconnect();
+        window.__modelThemeObserver = null;
       },
       { once: true },
     );
@@ -113,38 +162,3 @@ const {
 
   document.addEventListener("astro:page-load", initModelViewerThemeSync);
 </script>
-
-<style>
-  .model-viewer-custom {
-    --poster-color: transparent;
-    pointer-events: none;
-  }
-
-  .scene-glow {
-    opacity: 1;
-    transition: opacity 0.35s ease;
-  }
-
-  .scene-vignette {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at center, transparent 28%, color-mix(in oklab, var(--color-foreground) 6%, transparent) 85%);
-    opacity: 0.55;
-  }
-
-  .scene-ambient {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 50% 50%, color-mix(in oklab, var(--color-muted) 65%, transparent) 0%, transparent 72%);
-    opacity: 0.45;
-  }
-
-  :global(html:not(.dark)) .scene-vignette {
-    opacity: 0.28;
-  }
-
-  :global(html:not(.dark)) .scene-ambient {
-    opacity: 0.2;
-  }
-</style>
-

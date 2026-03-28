@@ -1,0 +1,21 @@
+---
+import { cn } from '@/libs/utils';
+
+interface Props {
+  href: string;
+  target?: string;
+  rel?: string;
+  class?: string;
+}
+
+const {
+  href,
+  target,
+  rel,
+  class: className,
+} = Astro.props;
+---
+
+<a href={href} target={target} rel={rel} class={cn('inline-link', className)}>
+  <slot />
+</a>

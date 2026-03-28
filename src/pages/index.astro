@@ -1,51 +1,50 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro';
-import { Badge, Card } from '@almach/ui';
+import { Badge } from '@almach/ui';
 import { RESUME_DATA } from '@/data/resume-data';
 import { MailIcon } from 'lucide-react';
+import GlassCard from '@/components/ui/GlassCard.astro';
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+import InlineLink from '@/components/ui/InlineLink.astro';
 ---
 
 <MainLayout>
-  <div class="container mx-auto max-w-5xl px-6 py-20">
-    <div class="space-y-20">
+  <div class="page-shell">
+    <div class="page-stack">
       <!-- Hero -->
-      <section class="max-w-3xl space-y-8">
+      <section class="page-hero">
         <div class="space-y-6">
-          <h1 class="text-5xl font-medium tracking-tight md:text-6xl">
+          <h1 class="page-heading">
             {RESUME_DATA.name}
           </h1>
-          <p class="text-muted-foreground text-lg leading-relaxed md:text-xl">
+          <p class="page-lead">
             {RESUME_DATA.about}
           </p>
         </div>
 
         <div class="flex flex-wrap gap-2">
-          {RESUME_DATA.skills.map((skill) => <Badge>{skill}</Badge>)}
+          {RESUME_DATA.skills.map((skill) => <Badge variant="secondary" className="chip-soft">{skill}</Badge>)}
         </div>
 
         <div class="flex flex-wrap gap-x-6 gap-y-3 text-sm">
           {
             RESUME_DATA.contact.email && (
-              <a
-                href={`mailto:${RESUME_DATA.contact.email}`}
-                class="text-muted-foreground hover:text-foreground inline-flex items-center gap-2 transition-colors"
-              >
-                <MailIcon className="size-4" />
+              <InlineLink href={`mailto:${RESUME_DATA.contact.email}`}>
+                <MailIcon className="icon-tone size-4" />
                 <span>Email</span>
-              </a>
+              </InlineLink>
             )
           }
           {
             RESUME_DATA.contact.social.map((social) => (
-              <a
+              <InlineLink
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-muted-foreground hover:text-foreground inline-flex items-center gap-2 transition-colors"
               >
-                <social.icon className="size-4 fill-current" />
+                <social.icon className="icon-tone size-4 fill-current" />
                 <span>{social.name}</span>
-              </a>
+              </InlineLink>
             ))
           }
         </div>
@@ -54,11 +53,9 @@ import { MailIcon } from 'lucide-react';
       <!-- Work -->
       {
         RESUME_DATA.work.length > 0 && (
-          <section class="space-y-6">
-            <h2 class="text-muted-foreground text-xs font-medium tracking-widest uppercase">
-              Work
-            </h2>
-            <div class="space-y-4">
+          <section class="section-stack">
+            <SectionTitle>Work</SectionTitle>
+            <div class="card-stack">
               {RESUME_DATA.work.map((work) => (
                 <a
                   href={work.link}
@@ -66,26 +63,26 @@ import { MailIcon } from 'lucide-react';
                   rel="noopener noreferrer"
                   class="block"
                 >
-                  <Card className="border-border/50 bg-card/50 p-6 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-foreground/20 hover:bg-card/80 hover:shadow-sm">
+                  <GlassCard class="p-6 hover:-translate-y-0.5">
                     <div class="space-y-3">
                       <div class="flex items-start justify-between gap-4">
                         <div class="flex-1 space-y-1">
-                          <h3 class="text-foreground font-medium">
+                          <h3 class="text-main font-medium">
                             {work.company}
                           </h3>
-                          <p class="text-muted-foreground text-sm">
+                          <p class="text-soft text-sm">
                             {work.title}
                           </p>
                         </div>
-                        <span class="text-muted-foreground text-sm whitespace-nowrap">
+                        <span class="text-soft text-sm whitespace-nowrap">
                           {work.start}—{work.end}
                         </span>
                       </div>
-                      <p class="text-muted-foreground text-sm leading-relaxed">
+                      <p class="text-soft text-sm leading-relaxed">
                         {work.description}
                       </p>
                     </div>
-                  </Card>
+                  </GlassCard>
                 </a>
               ))}
             </div>
@@ -95,28 +92,20 @@ import { MailIcon } from 'lucide-react';
 
       <!-- Skills -->
       <div class="grid gap-16 md:grid-cols-2">
-        <section class="space-y-6">
-          <h2
-            class="text-muted-foreground text-xs font-medium tracking-widest uppercase"
-          >
-            Languages
-          </h2>
+        <section class="section-stack">
+          <SectionTitle>Languages</SectionTitle>
           <div class="space-y-4">
             <div class="flex flex-wrap gap-2">
-              {RESUME_DATA.languages.map((lang) => <Badge>{lang}</Badge>)}
+              {RESUME_DATA.languages.map((lang) => <Badge variant="secondary" className="chip-soft">{lang}</Badge>)}
             </div>
           </div>
         </section>
 
-        <section class="space-y-6">
-          <h2
-            class="text-muted-foreground text-xs font-medium tracking-widest uppercase"
-          >
-            Tools
-          </h2>
+        <section class="section-stack">
+          <SectionTitle>Tools</SectionTitle>
           <div class="space-y-4">
             <div class="flex flex-wrap gap-2">
-              {RESUME_DATA.tools.map((tool) => <Badge>{tool}</Badge>)}
+              {RESUME_DATA.tools.map((tool) => <Badge variant="secondary" className="chip-soft">{tool}</Badge>)}
             </div>
           </div>
         </section>

@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import Navbar from '@/components/Navbar.astro';
 import Model3DViewer from '@/components/Model3DViewer.astro';
+import GalaxyBackground from '@/components/GalaxyBackground.astro';
 
 interface Props {
   title?: string;
@@ -13,7 +14,9 @@ const { title, description, showModel = true } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description}>
-  <div class="relative flex min-h-screen flex-col">
+  <div class="relative flex min-h-screen flex-col overflow-x-hidden">
+    <GalaxyBackground />
+
     {
       showModel && (
         <div transition:persist="3d-model">
@@ -23,7 +26,7 @@ const { title, description, showModel = true } = Astro.props;
     }
 
     <Navbar class="relative z-50" />
-    <main class="relative z-10 flex-1">
+    <main class="relative z-10 flex-1 pb-16 md:pb-24">
       <slot />
     </main>
   </div>

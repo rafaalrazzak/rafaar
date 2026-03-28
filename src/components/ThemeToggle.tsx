@@ -44,7 +44,7 @@ export default function ThemeToggle() {
     <div className="relative">
       <button
         onClick={() => setShowMenu(!showMenu)}
-        className="inline-flex size-9 items-center justify-center rounded-md border border-border bg-background transition-colors hover:bg-accent"
+        className="icon-button-glass inline-flex size-9 items-center justify-center rounded-md"
         aria-label="Change theme"
       >
         <Icon className="size-4" />
@@ -56,7 +56,7 @@ export default function ThemeToggle() {
             className="fixed inset-0 z-40"
             onClick={() => setShowMenu(false)}
           />
-          <div className="absolute right-0 top-12 z-50 w-40 rounded-lg border border-border bg-background p-1 shadow-lg">
+          <div className="glass-panel absolute right-0 top-12 z-50 w-40 rounded-lg p-1">
             <div className="space-y-0.5">
               {themes.map((t) => {
                 const ThemeIcon = t.icon;
@@ -64,8 +64,8 @@ export default function ThemeToggle() {
                   <button
                     key={t.value}
                     onClick={() => changeTheme(t.value)}
-                    className={`flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors hover:bg-accent ${
-                      theme === t.value ? 'bg-accent font-medium' : ''
+                    className={`menu-item ${
+                      theme === t.value ? 'bg-accent/70 text-main font-medium' : ''
                     }`}
                   >
                     <ThemeIcon className="size-4" />

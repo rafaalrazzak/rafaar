@@ -1,10 +1,12 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro';
 import { Badge } from '@almach/ui';
-import { Card } from '@almach/ui';
 import { RESUME_DATA } from '@/data/resume-data';
 import { tools } from '@/data/tools';
 import { GlobeIcon, MailIcon } from 'lucide-react';
+import GlassCard from '@/components/ui/GlassCard.astro';
+import SectionTitle from '@/components/ui/SectionTitle.astro';
+import InlineLink from '@/components/ui/InlineLink.astro';
 
 const allTools = tools.flatMap((tool) => tool.item);
 ---
@@ -12,8 +14,9 @@ const allTools = tools.flatMap((tool) => tool.item);
 <MainLayout
   title={`${RESUME_DATA.name} | CV`}
   description={RESUME_DATA.summary}
+  showModel={false}
 >
-  <div class="container mx-auto max-w-5xl px-6 py-20">
+  <div class="page-shell">
     <div class="space-y-12">
       <!-- Header -->
       <section class="space-y-6">
@@ -22,31 +25,27 @@ const allTools = tools.flatMap((tool) => tool.item);
             {RESUME_DATA.name}
           </h1>
           <p
-            class="text-muted-foreground max-w-3xl text-base leading-relaxed md:text-lg"
+            class="text-soft max-w-3xl text-base leading-relaxed md:text-lg"
           >
             {RESUME_DATA.summary}
           </p>
         </div>
 
         <div class="flex flex-wrap gap-x-5 gap-y-2 text-sm">
-          <a
+          <InlineLink
             href={RESUME_DATA.locationLink}
             target="_blank"
             rel="noopener noreferrer"
-            class="text-muted-foreground hover:text-foreground inline-flex items-center gap-2"
           >
-            <GlobeIcon className="size-4" />
+            <GlobeIcon className="icon-tone size-4" />
             <span>{RESUME_DATA.location}</span>
-          </a>
+          </InlineLink>
           {
             RESUME_DATA.contact.email && (
-              <a
-                href={`mailto:${RESUME_DATA.contact.email}`}
-                class="text-muted-foreground hover:text-foreground inline-flex items-center gap-2"
-              >
-                <MailIcon className="size-4" />
+              <InlineLink href={`mailto:${RESUME_DATA.contact.email}`}>
+                <MailIcon className="icon-tone size-4" />
                 <span>{RESUME_DATA.contact.email}</span>
-              </a>
+              </InlineLink>
             )
           }
         </div>
@@ -54,11 +53,7 @@ const allTools = tools.flatMap((tool) => tool.item);
 
       <!-- Work Experience -->
       <section class="space-y-6">
-        <h2
-          class="text-muted-foreground text-xs font-medium tracking-widest uppercase"
-        >
-          Work Experience
-        </h2>
+        <SectionTitle>Work Experience</SectionTitle>
         <div class="space-y-3">
           {
             RESUME_DATA.work.map((work) => (
@@ -68,31 +63,31 @@ const allTools = tools.flatMap((tool) => tool.item);
                 rel="noopener noreferrer"
                 class="block"
               >
-                <Card className="border-border/70 bg-card p-5 shadow-none transition-colors hover:border-foreground/20">
+                <GlassCard class="p-5">
                   <div class="space-y-3">
                     <div class="flex items-start justify-between gap-4">
                       <div class="flex-1 space-y-1">
-                        <h3 class="text-foreground font-medium">
+                        <h3 class="text-main font-medium">
                           {work.company}
                         </h3>
-                        <p class="text-muted-foreground text-sm">
+                        <p class="text-soft text-sm">
                           {work.title}
                         </p>
                       </div>
-                      <span class="text-muted-foreground text-sm whitespace-nowrap">
+                      <span class="text-soft text-sm whitespace-nowrap">
                         {work.start}—{work.end}
                       </span>
                     </div>
-                    <p class="text-muted-foreground/90 text-sm leading-relaxed">
+                    <p class="text-soft text-sm leading-relaxed">
                       {work.description}
                     </p>
                     <div class="flex flex-wrap gap-1.5">
                       {work.badges.map((badge) => (
-                        <Badge>{badge}</Badge>
+                        <Badge variant="secondary" className="chip-soft">{badge}</Badge>
                       ))}
                     </div>
                   </div>
-                </Card>
+                </GlassCard>
               </a>
             ))
           }
@@ -101,22 +96,18 @@ const allTools = tools.flatMap((tool) => tool.item);
 
       <!-- Education -->
       <section class="space-y-6">
-        <h2
-          class="text-muted-foreground text-xs font-medium tracking-widest uppercase"
-        >
-          Education
-        </h2>
+        <SectionTitle>Education</SectionTitle>
         <div class="space-y-3">
           {
             RESUME_DATA.education.map((edu) => (
-              <div class="border-border/70 bg-card rounded-lg border p-4">
+              <div class="glass-card glass-card-strong rounded-lg p-4">
                 <div class="flex items-start justify-between gap-4">
                   <h3 class="font-medium">{edu.school}</h3>
-                  <span class="text-muted-foreground text-sm whitespace-nowrap">
+                  <span class="text-soft text-sm whitespace-nowrap">
                     {edu.start}—{edu.end}
                   </span>
                 </div>
-                <p class="text-muted-foreground text-sm">{edu.degree}</p>
+                <p class="text-soft text-sm">{edu.degree}</p>
               </div>
             ))
           }
@@ -125,14 +116,10 @@ const allTools = tools.flatMap((tool) => tool.item);
 
       <!-- Skills -->
       <section class="space-y-6">
-        <h2
-          class="text-muted-foreground text-xs font-medium tracking-widest uppercase"
-        >
-          Skills &amp; Tools
-        </h2>
-        <div class="border-border/70 bg-card rounded-lg border p-4">
+        <SectionTitle>Skills &amp; Tools</SectionTitle>
+        <div class="glass-card glass-card-strong rounded-lg p-4">
           <div class="flex flex-wrap gap-1.5">
-            {allTools.map((tool) => <Badge>{tool}</Badge>)}
+            {allTools.map((tool) => <Badge variant="secondary" className="chip-soft">{tool}</Badge>)}
           </div>
         </div>
       </section>

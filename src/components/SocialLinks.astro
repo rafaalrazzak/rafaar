@@ -11,9 +11,9 @@ const { class: className } = Astro.props;
 
 <div class={className}>
   {socialMedia.map((social) => (
-    <Button asChild variant="outline" size="icon" className="size-10">
+    <Button asChild variant="outline" size="icon" className="icon-button-glass size-10">
       <a href={social.url} target="_blank" rel="noopener noreferrer">
-        <social.icon className="size-4 fill-current" />
+        <social.icon className="icon-tone size-4 fill-current" />
         <span class="sr-only">{social.name}</span>
       </a>
     </Button>

@@ -1,7 +1,7 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro';
-import { Card } from '@almach/ui';
 import { MusicIcon } from 'lucide-react';
+import GlassCard from '@/components/ui/GlassCard.astro';
 ---
 
 <MainLayout title="Songs">
@@ -11,7 +11,7 @@ import { MusicIcon } from 'lucide-react';
       <section class="max-w-3xl space-y-8">
         <div class="space-y-6">
           <h1 class="text-5xl font-medium tracking-tight md:text-6xl">Music</h1>
-          <p class="text-lg leading-relaxed text-muted-foreground md:text-xl">
+          <p class="text-soft text-lg leading-relaxed md:text-xl">
             What I'm listening to and my favorite tracks.
           </p>
         </div>
@@ -20,18 +20,18 @@ import { MusicIcon } from 'lucide-react';
       <!-- Content -->
       <section class="space-y-6">
         <div class="space-y-4">
-          <Card className="border-border/50 bg-card/50 p-6">
+          <GlassCard class="p-6">
           <div
             class="flex flex-col items-center justify-center space-y-4 py-16 text-center"
           >
             <div
-              class="flex size-16 items-center justify-center rounded-full bg-muted/50"
+              class="glass-panel flex size-16 items-center justify-center rounded-full"
             >
-              <MusicIcon className="size-8 text-muted-foreground" />
+              <MusicIcon className="icon-tone size-8" />
             </div>
-            <p class="text-sm text-muted-foreground">Coming soon...</p>
+            <p class="text-soft text-sm">Coming soon...</p>
           </div>
-          </Card>
+          </GlassCard>
         </div>
       </section>
     </div>
