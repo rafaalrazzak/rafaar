@@ -1,3 +1,4 @@
+import * as React from 'react';
 const Sun = ({ size = '24', ...props }) => (
   <svg
     width={size}
@@ -18,3 +19,4 @@ const Sun = ({ size = '24', ...props }) => (
 );
 
 export default Sun;
+

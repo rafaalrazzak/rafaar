@@ -1,3 +1,4 @@
+import * as React from 'react';
 const X = ({ size = '24', ...props }) => (
   <svg
     width={size}
@@ -11,3 +12,4 @@ const X = ({ size = '24', ...props }) => (
 );
 
 export default X;
+

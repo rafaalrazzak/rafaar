@@ -1,3 +1,4 @@
+import * as React from 'react';
 const Github = ({ size = '18', ...props }) => (
   <svg
     {...props}
@@ -18,3 +19,4 @@ const Github = ({ size = '18', ...props }) => (
 );
 
 export default Github;
+

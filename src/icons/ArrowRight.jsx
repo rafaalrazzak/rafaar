@@ -1,3 +1,4 @@
+import * as React from 'react';
 const ArrowRight = ({ size = '24', ...props }) => (
   <svg
     width={size}
@@ -17,3 +18,4 @@ const ArrowRight = ({ size = '24', ...props }) => (
 );
 
 export default ArrowRight;
+

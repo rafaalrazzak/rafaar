@@ -1,3 +1,4 @@
+import * as React from 'react';
 const Instagram = ({ size = '18', ...props }) => (
   <svg
     {...props}
@@ -19,3 +20,4 @@ const Instagram = ({ size = '18', ...props }) => (
 );
 
 export default Instagram;
+

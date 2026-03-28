@@ -1,3 +1,4 @@
+import * as React from 'react';
 const Spotify = ({ fill, size = '24', ...props }) => (
   <svg
     width={size}
@@ -16,3 +17,4 @@ const Spotify = ({ fill, size = '24', ...props }) => (
 );
 
 export default Spotify;
+
