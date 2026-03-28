@@ -8,7 +8,8 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "node scripts/patch-almach-ui.mjs && astro build",
+    "postinstall": "node scripts/patch-almach-ui.mjs",
     "preview": "astro preview"
   },
   "dependencies": {
