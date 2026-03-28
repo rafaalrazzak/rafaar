@@ -1,4 +1,6 @@
 @import 'tailwindcss';
+@import '@almach/ui/styles';
+@source '../../node_modules/@almach/ui/dist/**/*.js';
 
 /* Light Theme - Default */
 :root {
@@ -95,54 +97,15 @@ a {
   outline-offset: 2px;
 }
 
-/* Smooth transitions for theme changes */
-*,
-*::before,
-*::after {
-  transition-property: background-color, border-color, color, fill, stroke, opacity;
-  transition-duration: 0.4s;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+/* Keep transitions minimal to avoid page-swap flicker */
+body {
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* Faster transitions for interactive elements */
-button,
 a,
+button,
 input,
 select,
 textarea {
-  transition-duration: 0.2s;
-}
-
-/* Smooth theme transition for body */
-body {
-  transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-              color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Smooth transitions for headings */
-h1, h2, h3, h4, h5, h6 {
-  transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Disable transitions for animations and transforms */
-@keyframes {
-  * {
-    transition: none !important;
-  }
-}
-
-/* Tailwind theme integration */
-@theme {
-  --color-background: oklch(1 0 0);
-  --color-foreground: oklch(0.09 0 0);
-  --color-card: oklch(0.99 0 0);
-  --color-card-foreground: oklch(0.09 0 0);
-  --color-muted: oklch(0.97 0 0);
-  --color-muted-foreground: oklch(0.48 0 0);
-  --color-border: oklch(0.93 0 0);
-  --color-primary: oklch(0.09 0 0);
-  --color-primary-foreground: oklch(1 0 0);
-  --color-accent: oklch(0.96 0 0);
-  --color-accent-foreground: oklch(0.09 0 0);
-  --color-ring: oklch(0.09 0 0);
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, opacity 0.2s ease;
 }

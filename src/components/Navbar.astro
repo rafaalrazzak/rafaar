@@ -1,10 +1,19 @@
 ---
 import { APP_ROUTE } from '@/data/app-route';
 import ThemeToggle from './ThemeToggle';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
 ---
 
 <nav
-  class="sticky top-0 z-50 border-b border-border/50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+  class:list={[
+    'sticky top-0 z-50 border-b border-border/50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60',
+    className,
+  ]}
 >
   <div class="container mx-auto max-w-5xl px-6">
     <div class="flex h-14 items-center justify-between">
@@ -28,7 +37,9 @@ import ThemeToggle from './ThemeToggle';
           ))
         }
       </div>
-      <ThemeToggle client:load />
+      <div transition:persist="theme-toggle">
+        <ThemeToggle client:load />
+      </div>
     </div>
   </div>
 </nav>

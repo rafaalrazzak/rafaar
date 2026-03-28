@@ -1,7 +1,6 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro';
-import Section from '@/components/ui/Section.astro';
-import Card from '@/components/ui/Card.astro';
+import { Card } from '@almach/ui';
 import { RESUME_DATA } from '@/data/resume-data';
 import { projects } from '@/data/links/projects';
 ---
@@ -36,27 +35,30 @@ import { projects } from '@/data/links/projects';
       </section>
 
       <!-- Projects -->
-      <Section title="Projects">
-        <div class="space-y-3">
+      <section class="space-y-6">
+        <h2 class="text-xs font-medium uppercase tracking-widest text-muted-foreground">Projects</h2>
+        <div class="space-y-4">
           {
             projects.map((project) => (
-              <Card href={project.url}>
-                <div class="flex items-start gap-4">
-                  <div class="flex size-12 shrink-0 items-center justify-center rounded-lg bg-muted/50">
+              <a href={project.url} target="_blank" rel="noopener noreferrer" class="block">
+                <Card className="border-border/50 bg-card/50 p-6 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-foreground/20 hover:bg-card/80 hover:shadow-sm">
+                  <div class="flex items-start gap-4">
+                    <div class="flex size-12 shrink-0 items-center justify-center rounded-lg bg-muted/50">
                     <project.icon className="size-6 text-muted-foreground" />
+                    </div>
+                    <div class="flex-1 space-y-1">
+                      <h3 class="font-medium text-foreground">{project.title}</h3>
+                      <p class="text-sm text-muted-foreground">
+                        {project.description}
+                      </p>
+                    </div>
                   </div>
-                  <div class="flex-1 space-y-1">
-                    <h3 class="font-medium text-foreground">{project.title}</h3>
-                    <p class="text-sm text-muted-foreground">
-                      {project.description}
-                    </p>
-                  </div>
-                </div>
-              </Card>
+                </Card>
+              </a>
             ))
           }
         </div>
-      </Section>
+      </section>
     </div>
   </div>
 </MainLayout>
