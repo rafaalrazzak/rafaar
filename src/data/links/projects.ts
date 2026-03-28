@@ -3,7 +3,7 @@ import type { Project } from '@/types';
 
 export const projects: Project[] = [
   {
-    title: 'Secret Message',
+    title: 'Message',
     description: 'ssttt...🤫',
     url: 'https://l.kta.blue/secret',
     icon: MessagesSquare,
