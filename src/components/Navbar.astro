@@ -23,12 +23,14 @@ const pathname = normalizePath(Astro.url.pathname);
             APP_ROUTE.map(({ path, name }) => (
               <a
                 href={path}
+                data-route-link={normalizePath(path)}
                 class:list={[
                   'text-muted-foreground hover:bg-foreground/6 hover:text-foreground relative rounded-full px-3.5 py-1.5 text-sm font-medium transition-all duration-300 ease-out dark:hover:bg-white/8',
                   pathname === normalizePath(path)
                     ? 'text-foreground bg-white/70 shadow-sm shadow-slate-900/10 dark:bg-white/12 dark:shadow-black/20'
                     : '',
                 ]}
+                aria-current={pathname === normalizePath(path) ? 'page' : undefined}
               >
                 {name}
               </a>
@@ -42,3 +44,38 @@ const pathname = normalizePath(Astro.url.pathname);
     </div>
   </div>
 </nav>
+
+<script is:inline>
+  (() => {
+    const normalizePath = (value) =>
+      value.length > 1 ? value.replace(/\/+$/, '') : value;
+
+    const syncActiveRoute = () => {
+      const current = normalizePath(window.location.pathname);
+      const links = document.querySelectorAll('[data-route-link]');
+
+      links.forEach((link) => {
+        const isActive = normalizePath(link.getAttribute('data-route-link') || '') === current;
+        link.classList.toggle('text-foreground', isActive);
+        link.classList.toggle('bg-white/70', isActive);
+        link.classList.toggle('shadow-sm', isActive);
+        link.classList.toggle('shadow-slate-900/10', isActive);
+        link.classList.toggle('dark:bg-white/12', isActive);
+        link.classList.toggle('dark:shadow-black/20', isActive);
+        if (isActive) {
+          link.setAttribute('aria-current', 'page');
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      });
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', syncActiveRoute, { once: true });
+    } else {
+      syncActiveRoute();
+    }
+
+    document.addEventListener('astro:after-swap', syncActiveRoute);
+  })();
+</script>

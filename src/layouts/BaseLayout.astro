@@ -107,6 +107,17 @@ const fullTitle = title === siteMetadata.SITE_NAME ? title : `${title} — rafaa
         const isDark = root.classList.contains('dark');
         root.style.colorScheme = isDark ? 'dark' : 'light';
       });
+
+      // Prevent transient CSS transitions during client-side route swaps.
+      document.addEventListener('astro:before-swap', () => {
+        document.documentElement.dataset.routeTransitioning = 'true';
+      });
+
+      document.addEventListener('astro:after-swap', () => {
+        requestAnimationFrame(() => {
+          delete document.documentElement.dataset.routeTransitioning;
+        });
+      });
     </script>
   </body>
 </html>
