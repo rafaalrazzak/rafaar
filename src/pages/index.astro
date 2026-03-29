@@ -1,36 +1,43 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro';
-import { Badge } from '@almach/ui';
 import { RESUME_DATA } from '@/data/resume-data';
 import { MailIcon } from 'lucide-react';
 import GlassCard from '@/components/ui/GlassCard.astro';
 import SectionTitle from '@/components/ui/SectionTitle.astro';
 import InlineLink from '@/components/ui/InlineLink.astro';
+import Chip from '@/components/ui/Chip.astro';
+import PageShell from '@/components/layout/PageShell.astro';
+import PageStack from '@/components/layout/PageStack.astro';
+import PageHero from '@/components/layout/PageHero.astro';
+import SectionStack from '@/components/layout/SectionStack.astro';
+import CardStack from '@/components/layout/CardStack.astro';
+import PageHeading from '@/components/typography/PageHeading.astro';
+import PageLead from '@/components/typography/PageLead.astro';
 ---
 
 <MainLayout>
-  <div class="page-shell">
-    <div class="page-stack">
+  <PageShell>
+    <PageStack>
       <!-- Hero -->
-      <section class="page-hero">
+      <PageHero>
         <div class="space-y-6">
-          <h1 class="page-heading">
+          <PageHeading>
             {RESUME_DATA.name}
-          </h1>
-          <p class="page-lead">
+          </PageHeading>
+          <PageLead>
             {RESUME_DATA.about}
-          </p>
+          </PageLead>
         </div>
 
         <div class="flex flex-wrap gap-2">
-          {RESUME_DATA.skills.map((skill) => <Badge variant="secondary" className="chip-soft">{skill}</Badge>)}
+          {RESUME_DATA.skills.map((skill) => <Chip>{skill}</Chip>)}
         </div>
 
         <div class="flex flex-wrap gap-x-6 gap-y-3 text-sm">
           {
             RESUME_DATA.contact.email && (
               <InlineLink href={`mailto:${RESUME_DATA.contact.email}`}>
-                <MailIcon className="icon-tone size-4" />
+                <MailIcon className="text-muted-foreground hover:text-foreground size-4 transition-colors" />
                 <span>Email</span>
               </InlineLink>
             )
@@ -42,20 +49,20 @@ import InlineLink from '@/components/ui/InlineLink.astro';
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <social.icon className="icon-tone size-4 fill-current" />
+                <social.icon className="text-muted-foreground hover:text-foreground size-4 fill-current transition-colors" />
                 <span>{social.name}</span>
               </InlineLink>
             ))
           }
         </div>
-      </section>
+      </PageHero>
 
       <!-- Work -->
       {
         RESUME_DATA.work.length > 0 && (
-          <section class="section-stack">
+          <SectionStack>
             <SectionTitle>Work</SectionTitle>
-            <div class="card-stack">
+            <CardStack>
               {RESUME_DATA.work.map((work) => (
                 <a
                   href={work.link}
@@ -67,49 +74,49 @@ import InlineLink from '@/components/ui/InlineLink.astro';
                     <div class="space-y-3">
                       <div class="flex items-start justify-between gap-4">
                         <div class="flex-1 space-y-1">
-                          <h3 class="text-main font-medium">
+                          <h3 class="text-foreground font-medium">
                             {work.company}
                           </h3>
-                          <p class="text-soft text-sm">
+                          <p class="text-muted-foreground text-sm">
                             {work.title}
                           </p>
                         </div>
-                        <span class="text-soft text-sm whitespace-nowrap">
+                        <span class="text-muted-foreground text-sm whitespace-nowrap">
                           {work.start}—{work.end}
                         </span>
                       </div>
-                      <p class="text-soft text-sm leading-relaxed">
+                      <p class="text-muted-foreground text-sm leading-relaxed">
                         {work.description}
                       </p>
                     </div>
                   </GlassCard>
                 </a>
               ))}
-            </div>
-          </section>
+            </CardStack>
+          </SectionStack>
         )
       }
 
       <!-- Skills -->
       <div class="grid gap-16 md:grid-cols-2">
-        <section class="section-stack">
+        <SectionStack>
           <SectionTitle>Languages</SectionTitle>
           <div class="space-y-4">
             <div class="flex flex-wrap gap-2">
-              {RESUME_DATA.languages.map((lang) => <Badge variant="secondary" className="chip-soft">{lang}</Badge>)}
+              {RESUME_DATA.languages.map((lang) => <Chip>{lang}</Chip>)}
             </div>
           </div>
-        </section>
+        </SectionStack>
 
-        <section class="section-stack">
+        <SectionStack>
           <SectionTitle>Tools</SectionTitle>
           <div class="space-y-4">
             <div class="flex flex-wrap gap-2">
-              {RESUME_DATA.tools.map((tool) => <Badge variant="secondary" className="chip-soft">{tool}</Badge>)}
+              {RESUME_DATA.tools.map((tool) => <Chip>{tool}</Chip>)}
             </div>
           </div>
-        </section>
+        </SectionStack>
       </div>
-    </div>
-  </div>
+    </PageStack>
+  </PageShell>
 </MainLayout>

@@ -1,0 +1,21 @@
+---
+import { Badge } from '@almach/ui';
+import { cn } from '@/libs/utils';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<Badge
+  variant="secondary"
+  className={cn(
+    'border border-border/70 bg-background/70 text-foreground shadow-sm backdrop-blur-sm dark:border-white/15 dark:bg-zinc-900/60 dark:text-zinc-100 dark:shadow-black/30',
+    className,
+  )}
+>
+  <slot />
+</Badge>
+

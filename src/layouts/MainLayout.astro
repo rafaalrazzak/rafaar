@@ -19,7 +19,7 @@ const { title, description, showModel = true } = Astro.props;
 
     {
       showModel && (
-        <div transition:persist="3d-model" class="hidden md:block">
+        <div transition:persist="3d-model">
           <Model3DViewer
             modelUrl="/models/logo.glb"
             height="100vh"
@@ -30,7 +30,7 @@ const { title, description, showModel = true } = Astro.props;
     }
     <div
       aria-hidden="true"
-      class="pointer-events-none fixed inset-0 z-[4] bg-[radial-gradient(78%_62%_at_24%_30%,rgba(255,255,255,0.86)_0%,rgba(255,255,255,0.62)_36%,rgba(255,255,255,0.18)_66%,transparent_82%),radial-gradient(58%_48%_at_68%_44%,rgba(255,255,255,0.18)_0%,transparent_70%),linear-gradient(90deg,rgba(248,250,252,0.58)_0%,rgba(248,250,252,0.4)_36%,rgba(248,250,252,0.14)_62%,transparent_78%),linear-gradient(180deg,rgba(248,250,252,0.64)_0%,rgba(248,250,252,0.28)_44%,rgba(248,250,252,0.48)_100%)] dark:bg-[radial-gradient(70%_54%_at_24%_30%,rgba(8,19,48,0.56)_0%,rgba(7,16,38,0.38)_40%,rgba(5,12,28,0.12)_66%,transparent_84%),radial-gradient(44%_40%_at_74%_20%,rgba(56,189,248,0.22)_0%,rgba(37,99,235,0.12)_34%,transparent_70%),radial-gradient(58%_44%_at_64%_48%,rgba(30,64,175,0.14)_0%,transparent_74%),linear-gradient(90deg,rgba(2,6,23,0.26)_0%,rgba(2,6,23,0.14)_34%,rgba(2,6,23,0.06)_62%,transparent_82%),linear-gradient(180deg,rgba(2,6,23,0.34)_0%,rgba(2,6,23,0.12)_44%,rgba(2,6,23,0.26)_100%)]"
+      class="pointer-events-none fixed inset-0 z-[4] bg-[radial-gradient(78%_62%_at_24%_30%,rgba(255,255,255,0.86)_0%,rgba(255,255,255,0.62)_36%,rgba(255,255,255,0.18)_66%,transparent_82%),radial-gradient(58%_48%_at_68%_44%,rgba(255,255,255,0.18)_0%,transparent_70%),linear-gradient(90deg,rgba(248,250,252,0.58)_0%,rgba(248,250,252,0.4)_36%,rgba(248,250,252,0.14)_62%,transparent_78%),linear-gradient(180deg,rgba(248,250,252,0.64)_0%,rgba(248,250,252,0.28)_44%,rgba(248,250,252,0.48)_100%)] opacity-30 dark:bg-[radial-gradient(70%_54%_at_24%_30%,rgba(8,19,48,0.56)_0%,rgba(7,16,38,0.38)_40%,rgba(5,12,28,0.12)_66%,transparent_84%),radial-gradient(44%_40%_at_74%_20%,rgba(56,189,248,0.22)_0%,rgba(37,99,235,0.12)_34%,transparent_70%),radial-gradient(58%_44%_at_64%_48%,rgba(30,64,175,0.14)_0%,transparent_74%),linear-gradient(90deg,rgba(2,6,23,0.26)_0%,rgba(2,6,23,0.14)_34%,rgba(2,6,23,0.06)_62%,transparent_82%),linear-gradient(180deg,rgba(2,6,23,0.34)_0%,rgba(2,6,23,0.12)_44%,rgba(2,6,23,0.26)_100%)] dark:opacity-52"
     >
     </div>
 

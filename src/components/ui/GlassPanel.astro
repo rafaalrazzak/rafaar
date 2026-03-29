@@ -1,0 +1,21 @@
+---
+import { cn } from '@/libs/utils';
+
+interface Props {
+  class?: string;
+  as?: 'div' | 'span';
+}
+
+const { class: className, as = 'div' } = Astro.props;
+const Tag = as;
+---
+
+<Tag
+  class={cn(
+    'border border-white/65 bg-white/56 shadow-xl shadow-slate-900/8 backdrop-blur-xl backdrop-saturate-150 dark:border-white/12 dark:bg-zinc-950/54 dark:shadow-2xl dark:shadow-black/35',
+    className,
+  )}
+>
+  <slot />
+</Tag>
+

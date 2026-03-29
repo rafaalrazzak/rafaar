@@ -44,7 +44,7 @@ export default function ThemeToggle() {
     <div className="relative">
       <button
         onClick={() => setShowMenu(!showMenu)}
-        className="icon-button-glass inline-flex size-9 items-center justify-center rounded-md"
+        className="text-muted-foreground hover:text-foreground inline-flex size-9 items-center justify-center rounded-md border border-border/40 bg-background/55 shadow-lg shadow-slate-900/10 backdrop-blur-xl backdrop-saturate-150 transition-colors dark:border-white/15 dark:bg-zinc-900/60 dark:shadow-black/30"
         aria-label="Change theme"
       >
         <Icon className="size-4" />
@@ -56,7 +56,7 @@ export default function ThemeToggle() {
             className="fixed inset-0 z-40"
             onClick={() => setShowMenu(false)}
           />
-          <div className="glass-panel absolute right-0 top-12 z-50 w-40 rounded-lg p-1">
+          <div className="absolute right-0 top-12 z-50 w-40 rounded-lg border border-white/65 bg-white/56 p-1 shadow-xl shadow-slate-900/8 backdrop-blur-xl backdrop-saturate-150 dark:border-white/12 dark:bg-zinc-950/54 dark:shadow-2xl dark:shadow-black/35">
             <div className="space-y-0.5">
               {themes.map((t) => {
                 const ThemeIcon = t.icon;
@@ -64,8 +64,8 @@ export default function ThemeToggle() {
                   <button
                     key={t.value}
                     onClick={() => changeTheme(t.value)}
-                    className={`menu-item ${
-                      theme === t.value ? 'bg-accent/70 text-main font-medium' : ''
+                    className={`text-muted-foreground hover:text-foreground hover:bg-accent/60 flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors ${
+                      theme === t.value ? 'bg-accent/70 text-foreground font-medium' : ''
                     }`}
                   >
                     <ThemeIcon className="size-4" />

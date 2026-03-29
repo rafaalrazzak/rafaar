@@ -2,38 +2,44 @@
 import MainLayout from '@/layouts/MainLayout.astro';
 import { MusicIcon } from 'lucide-react';
 import GlassCard from '@/components/ui/GlassCard.astro';
+import GlassPanel from '@/components/ui/GlassPanel.astro';
+import PageShell from '@/components/layout/PageShell.astro';
+import PageStack from '@/components/layout/PageStack.astro';
+import PageHero from '@/components/layout/PageHero.astro';
+import SectionStack from '@/components/layout/SectionStack.astro';
+import CardStack from '@/components/layout/CardStack.astro';
+import PageHeading from '@/components/typography/PageHeading.astro';
+import PageLead from '@/components/typography/PageLead.astro';
 ---
 
 <MainLayout title="Songs">
-  <div class="container mx-auto max-w-5xl px-6 py-20">
-    <div class="space-y-20">
+  <PageShell>
+    <PageStack>
       <!-- Header -->
-      <section class="max-w-3xl space-y-8">
+      <PageHero>
         <div class="space-y-6">
-          <h1 class="text-5xl font-medium tracking-tight md:text-6xl">Music</h1>
-          <p class="text-soft text-lg leading-relaxed md:text-xl">
+          <PageHeading>Music</PageHeading>
+          <PageLead>
             What I'm listening to and my favorite tracks.
-          </p>
+          </PageLead>
         </div>
-      </section>
+      </PageHero>
 
       <!-- Content -->
-      <section class="space-y-6">
-        <div class="space-y-4">
+      <SectionStack>
+        <CardStack>
           <GlassCard class="p-6">
-          <div
-            class="flex flex-col items-center justify-center space-y-4 py-16 text-center"
-          >
             <div
-              class="glass-panel flex size-16 items-center justify-center rounded-full"
+              class="flex flex-col items-center justify-center space-y-4 py-16 text-center"
             >
-              <MusicIcon className="icon-tone size-8" />
+              <GlassPanel class="flex size-16 items-center justify-center rounded-full">
+                <MusicIcon className="text-muted-foreground hover:text-foreground size-8 transition-colors" />
+              </GlassPanel>
+              <p class="text-muted-foreground text-sm">Coming soon...</p>
             </div>
-            <p class="text-soft text-sm">Coming soon...</p>
-          </div>
           </GlassCard>
-        </div>
-      </section>
-    </div>
-  </div>
+        </CardStack>
+      </SectionStack>
+    </PageStack>
+  </PageShell>
 </MainLayout>

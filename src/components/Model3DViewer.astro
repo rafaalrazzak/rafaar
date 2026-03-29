@@ -14,19 +14,22 @@ interface Props {
 
 const {
   modelUrl,
-  height = "100vh",
+  height = '100vh',
   enableGlare = true,
-  alt = "3D logo",
-  cameraOrbit = "0deg 72deg 200%",
-  cameraTarget = "0m 0.08m 0m",
-  fieldOfView = "35deg",
-  exposure = "0.92",
-  shadowIntensity = "0.34",
-  shadowSoftness = "1.4",
+  alt = '3D logo',
+  cameraOrbit = '0deg 72deg 200%',
+  cameraTarget = '0m 0.08m 0m',
+  fieldOfView = '35deg',
+  exposure = '0.92',
+  shadowIntensity = '0.34',
+  shadowSoftness = '1.4',
 } = Astro.props;
 ---
 
-<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+<script
+  type="module"
+  src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"
+></script>
 
 <style is:global>
   #animated-model {
@@ -61,7 +64,7 @@ const {
   min-camera-orbit="auto auto 150%"
   max-camera-orbit="auto auto 250%"
   interpolation-decay="200"
-  class="fixed inset-0 z-[3] pointer-events-none [--poster-color:transparent]"
+  class="pointer-events-none fixed inset-0 z-[3] [--poster-color:transparent]"
   style={`height:${height};width:100%;`}
 >
 </model-viewer>
@@ -69,9 +72,9 @@ const {
 {
   enableGlare && (
     <div class="scene-glow pointer-events-none fixed inset-0 z-[2]">
-      <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_28%,color-mix(in_oklab,var(--color-foreground)_6%,transparent)_85%)] opacity-55 dark:opacity-50"></div>
-      <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,color-mix(in_oklab,var(--color-muted)_65%,transparent)_0%,transparent_72%)] opacity-45 dark:opacity-40"></div>
-      <div class="pointer-events-none absolute inset-x-0 bottom-[-6rem] h-[20rem] bg-[radial-gradient(60%_45%_at_50%_50%,rgba(15,23,42,0.22),transparent)] dark:bg-[radial-gradient(60%_45%_at_50%_50%,rgba(2,6,23,0.52),transparent)]"></div>
+      <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_28%,color-mix(in_oklab,var(--color-foreground)_6%,transparent)_85%)] opacity-55 dark:opacity-50" />
+      <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,color-mix(in_oklab,var(--color-muted)_65%,transparent)_0%,transparent_72%)] opacity-45 dark:opacity-40" />
+      <div class="pointer-events-none absolute inset-x-0 bottom-[-6rem] h-[20rem] bg-[radial-gradient(60%_45%_at_50%_50%,rgba(15,23,42,0.22),transparent)] dark:bg-[radial-gradient(60%_45%_at_50%_50%,rgba(2,6,23,0.52),transparent)]" />
     </div>
   )
 }
@@ -80,61 +83,64 @@ const {
   function setObserver(viewer) {
     if (window.__modelThemeObserver) return window.__modelThemeObserver;
     const observer = new MutationObserver(() => applyViewerTheme(viewer));
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
     window.__modelThemeObserver = observer;
     return observer;
   }
 
   function applyViewerTheme(viewer) {
-    const isDark = document.documentElement.classList.contains("dark");
-    const isLoaded = viewer.dataset.loaded === "true";
-    const targetOpacity = isDark ? "0.9" : "0.72";
+    const isDark = document.documentElement.classList.contains('dark');
+    const isLoaded = viewer.dataset.loaded === 'true';
+    const targetOpacity = isDark ? '0.78' : '0.62';
     const targetFilter = isDark
-      ? "saturate(1.05)"
-      : "brightness(1.08) contrast(0.88) saturate(0.72) drop-shadow(0 20px 28px rgba(15,23,42,0.12))";
+      ? 'saturate(1.05)'
+      : 'brightness(1.08) contrast(0.88) saturate(0.72) drop-shadow(0 20px 28px rgba(15,23,42,0.12))';
 
     if (isDark) {
-      viewer.exposure = "0.92";
-      viewer.shadowIntensity = "0.42";
-      viewer.shadowSoftness = "1.25";
+      viewer.exposure = '0.92';
+      viewer.shadowIntensity = '0.42';
+      viewer.shadowSoftness = '1.25';
     } else {
-      viewer.exposure = "1";
-      viewer.shadowIntensity = "0.5";
-      viewer.shadowSoftness = "0.9";
+      viewer.exposure = '1';
+      viewer.shadowIntensity = '0.5';
+      viewer.shadowSoftness = '0.9';
     }
 
-    viewer.style.mixBlendMode = "normal";
-    viewer.style.opacity = isLoaded ? targetOpacity : "0";
-    viewer.style.filter = isLoaded ? targetFilter : "blur(6px) saturate(0.88)";
+    viewer.style.mixBlendMode = 'normal';
+    viewer.style.opacity = isLoaded ? targetOpacity : '0';
+    viewer.style.filter = isLoaded ? targetFilter : 'blur(6px) saturate(0.88)';
     viewer.style.transform = isLoaded
-      ? "translate3d(0, 10vh, 0) scale(1)"
-      : "translate3d(0, 13vh, 0) scale(0.985)";
-    viewer.style.willChange = "opacity, filter, transform";
+      ? 'translate3d(0, 10vh, 0) scale(1)'
+      : 'translate3d(0, 13vh, 0) scale(0.985)';
+    viewer.style.willChange = 'opacity, filter, transform';
     viewer.style.transition =
-      "opacity .9s cubic-bezier(.22,1,.36,1), filter .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1)";
+      'opacity .9s cubic-bezier(.22,1,.36,1), filter .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1)';
   }
 
   function initModelViewerThemeSync() {
-    const viewer = document.getElementById("animated-model");
+    const viewer = document.getElementById('animated-model');
     if (!viewer) return;
 
     if (!viewer.dataset.enterInit) {
-      viewer.dataset.enterInit = "true";
-      viewer.dataset.loaded = "false";
+      viewer.dataset.enterInit = 'true';
+      viewer.dataset.loaded = 'false';
       viewer.addEventListener(
-        "load",
+        'load',
         () => {
-          viewer.dataset.loaded = "true";
+          viewer.dataset.loaded = 'true';
           applyViewerTheme(viewer);
         },
-        { once: true },
+        { once: true }
       );
 
       // Fallback in case load event was missed after persisted navigation.
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          if (viewer.dataset.loaded !== "true") {
-            viewer.dataset.loaded = "true";
+          if (viewer.dataset.loaded !== 'true') {
+            viewer.dataset.loaded = 'true';
             applyViewerTheme(viewer);
           }
         });
@@ -145,20 +151,22 @@ const {
     const observer = setObserver(viewer);
 
     document.addEventListener(
-      "astro:before-swap",
+      'astro:before-swap',
       () => {
         observer.disconnect();
         window.__modelThemeObserver = null;
       },
-      { once: true },
+      { once: true }
     );
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initModelViewerThemeSync, { once: true });
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initModelViewerThemeSync, {
+      once: true,
+    });
   } else {
     initModelViewerThemeSync();
   }
 
-  document.addEventListener("astro:page-load", initModelViewerThemeSync);
+  document.addEventListener('astro:page-load', initModelViewerThemeSync);
 </script>

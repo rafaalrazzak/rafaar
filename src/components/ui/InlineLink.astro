@@ -16,6 +16,14 @@ const {
 } = Astro.props;
 ---
 
-<a href={href} target={target} rel={rel} class={cn('inline-link', className)}>
+<a
+  href={href}
+  target={target}
+  rel={rel}
+  class={cn(
+    'text-muted-foreground hover:text-foreground inline-flex items-center gap-2 transition-colors',
+    className,
+  )}
+>
   <slot />
 </a>

@@ -13,7 +13,7 @@ const pathname = normalizePath(Astro.url.pathname);
 ---
 
 <nav class:list={['sticky top-0 z-50', className]}>
-  <div class="mx-auto w-full max-w-5xl px-2 pt-2 sm:px-4">
+  <div class="mx-auto w-full max-w-6xl px-4 pt-2 sm:px-6 lg:px-8">
     <div
       class="rounded-2xl border border-white/70 bg-white/72 px-3 shadow-xl shadow-slate-900/10 backdrop-blur-2xl backdrop-saturate-150 sm:px-4 dark:border-white/15 dark:bg-zinc-950/62 dark:shadow-black/35"
     >
@@ -24,7 +24,7 @@ const pathname = normalizePath(Astro.url.pathname);
               <a
                 href={path}
                 class:list={[
-                  'text-soft hover:bg-foreground/6 hover:text-foreground relative rounded-full px-3.5 py-1.5 text-sm font-medium transition-all duration-300 ease-out dark:hover:bg-white/8',
+                  'text-muted-foreground hover:bg-foreground/6 hover:text-foreground relative rounded-full px-3.5 py-1.5 text-sm font-medium transition-all duration-300 ease-out dark:hover:bg-white/8',
                   pathname === normalizePath(path)
                     ? 'text-foreground bg-white/70 shadow-sm shadow-slate-900/10 dark:bg-white/12 dark:shadow-black/20'
                     : '',

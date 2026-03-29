@@ -3,20 +3,28 @@ import MainLayout from '@/layouts/MainLayout.astro';
 import { RESUME_DATA } from '@/data/resume-data';
 import { projects } from '@/data/links/projects';
 import GlassCard from '@/components/ui/GlassCard.astro';
+import GlassPanel from '@/components/ui/GlassPanel.astro';
 import SectionTitle from '@/components/ui/SectionTitle.astro';
 import InlineLink from '@/components/ui/InlineLink.astro';
+import PageShell from '@/components/layout/PageShell.astro';
+import PageStack from '@/components/layout/PageStack.astro';
+import PageHero from '@/components/layout/PageHero.astro';
+import SectionStack from '@/components/layout/SectionStack.astro';
+import CardStack from '@/components/layout/CardStack.astro';
+import PageHeading from '@/components/typography/PageHeading.astro';
+import PageLead from '@/components/typography/PageLead.astro';
 ---
 
 <MainLayout title="Links">
-  <div class="page-shell">
-    <div class="page-stack">
+  <PageShell>
+    <PageStack>
       <!-- Header -->
-      <section class="page-hero">
+      <PageHero>
         <div class="space-y-6">
-          <h1 class="page-heading">Links</h1>
-          <p class="page-lead">
+          <PageHeading>Links</PageHeading>
+          <PageLead>
             Connect with me across the web.
-          </p>
+          </PageLead>
         </div>
 
         <div class="flex flex-wrap gap-x-6 gap-y-3 text-sm">
@@ -27,29 +35,29 @@ import InlineLink from '@/components/ui/InlineLink.astro';
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <social.icon className="icon-tone size-4 fill-current" />
+                <social.icon className="text-muted-foreground hover:text-foreground size-4 fill-current transition-colors" />
                 <span>{social.name}</span>
               </InlineLink>
             ))
           }
         </div>
-      </section>
+      </PageHero>
 
       <!-- Projects -->
-      <section class="section-stack">
+      <SectionStack>
         <SectionTitle>Projects</SectionTitle>
-        <div class="card-stack">
+        <CardStack>
           {
             projects.map((project) => (
               <a href={project.url} target="_blank" rel="noopener noreferrer" class="block">
                 <GlassCard class="p-6 hover:-translate-y-0.5">
                   <div class="flex items-start gap-4">
-                    <div class="glass-panel flex size-12 shrink-0 items-center justify-center rounded-lg">
-                    <project.icon className="icon-tone size-6" />
-                    </div>
+                    <GlassPanel class="flex size-12 shrink-0 items-center justify-center rounded-lg">
+                      <project.icon className="text-muted-foreground hover:text-foreground size-6 transition-colors" />
+                    </GlassPanel>
                     <div class="flex-1 space-y-1">
-                      <h3 class="text-main font-medium">{project.title}</h3>
-                      <p class="text-soft text-sm">
+                      <h3 class="text-foreground font-medium">{project.title}</h3>
+                      <p class="text-muted-foreground text-sm">
                         {project.description}
                       </p>
                     </div>
@@ -58,8 +66,8 @@ import InlineLink from '@/components/ui/InlineLink.astro';
               </a>
             ))
           }
-        </div>
-      </section>
-    </div>
-  </div>
+        </CardStack>
+      </SectionStack>
+    </PageStack>
+  </PageShell>
 </MainLayout>
