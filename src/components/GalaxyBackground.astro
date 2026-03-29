@@ -1,28 +1,33 @@
 <div
   transition:persist="galaxy-bg"
+  data-fixed-visual
   class="pointer-events-none fixed inset-0 -z-10 overflow-hidden print:hidden"
 >
   <div class="bg-background absolute inset-0 -z-10"></div>
   <canvas id="galaxy-canvas" class="absolute inset-0 -z-10 h-full w-full"
   ></canvas>
-  <div class="galaxy-aurora galaxy-aurora-a absolute inset-0 -z-10"></div>
-  <div class="galaxy-aurora galaxy-aurora-b absolute inset-0 -z-10"></div>
-  <div class="galaxy-aurora galaxy-aurora-c absolute inset-0 -z-10"></div>
+  <div data-aurora="a" class="absolute inset-0 -z-10"></div>
+  <div data-aurora="b" class="absolute inset-0 -z-10"></div>
+  <div data-aurora="c" class="absolute inset-0 -z-10"></div>
 
   <div
-    class="galaxy-overlay galaxy-overlay-a absolute inset-0 -z-10 bg-[radial-gradient(120%_90%_at_15%_5%,rgba(59,130,246,0.18),transparent_52%),radial-gradient(90%_70%_at_85%_12%,rgba(14,165,233,0.14),transparent_56%),linear-gradient(180deg,rgba(248,250,252,0.92)_0%,rgba(241,245,249,0.82)_45%,rgba(248,250,252,0.92)_100%)] dark:bg-[radial-gradient(120%_95%_at_15%_5%,rgba(37,99,235,0.34),transparent_56%),radial-gradient(95%_75%_at_85%_12%,rgba(56,189,248,0.22),transparent_60%),linear-gradient(180deg,rgba(2,6,23,0.92)_0%,rgba(3,7,18,0.84)_45%,rgba(2,6,23,0.95)_100%)]"
+    data-overlay="a"
+    class="absolute inset-0 -z-10 bg-[radial-gradient(120%_90%_at_15%_5%,rgba(59,130,246,0.18),transparent_52%),radial-gradient(90%_70%_at_85%_12%,rgba(14,165,233,0.14),transparent_56%),linear-gradient(180deg,rgba(248,250,252,0.92)_0%,rgba(241,245,249,0.82)_45%,rgba(248,250,252,0.92)_100%)] dark:bg-[radial-gradient(120%_95%_at_15%_5%,rgba(37,99,235,0.34),transparent_56%),radial-gradient(95%_75%_at_85%_12%,rgba(56,189,248,0.22),transparent_60%),linear-gradient(180deg,rgba(2,6,23,0.92)_0%,rgba(3,7,18,0.84)_45%,rgba(2,6,23,0.95)_100%)]"
   >
   </div>
   <div
-    class="galaxy-overlay galaxy-overlay-b from-background/85 via-background/30 to-background/70 absolute inset-0 -z-10 bg-gradient-to-b"
+    data-overlay="b"
+    class="from-background/85 via-background/30 to-background/70 absolute inset-0 -z-10 bg-gradient-to-b"
   >
   </div>
   <div
-    class="galaxy-overlay galaxy-overlay-c absolute inset-0 -z-10 bg-[radial-gradient(70%_55%_at_50%_65%,rgba(255,255,255,0.36),transparent_72%)] dark:bg-[radial-gradient(70%_55%_at_50%_65%,rgba(15,23,42,0.42),transparent_72%)]"
+    data-overlay="c"
+    class="absolute inset-0 -z-10 bg-[radial-gradient(70%_55%_at_50%_65%,rgba(255,255,255,0.36),transparent_72%)] dark:bg-[radial-gradient(70%_55%_at_50%_65%,rgba(15,23,42,0.42),transparent_72%)]"
   >
   </div>
   <div
-    class="galaxy-overlay absolute inset-0 -z-10 bg-[radial-gradient(55%_55%_at_50%_45%,rgba(59,130,246,0.12),transparent)] dark:bg-[radial-gradient(55%_55%_at_50%_45%,rgba(96,165,250,0.16),transparent)]"
+    data-overlay="d"
+    class="absolute inset-0 -z-10 bg-[radial-gradient(55%_55%_at_50%_45%,rgba(59,130,246,0.12),transparent)] dark:bg-[radial-gradient(55%_55%_at_50%_45%,rgba(96,165,250,0.16),transparent)]"
   >
   </div>
   <div
@@ -32,38 +37,38 @@
 </div>
 
 <style>
-  .galaxy-aurora {
+  [data-aurora] {
     will-change: transform, opacity, filter;
     mix-blend-mode: normal;
     pointer-events: none;
   }
 
-  :global(.dark) .galaxy-aurora {
+  :global(.dark) [data-aurora] {
     mix-blend-mode: screen;
   }
 
-  .galaxy-overlay {
+  [data-overlay] {
     pointer-events: none;
     will-change: transform, opacity;
     transform-origin: 50% 50%;
     inset: 0;
   }
 
-  .galaxy-overlay-a {
+  [data-overlay='a'] {
     animation: overlayDriftA 46s cubic-bezier(0.37, 0, 0.18, 1) infinite
       alternate;
   }
 
-  .galaxy-overlay-b {
+  [data-overlay='b'] {
     animation: overlayDriftB 38s cubic-bezier(0.37, 0, 0.18, 1) infinite
       alternate;
   }
 
-  .galaxy-overlay-c {
+  [data-overlay='c'] {
     animation: overlayPulse 28s ease-in-out infinite alternate;
   }
 
-  .galaxy-aurora-a {
+  [data-aurora='a'] {
     background:
       radial-gradient(
         55% 45% at 20% 30%,
@@ -81,7 +86,7 @@
     filter: blur(18px);
   }
 
-  .galaxy-aurora-b {
+  [data-aurora='b'] {
     background:
       radial-gradient(
         48% 38% at 68% 66%,
@@ -99,7 +104,7 @@
     filter: blur(24px);
   }
 
-  .galaxy-aurora-c {
+  [data-aurora='c'] {
     background: conic-gradient(
       from 180deg at 50% 50%,
       rgba(56, 189, 248, 0.14),
@@ -113,7 +118,7 @@
     filter: blur(36px);
   }
 
-  :global(.dark) .galaxy-aurora-a {
+  :global(.dark) [data-aurora='a'] {
     background:
       radial-gradient(
         55% 45% at 20% 30%,
@@ -128,7 +133,7 @@
     opacity: 0.78;
   }
 
-  :global(.dark) .galaxy-aurora-b {
+  :global(.dark) [data-aurora='b'] {
     background:
       radial-gradient(
         48% 38% at 68% 66%,
@@ -143,7 +148,7 @@
     opacity: 0.68;
   }
 
-  :global(.dark) .galaxy-aurora-c {
+  :global(.dark) [data-aurora='c'] {
     opacity: 0.58;
   }
 
@@ -208,12 +213,8 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .galaxy-aurora-a,
-    .galaxy-aurora-b,
-    .galaxy-aurora-c,
-    .galaxy-overlay-a,
-    .galaxy-overlay-b,
-    .galaxy-overlay-c {
+    [data-aurora],
+    [data-overlay] {
       animation: none;
     }
   }
