@@ -10,8 +10,8 @@ const dateWorks = {
 } as const;
 
 function calculateDuration(start: Date, end: Date | string): string {
-  const endDate = typeof end === 'string' && end.toLowerCase() === 'present' 
-    ? new Date() 
+  const endDate = typeof end === 'string' && end.toLowerCase() === 'present'
+    ? new Date()
     : typeof end === 'string' ? new Date(end) : end;
 
   const years = differenceInYears(endDate, start);
@@ -69,5 +69,49 @@ export const RESUME_DATA: ResumeData = {
     'Figma', 'Adobe CC', 'Bun', 'Node.js', 'React.js', 'Next.js', 'Astro', 'Solid',
     'TailwindCSS', 'Supabase', 'Firebase', 'GraphQL', 'MongoDB', 'Prisma', 'Drizzle',
     'VSCode', 'Git', 'Vercel', 'Docker',
+  ],
+  projects: [
+    {
+      title: 'Ryu',
+      description: 'A beautifully designed spending tracker. Log transactions in seconds, set budgets, and understand where your money goes.',
+      url: 'https://ryu.kita.blue/',
+      thumbnail: 'https://ryu.kita.blue/og.png',
+      badges: ['Web'],
+    },
+    {
+      title: 'Almach',
+      description: 'A modern, accessible React UI component library monorepo. Built on React Aria, Tailwind CSS v4, TanStack Query, TanStack Form, and Zod.',
+      url: 'https://almach.kita.blue',
+      thumbnail: 'https://almach.kita.blue/og.png',
+      badges: ['React', 'Tailwind CSS v4', 'React Aria', 'Bun'],
+    },
+    {
+      title: 'Forum GenRe Kabupaten Bogor',
+      description: 'Digital platform ecosystem for Forum GenRe Kabupaten Bogor.',
+      url: 'https://genre.kita.blue',
+      thumbnail: 'https://genre.kita.blue/og.png',
+      badges: ['Web'],
+    },
+    {
+      title: 'Events Platform',
+      description: 'The ultimate multi-tenant platform for creating, managing, and attending exceptional events. Connect with your audience and create unforgettable experiences.',
+      url: 'https://events.kita.blue',
+      thumbnail: 'https://events.kita.blue/og.png',
+      badges: ['Web'],
+    },
+    {
+      title: 'OSIS SMK Al-Asiyah',
+      description: 'Web portal for Student Council (OSIS) operations and information.',
+      url: 'https://osis.kita.blue',
+      thumbnail: 'https://osis.kita.blue/assets/site/thumbnail-osis.png',
+      badges: ['Web'],
+    },
+    {
+      title: 'MPK SMK Al-Asiyah',
+      description: 'Web portal for Student Representative Council (MPK).',
+      url: 'https://mpk.kita.blue',
+      thumbnail: 'https://mpk.kita.blue/assets/thumbnail-mpkj.png',
+      badges: ['Web'],
+    },
   ],
 } as const;

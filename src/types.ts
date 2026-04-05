@@ -4,7 +4,9 @@ export interface Project {
   title: string;
   description: string;
   url: string;
-  icon: LucideIcon;
+  icon?: LucideIcon | React.ComponentType<{ className?: string }>;
+  thumbnail?: string;
+  badges?: string[];
 }
 
 export interface SocialMedia {
@@ -51,4 +53,5 @@ export interface ResumeData {
   work: readonly Work[];
   languages: readonly string[];
   tools: readonly string[];
+  projects: readonly Project[];
 }
