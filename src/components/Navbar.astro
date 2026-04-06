@@ -15,7 +15,7 @@ const pathname = normalizePath(Astro.url.pathname);
 <nav class:list={['sticky top-0 z-50', className]}>
   <div class="mx-auto w-full max-w-6xl px-4 pt-2 sm:px-6 lg:px-8">
     <div
-      class="rounded-2xl border border-white/70 bg-white/72 px-3 shadow-xl shadow-slate-900/10 backdrop-blur-2xl backdrop-saturate-150 sm:px-4 dark:border-white/15 dark:bg-zinc-950/62 dark:shadow-black/35"
+      class="rounded-2xl border border-border/60 bg-background/72 px-3 shadow-xl backdrop-blur-2xl backdrop-saturate-150 sm:px-4"
     >
       <div class="flex h-14 items-center justify-between gap-3">
         <div class="flex items-center gap-1">
@@ -25,9 +25,9 @@ const pathname = normalizePath(Astro.url.pathname);
                 href={path}
                 data-route-link={normalizePath(path)}
                 class:list={[
-                  'text-muted-foreground hover:bg-foreground/6 hover:text-foreground relative rounded-full px-3.5 py-1.5 text-sm font-medium transition-all duration-300 ease-out dark:hover:bg-white/8',
+                  'text-muted-foreground hover:bg-foreground/6 hover:text-foreground relative rounded-full px-3.5 py-1.5 text-sm font-medium transition-all duration-300 ease-out',
                   pathname === normalizePath(path)
-                    ? 'text-foreground bg-white/70 shadow-sm shadow-slate-900/10 dark:bg-white/12 dark:shadow-black/20'
+                    ? 'bg-accent/70 text-foreground shadow-sm'
                     : '',
                 ]}
                 aria-current={pathname === normalizePath(path) ? 'page' : undefined}
@@ -57,11 +57,8 @@ const pathname = normalizePath(Astro.url.pathname);
       links.forEach((link) => {
         const isActive = normalizePath(link.getAttribute('data-route-link') || '') === current;
         link.classList.toggle('text-foreground', isActive);
-        link.classList.toggle('bg-white/70', isActive);
+        link.classList.toggle('bg-accent/70', isActive);
         link.classList.toggle('shadow-sm', isActive);
-        link.classList.toggle('shadow-slate-900/10', isActive);
-        link.classList.toggle('dark:bg-white/12', isActive);
-        link.classList.toggle('dark:shadow-black/20', isActive);
         if (isActive) {
           link.setAttribute('aria-current', 'page');
         } else {

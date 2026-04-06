@@ -34,7 +34,7 @@ const allTools = tools.flatMap((tool) => tool.item);
           </div>
           <button 
             onclick="window.print()" 
-            class="print-btn hidden lg:flex items-center gap-2 rounded-full border border-border/70 bg-background/55 px-4 py-2 text-sm font-medium transition-colors hover:bg-muted dark:border-white/15 dark:bg-zinc-950/58 backdrop-blur-2xl"
+            class="print-btn hidden lg:flex items-center gap-2 rounded-full border border-border/70 bg-background/55 px-4 py-2 text-sm font-medium transition-colors hover:bg-muted backdrop-blur-2xl"
             title="Print CV"
           >
             <PrinterIcon className="size-4" />
@@ -72,7 +72,7 @@ const allTools = tools.flatMap((tool) => tool.item);
                 <a href={work.link} target="_blank" rel="noopener noreferrer" class="p-5 sm:p-6 print:p-0 flex flex-col sm:flex-row gap-5 print:gap-4 w-full h-full focus:outline-none">
                   {work.logo && (
                     <div class="shrink-0">
-                      <div class="flex h-16 w-16 items-center justify-center overflow-hidden rounded-xl border border-border/50 bg-white shadow-sm print:border-neutral-300 print:shadow-none">
+                      <div class="flex h-16 w-16 items-center justify-center overflow-hidden rounded-xl border border-border/50 bg-card shadow-sm print:border-border/60 print:shadow-none">
                         <img 
                           src={work.logo} 
                           alt={`${work.company} logo`} 
@@ -146,7 +146,7 @@ const allTools = tools.flatMap((tool) => tool.item);
                   <GlassCard class="relative h-full overflow-hidden print-border transition-all duration-300 hover:-translate-y-0.5 group">
                     <a href={project.url} target="_blank" rel="noopener noreferrer" class="flex flex-col print:flex-row h-full w-full print:items-start print:gap-3.5 print:pb-1 focus:outline-none">
                       {project.thumbnail && (
-                        <div class="aspect-video w-full print:w-[85px] print:h-auto overflow-hidden border-b print:border-b-0 border-border/50 bg-white print:border print:border-neutral-200 print:rounded-[6px] print:shrink-0 print:shadow-sm">
+                        <div class="aspect-video w-full print:w-[85px] print:h-auto overflow-hidden border-b print:border-b-0 border-border/50 bg-card print:border print:border-border/60 print:rounded-[6px] print:shrink-0 print:shadow-sm">
                           <img 
                             src={project.thumbnail} 
                             alt={project.title} 
@@ -163,7 +163,7 @@ const allTools = tools.flatMap((tool) => tool.item);
                           <p class="text-muted-foreground text-sm print:text-[11.5px] print:leading-snug line-clamp-2">
                             {project.description}
                           </p>
-                          <span class="hidden print:block text-[0.68rem] text-zinc-500 font-medium whitespace-nowrap overflow-hidden text-ellipsis transition-colors hover:text-zinc-700 hover:underline">
+                          <span class="hidden print:block text-[0.68rem] text-muted-foreground font-medium whitespace-nowrap overflow-hidden text-ellipsis transition-colors hover:text-foreground hover:underline">
                             {project.url.replace(/^https?:\/\//, '').replace(/\/$/, '')}
                           </span>
                         </div>
@@ -172,8 +172,8 @@ const allTools = tools.flatMap((tool) => tool.item);
                           <div class="hidden print:flex flex-wrap items-center">
                             {project.badges.map((badge, i) => (
                               <>
-                                <span class="text-[0.7rem] font-medium text-zinc-500">{badge}</span>
-                                {i < project.badges.length - 1 && <span class="mx-1 text-zinc-400">•</span>}
+                                <span class="text-[0.7rem] font-medium text-muted-foreground">{badge}</span>
+                                {i < project.badges!.length - 1 && <span class="mx-1 text-muted-foreground/70">•</span>}
                               </>
                             ))}
                           </div>
@@ -200,8 +200,8 @@ const allTools = tools.flatMap((tool) => tool.item);
           <div class="hidden print:flex flex-wrap items-center">
             {allTools.map((tool, i) => (
               <>
-                <span class="text-[0.8rem] font-medium text-zinc-700">{tool}</span>
-                {i < allTools.length - 1 && <span class="mx-1.5 text-zinc-400">•</span>}
+                <span class="text-[0.8rem] font-medium text-foreground">{tool}</span>
+                {i < allTools.length - 1 && <span class="mx-1.5 text-muted-foreground/70">•</span>}
               </>
             ))}
           </div>
@@ -266,7 +266,7 @@ const allTools = tools.flatMap((tool) => tool.item);
     .space-y-4 > a .print-border,
     .space-y-4 > div.print-border {
       padding-bottom: 0.75rem !important;
-      border-bottom: 1px solid #e4e4e7 !important;
+      border-bottom: 1px solid var(--color-border) !important;
     }
     .space-y-4 > a:last-of-type .print-border,
     .space-y-4 > div.print-border:last-of-type {
@@ -291,10 +291,10 @@ const allTools = tools.flatMap((tool) => tool.item);
 
     /* Make text readable & hierarchy clear */
     .text-muted-foreground {
-      color: #52525b !important;
+      color: var(--color-muted-foreground) !important;
     }
     .text-foreground, h1, h2, h3, h4, p, span {
-      color: #18181b !important;
+      color: var(--color-foreground) !important;
     }
     
     /* Typography Overrides */
@@ -345,7 +345,7 @@ const allTools = tools.flatMap((tool) => tool.item);
     }
 
     /* Thumbnail adjustments */
-    .h-16.w-16, .print\:border-neutral-300 {
+    .h-16.w-16, .print\:border-border\/60 {
       height: 44px !important;
       width: 44px !important;
       padding: 0 !important;

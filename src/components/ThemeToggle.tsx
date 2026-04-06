@@ -13,14 +13,26 @@ export default function ThemeToggle() {
     applyTheme(savedTheme);
   }, []);
 
+  useEffect(() => {
+    if (theme !== 'system') return;
+
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const syncSystemTheme = () => applyTheme('system');
+
+    mediaQuery.addEventListener('change', syncSystemTheme);
+    return () => mediaQuery.removeEventListener('change', syncSystemTheme);
+  }, [theme]);
+
   const applyTheme = (newTheme: Theme) => {
     const root = document.documentElement;
     
     if (newTheme === 'system') {
       const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       root.classList.toggle('dark', systemTheme === 'dark');
+      root.style.colorScheme = systemTheme;
     } else {
       root.classList.toggle('dark', newTheme === 'dark');
+      root.style.colorScheme = newTheme;
     }
   };
 
@@ -44,7 +56,7 @@ export default function ThemeToggle() {
     <div className="relative">
       <button
         onClick={() => setShowMenu(!showMenu)}
-        className="text-muted-foreground hover:text-foreground inline-flex size-9 items-center justify-center rounded-md border border-border/40 bg-background/55 shadow-lg shadow-slate-900/10 backdrop-blur-xl backdrop-saturate-150 transition-colors dark:border-white/15 dark:bg-zinc-900/60 dark:shadow-black/30"
+        className="text-muted-foreground hover:text-foreground inline-flex size-9 items-center justify-center rounded-md border border-border/60 bg-background/55 shadow-lg backdrop-blur-xl backdrop-saturate-150 transition-colors"
         aria-label="Change theme"
       >
         <Icon className="size-4" />
@@ -56,7 +68,7 @@ export default function ThemeToggle() {
             className="fixed inset-0 z-40"
             onClick={() => setShowMenu(false)}
           />
-          <div className="absolute right-0 top-12 z-50 w-40 rounded-lg border border-white/65 bg-white/56 p-1 shadow-xl shadow-slate-900/8 backdrop-blur-xl backdrop-saturate-150 dark:border-white/12 dark:bg-zinc-950/54 dark:shadow-2xl dark:shadow-black/35">
+          <div className="absolute right-0 top-12 z-50 w-40 rounded-lg border border-border/60 bg-card/80 p-1 shadow-xl backdrop-blur-xl backdrop-saturate-150">
             <div className="space-y-0.5">
               {themes.map((t) => {
                 const ThemeIcon = t.icon;

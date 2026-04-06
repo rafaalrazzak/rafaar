@@ -58,7 +58,7 @@ export const RESUME_DATA: ResumeData = {
       badges: ['Remote', calculateDuration(dateWorks.tako.start, dateWorks.tako.end)],
       title: 'Full-stack Engineer',
       logo: '/tako.png',
-      color: '#37a2ea',
+      color: 'var(--color-primary)',
       start: formatDate(dateWorks.tako.start),
       end: dateWorks.tako.end,
       description: 'Pengen dapet penghasilan lebih dari hanya sekedar membuat konten? Langsung aja join Tako sekarang!',
