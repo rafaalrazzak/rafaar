@@ -61,7 +61,7 @@ export const RESUME_DATA: ResumeData = {
       color: 'var(--color-primary)',
       start: formatDate(dateWorks.tako.start),
       end: dateWorks.tako.end,
-      description: 'Pengen dapet penghasilan lebih dari hanya sekedar membuat konten? Langsung aja join Tako sekarang!',
+      description: 'Building and maintaining web applications using Next.js, Tailwind CSS, TypeScript, Node.js, and other modern technologies. Collaborating with cross-functional teams to deliver high-quality products.',
     },
   ],
   languages: ['Go', 'JavaScript', 'TypeScript', 'HTML', 'CSS'],

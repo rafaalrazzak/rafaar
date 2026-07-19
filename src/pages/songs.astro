@@ -1,13 +1,10 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro';
 import { MusicIcon } from 'lucide-react';
-import GlassCard from '@/components/ui/GlassCard.astro';
-import GlassPanel from '@/components/ui/GlassPanel.astro';
 import PageShell from '@/components/layout/PageShell.astro';
 import PageStack from '@/components/layout/PageStack.astro';
 import PageHero from '@/components/layout/PageHero.astro';
 import SectionStack from '@/components/layout/SectionStack.astro';
-import CardStack from '@/components/layout/CardStack.astro';
 import PageHeading from '@/components/typography/PageHeading.astro';
 import PageLead from '@/components/typography/PageLead.astro';
 ---
@@ -27,18 +24,10 @@ import PageLead from '@/components/typography/PageLead.astro';
 
       <!-- Content -->
       <SectionStack>
-        <CardStack>
-          <GlassCard class="p-6">
-            <div
-              class="flex flex-col items-center justify-center space-y-4 py-16 text-center"
-            >
-              <GlassPanel class="flex size-16 items-center justify-center rounded-full">
-                <MusicIcon className="text-muted-foreground hover:text-foreground size-8 transition-colors" />
-              </GlassPanel>
-              <p class="text-muted-foreground text-sm">Coming soon...</p>
-            </div>
-          </GlassCard>
-        </CardStack>
+        <div class="flex flex-col items-center justify-center space-y-4 py-16 text-center">
+          <MusicIcon className="text-muted-foreground size-8" />
+          <p class="text-muted-foreground text-sm">Coming soon...</p>
+        </div>
       </SectionStack>
     </PageStack>
   </PageShell>

@@ -56,7 +56,7 @@ export default function ThemeToggle() {
     <div className="relative">
       <button
         onClick={() => setShowMenu(!showMenu)}
-        className="text-muted-foreground hover:text-foreground inline-flex size-9 items-center justify-center rounded-md border border-border/60 bg-background/55 shadow-lg backdrop-blur-xl backdrop-saturate-150 transition-colors"
+        className="text-muted-foreground hover:text-foreground inline-flex size-9 items-center justify-center rounded-md border border-border/60 bg-background transition-colors"
         aria-label="Change theme"
       >
         <Icon className="size-4" />
@@ -68,7 +68,7 @@ export default function ThemeToggle() {
             className="fixed inset-0 z-40"
             onClick={() => setShowMenu(false)}
           />
-          <div className="absolute right-0 top-12 z-50 w-40 rounded-lg border border-border/60 bg-card/80 p-1 shadow-xl backdrop-blur-xl backdrop-saturate-150">
+          <div className="absolute right-0 top-12 z-50 w-40 rounded-lg border border-border/60 bg-card p-1 shadow-md">
             <div className="space-y-0.5">
               {themes.map((t) => {
                 const ThemeIcon = t.icon;

@@ -2,8 +2,6 @@
 import MainLayout from '@/layouts/MainLayout.astro';
 import { RESUME_DATA } from '@/data/resume-data';
 import { projects } from '@/data/links/projects';
-import GlassCard from '@/components/ui/GlassCard.astro';
-import GlassPanel from '@/components/ui/GlassPanel.astro';
 import SectionTitle from '@/components/ui/SectionTitle.astro';
 import InlineLink from '@/components/ui/InlineLink.astro';
 import PageShell from '@/components/layout/PageShell.astro';
@@ -49,20 +47,19 @@ import PageLead from '@/components/typography/PageLead.astro';
         <CardStack>
           {
             projects.map((project) => (
-              <a href={project.url} target="_blank" rel="noopener noreferrer" class="block">
-                <GlassCard class="p-6 hover:-translate-y-0.5">
-                  <div class="flex items-start gap-4">
-                    <GlassPanel class="flex size-12 shrink-0 items-center justify-center rounded-lg">
-                      <project.icon className="text-muted-foreground hover:text-foreground size-6 transition-colors" />
-                    </GlassPanel>
-                    <div class="flex-1 space-y-1">
-                      <h3 class="text-foreground font-medium">{project.title}</h3>
-                      <p class="text-muted-foreground text-sm">
-                        {project.description}
-                      </p>
-                    </div>
-                  </div>
-                </GlassCard>
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group flex items-start gap-4"
+              >
+                <project.icon className="text-muted-foreground group-hover:text-foreground mt-0.5 size-5 shrink-0 transition-colors" />
+                <div class="flex-1 space-y-1">
+                  <h3 class="text-foreground font-medium">{project.title}</h3>
+                  <p class="text-muted-foreground text-sm">
+                    {project.description}
+                  </p>
+                </div>
               </a>
             ))
           }

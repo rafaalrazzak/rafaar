@@ -3,7 +3,6 @@ import MainLayout from '@/layouts/MainLayout.astro';
 import { RESUME_DATA } from '@/data/resume-data';
 import { tools } from '@/data/tools';
 import { GlobeIcon, MailIcon, PrinterIcon } from 'lucide-react';
-import GlassCard from '@/components/ui/GlassCard.astro';
 import Chip from '@/components/ui/Chip.astro';
 import SectionTitle from '@/components/ui/SectionTitle.astro';
 import InlineLink from '@/components/ui/InlineLink.astro';
@@ -22,19 +21,19 @@ const allTools = tools.flatMap((tool) => tool.item);
   <PageShell>
     <div class="space-y-12">
       <!-- Header -->
-      <section class="space-y-6">
+      <section class="print-avoid-break space-y-6 border-b border-border/60 pb-10">
         <div class="flex items-start justify-between gap-4">
           <div class="space-y-4">
             <PageHeading class="text-4xl font-semibold md:text-5xl">
               {RESUME_DATA.name}
             </PageHeading>
-            <PageLead class="max-w-3xl text-base md:text-lg">
+            <PageLead class="text-foreground/80 max-w-3xl text-base md:text-lg">
               {RESUME_DATA.summary}
             </PageLead>
           </div>
-          <button 
-            onclick="window.print()" 
-            class="print-btn hidden lg:flex items-center gap-2 rounded-full border border-border/70 bg-background/55 px-4 py-2 text-sm font-medium transition-colors hover:bg-muted backdrop-blur-2xl"
+          <button
+            onclick="window.print()"
+            class="print-btn hidden lg:flex items-center gap-2 rounded-full border border-border/70 bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-muted"
             title="Print CV"
           >
             <PrinterIcon className="size-4" />
@@ -65,72 +64,73 @@ const allTools = tools.flatMap((tool) => tool.item);
       <!-- Work Experience -->
       <section class="space-y-6">
         <SectionTitle>Work Experience</SectionTitle>
-        <div class="space-y-4">
+        <div class="divide-border/60 divide-y">
           {
             RESUME_DATA.work.map((work) => (
-              <GlassCard class="relative print-border transition-all duration-300 hover:-translate-y-0.5 group">
-                <a href={work.link} target="_blank" rel="noopener noreferrer" class="p-5 sm:p-6 print:p-0 flex flex-col sm:flex-row gap-5 print:gap-4 w-full h-full focus:outline-none">
-                  {work.logo && (
-                    <div class="shrink-0">
-                      <div class="flex h-16 w-16 items-center justify-center overflow-hidden rounded-xl border border-border/50 bg-card shadow-sm print:border-border/60 print:shadow-none">
-                        <img 
-                          src={work.logo} 
-                          alt={`${work.company} logo`} 
-                          class="h-10 w-10 object-contain transition-transform duration-500 group-hover:scale-110" 
-                          loading="lazy"
-                        />
-                      </div>
+              <a
+                href={work.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group flex w-full flex-col gap-5 py-6 first:pt-0 last:pb-0 focus:outline-none sm:flex-row break-inside-avoid print:gap-4 print:py-3"
+              >
+                {work.logo && (
+                  <div class="shrink-0">
+                    <div class="flex h-16 w-16 items-center justify-center overflow-hidden rounded-xl border border-border/50 print:border-border/60">
+                      <img
+                        src={work.logo}
+                        alt={`${work.company} logo`}
+                        class="h-10 w-10 object-contain transition-transform duration-500 group-hover:scale-110"
+                        loading="lazy"
+                      />
+                    </div>
+                  </div>
+                )}
+                <div class="space-y-3 flex-1">
+                  <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2 sm:gap-4">
+                    <div class="space-y-1">
+                      <h3 class="text-foreground font-semibold text-lg group-hover:text-primary transition-colors">
+                        {work.company}
+                      </h3>
+                      <p class="text-muted-foreground font-medium">
+                        {work.title}
+                      </p>
+                    </div>
+                    <span class="text-muted-foreground text-sm font-medium whitespace-nowrap mt-1 sm:mt-0">
+                      {work.start} — {work.end}
+                    </span>
+                  </div>
+                  <p class="text-muted-foreground text-sm leading-relaxed max-w-3xl">
+                    {work.description}
+                  </p>
+                  {work.badges && work.badges.length > 0 && (
+                    <div class="flex flex-wrap gap-2 pt-1">
+                      {work.badges.map((badge) => (
+                        <Chip class="print-chip">{badge}</Chip>
+                      ))}
                     </div>
                   )}
-                  <div class="space-y-3 flex-1">
-                    <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2 sm:gap-4">
-                      <div class="space-y-1">
-                        <h3 class="text-foreground font-semibold text-lg group-hover:text-primary transition-colors">
-                          {work.company}
-                        </h3>
-                        <p class="text-muted-foreground font-medium">
-                          {work.title}
-                        </p>
-                      </div>
-                      <span class="text-muted-foreground text-sm font-medium whitespace-nowrap mt-1 sm:mt-0">
-                        {work.start} — {work.end}
-                      </span>
-                    </div>
-                    <p class="text-muted-foreground text-sm leading-relaxed max-w-3xl">
-                      {work.description}
-                    </p>
-                    {work.badges && work.badges.length > 0 && (
-                      <div class="flex flex-wrap gap-2 pt-1">
-                        {work.badges.map((badge) => (
-                          <Chip class="print-chip">{badge}</Chip>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </a>
-              </GlassCard>
+                </div>
+              </a>
             ))
           }
         </div>
       </section>
 
       <!-- Education -->
-      <section class="space-y-6">
+      <section class="print-avoid-break space-y-6">
         <SectionTitle>Education</SectionTitle>
-        <div class="space-y-4">
+        <div class="divide-border/60 divide-y">
           {
             RESUME_DATA.education.map((edu) => (
-              <GlassCard class="relative print-border print:pb-1">
-                <div class="p-5 sm:p-6 print:p-0 flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 w-full">
-                  <div class="space-y-1">
-                    <h3 class="text-foreground font-semibold text-lg">{edu.school}</h3>
-                    <p class="text-muted-foreground font-medium">{edu.degree}</p>
-                  </div>
-                  <span class="text-muted-foreground text-sm font-medium whitespace-nowrap mt-1 sm:mt-0">
-                    {edu.start} — {edu.end}
-                  </span>
+              <div class="flex w-full flex-col justify-between gap-2 py-6 first:pt-0 last:pb-0 sm:flex-row sm:items-center sm:gap-4 break-inside-avoid print:py-3">
+                <div class="space-y-1">
+                  <h3 class="text-foreground font-semibold text-lg">{edu.school}</h3>
+                  <p class="text-muted-foreground font-medium">{edu.degree}</p>
                 </div>
-              </GlassCard>
+                <span class="text-muted-foreground text-sm font-medium whitespace-nowrap mt-1 sm:mt-0">
+                  {edu.start} — {edu.end}
+                </span>
+              </div>
             ))
           }
         </div>
@@ -143,50 +143,53 @@ const allTools = tools.flatMap((tool) => tool.item);
             <SectionTitle>Projects</SectionTitle>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               {RESUME_DATA.projects.map((project) => (
-                  <GlassCard class="relative h-full overflow-hidden print-border transition-all duration-300 hover:-translate-y-0.5 group">
-                    <a href={project.url} target="_blank" rel="noopener noreferrer" class="flex flex-col print:flex-row h-full w-full print:items-start print:gap-3.5 print:pb-1 focus:outline-none">
-                      {project.thumbnail && (
-                        <div class="aspect-video w-full print:w-[85px] print:h-auto overflow-hidden border-b print:border-b-0 border-border/50 bg-card print:border print:border-border/60 print:rounded-[6px] print:shrink-0 print:shadow-sm">
-                          <img 
-                            src={project.thumbnail} 
-                            alt={project.title} 
-                            class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                            loading="lazy" 
-                          />
-                        </div>
-                      )}
-                      <div class="p-5 flex flex-col flex-1 print:p-0">
-                        <div class="space-y-1 flex-1">
-                          <h3 class="text-foreground font-semibold group-hover:text-primary transition-colors print:text-[0.95rem] tracking-tight">
-                            {project.title}
-                          </h3>
-                          <p class="text-muted-foreground text-sm print:text-[11.5px] print:leading-snug line-clamp-2">
-                            {project.description}
-                          </p>
-                          <span class="hidden print:block text-[0.68rem] text-muted-foreground font-medium whitespace-nowrap overflow-hidden text-ellipsis transition-colors hover:text-foreground hover:underline">
-                            {project.url.replace(/^https?:\/\//, '').replace(/\/$/, '')}
-                          </span>
-                        </div>
-                      {project.badges && project.badges.length > 0 && (
-                        <div class="pt-3 mt-auto flex flex-col print:pt-1">
-                          <div class="hidden print:flex flex-wrap items-center">
-                            {project.badges.map((badge, i) => (
-                              <>
-                                <span class="text-[0.7rem] font-medium text-muted-foreground">{badge}</span>
-                                {i < project.badges!.length - 1 && <span class="mx-1 text-muted-foreground/70">•</span>}
-                              </>
-                            ))}
-                          </div>
-                          <div class="flex flex-wrap gap-1.5 print:hidden">
-                            {project.badges.map((badge) => (
-                              <Chip class="print-chip">{badge}</Chip>
-                            ))}
-                          </div>
-                        </div>
-                      )}
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group flex h-full w-full flex-col break-inside-avoid focus:outline-none print:flex-row print:items-start print:gap-3.5"
+                >
+                  {project.thumbnail && (
+                    <div class="aspect-video w-full print:w-[85px] print:h-auto overflow-hidden rounded-lg border border-border/50 bg-muted print:shrink-0 print:rounded-[6px]">
+                      <img
+                        src={project.thumbnail}
+                        alt={project.title}
+                        class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                      />
                     </div>
-                  </a>
-                </GlassCard>
+                  )}
+                  <div class="flex flex-1 flex-col pt-4 print:pt-0">
+                    <div class="space-y-1 flex-1">
+                      <h3 class="text-foreground font-semibold group-hover:text-primary transition-colors print:text-[0.95rem] tracking-tight">
+                        {project.title}
+                      </h3>
+                      <p class="text-muted-foreground text-sm print:text-[11.5px] print:leading-snug line-clamp-2">
+                        {project.description}
+                      </p>
+                      <span class="hidden print:block text-[0.68rem] text-muted-foreground font-medium whitespace-nowrap overflow-hidden text-ellipsis transition-colors hover:text-foreground hover:underline">
+                        {project.url.replace(/^https?:\/\//, '').replace(/\/$/, '')}
+                      </span>
+                    </div>
+                    {project.badges && project.badges.length > 0 && (
+                      <div class="pt-3 mt-auto flex flex-col print:pt-1">
+                        <div class="hidden print:flex flex-wrap items-center">
+                          {project.badges.map((badge, i) => (
+                            <>
+                              <span class="text-[0.7rem] font-medium text-muted-foreground">{badge}</span>
+                              {i < project.badges!.length - 1 && <span class="mx-1 text-muted-foreground/70">•</span>}
+                            </>
+                          ))}
+                        </div>
+                        <div class="flex flex-wrap gap-1.5 print:hidden">
+                          {project.badges.map((badge) => (
+                            <Chip class="print-chip">{badge}</Chip>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </a>
               ))}
             </div>
           </section>
@@ -194,21 +197,19 @@ const allTools = tools.flatMap((tool) => tool.item);
       }
 
       <!-- Skills -->
-      <section class="space-y-6">
+      <section class="print-avoid-break space-y-6">
         <SectionTitle>Skills &amp; Tools</SectionTitle>
-        <GlassCard class="p-5 sm:p-6 print-border">
-          <div class="hidden print:flex flex-wrap items-center">
-            {allTools.map((tool, i) => (
-              <>
-                <span class="text-[0.8rem] font-medium text-foreground">{tool}</span>
-                {i < allTools.length - 1 && <span class="mx-1.5 text-muted-foreground/70">•</span>}
-              </>
-            ))}
-          </div>
-          <div class="flex flex-wrap gap-2 print:hidden">
-            {allTools.map((tool) => <Chip class="print-chip">{tool}</Chip>)}
-          </div>
-        </GlassCard>
+        <div class="hidden print:flex flex-wrap items-center">
+          {allTools.map((tool, i) => (
+            <>
+              <span class="text-[0.8rem] font-medium text-foreground">{tool}</span>
+              {i < allTools.length - 1 && <span class="mx-1.5 text-muted-foreground/70">•</span>}
+            </>
+          ))}
+        </div>
+        <div class="flex flex-wrap gap-2 print:hidden">
+          {allTools.map((tool) => <Chip class="print-chip">{tool}</Chip>)}
+        </div>
       </section>
     </div>
   </PageShell>
@@ -216,20 +217,29 @@ const allTools = tools.flatMap((tool) => tool.item);
 
 <style is:global>
   @media print {
+    /* Force the light palette regardless of the active theme, so printing
+       in dark mode never renders light-on-light text. */
+    :root,
+    :root.dark {
+      --background: 210 40% 98%;
+      --foreground: 217 30% 18%;
+      --card: 210 44% 99%;
+      --card-foreground: 217 30% 18%;
+      --muted-foreground: 215 16% 42%;
+      --border: 210 25% 85%;
+    }
+
     /* Hide non-content elements */
-    nav, 
-    [data-fixed-visual], 
-    canvas, 
+    nav,
+    [data-fixed-visual],
+    canvas,
     .print-btn {
       display: none !important;
     }
-    
-    /* Reset body background */
+
     body {
-      background: white !important;
-      color: black !important;
-      margin: 0;
-      padding: 0;
+      margin: 0 !important;
+      padding: 0 !important;
       font-size: 13px !important;
       line-height: 1.4 !important;
     }
@@ -251,80 +261,41 @@ const allTools = tools.flatMap((tool) => tool.item);
       min-height: auto !important;
     }
 
-    /* Remove massive borders and paddings to create a compact resume look */
-    .print-border {
-      border: none !important;
-      box-shadow: none !important;
-      background: transparent !important;
-      backdrop-filter: none !important;
-      padding: 0 !important;
-      border-radius: 0 !important;
-    }
-    
-    /* Apply subtle borders only between items, not wrapped */
-    .space-y-4 > a blockquote,
-    .space-y-4 > a .print-border,
-    .space-y-4 > div.print-border {
-      padding-bottom: 0.75rem !important;
-      border-bottom: 1px solid var(--color-border) !important;
-    }
-    .space-y-4 > a:last-of-type .print-border,
-    .space-y-4 > div.print-border:last-of-type {
-      border-bottom: none !important;
-      padding-bottom: 0 !important;
-    }
-
     /* Projects grid layout tightening */
     .grid {
       gap: 1rem !important;
     }
-    .grid .print-border {
-      border-bottom: none !important;
-      padding-bottom: 0 !important;
-    }
-    
+
     /* Clean up avatar/logo borders */
     .border-border\/50 {
       border: none !important;
       background: transparent !important;
     }
 
-    /* Make text readable & hierarchy clear */
-    .text-muted-foreground {
-      color: var(--color-muted-foreground) !important;
-    }
-    .text-foreground, h1, h2, h3, h4, p, span {
-      color: var(--color-foreground) !important;
-    }
-    
     /* Typography Overrides */
     .text-4xl, .md\:text-5xl { font-size: 2.25rem !important; line-height: 1.2 !important; margin-bottom: 0px !important; }
     .text-base, .md\:text-lg { font-size: 0.95rem !important; line-height: 1.4 !important; }
     .text-lg { font-size: 1rem !important; margin-bottom: 0px !important; }
     .text-sm { font-size: 0.8rem !important; }
 
-
-    
-    /* Structure optimizations */
-    body {
-      padding: 0 !important;
-      margin: 0 !important;
-    }
-    
-    main {
-      padding-bottom: 0 !important;
-    }
-    
     .py-20 {
       padding-top: 1rem !important;
       padding-bottom: 0 !important;
     }
 
-    section {
+    /* Long lists (work, projects) break between entries instead of as a
+       whole section — each entry avoids breaking via break-inside-avoid.
+       Short sections (header, education, skills) use this class. */
+    .print-avoid-break {
       page-break-inside: avoid;
       break-inside: avoid;
     }
-    
+
+    h2 {
+      break-after: avoid;
+      page-break-after: avoid;
+    }
+
     .space-y-12 > :not([hidden]) ~ :not([hidden]) {
       margin-top: 1.0rem !important; /* Header to sections */
     }
@@ -333,15 +304,8 @@ const allTools = tools.flatMap((tool) => tool.item);
       margin-top: 0.75rem !important; /* Between sections */
     }
     
-    .space-y-4 > :not([hidden]) ~ :not([hidden]) {
-      margin-top: 0.35rem !important; /* Between works/edu */
-    }
-    
     .space-y-3 > :not([hidden]) ~ :not([hidden]) {
       margin-top: 0.15rem !important;
-    }
-    .gap-5 {
-      gap: 1rem !important;
     }
 
     /* Thumbnail adjustments */

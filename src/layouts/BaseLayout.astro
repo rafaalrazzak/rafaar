@@ -50,6 +50,15 @@ const fullTitle = title === siteMetadata.SITE_NAME ? title : `${title} — rafaa
         root.style.colorScheme = theme;
       })();
     </script>
+
+    <!-- Background effects initialization (before paint) -->
+    <script is:inline>
+      (function() {
+        const root = document.documentElement;
+        const savedBgEffects = localStorage.getItem('bg-effects');
+        root.dataset.bgEffects = savedBgEffects === 'off' ? 'off' : 'on';
+      })();
+    </script>
     
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
@@ -77,6 +86,7 @@ const fullTitle = title === siteMetadata.SITE_NAME ? title : `${title} — rafaa
         const isDark = root.classList.contains('dark');
         ev.newDocument.documentElement.classList.toggle('dark', isDark);
         ev.newDocument.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
+        ev.newDocument.documentElement.dataset.bgEffects = root.dataset.bgEffects;
       });
     </script>
     <script is:inline>

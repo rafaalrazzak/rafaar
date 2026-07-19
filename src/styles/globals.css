@@ -118,6 +118,15 @@ textarea {
   transform: translateZ(0);
 }
 
+[data-bg-effects-root] {
+  transition: opacity 0.4s ease;
+}
+
+html[data-bg-effects='off'] [data-bg-effects-root] {
+  opacity: 0;
+  pointer-events: none;
+}
+
 html[data-route-transitioning='true'] *,
 html[data-route-transitioning='true'] *::before,
 html[data-route-transitioning='true'] *::after {

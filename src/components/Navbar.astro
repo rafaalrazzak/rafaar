@@ -1,6 +1,7 @@
 ---
 import { APP_ROUTE } from '@/data/app-route';
 import ThemeToggle from './ThemeToggle';
+import BackgroundEffectsToggle from './BackgroundEffectsToggle';
 
 interface Props {
   class?: string;
@@ -15,7 +16,7 @@ const pathname = normalizePath(Astro.url.pathname);
 <nav class:list={['sticky top-0 z-50', className]}>
   <div class="mx-auto w-full max-w-6xl px-4 pt-2 sm:px-6 lg:px-8">
     <div
-      class="rounded-2xl border border-border/60 bg-background/72 px-3 shadow-xl backdrop-blur-2xl backdrop-saturate-150 sm:px-4"
+      class="rounded-2xl border border-border/60 bg-background shadow-sm sm:px-4 px-3"
     >
       <div class="flex h-14 items-center justify-between gap-3">
         <div class="flex items-center gap-1">
@@ -23,7 +24,6 @@ const pathname = normalizePath(Astro.url.pathname);
             APP_ROUTE.map(({ path, name }) => (
               <a
                 href={path}
-                data-route-link={normalizePath(path)}
                 class:list={[
                   'text-muted-foreground hover:bg-foreground/6 hover:text-foreground relative rounded-full px-3.5 py-1.5 text-sm font-medium transition-all duration-300 ease-out',
                   pathname === normalizePath(path)
@@ -37,42 +37,11 @@ const pathname = normalizePath(Astro.url.pathname);
             ))
           }
         </div>
-        <div transition:persist="theme-toggle">
+        <div class="flex items-center gap-2">
+          <BackgroundEffectsToggle client:load />
           <ThemeToggle client:load />
         </div>
       </div>
     </div>
   </div>
 </nav>
-
-<script is:inline>
-  (() => {
-    const normalizePath = (value) =>
-      value.length > 1 ? value.replace(/\/+$/, '') : value;
-
-    const syncActiveRoute = () => {
-      const current = normalizePath(window.location.pathname);
-      const links = document.querySelectorAll('[data-route-link]');
-
-      links.forEach((link) => {
-        const isActive = normalizePath(link.getAttribute('data-route-link') || '') === current;
-        link.classList.toggle('text-foreground', isActive);
-        link.classList.toggle('bg-accent/70', isActive);
-        link.classList.toggle('shadow-sm', isActive);
-        if (isActive) {
-          link.setAttribute('aria-current', 'page');
-        } else {
-          link.removeAttribute('aria-current');
-        }
-      });
-    };
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', syncActiveRoute, { once: true });
-    } else {
-      syncActiveRoute();
-    }
-
-    document.addEventListener('astro:after-swap', syncActiveRoute);
-  })();
-</script>

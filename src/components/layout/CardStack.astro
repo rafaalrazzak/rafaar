@@ -8,7 +8,11 @@ interface Props {
 const { class: className } = Astro.props;
 ---
 
-<div class={cn('space-y-4', className)}>
+<div
+  class={cn(
+    'divide-border/60 divide-y [&>*]:py-6 [&>*:first-child]:pt-0 [&>*:last-child]:pb-0',
+    className,
+  )}
+>
   <slot />
 </div>
-
