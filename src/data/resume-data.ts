@@ -75,7 +75,7 @@ export const RESUME_DATA: ResumeData = {
       title: 'Ryu',
       description: 'A beautifully designed spending tracker. Log transactions in seconds, set budgets, and understand where your money goes.',
       url: 'https://ryu.rin.ci/',
-      thumbnail: 'https://ryu.rin.ci/og.png',
+      thumbnail: 'https://ryu.rin.ci/og.jpg',
       badges: ['Web'],
     },
     {
