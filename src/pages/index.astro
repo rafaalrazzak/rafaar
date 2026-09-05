@@ -1,199 +1,389 @@
 ---
-import MainLayout from '@/layouts/MainLayout.astro';
+import Layout from '@/layouts/Layout.astro';
+import Section from '@/components/Section.astro';
+import Icon from '@/components/Icon.astro';
 import { RESUME_DATA } from '@/data/resume-data';
-import { MailIcon, FileTextIcon } from 'lucide-react';
-import SectionTitle from '@/components/ui/SectionTitle.astro';
-import InlineLink from '@/components/ui/InlineLink.astro';
-import Chip from '@/components/ui/Chip.astro';
-import PageShell from '@/components/layout/PageShell.astro';
-import PageStack from '@/components/layout/PageStack.astro';
-import PageHero from '@/components/layout/PageHero.astro';
-import SectionStack from '@/components/layout/SectionStack.astro';
-import CardStack from '@/components/layout/CardStack.astro';
-import PageHeading from '@/components/typography/PageHeading.astro';
-import PageLead from '@/components/typography/PageLead.astro';
+import { durationSince, startYear } from '@/lib/duration';
+import { CALENDAR, LEVEL_OPACITY, fetchContributions } from '@/lib/github';
+import siteMetadata from '@/data/site-metadata';
+
+const {
+  name,
+  role,
+  location,
+  about,
+  email,
+  social,
+  elsewhere,
+  work,
+  projects,
+  education,
+  stack,
+} = RESUME_DATA;
+
+const github = await fetchContributions('rafaalrazzak');
+
+// Structured data, built from the same source as the page so the two cannot
+// disagree. Gives search engines the entity behind the site rather than leaving
+// them to infer it from prose.
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name,
+  url: siteMetadata.SITE_URL,
+  image: new URL('/og.png', siteMetadata.SITE_URL).href,
+  jobTitle: role,
+  description: about,
+  email: `mailto:${email}`,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Bogor',
+    addressCountry: 'ID',
+  },
+  sameAs: social.map((link) => link.url),
+  worksFor: work.map((job) => ({
+    '@type': 'Organization',
+    name: job.company,
+    url: job.url,
+  })),
+  alumniOf: education.map((item) => ({
+    '@type': 'EducationalOrganization',
+    name: item.school,
+  })),
+  knowsAbout: stack.flatMap((entry) => entry.items),
+};
+
+const contact = [
+  { name: 'Email', url: `mailto:${email}`, icon: 'mail' as const },
+  ...social,
+];
 ---
 
-<MainLayout>
-  <PageShell>
-    <PageStack>
-      <!-- Hero -->
-      <PageHero>
-        <div class="space-y-6">
-          <PageHeading>
-            {RESUME_DATA.name}
-          </PageHeading>
-          <PageLead>
-            {RESUME_DATA.about}
-          </PageLead>
-        </div>
-
-        <div class="flex flex-wrap gap-2">
-          {RESUME_DATA.skills.map((skill) => <Chip>{skill}</Chip>)}
-        </div>
-
-        <div class="flex flex-wrap gap-x-6 gap-y-3 text-sm">
-          {
-            RESUME_DATA.contact.email && (
-              <InlineLink href={`mailto:${RESUME_DATA.contact.email}`}>
-                <MailIcon className="text-muted-foreground hover:text-foreground size-4 transition-colors" />
-                <span>Email</span>
-              </InlineLink>
-            )
-          }
-          {
-            RESUME_DATA.contact.social.map((social) => (
-              <InlineLink
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <social.icon className="text-muted-foreground hover:text-foreground size-4 fill-current transition-colors" />
-                <span>{social.name}</span>
-              </InlineLink>
-            ))
-          }
-          <InlineLink href="/cv">
-            <FileTextIcon className="text-muted-foreground hover:text-foreground size-4 transition-colors" />
-            <span>Curriculum Vitae</span>
-          </InlineLink>
-        </div>
-      </PageHero>
-
-      <!-- Work -->
-      {
-        RESUME_DATA.work.length > 0 && (
-          <SectionStack>
-            <SectionTitle>Work</SectionTitle>
-            <CardStack>
-              {RESUME_DATA.work.map((work) => (
-                <a
-                  href={work.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="group flex flex-col gap-5 sm:flex-row"
-                >
-                  {work.logo && (
-                    <div class="hidden sm:block shrink-0">
-                      <div class="flex h-16 w-16 items-center justify-center overflow-hidden rounded-xl border border-border/50">
-                        <img
-                          src={work.logo}
-                          alt={`${work.company} logo`}
-                          class="h-10 w-10 object-contain transition-transform duration-500 group-hover:scale-110"
-                          loading="lazy"
-                        />
-                      </div>
-                    </div>
-                  )}
-                  <div class="space-y-3 flex-1">
-                    <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2 sm:gap-4">
-                      <div class="flex items-start gap-4 sm:gap-0">
-                        {work.logo && (
-                          <div class="sm:hidden flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-border/50">
-                            <img
-                              src={work.logo}
-                              alt={`${work.company} logo`}
-                              class="h-8 w-8 object-contain"
-                              loading="lazy"
-                            />
-                          </div>
-                        )}
-                        <div class="space-y-1">
-                          <h3 class="text-foreground font-semibold text-lg group-hover:text-primary transition-colors">
-                            {work.company}
-                          </h3>
-                          <p class="text-muted-foreground font-medium">
-                            {work.title}
-                          </p>
-                        </div>
-                      </div>
-                      <span class="text-muted-foreground text-sm font-medium whitespace-nowrap mt-1 sm:mt-0">
-                        {work.start} — {work.end}
-                      </span>
-                    </div>
-                    <p class="text-muted-foreground text-sm leading-relaxed max-w-3xl">
-                      {work.description}
-                    </p>
-                    {work.badges && work.badges.length > 0 && (
-                      <div class="flex flex-wrap gap-2 pt-1">
-                        {work.badges.map((badge) => (
-                          <Chip>{badge}</Chip>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </a>
-              ))}
-            </CardStack>
-          </SectionStack>
-        )
-      }
-
-      <!-- Projects -->
-      {
-        RESUME_DATA.projects && RESUME_DATA.projects.length > 0 && (
-          <SectionStack>
-            <SectionTitle>Projects</SectionTitle>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {RESUME_DATA.projects.map((project) => (
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="group flex h-full flex-col"
-                >
-                  {project.thumbnail && (
-                    <div class="aspect-video w-full overflow-hidden rounded-lg border border-border/50 bg-muted">
-                      <img
-                        src={project.thumbnail}
-                        alt={project.title}
-                        class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                        loading="lazy"
-                      />
-                    </div>
-                  )}
-                  <div class="space-y-2 pt-4 flex-1">
-                    <h3 class="text-foreground font-medium group-hover:opacity-80 transition-opacity">
-                      {project.title}
-                    </h3>
-                    <p class="text-muted-foreground text-sm leading-relaxed">
-                      {project.description}
-                    </p>
-                  </div>
-                  {project.badges && project.badges.length > 0 && (
-                    <div class="flex flex-wrap gap-2 pt-3">
-                      {project.badges.map((badge) => (
-                        <Chip>{badge}</Chip>
-                      ))}
-                    </div>
-                  )}
-                </a>
-              ))}
-            </div>
-          </SectionStack>
-        )
-      }
-
-      <!-- Skills -->
-      <div class="grid gap-16 md:grid-cols-2">
-        <SectionStack>
-          <SectionTitle>Languages</SectionTitle>
-          <div class="space-y-4">
-            <div class="flex flex-wrap gap-2">
-              {RESUME_DATA.languages.map((lang) => <Chip>{lang}</Chip>)}
-            </div>
-          </div>
-        </SectionStack>
-
-        <SectionStack>
-          <SectionTitle>Tools</SectionTitle>
-          <div class="space-y-4">
-            <div class="flex flex-wrap gap-2">
-              {RESUME_DATA.tools.map((tool) => <Chip>{tool}</Chip>)}
-            </div>
-          </div>
-        </SectionStack>
+<Layout>
+  <div class="space-y-14 print:space-y-6">
+    <!-- Intro -->
+    <section class="space-y-5">
+      <div class="space-y-2">
+        <h1 class="font-display text-4xl font-semibold tracking-tight sm:text-5xl print:text-3xl">
+          {name}
+        </h1>
+        <p class="text-muted-foreground text-base">
+          {role} · {location}
+        </p>
       </div>
-    </PageStack>
-  </PageShell>
-</MainLayout>
+
+      <p class="text-foreground/90 max-w-prose text-[0.975rem] leading-relaxed">
+        {about}
+      </p>
+
+      <div class="flex flex-wrap items-center gap-x-5 gap-y-2.5 text-sm">
+        {
+          contact.map((link) => (
+            <a
+              href={link.url}
+              target={link.url.startsWith('mailto:') ? undefined : '_blank'}
+              rel="noopener noreferrer"
+              class="text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5"
+            >
+              <Icon name={link.icon} class="size-[0.95rem]" />
+              <span>{link.name}</span>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Work -->
+    <Section title="Work">
+      <div class="space-y-8 print:space-y-4">
+        {
+          work.map((job) => (
+            <article class="flex gap-4">
+              {job.logo && (
+                <img
+                  src={job.logo}
+                  alt=""
+                  loading="lazy"
+                  class="ring-border/70 mt-1 size-10 shrink-0 rounded-lg bg-white object-contain p-1 ring-1"
+                />
+              )}
+              <div class="min-w-0 flex-1 space-y-1.5">
+                <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                  <h3 class="font-display text-lg font-semibold">
+                    <a
+                      href={job.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="hover:text-primary group inline-flex items-center gap-1"
+                    >
+                      {job.company}
+                      <Icon
+                        name="arrow-up-right"
+                        class="size-3.5 opacity-0 transition-all group-hover:opacity-60"
+                      />
+                    </a>
+                  </h3>
+                  <span class="text-muted-foreground text-sm tabular-nums">
+                    {startYear(job.startDate)} — {job.end ?? 'Present'}
+                    <span
+                      class="text-muted-foreground/60"
+                      data-duration-since={job.endDate ? undefined : job.startDate}
+                    >
+                      {(() => {
+                        const elapsed = durationSince(job.startDate, job.endDate);
+                        return elapsed && ` · ${elapsed}`;
+                      })()}
+                    </span>
+                  </span>
+                </div>
+
+                <p class="text-foreground/75 text-sm">
+                  {job.role}
+                  {job.mode && <span class="text-muted-foreground"> · {job.mode}</span>}
+                </p>
+
+                <p class="text-muted-foreground max-w-prose pt-1.5 text-sm leading-relaxed">
+                  {job.description}
+                </p>
+
+                {job.tags && job.tags.length > 0 && (
+                  <p class="text-muted-foreground/70 pt-1 text-xs">
+                    {job.tags.join(' · ')}
+                  </p>
+                )}
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </Section>
+
+    <!-- Projects -->
+    <Section title="Projects">
+      <div class="grid gap-x-6 gap-y-9 sm:grid-cols-2 print:grid-cols-2 print:gap-y-4">
+        {
+          projects.map((project) => (
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex flex-col gap-3"
+            >
+              {project.thumbnail && (
+                <div
+                  class="bg-muted print:hidden aspect-[16/10] overflow-hidden rounded-lg border border-border/70"
+                >
+                  <img
+                    src={project.thumbnail}
+                    alt=""
+                    loading="lazy"
+                    class="size-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                </div>
+              )}
+
+              <div class="space-y-1.5">
+                <h3 class="font-display group-hover:text-primary inline-flex items-center gap-1 text-base font-semibold">
+                  {project.title}
+                  <Icon
+                    name="arrow-up-right"
+                    class="size-3.5 opacity-0 transition-opacity group-hover:opacity-60"
+                  />
+                </h3>
+                <p class="text-muted-foreground text-sm leading-relaxed">
+                  {project.description}
+                </p>
+                {project.tags && project.tags.length > 0 && (
+                  <p class="text-muted-foreground/80 pt-0.5 text-xs">
+                    {project.tags.join(' · ')}
+                  </p>
+                )}
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </Section>
+
+    <!-- Education -->
+    <Section title="Education">
+      <div class="space-y-5">
+        {
+          education.map((item) => (
+            <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+              <div>
+                <h3 class="font-display text-lg font-semibold">{item.school}</h3>
+                <p class="text-muted-foreground text-sm">{item.degree}</p>
+              </div>
+              <span class="text-muted-foreground text-sm tabular-nums">
+                {item.start} — {item.end}
+              </span>
+            </div>
+          ))
+        }
+      </div>
+    </Section>
+
+    <!-- Stack -->
+    <Section title="Stack">
+      <dl class="space-y-4">
+        {
+          stack.map((entry) => (
+            <div class="grid gap-1 sm:grid-cols-[7.5rem_1fr] sm:gap-6">
+              <dt class="text-muted-foreground text-sm">{entry.group}</dt>
+              <dd class="text-foreground/90 text-sm leading-relaxed">
+                {entry.items.join(', ')}
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </Section>
+
+    <!-- GitHub -->
+    {
+      github && (
+        <Section title="GitHub">
+          <div class="space-y-4">
+            <div class="-mx-1 overflow-x-auto px-1 print:hidden">
+              <svg
+                data-contribution-grid
+                role="img"
+                aria-label={`${github.total.toLocaleString('en-US')} contributions in the last year`}
+                width={github.weeks * CALENDAR.step - (CALENDAR.step - CALENDAR.cell)}
+                height={CALENDAR.rows * CALENDAR.step - (CALENDAR.step - CALENDAR.cell)}
+                class="text-primary"
+              >
+                {github.days.map((day) => (
+                  <rect
+                    x={day.week * CALENDAR.step}
+                    y={day.weekday * CALENDAR.step}
+                    width={CALENDAR.cell}
+                    height={CALENDAR.cell}
+                    rx="2"
+                    fill="currentColor"
+                    opacity={LEVEL_OPACITY[day.level] ?? LEVEL_OPACITY[0]}
+                  />
+                ))}
+              </svg>
+            </div>
+
+            <p class="text-muted-foreground text-sm">
+              <span class="text-foreground font-medium tabular-nums" data-contribution-total>
+                {github.total.toLocaleString('en-US')}
+              </span>{' '}
+              contributions in the last year, over{' '}
+              <span class="text-foreground font-medium tabular-nums" data-contribution-active>
+                {github.activeDays}
+              </span>{' '}
+              active days. Counts private and organisation work.
+            </p>
+          </div>
+        </Section>
+      )
+    }
+
+    <!-- Elsewhere -->
+    <Section title="Elsewhere" class="print:hidden">
+      <div class="space-y-4">
+        {
+          elsewhere.map((link) => (
+            <a
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex items-center gap-3"
+            >
+              <Icon
+                name={link.icon}
+                class="text-muted-foreground group-hover:text-foreground size-4 shrink-0 transition-colors"
+              />
+              <span class="group-hover:text-primary text-sm font-medium">
+                {link.name}
+              </span>
+              {link.note && (
+                <span class="text-muted-foreground truncate text-sm">
+                  {link.note}
+                </span>
+              )}
+              <Icon
+                name="arrow-up-right"
+                class="text-muted-foreground ml-auto size-3.5 shrink-0 opacity-0 transition-opacity group-hover:opacity-70"
+              />
+            </a>
+          ))
+        }
+      </div>
+    </Section>
+  </div>
+  <script
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify(personSchema)}
+  />
+</Layout>
+
+<script>
+  // The contribution figures are baked in at build time. Refresh them from the
+  // same-origin proxy, which reaches GitHub server-side - the browser cannot,
+  // as GitHub's calendar sends no CORS headers. Any failure leaves the
+  // build-time values in place.
+  import { CALENDAR, LEVEL_OPACITY, type Contributions } from '@/lib/github';
+
+  const grid = document.querySelector<SVGSVGElement>('[data-contribution-grid]');
+  const totalEl = document.querySelector<HTMLElement>('[data-contribution-total]');
+  const activeEl = document.querySelector<HTMLElement>('[data-contribution-active]');
+
+  if (grid && totalEl && activeEl) {
+    const { cell, step, rows } = CALENDAR;
+    const NS = 'http://www.w3.org/2000/svg';
+
+    try {
+      const res = await fetch('/api/contributions');
+      if (res.ok) {
+        const data = (await res.json()) as Contributions;
+
+        totalEl.textContent = data.total.toLocaleString('en-US');
+        activeEl.textContent = String(data.activeDays);
+
+        grid.setAttribute('width', String(data.weeks * step - (step - cell)));
+        grid.setAttribute('height', String(rows * step - (step - cell)));
+        grid.setAttribute(
+          'aria-label',
+          `${data.total.toLocaleString('en-US')} contributions in the last year`,
+        );
+
+        const next = document.createDocumentFragment();
+        for (const day of data.days) {
+          const rect = document.createElementNS(NS, 'rect');
+          rect.setAttribute('x', String(day.week * step));
+          rect.setAttribute('y', String(day.weekday * step));
+          rect.setAttribute('width', String(cell));
+          rect.setAttribute('height', String(cell));
+          rect.setAttribute('rx', '2');
+          rect.setAttribute('fill', 'currentColor');
+          rect.setAttribute('opacity', String(LEVEL_OPACITY[day.level] ?? LEVEL_OPACITY[0]));
+          next.append(rect);
+        }
+        grid.replaceChildren(next);
+      }
+    } catch {
+      // Keep what the build rendered.
+    }
+  }
+</script>
+
+<script>
+  // The page is static, so the baked duration is only correct as of the last
+  // build. Recompute on load using the same formatter the server used.
+  import { durationSince } from '@/lib/duration';
+
+  for (const el of document.querySelectorAll<HTMLElement>('[data-duration-since]')) {
+    const start = el.dataset.durationSince;
+    if (!start) continue;
+
+    const elapsed = durationSince(start);
+    const next = elapsed ? ` · ${elapsed}` : '';
+    if (next !== el.textContent) el.textContent = next;
+  }
+</script>

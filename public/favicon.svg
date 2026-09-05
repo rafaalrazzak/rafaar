@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>
+    .plate { fill: #11203c }
+    .mark { stroke: #faf9f5 }
+    @media (prefers-color-scheme: dark) {
+      .plate { fill: #efece6 }
+      .mark { stroke: #11203c }
+    }
+  </style>
+  <rect class="plate" width="64" height="64" rx="15" />
+  <!-- Mark from RAF.svg. Stroke is heavier than the source (190 vs 90) so the
+       strokes still separate at 16px; the geometry is untouched. -->
+  <g
+    class="mark"
+    transform="translate(-89.404 -8.061) scale(0.0274091)"
+    fill="none"
+    stroke-width="190"
+    stroke-miterlimit="10"
+  >
+    <path d="m4319.59 850.41v-190.75c0-81 65.66-146.66 146.66-146.66h531.33" />
+    <path d="m5058.63 2345.04l-717.23-1084.95" />
+    <path d="m4979.95 1120.81c0 182.35-147.82 330.19-330.19 330.19-182.35 0-330.17-147.84-330.17-330.19 0 0 0-270.38 0-270.4 0-7.96 84.49-29.07 94.14-31.66 35.59-9.58 71.83-16.72 108.38-21.36 107.81-13.7 224.98 0.3 319.98 58.52 88.45 54.2 137.86 163.14 137.86 264.9z" />
+    <path d="m4319.59 850.41v1559.76c-304.46-123.59-519.59-426.18-519.59-779.89 0-353.68 215.13-656.27 519.59-779.87z" />
+  </g>
+</svg>

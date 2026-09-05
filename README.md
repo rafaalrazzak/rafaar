@@ -1,148 +1,102 @@
 # Portfolio - Rafa Al Razzak
 
-Modern, fast, and secure portfolio built with Astro, React, and Tailwind CSS v4.
+Static personal site built with Astro and Tailwind CSS v4. The project is intentionally small: no React runtime, no UI component dependency, and no client-side router.
 
-## Features
+## Stack
 
-- ⚡ **Lightning Fast** - Static-first with React Islands
-- 🎨 **Modern Design** - Tailwind CSS v4 with custom theme
-- 🔒 **Secure** - Security headers and CSP
-- 📱 **Responsive** - Mobile-first design
-- ♿ **Accessible** - WCAG compliant
-- 🌙 **Dark Mode** - System preference support
-- 🚀 **Optimized** - Minimal JavaScript, fast load times
+- Astro 7 static output
+- Tailwind CSS v4 through the Vite plugin
+- TypeScript for data and config
+- Local Astro SVG icons
+- Oxlint and Oxfmt
+- Cloudflare Pages via `wrangler.toml`
 
-## Tech Stack
-
-- **Framework**: Astro 4
-- **UI Library**: React 18 (Islands Architecture)
-- **Styling**: Tailwind CSS v4
-- **Icons**: Lucide React
-- **Animations**: Framer Motion
-- **Type Safety**: TypeScript
-- **Deployment**: Static (Cloudflare Pages, Vercel, Netlify)
-
-## Project Structure
-
-```
-/
-├── public/              # Static assets
-│   ├── _headers        # Security headers
-│   └── ...
-├── src/
-│   ├── components/     # Reusable components
-│   │   ├── ui/        # UI primitives
-│   │   ├── MainPageClient.tsx
-│   │   ├── ProjectCard.astro
-│   │   ├── SocialLinks.astro
-│   │   ├── ThemeToggle.tsx
-│   │   └── WorkCard.astro
-│   ├── data/          # Site data
-│   │   ├── app-route.ts
-│   │   ├── resume-data.ts
-│   │   ├── site-metadata.ts
-│   │   ├── social-media.ts
-│   │   └── tools.ts
-│   ├── hooks/         # React hooks
-│   ├── icons/         # Icon components
-│   ├── layouts/       # Page layouts
-│   │   ├── BaseLayout.astro
-│   │   └── MainLayout.astro
-│   ├── libs/          # Utilities
-│   │   └── utils.ts
-│   ├── pages/         # Routes
-│   │   ├── index.astro
-│   │   ├── cv.astro
-│   │   ├── links.astro
-│   │   └── songs.astro
-│   ├── styles/        # Global styles
-│   │   └── globals.css
-│   └── types.ts       # TypeScript types
-├── astro.config.mjs   # Astro configuration
-├── package.json
-├── postcss.config.js  # PostCSS configuration
-├── tsconfig.json      # TypeScript configuration
-└── wrangler.toml      # Cloudflare configuration
-```
-
-## Development
+## Commands
 
 ```bash
-# Install dependencies
 bun install
-
-# Start dev server
 bun run dev
-
-# Build for production
+bun run format
+bun run lint
 bun run build
-
-# Preview production build
 bun run preview
 ```
 
-## Deployment
+## Cloudflare Pages
 
-### Cloudflare Pages
+The project builds to `dist`, matching `wrangler.toml`.
 
 ```bash
-bun run build
-wrangler pages deploy dist
+bun run deploy
 ```
 
-Or connect your Git repository to Cloudflare Pages dashboard.
+Cloudflare Pages dashboard settings:
 
-### Vercel / Netlify
+- Build command: `bun run build`
+- Build output directory: `dist`
+- Node version: `22.12.0` or newer
 
-Connect your repository and they'll auto-detect Astro configuration.
+## Structure
 
-## Performance
-
-- **Lighthouse Score**: 100/100
-- **First Contentful Paint**: < 1s
-- **Time to Interactive**: < 2s
-- **Bundle Size**: ~150KB (gzipped: ~50KB)
-
-## Security
-
-- Content Security Policy (CSP)
-- X-Frame-Options: DENY
-- X-Content-Type-Options: nosniff
-- Referrer-Policy: strict-origin-when-cross-origin
-- Permissions-Policy restrictions
-
-## Customization
-
-### Update Site Info
-
-Edit `src/data/site-metadata.ts`:
-
-```ts
-const siteMetadata = {
-  SITE_NAME: 'Your Name',
-  SITE_URL: 'https://yoursite.com',
-  // ...
-};
+```text
+src/
+  components/   Header, Section, Icon, ThemeToggle
+  data/         resume-data.ts, social-media.ts, site-metadata.ts
+  layouts/      Layout.astro
+  pages/        index.astro
+  styles/       globals.css
 ```
 
-### Add New Page
+The site is a single page. `/cv` and `/links` used to be separate routes that
+repeated the same content; they are now sections of `/`, with 301s in
+`public/_redirects`. The CV is the page itself — the print stylesheet in
+`globals.css` strips the chrome, so the header print button (or Cmd/Ctrl+P)
+produces an A4 resume.
 
-Create `src/pages/about.astro`:
+## Content
 
-```astro
----
-import MainLayout from '@/layouts/MainLayout.astro';
----
+All content lives in `src/data/resume-data.ts` — intro, work, projects,
+education, stack and external links. Site-wide meta is in
+`src/data/site-metadata.ts`.
 
-<MainLayout title="About">
-  <h1>About Me</h1>
-</MainLayout>
-```
+## GitHub activity
 
-### Modify Theme
+The GitHub section shows contributions and active days rather than repo, star or
+follower counts: contribution totals include private and organisation work, which
+is where most of the activity is, while the public counts do not reflect it.
 
-Edit `src/styles/globals.css` to customize colors and design tokens.
+GitHub's calendar page sends no `Access-Control-Allow-Origin`, so the browser
+cannot read it directly. Two paths share one parser in `src/lib/github.ts`:
 
-## License
+- **Build time** renders the section, so it works with JavaScript disabled.
+- **`functions/api/contributions.ts`**, a Cloudflare Pages Function, proxies the
+  same page from our own origin, edge-cached for an hour. The page fetches it on
+  load and repaints the numbers and calendar.
 
-MIT
+Either failing leaves the other's values in place, so neither a GitHub outage nor
+a cold Function can break the page or the build.
+
+## Fonts
+
+Manrope and Source Serif 4 are self-hosted from `public/fonts` rather than pulled
+from Google, so the critical path carries no third-party request and the CSP does
+not have to allow `fonts.googleapis.com` or `fonts.gstatic.com`. Both are OFL
+licensed, which permits redistribution.
+
+`src/styles/fonts.css` holds the `@font-face` rules, generated from the Google CSS
+so the `unicode-range` values are exact - `latin-ext` only downloads if a character
+needs it. Manrope carries 400-600 as a variable range; Source Serif is pinned to
+600, the only weight the page uses, which takes it from 119 KB to 50 KB while
+keeping its optical-size axis. The two latin faces are preloaded in the head.
+
+## Brand assets
+
+`public/favicon.svg` carries the RAF mark and swaps its plate and stroke colours
+via `prefers-color-scheme`, so it inverts with the viewer's theme. Its stroke is
+heavier than the source artwork (190 vs 90) purely so the strokes still separate
+at 16px — the geometry is untouched.
+
+`favicon.ico` (16/32/48) and `apple-touch-icon.png` are rasterised from that same
+SVG, and `og.png` is the 1200x630 social card. All three are generated, not
+hand-drawn: regenerating them needs an SVG rasteriser (`@resvg/resvg-js`) and the
+Manrope / Source Serif 4 files, neither of which is kept as a project dependency.

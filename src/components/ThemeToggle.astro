@@ -1,0 +1,58 @@
+---
+import Icon from '@/components/Icon.astro';
+---
+
+<button
+  type="button"
+  data-theme-toggle
+  class="text-muted-foreground hover:bg-muted hover:text-foreground inline-flex size-9 items-center justify-center rounded-md transition-colors"
+  aria-label="Change theme"
+  title="Change theme"
+>
+  <span data-theme-icon="light" class="hidden"><Icon name="sun" /></span>
+  <span data-theme-icon="dark" class="hidden"><Icon name="moon" /></span>
+  <span data-theme-icon="system"><Icon name="monitor" /></span>
+</button>
+
+<script>
+  const CHOICES = ['system', 'light', 'dark'] as const;
+  type Choice = (typeof CHOICES)[number];
+
+  const root = document.documentElement;
+  const media = window.matchMedia('(prefers-color-scheme: dark)');
+
+  const apply = (choice: Choice) => {
+    const dark = choice === 'dark' || (choice === 'system' && media.matches);
+
+    root.classList.toggle('dark', dark);
+    root.style.colorScheme = dark ? 'dark' : 'light';
+    root.dataset.themeChoice = choice;
+
+    document.querySelectorAll<HTMLElement>('[data-theme-icon]').forEach((icon) => {
+      icon.classList.toggle('hidden', icon.dataset.themeIcon !== choice);
+    });
+    document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+      button.setAttribute('aria-label', `Theme: ${choice}`);
+      button.setAttribute('title', `Theme: ${choice}`);
+    });
+  };
+
+  const current = (): Choice => {
+    const saved = root.dataset.themeChoice;
+    return CHOICES.includes(saved as Choice) ? (saved as Choice) : 'system';
+  };
+
+  apply(current());
+
+  media.addEventListener('change', () => {
+    if (current() === 'system') apply('system');
+  });
+
+  document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const next = CHOICES[(CHOICES.indexOf(current()) + 1) % CHOICES.length]!;
+      localStorage.setItem('theme', next);
+      apply(next);
+    });
+  });
+</script>
