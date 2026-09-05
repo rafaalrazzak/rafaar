@@ -1,0 +1,17 @@
+---
+interface Props {
+  title: string;
+  class?: string;
+}
+
+const { title, class: className } = Astro.props;
+---
+
+<section class:list={['border-t border-border/70 pt-8 print:pt-4', className]}>
+  <h2
+    class="text-muted-foreground mb-7 text-[0.7rem] font-semibold uppercase tracking-[0.18em] print:mb-3"
+  >
+    {title}
+  </h2>
+  <slot />
+</section>

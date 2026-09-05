@@ -1,30 +1,50 @@
-import type { LucideIcon } from 'lucide-react';
+export type IconName =
+  | "arrow-up-right"
+  | "github"
+  | "instagram"
+  | "linkedin"
+  | "mail"
+  | "messages"
+  | "monitor"
+  | "moon"
+  | "music"
+  | "printer"
+  | "spotify"
+  | "sun"
+  | "x";
+
+export interface Link {
+  name: string;
+  url: string;
+  icon: IconName;
+  note?: string;
+}
+
+export interface Work {
+  company: string;
+  role: string;
+  /** Working arrangement, e.g. "Remote" - shown next to the role, not as a tech tag. */
+  mode?: string;
+  url: string;
+  logo?: string;
+  /** ISO YYYY-MM-DD. Drives both the displayed year and the duration. */
+  startDate: string;
+  /** Display label for the end of the range. */
+  end?: string;
+  /** ISO YYYY-MM-DD, only for roles that have ended - its absence marks the
+   *  role ongoing, which is what lets the browser keep the duration current. */
+  endDate?: string;
+  description: string;
+  /** Stack only. The description carries the what; these carry the how. */
+  tags?: readonly string[];
+}
 
 export interface Project {
   title: string;
   description: string;
   url: string;
-  icon?: LucideIcon | React.ComponentType<{ className?: string }>;
   thumbnail?: string;
-  badges?: string[];
-}
-
-export interface SocialMedia {
-  name: string;
-  url: string;
-  icon: React.ComponentType<{ className?: string }>;
-}
-
-export interface Work {
-  company: string;
-  link: string;
-  badges: string[];
-  title: string;
-  logo: string;
-  color: string;
-  start: string;
-  end: string;
-  description: string;
+  tags?: readonly string[];
 }
 
 export interface Education {
@@ -34,24 +54,21 @@ export interface Education {
   end: string;
 }
 
+export interface StackGroup {
+  group: string;
+  items: readonly string[];
+}
+
 export interface ResumeData {
   name: string;
-  initials: string;
+  role: string;
   location: string;
-  locationLink: string;
   about: string;
-  summary: string;
-  skills: readonly string[];
-  avatarUrl: string;
-  ogImage: string;
-  personalWebsiteUrl: string;
-  contact: {
-    email: string;
-    social: SocialMedia[];
-  };
-  education: readonly Education[];
+  email: string;
+  social: readonly Link[];
+  elsewhere: readonly Link[];
   work: readonly Work[];
-  languages: readonly string[];
-  tools: readonly string[];
   projects: readonly Project[];
+  education: readonly Education[];
+  stack: readonly StackGroup[];
 }

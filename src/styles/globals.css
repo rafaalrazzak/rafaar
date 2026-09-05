@@ -1,65 +1,45 @@
 @import 'tailwindcss';
-@import '@almach/ui/styles';
-@source '../../node_modules/@almach/ui/dist/**/*.js';
+@import './fonts.css';
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-border: hsl(var(--border));
+  --color-primary: hsl(var(--primary));
+  --color-ring: hsl(var(--ring));
+}
 
 :root {
-  --background: 210 40% 98%;
-  --foreground: 217 30% 18%;
-  --card: 210 44% 99%;
-  --card-foreground: 217 30% 18%;
-  --popover: 210 44% 99%;
-  --popover-foreground: 217 30% 18%;
-  --primary: 217 91% 55%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 205 40% 92%;
-  --secondary-foreground: 217 30% 18%;
-  --muted: 210 25% 93%;
-  --muted-foreground: 215 16% 42%;
-  --accent: 205 40% 92%;
-  --accent-foreground: 217 30% 18%;
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 100%;
-  --border: 210 25% 85%;
-  --input: 210 25% 85%;
-  --ring: 217 91% 55%;
-  --radius: 0.625rem;
-  --theme-motion-overlay-duration-ms: 260;
-  --theme-motion-overlay-duration: 260ms;
-  --theme-motion-interactive-duration: 220ms;
-  --theme-motion-ease-standard: linear;
+  --background: 44 33% 97%;
+  --foreground: 220 17% 15%;
+  --card: 40 25% 94%;
+  --muted: 40 18% 91%;
+  --muted-foreground: 220 8% 46%;
+  --border: 36 14% 84%;
+  --primary: 205 72% 37%;
+  --ring: 205 72% 37%;
+
+  --font-sans: Manrope, ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Source Serif 4', ui-serif, Georgia, serif;
 }
 
 .dark {
-  --background: 216 34% 10%;
-  --foreground: 210 30% 95%;
-  --card: 216 30% 12%;
-  --card-foreground: 210 30% 95%;
-  --popover: 216 30% 12%;
-  --popover-foreground: 210 30% 95%;
-  --primary: 213 93% 67%;
-  --primary-foreground: 216 34% 10%;
-  --secondary: 213 20% 21%;
-  --secondary-foreground: 210 30% 95%;
-  --muted: 215 20% 18%;
-  --muted-foreground: 214 18% 69%;
-  --accent: 213 20% 21%;
-  --accent-foreground: 210 30% 95%;
-  --destructive: 0 72% 48%;
-  --destructive-foreground: 210 30% 95%;
-  --border: 214 16% 24%;
-  --input: 214 16% 24%;
-  --ring: 213 93% 67%;
+  --background: 220 18% 9%;
+  --foreground: 42 22% 92%;
+  --card: 220 14% 13%;
+  --muted: 219 13% 16%;
+  --muted-foreground: 42 8% 62%;
+  --border: 218 10% 22%;
+  --primary: 199 66% 62%;
+  --ring: 199 66% 62%;
 }
 
 @layer base {
-
-  html,
-  body {
-    overflow-x: clip;
-  }
-
-  * {
-    @apply border-border;
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
@@ -67,68 +47,87 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-feature-settings: 'kern' 1, 'liga' 1;
   }
 
   h1,
   h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  h3 {
     @apply text-foreground font-medium tracking-tight;
-    font-family: var(--font-serif);
-    line-height: 1.2;
+    text-wrap: balance;
+  }
+
+  p,
+  li {
+    text-wrap: pretty;
   }
 
   a {
-    @apply no-underline;
+    @apply no-underline transition-colors duration-200;
   }
 
   :focus-visible {
-    @apply ring-ring ring-offset-background outline-none ring-2 ring-offset-2;
+    @apply ring-ring ring-offset-background rounded-sm outline-none ring-2 ring-offset-2;
   }
 
   ::selection {
-    background-color: var(--color-foreground);
-    color: var(--color-background);
+    background-color: hsl(var(--foreground));
+    color: hsl(var(--background));
   }
 }
 
-a,
-button,
-input,
-select,
-textarea {
-  @apply transition-colors duration-200;
+@utility font-display {
+  font-family: var(--font-display);
 }
 
-::view-transition-group(root) {
-  animation: none;
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-}
+/* Print: the page doubles as the printable CV, so drop chrome and
+   force the light palette regardless of the active theme. */
+@media print {
+  :root,
+  :root.dark {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 12%;
+    --card: 0 0% 100%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 38%;
+    --border: 0 0% 82%;
+    --primary: 0 0% 12%;
+  }
 
-[data-fixed-visual] {
-  view-transition-name: none;
-  backface-visibility: hidden;
-  transform: translateZ(0);
-}
+  @page {
+    size: A4;
+    margin: 14mm 15mm;
+  }
 
-[data-bg-effects-root] {
-  transition: opacity 0.4s ease;
-}
+  body {
+    font-size: 10.5pt;
+    line-height: 1.45;
+  }
 
-html[data-bg-effects='off'] [data-bg-effects-root] {
-  opacity: 0;
-  pointer-events: none;
-}
+  main {
+    padding: 0 !important;
+    max-width: none !important;
+  }
 
-html[data-route-transitioning='true'] *,
-html[data-route-transitioning='true'] *::before,
-html[data-route-transitioning='true'] *::after {
-  transition-duration: 0ms !important;
+  section,
+  article {
+    break-inside: avoid;
+  }
+
+  h2 {
+    break-after: avoid;
+  }
+
+  a {
+    color: inherit !important;
+  }
 }

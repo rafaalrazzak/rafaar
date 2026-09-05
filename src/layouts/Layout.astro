@@ -1,0 +1,100 @@
+---
+import '@/styles/globals.css';
+import siteMetadata from '@/data/site-metadata';
+import Header from '@/components/Header.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = `${siteMetadata.SITE_NAME} — ${siteMetadata.SITE_TAGLINE}`,
+  description = siteMetadata.SITE_DESCRIPTION,
+} = Astro.props;
+
+const ogImage = new URL(siteMetadata.TWITTER_CARD, siteMetadata.SITE_URL).href;
+const canonical = new URL(Astro.url.pathname, siteMetadata.SITE_URL).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="canonical" href={canonical} />
+
+    <link
+      rel="preload"
+      href="/fonts/manrope-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/source-serif-4-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <!-- Resolve the theme before first paint to avoid a flash. -->
+    <script is:inline>
+      (() => {
+        const saved = localStorage.getItem('theme');
+        const choice = saved === 'light' || saved === 'dark' ? saved : 'system';
+        const dark =
+          choice === 'dark' ||
+          (choice === 'system' &&
+            window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+        document.documentElement.classList.toggle('dark', dark);
+        document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+        document.documentElement.dataset.themeChoice = choice;
+      })();
+    </script>
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf9f5" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#13161b" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteMetadata.SITE_NAME} />
+    <meta property="og:locale" content={siteMetadata.SITE_LOCALE} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${siteMetadata.SITE_NAME} — ${siteMetadata.SITE_TAGLINE}`} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content={siteMetadata.TWITTER_USERNAME} />
+    <meta name="twitter:creator" content={siteMetadata.TWITTER_USERNAME} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+  </head>
+  <body>
+    <a
+      href="#content"
+      class="bg-background ring-ring fixed left-4 top-4 z-50 -translate-y-20 rounded-md border border-border px-3 py-2 text-sm font-medium transition-transform focus:translate-y-0"
+    >
+      Skip to content
+    </a>
+    <Header />
+    <main
+      id="content"
+      class="mx-auto w-full max-w-3xl px-6 pb-24 pt-14 sm:pt-20"
+    >
+      <slot />
+    </main>
+  </body>
+</html>
