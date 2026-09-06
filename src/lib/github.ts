@@ -2,6 +2,8 @@ export interface ContributionDay {
   date: string;
   /** GitHub's own 0-4 intensity bucket. */
   level: number;
+  /** Exact contribution count, read from the day's tooltip. */
+  count: number;
   /** Column (week) and row (weekday) in the calendar grid. */
   week: number;
   weekday: number;
@@ -60,6 +62,27 @@ export function monthLabels(days: ContributionDay[]): MonthLabel[] {
   return labels;
 }
 
+/**
+ * Tooltip text for one cell, shared by the build render and the client repaint.
+ * Falls back to a countless phrasing if GitHub ever changes its tooltip markup,
+ * so a parser drift understates the day rather than claiming it was empty.
+ */
+export function describeDay(day: ContributionDay): string {
+  const date = new Date(`${day.date}T00:00:00Z`).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+  const amount =
+    day.count > 0
+      ? `${day.count.toLocaleString("en-US")} contribution${day.count === 1 ? "" : "s"}`
+      : day.level > 0
+        ? "Contributions"
+        : "No contributions";
+  return `${amount} on ${date}`;
+}
+
 export const CONTRIBUTIONS_URL = (user: string) => `https://github.com/users/${user}/contributions`;
 
 const DAY_MS = 86_400_000;
@@ -74,8 +97,23 @@ export function parseContributions(html: string): Contributions | null {
   const total = Number(
     /([\d,]+)\s+contributions?\s+in\s+the\s+last\s+year/.exec(html)?.[1]?.replace(/,/g, ""),
   );
-  const cells = [...html.matchAll(/data-date="(\d{4}-\d{2}-\d{2})"[^>]*data-level="(\d)"/g)].map(
-    ([, date, level]) => ({ date: date!, level: Number(level) }),
+  // The exact per-day count only exists in the visually-hidden tooltip that
+  // GitHub links to each cell by id, so index those first.
+  const counts = new Map<string, number>();
+  for (const [, id, text] of html.matchAll(
+    /<tool-tip[^>]*\bfor="([^"]+)"[^>]*>([^<]*)<\/tool-tip>/g,
+  )) {
+    const count = /^([\d,]+)\s+contribution/.exec(text!.trim())?.[1];
+    counts.set(id!, count ? Number(count.replace(/,/g, "")) : 0);
+  }
+
+  const cells = [...html.matchAll(/data-date="(\d{4}-\d{2}-\d{2})"([^>]*)/g)].flatMap(
+    ([, date, attrs]) => {
+      const level = /data-level="(\d)"/.exec(attrs!)?.[1];
+      if (level === undefined) return [];
+      const id = /\bid="([^"]+)"/.exec(attrs!)?.[1];
+      return [{ date: date!, level: Number(level), count: (id && counts.get(id)) || 0 }];
+    },
   );
 
   if (!Number.isFinite(total) || total <= 0 || cells.length === 0) return null;
@@ -86,9 +124,9 @@ export function parseContributions(html: string): Contributions | null {
   const first = Date.parse(cells[0]!.date);
   const firstWeekday = new Date(first).getUTCDay();
 
-  const days = cells.map(({ date, level }) => {
+  const days = cells.map(({ date, level, count }) => {
     const offset = Math.round((Date.parse(date) - first) / DAY_MS) + firstWeekday;
-    return { date, level, week: Math.floor(offset / 7), weekday: offset % 7 };
+    return { date, level, count, week: Math.floor(offset / 7), weekday: offset % 7 };
   });
 
   return {

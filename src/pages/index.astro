@@ -4,7 +4,7 @@ import Section from '@/components/Section.astro';
 import Icon from '@/components/Icon.astro';
 import { RESUME_DATA } from '@/data/resume-data';
 import { durationSince, startYear } from '@/lib/duration';
-import { CALENDAR, LEVEL_OPACITY, WEEKDAY_LABELS, fetchContributions, monthLabels } from '@/lib/github';
+import { CALENDAR, LEVEL_OPACITY, WEEKDAY_LABELS, describeDay, fetchContributions, monthLabels } from '@/lib/github';
 import siteMetadata from '@/data/site-metadata';
 
 const {
@@ -246,48 +246,57 @@ const contact = [
       github && (
         <Section title="GitHub">
           <div class="space-y-4">
-            <div class="-mx-1 overflow-x-auto px-1 print:hidden">
-              <svg
-                data-contribution-grid
-                role="img"
-                aria-label={`${github.total.toLocaleString('en-US')} contributions in the last year`}
-                width={CALENDAR.weekdayLabelWidth + github.weeks * CALENDAR.step - (CALENDAR.step - CALENDAR.cell)}
-                height={CALENDAR.monthLabelHeight + CALENDAR.rows * CALENDAR.step - (CALENDAR.step - CALENDAR.cell)}
-                class="text-primary"
-              >
-                <g
-                  fill="currentColor"
-                  class="text-muted-foreground"
-                  font-size="9"
-                  data-contribution-months
+            <div class="relative print:hidden">
+              <div class="-mx-1 overflow-x-auto px-1">
+                <svg
+                  data-contribution-grid
+                  role="img"
+                  aria-label={`${github.total.toLocaleString('en-US')} contributions in the last year`}
+                  width={CALENDAR.weekdayLabelWidth + github.weeks * CALENDAR.step - (CALENDAR.step - CALENDAR.cell)}
+                  height={CALENDAR.monthLabelHeight + CALENDAR.rows * CALENDAR.step - (CALENDAR.step - CALENDAR.cell)}
+                  class="text-primary"
                 >
-                  {githubMonths.map((month) => (
-                    <text x={CALENDAR.weekdayLabelWidth + month.week * CALENDAR.step} y={CALENDAR.monthLabelHeight - 4}>
-                      {month.label}
-                    </text>
-                  ))}
-                </g>
-                <g fill="currentColor" class="text-muted-foreground" font-size="9">
-                  {WEEKDAY_LABELS.map(({ weekday, label }) => (
-                    <text x="0" y={CALENDAR.monthLabelHeight + weekday * CALENDAR.step + CALENDAR.cell}>
-                      {label}
-                    </text>
-                  ))}
-                </g>
-                <g data-contribution-days>
-                  {github.days.map((day) => (
-                    <rect
-                      x={CALENDAR.weekdayLabelWidth + day.week * CALENDAR.step}
-                      y={CALENDAR.monthLabelHeight + day.weekday * CALENDAR.step}
-                      width={CALENDAR.cell}
-                      height={CALENDAR.cell}
-                      rx="2"
-                      fill="currentColor"
-                      opacity={LEVEL_OPACITY[day.level] ?? LEVEL_OPACITY[0]}
-                    />
-                  ))}
-                </g>
-              </svg>
+                  <g
+                    fill="currentColor"
+                    class="text-muted-foreground"
+                    font-size="9"
+                    data-contribution-months
+                  >
+                    {githubMonths.map((month) => (
+                      <text x={CALENDAR.weekdayLabelWidth + month.week * CALENDAR.step} y={CALENDAR.monthLabelHeight - 4}>
+                        {month.label}
+                      </text>
+                    ))}
+                  </g>
+                  <g fill="currentColor" class="text-muted-foreground" font-size="9">
+                    {WEEKDAY_LABELS.map(({ weekday, label }) => (
+                      <text x="0" y={CALENDAR.monthLabelHeight + weekday * CALENDAR.step + CALENDAR.cell}>
+                        {label}
+                      </text>
+                    ))}
+                  </g>
+                  <g data-contribution-days>
+                    {github.days.map((day) => (
+                      <rect
+                        x={CALENDAR.weekdayLabelWidth + day.week * CALENDAR.step}
+                        y={CALENDAR.monthLabelHeight + day.weekday * CALENDAR.step}
+                        width={CALENDAR.cell}
+                        height={CALENDAR.cell}
+                        rx="2"
+                        fill="currentColor"
+                        opacity={LEVEL_OPACITY[day.level] ?? LEVEL_OPACITY[0]}
+                        data-tip={describeDay(day)}
+                      />
+                    ))}
+                  </g>
+                </svg>
+              </div>
+              <div
+                data-contribution-tooltip
+                role="tooltip"
+                hidden
+                class="border-border bg-card text-foreground pointer-events-none absolute z-10 -translate-x-1/2 -translate-y-full rounded-md border px-2 py-1 text-xs whitespace-nowrap shadow-sm"
+              />
             </div>
 
             <p class="text-muted-foreground text-sm">
@@ -350,7 +359,7 @@ const contact = [
   // same-origin proxy, which reaches GitHub server-side - the browser cannot,
   // as GitHub's calendar sends no CORS headers. Any failure leaves the
   // build-time values in place.
-  import { CALENDAR, LEVEL_OPACITY, monthLabels, type Contributions } from '@/lib/github';
+  import { CALENDAR, LEVEL_OPACITY, describeDay, monthLabels, type Contributions } from '@/lib/github';
 
   const grid = document.querySelector<SVGSVGElement>('[data-contribution-grid]');
   const daysGroup = document.querySelector<SVGGElement>('[data-contribution-days]');
@@ -387,6 +396,7 @@ const contact = [
           rect.setAttribute('rx', '2');
           rect.setAttribute('fill', 'currentColor');
           rect.setAttribute('opacity', String(LEVEL_OPACITY[day.level] ?? LEVEL_OPACITY[0]));
+          rect.setAttribute('data-tip', describeDay(day));
           nextDays.append(rect);
         }
         daysGroup.replaceChildren(nextDays);
@@ -404,6 +414,48 @@ const contact = [
     } catch {
       // Keep what the build rendered.
     }
+  }
+</script>
+
+<script>
+  // Hover tooltip for the contribution grid. Every cell carries its own label
+  // in data-tip - rendered at build time and rewritten by the refresh above -
+  // so this only has to position and show it. Kept in its own script so the
+  // tooltip still works when the refresh bails out.
+  const tip = document.querySelector<HTMLElement>('[data-contribution-tooltip]');
+  const frame = tip?.parentElement;
+  const days = document.querySelector<SVGGElement>('[data-contribution-days]');
+
+  if (tip && frame && days) {
+    const hide = () => {
+      tip.hidden = true;
+    };
+
+    days.addEventListener('pointerover', (event) => {
+      const cell = (event.target as Element).closest('rect');
+      const label = cell?.getAttribute('data-tip');
+      if (!cell || !label) return hide();
+
+      tip.textContent = label;
+      tip.hidden = false;
+
+      // Both boxes are viewport-relative, so this stays correct however far the
+      // calendar has been scrolled sideways on narrow screens.
+      const cellBox = cell.getBoundingClientRect();
+      const frameBox = frame.getBoundingClientRect();
+      const half = tip.offsetWidth / 2;
+      const x = cellBox.left - frameBox.left + cellBox.width / 2;
+
+      tip.style.left = `${Math.min(Math.max(x, half), frameBox.width - half)}px`;
+      tip.style.top = `${cellBox.top - frameBox.top - 6}px`;
+    });
+
+    // Bound to the frame, not the grid: cells sit 3px apart, and leaving the
+    // group on every gap crossing would make the bubble flicker.
+    frame.addEventListener('pointerleave', hide);
+    // The grid scrolls inside its own container, which would leave the bubble
+    // stranded next to the wrong day.
+    document.addEventListener('scroll', hide, { capture: true, passive: true });
   }
 </script>
 
