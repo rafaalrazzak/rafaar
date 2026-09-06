@@ -71,6 +71,13 @@ export const RESUME_DATA: ResumeData = {
       tags: ["TanStack", "Tauri", "Cloudflare"],
     },
     {
+      title: "Rinci",
+      description: "Short links, custom domains, and click analytics.",
+      url: "https://link.rin.ci",
+      thumbnail: "https://link.rin.ci/og.png",
+      tags: ["Astro", "React"],
+    },
+    {
       title: "Almach",
       description:
         "An accessible React component library: 30+ components on React Aria and Tailwind v4, with typed form and query layers alongside. It is the base the rest of my projects are built on.",
@@ -85,6 +92,14 @@ export const RESUME_DATA: ResumeData = {
       url: "https://events.kita.blue",
       thumbnail: "https://events.kita.blue/og.png",
       tags: ["Next.js", "Multi-tenant"],
+    },
+    {
+      title: "NFCC",
+      description:
+        "Site for Nurul Fikri Cybersecurity Community: offensive security workshops, CTF, and boot-to-root sessions for STT Terpadu Nurul Fikri students.",
+      url: "https://nfcc.my.id",
+      thumbnail: "https://nfcc.my.id/hero.webp",
+      tags: ["Web"],
     },
     {
       title: "Forum GenRe Bogor",
