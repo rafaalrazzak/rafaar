@@ -14,10 +14,51 @@ export interface Contributions {
   days: ContributionDay[];
 }
 
+export interface MonthLabel {
+  week: number;
+  label: string;
+}
+
 /** Calendar geometry, shared by the build render and the client repaint so the
  *  two cannot drift apart. */
-export const CALENDAR = { cell: 10, step: 13, rows: 7 } as const;
+export const CALENDAR = {
+  cell: 10,
+  step: 13,
+  rows: 7,
+  /** Space reserved above the grid for month labels, and to the left for weekday labels. */
+  monthLabelHeight: 14,
+  weekdayLabelWidth: 20,
+} as const;
 export const LEVEL_OPACITY = [0.08, 0.3, 0.5, 0.72, 1] as const;
+/** GitHub only labels every other weekday row to avoid clutter. */
+export const WEEKDAY_LABELS = [
+  { weekday: 1, label: "Mon" },
+  { weekday: 3, label: "Wed" },
+  { weekday: 5, label: "Fri" },
+] as const;
+
+/**
+ * One label per month, positioned at the first week column that month
+ * appears in. `days` must be sorted by date ascending (parseContributions
+ * guarantees this), so the first day seen for a given week is its earliest.
+ */
+export function monthLabels(days: ContributionDay[]): MonthLabel[] {
+  const firstDateOfWeek = new Map<number, string>();
+  for (const day of days) {
+    if (!firstDateOfWeek.has(day.week)) firstDateOfWeek.set(day.week, day.date);
+  }
+
+  const labels: MonthLabel[] = [];
+  let prevMonth = -1;
+  for (const week of [...firstDateOfWeek.keys()].sort((a, b) => a - b)) {
+    const date = new Date(`${firstDateOfWeek.get(week)}T00:00:00Z`);
+    const month = date.getUTCMonth();
+    if (month === prevMonth) continue;
+    prevMonth = month;
+    labels.push({ week, label: date.toLocaleString("en-US", { month: "short", timeZone: "UTC" }) });
+  }
+  return labels;
+}
 
 export const CONTRIBUTIONS_URL = (user: string) => `https://github.com/users/${user}/contributions`;
 

@@ -4,7 +4,7 @@ import Section from '@/components/Section.astro';
 import Icon from '@/components/Icon.astro';
 import { RESUME_DATA } from '@/data/resume-data';
 import { durationSince, startYear } from '@/lib/duration';
-import { CALENDAR, LEVEL_OPACITY, fetchContributions } from '@/lib/github';
+import { CALENDAR, LEVEL_OPACITY, WEEKDAY_LABELS, fetchContributions, monthLabels } from '@/lib/github';
 import siteMetadata from '@/data/site-metadata';
 
 const {
@@ -22,6 +22,7 @@ const {
 } = RESUME_DATA;
 
 const github = await fetchContributions('rafaalrazzak');
+const githubMonths = github ? monthLabels(github.days) : [];
 
 // Structured data, built from the same source as the page so the two cannot
 // disagree. Gives search engines the entity behind the site rather than leaving
@@ -250,21 +251,42 @@ const contact = [
                 data-contribution-grid
                 role="img"
                 aria-label={`${github.total.toLocaleString('en-US')} contributions in the last year`}
-                width={github.weeks * CALENDAR.step - (CALENDAR.step - CALENDAR.cell)}
-                height={CALENDAR.rows * CALENDAR.step - (CALENDAR.step - CALENDAR.cell)}
+                width={CALENDAR.weekdayLabelWidth + github.weeks * CALENDAR.step - (CALENDAR.step - CALENDAR.cell)}
+                height={CALENDAR.monthLabelHeight + CALENDAR.rows * CALENDAR.step - (CALENDAR.step - CALENDAR.cell)}
                 class="text-primary"
               >
-                {github.days.map((day) => (
-                  <rect
-                    x={day.week * CALENDAR.step}
-                    y={day.weekday * CALENDAR.step}
-                    width={CALENDAR.cell}
-                    height={CALENDAR.cell}
-                    rx="2"
-                    fill="currentColor"
-                    opacity={LEVEL_OPACITY[day.level] ?? LEVEL_OPACITY[0]}
-                  />
-                ))}
+                <g
+                  fill="currentColor"
+                  class="text-muted-foreground"
+                  font-size="9"
+                  data-contribution-months
+                >
+                  {githubMonths.map((month) => (
+                    <text x={CALENDAR.weekdayLabelWidth + month.week * CALENDAR.step} y={CALENDAR.monthLabelHeight - 4}>
+                      {month.label}
+                    </text>
+                  ))}
+                </g>
+                <g fill="currentColor" class="text-muted-foreground" font-size="9">
+                  {WEEKDAY_LABELS.map(({ weekday, label }) => (
+                    <text x="0" y={CALENDAR.monthLabelHeight + weekday * CALENDAR.step + CALENDAR.cell}>
+                      {label}
+                    </text>
+                  ))}
+                </g>
+                <g data-contribution-days>
+                  {github.days.map((day) => (
+                    <rect
+                      x={CALENDAR.weekdayLabelWidth + day.week * CALENDAR.step}
+                      y={CALENDAR.monthLabelHeight + day.weekday * CALENDAR.step}
+                      width={CALENDAR.cell}
+                      height={CALENDAR.cell}
+                      rx="2"
+                      fill="currentColor"
+                      opacity={LEVEL_OPACITY[day.level] ?? LEVEL_OPACITY[0]}
+                    />
+                  ))}
+                </g>
               </svg>
             </div>
 
@@ -328,14 +350,16 @@ const contact = [
   // same-origin proxy, which reaches GitHub server-side - the browser cannot,
   // as GitHub's calendar sends no CORS headers. Any failure leaves the
   // build-time values in place.
-  import { CALENDAR, LEVEL_OPACITY, type Contributions } from '@/lib/github';
+  import { CALENDAR, LEVEL_OPACITY, monthLabels, type Contributions } from '@/lib/github';
 
   const grid = document.querySelector<SVGSVGElement>('[data-contribution-grid]');
+  const daysGroup = document.querySelector<SVGGElement>('[data-contribution-days]');
+  const monthsGroup = document.querySelector<SVGGElement>('[data-contribution-months]');
   const totalEl = document.querySelector<HTMLElement>('[data-contribution-total]');
   const activeEl = document.querySelector<HTMLElement>('[data-contribution-active]');
 
-  if (grid && totalEl && activeEl) {
-    const { cell, step, rows } = CALENDAR;
+  if (grid && daysGroup && monthsGroup && totalEl && activeEl) {
+    const { cell, step, rows, monthLabelHeight, weekdayLabelWidth } = CALENDAR;
     const NS = 'http://www.w3.org/2000/svg';
 
     try {
@@ -346,26 +370,36 @@ const contact = [
         totalEl.textContent = data.total.toLocaleString('en-US');
         activeEl.textContent = String(data.activeDays);
 
-        grid.setAttribute('width', String(data.weeks * step - (step - cell)));
-        grid.setAttribute('height', String(rows * step - (step - cell)));
+        grid.setAttribute('width', String(weekdayLabelWidth + data.weeks * step - (step - cell)));
+        grid.setAttribute('height', String(monthLabelHeight + rows * step - (step - cell)));
         grid.setAttribute(
           'aria-label',
           `${data.total.toLocaleString('en-US')} contributions in the last year`,
         );
 
-        const next = document.createDocumentFragment();
+        const nextDays = document.createDocumentFragment();
         for (const day of data.days) {
           const rect = document.createElementNS(NS, 'rect');
-          rect.setAttribute('x', String(day.week * step));
-          rect.setAttribute('y', String(day.weekday * step));
+          rect.setAttribute('x', String(weekdayLabelWidth + day.week * step));
+          rect.setAttribute('y', String(monthLabelHeight + day.weekday * step));
           rect.setAttribute('width', String(cell));
           rect.setAttribute('height', String(cell));
           rect.setAttribute('rx', '2');
           rect.setAttribute('fill', 'currentColor');
           rect.setAttribute('opacity', String(LEVEL_OPACITY[day.level] ?? LEVEL_OPACITY[0]));
-          next.append(rect);
+          nextDays.append(rect);
         }
-        grid.replaceChildren(next);
+        daysGroup.replaceChildren(nextDays);
+
+        const nextMonths = document.createDocumentFragment();
+        for (const month of monthLabels(data.days)) {
+          const text = document.createElementNS(NS, 'text');
+          text.setAttribute('x', String(weekdayLabelWidth + month.week * step));
+          text.setAttribute('y', String(monthLabelHeight - 4));
+          text.textContent = month.label;
+          nextMonths.append(text);
+        }
+        monthsGroup.replaceChildren(nextMonths);
       }
     } catch {
       // Keep what the build rendered.
