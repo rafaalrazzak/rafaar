@@ -21,8 +21,9 @@ export const onRequestGet = async ({ request, waitUntil }: Context): Promise<Res
   const upstream = await fetch(UPSTREAM, { headers: { "user-agent": "rafaar.com" } });
   if (!upstream.ok) return new Response(null, { status: 502 });
 
-  const body = (await upstream.json()) as { data?: { current?: unknown } };
-  const res = new Response(JSON.stringify({ current: body.data?.current ?? null }), {
+  // Passed through unchanged so `astro dev`, which proxies straight to the API
+  // (astro.config.mjs), sees the same shape as production.
+  const res = new Response(await upstream.text(), {
     headers: {
       "content-type": "application/json; charset=utf-8",
       "cache-control": `public, max-age=${TTL}, s-maxage=${TTL}`,
