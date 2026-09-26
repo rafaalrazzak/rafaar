@@ -379,6 +379,14 @@ const contact = [
       if (res.ok) {
         const data = (await res.json()) as Contributions;
 
+        // A deploy leaves the edge function - and its hour-long cache - a
+        // version behind this page for a while. Payloads from before per-day
+        // counts existed would strip the numbers out of every tooltip, so bail
+        // to the catch below and keep what the build rendered.
+        if (data.days.some((day) => typeof day.count !== 'number')) {
+          throw new Error('contribution payload predates per-day counts');
+        }
+
         totalEl.textContent = data.total.toLocaleString('en-US');
         activeEl.textContent = String(data.activeDays);
 
