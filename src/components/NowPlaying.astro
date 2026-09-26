@@ -1,0 +1,135 @@
+---
+import Icon from '@/components/Icon.astro';
+---
+
+<!--
+  Filled in client-side: the page is static, and a build-time track would be
+  stale within minutes. Stays hidden until something is actually playing.
+-->
+<a
+  data-now-playing
+  hidden
+  target="_blank"
+  rel="noopener noreferrer"
+  class="group border-border/70 hover:border-border inline-flex max-w-full items-center gap-3 rounded-lg border py-1.5 pr-3.5 pl-1.5 transition-colors print:hidden"
+>
+  <span class="bg-muted relative size-9 shrink-0 overflow-hidden rounded-md">
+    <img data-now-playing-art alt="" class="size-full object-cover" hidden />
+    <Icon
+      name="music"
+      class="text-muted-foreground absolute inset-0 m-auto size-4"
+    />
+  </span>
+  <span class="min-w-0 leading-tight">
+    <span class="text-muted-foreground flex items-center gap-1.5 text-[0.7rem]">
+      <span class="now-playing-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+      Listening to
+    </span>
+    <span class="block truncate text-sm">
+      <span data-now-playing-title class="group-hover:text-primary font-medium"></span>
+      <span class="text-muted-foreground" data-now-playing-artist></span>
+    </span>
+  </span>
+</a>
+
+<style>
+  .now-playing-bars {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 1.5px;
+    height: 0.6rem;
+  }
+  .now-playing-bars i {
+    width: 2px;
+    height: 100%;
+    border-radius: 1px;
+    background: var(--color-primary);
+    transform-origin: bottom;
+    animation: now-playing-bar 1s ease-in-out infinite;
+  }
+  .now-playing-bars i:nth-child(2) {
+    animation-delay: -0.4s;
+  }
+  .now-playing-bars i:nth-child(3) {
+    animation-delay: -0.7s;
+  }
+  @keyframes now-playing-bar {
+    0%,
+    100% {
+      transform: scaleY(0.3);
+    }
+    50% {
+      transform: scaleY(1);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .now-playing-bars i {
+      animation: none;
+      transform: scaleY(0.6);
+    }
+  }
+</style>
+
+<script>
+  interface Track {
+    title: string;
+    artists: string[];
+    artworkUrl: string | null;
+    url: string | null;
+    isPlaying: boolean;
+  }
+
+  const POLL_MS = 30_000;
+
+  const root = document.querySelector<HTMLAnchorElement>('[data-now-playing]');
+  const art = root?.querySelector<HTMLImageElement>('[data-now-playing-art]');
+  const titleEl = root?.querySelector<HTMLElement>('[data-now-playing-title]');
+  const artistEl = root?.querySelector<HTMLElement>('[data-now-playing-artist]');
+
+  function render(track: Track | null) {
+    if (!root || !art || !titleEl || !artistEl) return;
+    if (!track?.isPlaying) {
+      root.hidden = true;
+      return;
+    }
+
+    titleEl.textContent = track.title;
+    artistEl.textContent = track.artists.length ? ` · ${track.artists.join(', ')}` : '';
+    root.title = [track.title, ...track.artists].join(' — ');
+
+    if (track.url) root.href = track.url;
+    else root.removeAttribute('href');
+
+    if (track.artworkUrl) {
+      if (art.src !== track.artworkUrl) art.src = track.artworkUrl;
+      art.hidden = false;
+    } else {
+      art.hidden = true;
+      art.removeAttribute('src');
+    }
+
+    root.hidden = false;
+  }
+
+  async function refresh() {
+    try {
+      const res = await fetch('/api/now-playing');
+      if (!res.ok) return;
+      const { current } = (await res.json()) as { current: Track | null };
+      render(current);
+    } catch {
+      // Keep whatever is shown; the next poll retries.
+    }
+  }
+
+  if (root) {
+    void refresh();
+    // Only poll while someone is looking at the tab.
+    setInterval(() => {
+      if (document.visibilityState === 'visible') void refresh();
+    }, POLL_MS);
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') void refresh();
+    });
+  }
+</script>

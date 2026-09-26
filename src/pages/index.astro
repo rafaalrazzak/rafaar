@@ -2,6 +2,7 @@
 import Layout from '@/layouts/Layout.astro';
 import Section from '@/components/Section.astro';
 import Icon from '@/components/Icon.astro';
+import NowPlaying from '@/components/NowPlaying.astro';
 import { RESUME_DATA } from '@/data/resume-data';
 import { durationSince, startYear } from '@/lib/duration';
 import { CALENDAR, LEVEL_OPACITY, WEEKDAY_LABELS, describeDay, fetchContributions, monthLabels } from '@/lib/github';
@@ -92,6 +93,8 @@ const contact = [
           ))
         }
       </div>
+
+      <NowPlaying />
     </section>
 
     <!-- Work -->
