@@ -11,33 +11,70 @@ import Icon from '@/components/Icon.astro';
   hidden
   target="_blank"
   rel="noopener noreferrer"
-  class="group border-border/70 hover:border-border inline-flex max-w-full items-center gap-3 rounded-lg border py-1.5 pr-3.5 pl-1.5 transition-colors print:hidden"
+  class="now-playing group flex max-w-md items-center gap-4 print:hidden"
 >
-  <span class="bg-muted relative size-9 shrink-0 overflow-hidden rounded-md">
-    <img data-now-playing-art alt="" class="size-full object-cover" hidden />
-    <Icon
-      name="music"
-      class="text-muted-foreground absolute inset-0 m-auto size-4"
+  <span class="relative size-12 shrink-0">
+    <!-- Soft glow in the cover's own colours, so the card picks up the album. -->
+    <img
+      data-now-playing-glow
+      alt=""
+      aria-hidden="true"
+      class="absolute inset-0 size-full scale-110 rounded-lg object-cover opacity-40 blur-lg transition-opacity duration-500 group-hover:opacity-60"
     />
+    <span class="bg-muted ring-border/70 relative block size-full overflow-hidden rounded-lg ring-1">
+      <Icon name="music" class="text-muted-foreground absolute inset-0 m-auto size-4" />
+      <img
+        data-now-playing-art
+        alt=""
+        class="relative size-full object-cover transition-transform duration-500 group-hover:scale-105"
+      />
+    </span>
   </span>
-  <span class="min-w-0 leading-tight">
-    <span class="text-muted-foreground flex items-center gap-1.5 text-[0.7rem]">
-      <span class="now-playing-bars" aria-hidden="true"><i></i><i></i><i></i></span>
-      Listening to
+
+  <span class="min-w-0 flex-1 space-y-0.5">
+    <span
+      class="text-muted-foreground flex items-center gap-2 text-[0.65rem] font-semibold uppercase tracking-[0.18em]"
+    >
+      <span class="now-playing-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      Now playing
     </span>
-    <span class="block truncate text-sm">
-      <span data-now-playing-title class="group-hover:text-primary font-medium"></span>
-      <span class="text-muted-foreground" data-now-playing-artist></span>
+    <span class="flex items-center gap-1">
+      <span
+        data-now-playing-title
+        class="font-display group-hover:text-primary truncate text-[0.95rem] font-semibold transition-colors"
+      ></span>
+      <Icon
+        name="arrow-up-right"
+        class="size-3.5 shrink-0 opacity-0 transition-opacity group-hover:opacity-60"
+      />
     </span>
+    <span data-now-playing-meta class="text-muted-foreground block truncate text-[0.8rem]"></span>
   </span>
 </a>
 
 <style>
+  .now-playing {
+    animation: now-playing-in 0.4s ease-out;
+  }
+  .now-playing[data-changing] [data-now-playing-title],
+  .now-playing[data-changing] [data-now-playing-meta],
+  .now-playing[data-changing] [data-now-playing-art] {
+    opacity: 0;
+  }
+  [data-now-playing-title],
+  [data-now-playing-meta],
+  [data-now-playing-art] {
+    transition-property: opacity, transform, color;
+  }
+  img:not([src]) {
+    visibility: hidden;
+  }
+
   .now-playing-bars {
     display: inline-flex;
     align-items: flex-end;
     gap: 1.5px;
-    height: 0.6rem;
+    height: 0.65rem;
   }
   .now-playing-bars i {
     width: 2px;
@@ -45,24 +82,38 @@ import Icon from '@/components/Icon.astro';
     border-radius: 1px;
     background: var(--color-primary);
     transform-origin: bottom;
-    animation: now-playing-bar 1s ease-in-out infinite;
+    animation: now-playing-bar 1.1s ease-in-out infinite;
   }
   .now-playing-bars i:nth-child(2) {
-    animation-delay: -0.4s;
+    animation-delay: -0.45s;
   }
   .now-playing-bars i:nth-child(3) {
-    animation-delay: -0.7s;
+    animation-delay: -0.8s;
   }
+  .now-playing-bars i:nth-child(4) {
+    animation-delay: -0.2s;
+  }
+
   @keyframes now-playing-bar {
     0%,
     100% {
-      transform: scaleY(0.3);
+      transform: scaleY(0.25);
     }
     50% {
       transform: scaleY(1);
     }
   }
+  @keyframes now-playing-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
+    .now-playing {
+      animation: none;
+    }
     .now-playing-bars i {
       animation: none;
       transform: scaleY(0.6);
@@ -74,41 +125,65 @@ import Icon from '@/components/Icon.astro';
   interface Track {
     title: string;
     artists: string[];
+    album: string | null;
     artworkUrl: string | null;
     url: string | null;
     isPlaying: boolean;
   }
 
   const POLL_MS = 30_000;
+  const FADE_MS = 200;
 
   const root = document.querySelector<HTMLAnchorElement>('[data-now-playing]');
   const art = root?.querySelector<HTMLImageElement>('[data-now-playing-art]');
+  const glow = root?.querySelector<HTMLImageElement>('[data-now-playing-glow]');
   const titleEl = root?.querySelector<HTMLElement>('[data-now-playing-title]');
-  const artistEl = root?.querySelector<HTMLElement>('[data-now-playing-artist]');
+  const metaEl = root?.querySelector<HTMLElement>('[data-now-playing-meta]');
 
-  function render(track: Track | null) {
-    if (!root || !art || !titleEl || !artistEl) return;
-    if (!track?.isPlaying) {
-      root.hidden = true;
-      return;
-    }
+  let shownKey: string | null = null;
+
+  function setImage(img: HTMLImageElement, url: string | null) {
+    if (url) img.src = url;
+    else img.removeAttribute('src');
+  }
+
+  function fill(track: Track) {
+    if (!root || !art || !glow || !titleEl || !metaEl) return;
 
     titleEl.textContent = track.title;
-    artistEl.textContent = track.artists.length ? ` · ${track.artists.join(', ')}` : '';
-    root.title = [track.title, ...track.artists].join(' — ');
+    metaEl.textContent = [track.artists.join(', '), track.album].filter(Boolean).join(' · ');
+    root.setAttribute('aria-label', `Now playing: ${[track.title, ...track.artists].join(' by ')}`);
 
     if (track.url) root.href = track.url;
     else root.removeAttribute('href');
 
-    if (track.artworkUrl) {
-      if (art.src !== track.artworkUrl) art.src = track.artworkUrl;
-      art.hidden = false;
-    } else {
-      art.hidden = true;
-      art.removeAttribute('src');
+    setImage(art, track.artworkUrl);
+    setImage(glow, track.artworkUrl);
+  }
+
+  function render(track: Track | null) {
+    if (!root) return;
+    if (!track?.isPlaying) {
+      root.hidden = true;
+      shownKey = null;
+      return;
     }
 
-    root.hidden = false;
+    const key = `${track.title}\u0000${track.artists.join()}`;
+    if (key === shownKey) return;
+
+    // First appearance animates in via CSS; later track changes crossfade.
+    if (shownKey === null || root.hidden) {
+      fill(track);
+      root.hidden = false;
+    } else {
+      root.setAttribute('data-changing', '');
+      setTimeout(() => {
+        fill(track);
+        root.removeAttribute('data-changing');
+      }, FADE_MS);
+    }
+    shownKey = key;
   }
 
   async function refresh() {
