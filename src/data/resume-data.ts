@@ -16,12 +16,12 @@ export const RESUME_DATA: ResumeData = {
       icon: "messages",
       note: "Say something anonymously",
     },
-    {
-      name: "Songs",
-      url: "https://l.kta.blue/songs",
-      icon: "music",
-      note: "What I have on repeat",
-    },
+    // {
+    //   name: "Songs",
+    //   url: "https://l.kta.blue/songs",
+    //   icon: "music",
+    //   note: "What I have on repeat",
+    // },
   ],
   work: [
     {
