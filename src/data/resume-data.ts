@@ -71,6 +71,14 @@ export const RESUME_DATA: ResumeData = {
       tags: ["TanStack", "Tauri", "Cloudflare"],
     },
     {
+      title: "Waktu Sholat",
+      description:
+        "Offline prayer times for Android, matching the official Kemenag schedule to the minute, with a calibrated Qibla compass, five home-screen widgets and a sky that follows the day. Under 300 KB, no ads, no tracking.",
+      url: "https://waktu-sholat.rafaar.com",
+      thumbnail: "https://waktu-sholat.rafaar.com/og-image.png",
+      tags: ["Kotlin", "Android", "Astro"],
+    },
+    {
       title: "Rinci",
       description: "Short links, custom domains, and click analytics.",
       url: "https://link.rin.ci",
