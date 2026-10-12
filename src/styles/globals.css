@@ -103,9 +103,27 @@
     --primary: 0 0% 12%;
   }
 
+  /* Defining margin boxes also stops Chrome stamping its own date, title
+     and URL into the margins. */
   @page {
     size: A4;
-    margin: 14mm 15mm;
+    margin: 14mm 16mm 16mm;
+
+    @top-right {
+      content: '';
+    }
+
+    @bottom-left {
+      content: 'Rafa Al Razzak  ·  rafaar.com';
+      font: 7.5pt Manrope, ui-sans-serif, system-ui, sans-serif;
+      color: #8a8a8a;
+    }
+
+    @bottom-right {
+      content: counter(page) ' / ' counter(pages);
+      font: 7.5pt Manrope, ui-sans-serif, system-ui, sans-serif;
+      color: #8a8a8a;
+    }
   }
 
   body {
@@ -118,8 +136,11 @@
     max-width: none !important;
   }
 
-  section,
-  article {
+  /* Keep single entries whole, but let sections flow across pages rather
+     than leaving half a page blank ahead of a long one. */
+  article,
+  dl > div,
+  .grid > a {
     break-inside: avoid;
   }
 
@@ -129,5 +150,10 @@
 
   a {
     color: inherit !important;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 }

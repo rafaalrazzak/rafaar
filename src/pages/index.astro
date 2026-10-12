@@ -59,6 +59,15 @@ const contact = [
   { name: 'Email', url: `mailto:${email}`, icon: 'mail' as const },
   ...social,
 ];
+
+// Paper has no links to click, so the printed CV spells out the addresses
+// that matter to a reader and drops the purely social ones.
+const PRINT_CONTACT = new Set(['GitHub', 'LinkedIn']);
+const printContact = [
+  email,
+  siteMetadata.SITE_URL,
+  ...social.filter((link) => PRINT_CONTACT.has(link.name)).map((link) => link.url),
+].map((value) => value.replace(/^https?:\/\/(www\.)?/, ''));
 ---
 
 <Layout>
@@ -74,11 +83,11 @@ const contact = [
         </p>
       </div>
 
-      <p class="text-foreground/90 max-w-prose text-[0.975rem] leading-relaxed">
+      <p class="text-foreground/90 max-w-prose text-[0.975rem] leading-relaxed print:max-w-none print:text-[10.5pt]">
         {about}
       </p>
 
-      <div class="flex flex-wrap items-center gap-x-5 gap-y-2.5 text-sm">
+      <div class="flex flex-wrap items-center gap-x-5 gap-y-2.5 text-sm print:hidden">
         {
           contact.map((link) => (
             <a
@@ -94,6 +103,10 @@ const contact = [
         }
       </div>
 
+      <p class="text-foreground/80 hidden text-[9.5pt] print:block">
+        {printContact.join('  ·  ')}
+      </p>
+
       <NowPlaying />
     </section>
 
@@ -102,13 +115,13 @@ const contact = [
       <div class="space-y-8 print:space-y-4">
         {
           work.map((job) => (
-            <article class="flex gap-4">
+            <article class="flex gap-4 print:gap-0">
               {job.logo && (
                 <img
                   src={job.logo}
                   alt=""
                   loading="lazy"
-                  class="ring-border/70 mt-1 size-10 shrink-0 rounded-lg bg-white object-contain p-1 ring-1"
+                  class="ring-border/70 mt-1 size-10 shrink-0 rounded-lg bg-white object-contain p-1 ring-1 print:hidden"
                 />
               )}
               <div class="min-w-0 flex-1 space-y-1.5">
@@ -146,7 +159,7 @@ const contact = [
                   {job.mode && <span class="text-muted-foreground"> · {job.mode}</span>}
                 </p>
 
-                <p class="text-muted-foreground max-w-prose pt-1.5 text-sm leading-relaxed">
+                <p class="text-muted-foreground max-w-prose pt-1.5 text-sm leading-relaxed print:max-w-none print:pt-0.5">
                   {job.description}
                 </p>
 
@@ -171,7 +184,7 @@ const contact = [
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              class="group flex flex-col gap-3"
+              class:list={['group flex flex-col gap-3', project.hideInPrint && 'print:hidden']}
             >
               {project.thumbnail && (
                 <div
@@ -230,7 +243,7 @@ const contact = [
 
     <!-- Stack -->
     <Section title="Stack">
-      <dl class="space-y-4">
+      <dl class="space-y-4 print:space-y-1.5">
         {
           stack.map((entry) => (
             <div class="grid gap-1 sm:grid-cols-[7.5rem_1fr] sm:gap-6">
@@ -247,7 +260,7 @@ const contact = [
     <!-- GitHub -->
     {
       github && (
-        <Section title="GitHub">
+        <Section title="GitHub" class="print:hidden">
           <div class="space-y-4">
             <div class="relative print:hidden">
               <div class="-mx-1 overflow-x-auto px-1">

@@ -6,7 +6,7 @@ export const RESUME_DATA: ResumeData = {
   role: "Design & Full-stack Engineer",
   location: "Bogor, Indonesia",
   about:
-    "I build fast, well-crafted web products end to end — from interface design through to the systems behind them. Mostly TypeScript, React, and Go.",
+    "I design and build web products end to end, from the interface to the infrastructure it runs on. Mostly TypeScript, React, and Go.",
   email: "me@rafaar.com",
   social: socialMedia,
   elsewhere: [
@@ -33,7 +33,7 @@ export const RESUME_DATA: ResumeData = {
       startDate: "2026-08-01",
       end: "Present",
       description:
-        "Commerce platform for Indonesian small businesses: a shareable storefront, QR ordering at the table, and cashier and kitchen queues that update live, with nothing to install. I build the product and own the money side of it, from the 2.5% per-sale model through to merchant reporting.",
+        "Commerce platform for Indonesian small businesses: online storefront, QR table ordering, and live cashier and kitchen queues in the browser. I build the product and run finance, from the 2.5% per-sale pricing to merchant reporting.",
       tags: ["Next.js", "Postgres", "Realtime", "Payments"],
     },
     {
@@ -45,7 +45,7 @@ export const RESUME_DATA: ResumeData = {
       startDate: "2026-08-01",
       end: "Present",
       description:
-        "Plagiarism and AI-detection service that gives Indonesian students an affordable alternative to Turnitin, with paraphrasing and document repair alongside it. I build the app and run the cluster underneath it, where queued workers return a checked document in minutes, around the clock.",
+        "Plagiarism and AI-detection service for Indonesian students, priced below Turnitin, with paraphrasing and document repair. I build the app and run its Kubernetes cluster, where queued workers return a checked document in minutes.",
       tags: ["Next.js", "Bun", "Kubernetes", "Terraform"],
     },
     {
@@ -57,7 +57,7 @@ export const RESUME_DATA: ResumeData = {
       startDate: "2023-06-01",
       end: "Present",
       description:
-        "Creator gifting platform for Indonesian streamers, where a viewer's paid gift becomes a live alert on stream seconds later. I work across the API and the web app on a team that has taken it past 10,000 users and 2,500 creators.",
+        "Creator gifting platform for Indonesian streamers: a viewer's paid gift appears as an on-stream alert within seconds. I work on the API and web app. The platform has passed 10,000 users and 2,500 creators.",
       tags: ["Next.js", "Postgres", "Realtime", "Payments"],
     },
   ],
@@ -65,7 +65,7 @@ export const RESUME_DATA: ResumeData = {
     {
       title: "Ryu",
       description:
-        "A spending tracker built for speed: log a transaction in seconds, set budgets, see where the money actually goes. Runs on the web and as a desktop build, on components from Almach.",
+        "Spending tracker: log a transaction in seconds, set budgets, and see where the money goes. Runs on the web and desktop, built on Almach.",
       url: "https://ryu.rin.ci",
       thumbnail: "https://ryu.rin.ci/og.jpg",
       tags: ["TanStack", "Tauri", "Cloudflare"],
@@ -73,7 +73,7 @@ export const RESUME_DATA: ResumeData = {
     {
       title: "Waktu Sholat",
       description:
-        "Offline prayer times for Android, matching the official Kemenag schedule to the minute, with a calibrated Qibla compass, five home-screen widgets and a sky that follows the day. Under 300 KB, no ads, no tracking.",
+        "Offline Android prayer-times app matching the official Kemenag schedule, with a Qibla compass and five home-screen widgets. Under 300 KB, no ads, no tracking.",
       url: "https://waktu-sholat.rafaar.com",
       thumbnail: "https://waktu-sholat.rafaar.com/og-image.png",
       tags: ["Kotlin", "Android", "Astro"],
@@ -88,7 +88,7 @@ export const RESUME_DATA: ResumeData = {
     {
       title: "Almach",
       description:
-        "An accessible React component library: 30+ components on React Aria and Tailwind v4, with typed form and query layers alongside. It is the base the rest of my projects are built on.",
+        "Accessible React component library: 30+ components on React Aria and Tailwind v4, with typed form and query layers. The base for my other projects.",
       url: "https://almach.kita.blue",
       thumbnail: "https://almach.kita.blue/og.png",
       tags: ["React Aria", "Tailwind v4", "TanStack"],
@@ -96,39 +96,38 @@ export const RESUME_DATA: ResumeData = {
     {
       title: "Events Platform",
       description:
-        "Multi-tenant platform for creating, managing and attending events, from ticketing through to the attendee experience.",
+        "Multi-tenant platform for creating, managing, and attending events, including ticketing.",
       url: "https://events.kita.blue",
       thumbnail: "https://events.kita.blue/og.png",
-      tags: ["Next.js", "Multi-tenant"],
+      tags: ["Next.js"],
     },
     {
       title: "NFCC",
       description:
-        "Site for Nurul Fikri Cybersecurity Community: offensive security workshops, CTF, and boot-to-root sessions for STT Terpadu Nurul Fikri students.",
+        "Site for the Nurul Fikri Cybersecurity Community at STT Terpadu Nurul Fikri: offensive security workshops, CTFs, and boot-to-root sessions.",
       url: "https://nfcc.my.id",
       thumbnail: "https://nfcc.my.id/hero.webp",
-      tags: ["Web"],
     },
     {
       title: "Forum GenRe Bogor",
-      description: "Digital platform ecosystem for Forum GenRe Kabupaten Bogor.",
+      description: "Website for Forum GenRe Kabupaten Bogor.",
       url: "https://genre.kita.blue",
       thumbnail: "https://genre.kita.blue/og.png",
-      tags: ["Web"],
+      hideInPrint: true,
     },
     {
       title: "OSIS SMK Al-Asiyah",
-      description: "Web portal for Student Council operations and information.",
+      description: "Website for the school's student council.",
       url: "https://osis.kita.blue",
       thumbnail: "https://osis.kita.blue/assets/site/thumbnail-osis.png",
-      tags: ["Web"],
+      hideInPrint: true,
     },
     {
       title: "MPK SMK Al-Asiyah",
-      description: "Web portal for the Student Representative Council.",
+      description: "Website for the school's student representative council.",
       url: "https://mpk.kita.blue",
       thumbnail: "https://mpk.kita.blue/assets/thumbnail-mpkj.png",
-      tags: ["Web"],
+      hideInPrint: true,
     },
   ],
   education: [

@@ -45,6 +45,8 @@ export interface Project {
   url: string;
   thumbnail?: string;
   tags?: readonly string[];
+  /** Left off the printed CV to keep it to two pages. */
+  hideInPrint?: boolean;
 }
 
 export interface Education {
