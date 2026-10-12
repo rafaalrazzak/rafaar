@@ -89,6 +89,19 @@
   }
 }
 
+/* The print frame only exists for paper; on screen it is plain blocks. */
+.print-frame,
+.print-frame > tbody,
+.print-frame > tbody > tr,
+.print-frame > tbody > tr > td {
+  display: block;
+}
+
+.print-frame > thead,
+.print-frame > tfoot {
+  display: none;
+}
+
 /* Print: the page doubles as the printable CV, so drop chrome and
    force the light palette regardless of the active theme. */
 @media print {
@@ -103,27 +116,20 @@
     --primary: 0 0% 12%;
   }
 
-  /* Defining margin boxes also stops Chrome stamping its own date, title
-     and URL into the margins. */
+  /* The theme script sets color-scheme inline on <html>, and a dark scheme
+     tints the paper even though the content is forced light. */
+  html {
+    color-scheme: light !important;
+    background: #fff !important;
+  }
+
+  /* Zero page margins: all spacing comes from the frame below, so the
+     result is the same whether the dialog's margins are Default, None or
+     Minimum, and there is no room left for the browser to stamp its own
+     date, title and URL. */
   @page {
     size: A4;
-    margin: 14mm 16mm 16mm;
-
-    @top-right {
-      content: '';
-    }
-
-    @bottom-left {
-      content: 'Rafa Al Razzak  ·  rafaar.com';
-      font: 7.5pt Manrope, ui-sans-serif, system-ui, sans-serif;
-      color: #8a8a8a;
-    }
-
-    @bottom-right {
-      content: counter(page) ' / ' counter(pages);
-      font: 7.5pt Manrope, ui-sans-serif, system-ui, sans-serif;
-      color: #8a8a8a;
-    }
+    margin: 0;
   }
 
   body {
@@ -132,8 +138,50 @@
   }
 
   main {
-    padding: 0 !important;
     max-width: none !important;
+    margin: 0 !important;
+    padding: 0 16mm !important;
+  }
+
+  .print-frame {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .print-frame > thead {
+    display: table-header-group;
+  }
+
+  .print-frame > tbody {
+    display: table-row-group;
+  }
+
+  .print-frame > tfoot {
+    display: table-footer-group;
+  }
+
+  .print-frame tr {
+    display: table-row;
+  }
+
+  .print-frame td {
+    display: table-cell;
+    padding: 0;
+  }
+
+  .print-frame-top {
+    height: 14mm;
+  }
+
+  .print-frame-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    height: 14mm;
+    padding-bottom: 6mm;
+    font-size: 7.5pt;
+    color: hsl(var(--muted-foreground));
   }
 
   /* Keep single entries whole, but let sections flow across pages rather

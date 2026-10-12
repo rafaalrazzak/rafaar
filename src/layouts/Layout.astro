@@ -94,7 +94,27 @@ const canonical = new URL(Astro.url.pathname, siteMetadata.SITE_URL).href;
       id="content"
       class="mx-auto w-full max-w-3xl px-6 pb-24 pt-14 sm:pt-20"
     >
-      <slot />
+      <!-- Print frame. Browsers repeat a table's thead and tfoot on every
+           printed page, so these spacer rows give each page its top and
+           bottom padding whatever margins the print dialog is set to. On
+           screen the table collapses to plain blocks. -->
+      <table class="print-frame" role="presentation">
+        <thead aria-hidden="true">
+          <tr><td><div class="print-frame-top"></div></td></tr>
+        </thead>
+        <tbody>
+          <tr><td><slot /></td></tr>
+        </tbody>
+        <tfoot aria-hidden="true">
+          <tr>
+            <td>
+              <div class="print-frame-bottom">
+                {siteMetadata.SITE_NAME} · {new URL(siteMetadata.SITE_URL).host}
+              </div>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
     </main>
   </body>
 </html>
