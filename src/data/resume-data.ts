@@ -79,7 +79,7 @@ export const RESUME_DATA: ResumeData = {
       tags: ["Kotlin", "Android", "Astro"],
     },
     {
-      title: "Rinci",
+      title: "Rinci Link",
       description: "Short links, custom domains, and click analytics.",
       url: "https://link.rin.ci",
       thumbnail: "https://link.rin.ci/og.png",
