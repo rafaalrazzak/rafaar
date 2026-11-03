@@ -26,14 +26,14 @@ export const RESUME_DATA: ResumeData = {
   work: [
     {
       company: "ngonlenin",
-      role: "Full-stack Engineer & Finance",
+      role: "CTO",
       mode: "Remote",
       url: "https://ngonlenin.id",
       logo: "/ngonlenin.png",
       startDate: "2026-08-01",
       end: "Present",
       description:
-        "Commerce platform for Indonesian small businesses: online storefront, QR table ordering, and live cashier and kitchen queues in the browser. I build the product and run finance, from the 2.5% per-sale pricing to merchant reporting.",
+        "Commerce platform for Indonesian small businesses: online storefront, QR table ordering, and live cashier and kitchen queues in the browser. I lead engineering and build the product end to end.",
       tags: ["Next.js", "Postgres", "Realtime", "Payments"],
     },
     {
@@ -84,6 +84,14 @@ export const RESUME_DATA: ResumeData = {
       url: "https://link.rin.ci",
       thumbnail: "https://link.rin.ci/og.png",
       tags: ["Astro", "React"],
+    },
+    {
+      title: "Rinci Secrets",
+      description:
+        "CLI that pulls secrets from 11 managers, including Infisical, Doppler, Vault, AWS, and 1Password, then runs your command with them in its environment. Nothing is written to disk. Zero dependencies.",
+      url: "https://secrets.rin.ci",
+      thumbnail: "https://secrets.rin.ci/og/index.png",
+      tags: ["TypeScript", "Bun", "CLI"],
     },
     {
       title: "Almach",
