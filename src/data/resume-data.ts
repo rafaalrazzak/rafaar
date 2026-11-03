@@ -94,6 +94,14 @@ export const RESUME_DATA: ResumeData = {
       tags: ["TypeScript", "Bun", "CLI"],
     },
     {
+      title: "Rinci Hub",
+      description:
+        "Transactional email API for RINCI apps. One request queues an email, which is sent through SMTP, Zoho, or Resend in a set order, with a dashboard for sends, usage, and logs.",
+      url: "https://in.rin.ci",
+      thumbnail: "https://in.rin.ci/og.png",
+      tags: ["Bun", "Elysia", "BullMQ"],
+    },
+    {
       title: "Almach",
       description:
         "Accessible React component library: 30+ components on React Aria and Tailwind v4, with typed form and query layers. The base for my other projects.",
