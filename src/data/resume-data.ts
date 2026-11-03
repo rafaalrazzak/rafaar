@@ -26,7 +26,7 @@ export const RESUME_DATA: ResumeData = {
   work: [
     {
       company: "ngonlenin",
-      role: "CTO",
+      role: "CTO & Full-stack Engineer",
       mode: "Remote",
       url: "https://ngonlenin.id",
       logo: "/ngonlenin.png",
