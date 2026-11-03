@@ -82,7 +82,7 @@ export const RESUME_DATA: ResumeData = {
       title: "Rinci Link",
       description: "Short links, custom domains, and click analytics.",
       url: "https://link.rin.ci",
-      thumbnail: "https://link.rin.ci/og.png",
+      thumbnail: "https://link.rin.ci/og.png?v=2",
       tags: ["Astro", "React"],
     },
     {
