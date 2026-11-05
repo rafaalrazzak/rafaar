@@ -5,7 +5,7 @@ import Icon from '@/components/Icon.astro';
 <button
   type="button"
   data-theme-toggle
-  class="text-muted-foreground hover:bg-muted hover:text-foreground inline-flex size-9 items-center justify-center rounded-md transition-colors"
+  class="text-muted-foreground hover:bg-muted hover:text-foreground inline-flex size-9 items-center justify-center rounded-lg transition-colors"
   aria-label="Change theme"
   title="Change theme"
 >
@@ -52,7 +52,9 @@ import Icon from '@/components/Icon.astro';
     button.addEventListener('click', () => {
       const next = CHOICES[(CHOICES.indexOf(current()) + 1) % CHOICES.length]!;
       localStorage.setItem('theme', next);
-      apply(next);
+      const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (document.startViewTransition && !calm) document.startViewTransition(() => apply(next));
+      else apply(next);
     });
   });
 </script>

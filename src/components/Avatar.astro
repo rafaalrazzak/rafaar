@@ -1,0 +1,178 @@
+---
+interface Props {
+  src: string;
+  /** Illustrated version shown on the back of the card. */
+  illustration?: string;
+  alt?: string;
+}
+
+const { src, illustration = '/avatar.svg', alt = '' } = Astro.props;
+---
+
+<!--
+  Two-sided portrait: photo on the front, illustration on the back. Turns
+  over on its own every few seconds, and on click or Enter/Space (which also
+  pauses the auto-flip for a while). Leans toward the pointer. Transforms
+  only, so it stays on the compositor. Photo only with reduced motion; left
+  off the printed CV.
+-->
+<button
+  type="button"
+  data-avatar
+  aria-pressed="false"
+  aria-label="Flip avatar"
+  title="Flip"
+  class="avatar group relative size-16 shrink-0 cursor-pointer sm:size-[4.5rem] print:hidden"
+>
+  <span class="avatar-tilt block size-full">
+    <span class="avatar-inner block size-full">
+      <span class="avatar-face bg-white">
+        <img src={src} alt={alt} width="144" height="144" class="size-full object-cover" />
+      </span>
+      <span class="avatar-face avatar-back" aria-hidden="true">
+        <img src={illustration} alt="" width="144" height="144" class="size-full object-cover" />
+      </span>
+    </span>
+  </span>
+  <span class="avatar-sheen" aria-hidden="true"></span>
+</button>
+
+<style>
+  .avatar {
+    --radius: 1.25rem;
+    perspective: 700px;
+    border-radius: var(--radius);
+  }
+  .avatar.is-flipping {
+    animation: avatar-pop 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  @keyframes avatar-pop {
+    50% {
+      transform: scale(0.9);
+    }
+  }
+  .avatar-tilt {
+    --rx: 0deg;
+    --ry: 0deg;
+    transform: rotateX(var(--rx)) rotateY(var(--ry));
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .avatar[data-tracking] .avatar-tilt {
+    transition-duration: 0.12s;
+  }
+  .avatar-inner {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .avatar[aria-pressed='true'] .avatar-inner {
+    transform: rotateY(180deg);
+  }
+  .avatar-face {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-radius: var(--radius);
+    backface-visibility: hidden;
+    box-shadow:
+      0 1px 2px hsl(230 30% 10% / 0.06),
+      0 12px 28px -16px hsl(230 40% 20% / 0.45);
+  }
+  /* Hairline drawn above the image so it reads the same on both faces. */
+  .avatar-face::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 0 0 1px hsl(var(--foreground) / 0.08);
+    pointer-events: none;
+  }
+  .avatar-back {
+    transform: rotateY(180deg);
+  }
+  .avatar-sheen {
+    --mx: 50%;
+    --my: 0%;
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius);
+    pointer-events: none;
+    background: radial-gradient(120% 90% at var(--mx) var(--my), hsl(0 0% 100% / 0.3), transparent 55%);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .avatar[data-tracking] .avatar-sheen {
+    opacity: 1;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .avatar,
+    .avatar-tilt,
+    .avatar-inner {
+      animation: none !important;
+      transform: none !important;
+      transition: none;
+    }
+    .avatar-back {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const MAX = 12;
+  const fine = window.matchMedia('(hover: hover) and (pointer: fine)');
+  const calm = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  for (const el of document.querySelectorAll<HTMLButtonElement>('[data-avatar]')) {
+    const tilt = el.querySelector<HTMLElement>('.avatar-tilt');
+    const sheen = el.querySelector<HTMLElement>('.avatar-sheen');
+    if (!tilt || !sheen) continue;
+
+    const flip = () => {
+      el.setAttribute('aria-pressed', String(el.getAttribute('aria-pressed') !== 'true'));
+      el.classList.remove('is-flipping');
+      void el.offsetWidth; // restart the pop animation
+      el.classList.add('is-flipping');
+    };
+    el.addEventListener('animationend', () => el.classList.remove('is-flipping'));
+
+    // Auto-flip only while the avatar is on screen, the tab is visible, and
+    // motion is welcome. A manual flip holds the chosen side for a while.
+    const EVERY = 3800;
+    const HOLD = 10_000;
+    let onScreen = true;
+    let heldUntil = 0;
+    setInterval(() => {
+      if (calm.matches || !onScreen || document.hidden || Date.now() < heldUntil) return;
+      flip();
+    }, EVERY);
+    new IntersectionObserver(([entry]) => {
+      onScreen = entry?.isIntersecting ?? true;
+    }).observe(el);
+
+    el.addEventListener('click', () => {
+      heldUntil = Date.now() + HOLD;
+      flip();
+    });
+
+    // Lean toward the pointer anywhere in the intro, not only over the avatar.
+    const zone = el.closest('section') ?? el;
+    zone.addEventListener('pointermove', (event) => {
+      if (!fine.matches || calm.matches) return;
+      const box = el.getBoundingClientRect();
+      const x = Math.max(-1, Math.min(1, (event.clientX - (box.left + box.width / 2)) / (box.width * 2.5)));
+      const y = Math.max(-1, Math.min(1, (event.clientY - (box.top + box.height / 2)) / (box.height * 2.5)));
+      tilt.style.setProperty('--ry', `${x * MAX}deg`);
+      tilt.style.setProperty('--rx', `${-y * MAX}deg`);
+      sheen.style.setProperty('--mx', `${50 + x * 50}%`);
+      sheen.style.setProperty('--my', `${50 + y * 50}%`);
+      el.setAttribute('data-tracking', '');
+    });
+    zone.addEventListener('pointerleave', () => {
+      tilt.style.setProperty('--rx', '0deg');
+      tilt.style.setProperty('--ry', '0deg');
+      el.removeAttribute('data-tracking');
+    });
+  }
+</script>

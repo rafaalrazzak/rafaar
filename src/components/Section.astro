@@ -1,15 +1,16 @@
 ---
 interface Props {
   title: string;
+  id?: string;
   class?: string;
 }
 
-const { title, class: className } = Astro.props;
+const { title, id, class: className } = Astro.props;
 ---
 
-<section class:list={['border-t border-border/70 pt-8 print:pt-4', className]}>
+<section id={id} data-reveal class:list={['scroll-mt-20', className]}>
   <h2
-    class="text-muted-foreground mb-7 text-[0.7rem] font-semibold uppercase tracking-[0.18em] print:mb-3"
+    class="text-muted-foreground mb-4 text-sm font-medium print:mb-3 print:text-[0.7rem] print:font-semibold print:uppercase print:tracking-[0.18em]"
   >
     {title}
   </h2>

@@ -4,7 +4,9 @@ const siteMetadata = {
   SITE_LOCALE: "en_US",
   SITE_URL: "https://rafaar.com",
   SITE_DESCRIPTION:
-    "Design and full-stack engineer in Bogor, Indonesia. I design and build web products end to end.",
+    "Rafa Al Razzak is a design and full-stack engineer in Bogor, Indonesia, building web products end to end with TypeScript, React, and Go.",
+  SITE_AUTHOR: "Rafa Al Razzak",
+  SITE_PHOTO: "/rafaar-formal.jpg",
   TWITTER_USERNAME: "@rafaalrazzak",
   TWITTER_CARD: "/og.png",
 };

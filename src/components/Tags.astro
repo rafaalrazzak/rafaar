@@ -1,0 +1,9 @@
+---
+interface Props {
+  tags: readonly string[];
+}
+
+const { tags } = Astro.props;
+---
+
+<p class="text-muted-foreground/80 pt-1 text-xs">{tags.join(' · ')}</p>

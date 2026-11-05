@@ -3,6 +3,8 @@ import Layout from '@/layouts/Layout.astro';
 import Section from '@/components/Section.astro';
 import Icon from '@/components/Icon.astro';
 import NowPlaying from '@/components/NowPlaying.astro';
+import Tags from '@/components/Tags.astro';
+import Avatar from '@/components/Avatar.astro';
 import { RESUME_DATA } from '@/data/resume-data';
 import { durationSince, startYear } from '@/lib/duration';
 import { CALENDAR, LEVEL_OPACITY, WEEKDAY_LABELS, describeDay, fetchContributions, monthLabels } from '@/lib/github';
@@ -28,12 +30,13 @@ const githubMonths = github ? monthLabels(github.days) : [];
 // Structured data, built from the same source as the page so the two cannot
 // disagree. Gives search engines the entity behind the site rather than leaving
 // them to infer it from prose.
-const personSchema = {
-  '@context': 'https://schema.org',
+const personId = `${siteMetadata.SITE_URL}/#person`;
+const person = {
   '@type': 'Person',
+  '@id': personId,
   name,
   url: siteMetadata.SITE_URL,
-  image: new URL('/og.png', siteMetadata.SITE_URL).href,
+  image: new URL(siteMetadata.SITE_PHOTO, siteMetadata.SITE_URL).href,
   jobTitle: role,
   description: about,
   email: `mailto:${email}`,
@@ -55,6 +58,33 @@ const personSchema = {
   knowsAbout: stack.flatMap((entry) => entry.items),
 };
 
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${siteMetadata.SITE_URL}/#website`,
+      url: siteMetadata.SITE_URL,
+      name: siteMetadata.SITE_NAME,
+      description: siteMetadata.SITE_DESCRIPTION,
+      inLanguage: 'en',
+      publisher: { '@id': personId },
+    },
+    {
+      '@type': 'ProfilePage',
+      '@id': `${siteMetadata.SITE_URL}/#profile`,
+      url: siteMetadata.SITE_URL,
+      name: `${name} — ${role}`,
+      isPartOf: { '@id': `${siteMetadata.SITE_URL}/#website` },
+      mainEntity: { '@id': personId },
+    },
+    person,
+  ],
+};
+
+// Projects beyond this count sit behind "Show all"; the printed CV lists them.
+const FEATURED = 6;
+
 const contact = [
   { name: 'Email', url: `mailto:${email}`, icon: 'mail' as const },
   ...social,
@@ -71,37 +101,54 @@ const printContact = [
 ---
 
 <Layout>
-  <div class="space-y-14 print:space-y-6">
+  <div class="space-y-16 print:space-y-6">
     <!-- Intro -->
-    <section class="space-y-5">
-      <div class="space-y-2">
-        <h1 class="font-display text-4xl font-semibold tracking-tight sm:text-5xl print:text-3xl">
-          {name}
-        </h1>
-        <p class="text-muted-foreground text-base">
-          {role} · {location}
-        </p>
+    <section class="space-y-6 print:space-y-3" data-reveal>
+      <div class="flex items-center gap-4">
+        <Avatar src="/rafaar-formal.jpg" />
+        <div class="min-w-0">
+          <h1 class="text-[1.75rem] leading-tight font-semibold tracking-[-0.03em] sm:text-[2rem] print:text-3xl">
+            {name}
+          </h1>
+          <p class="text-muted-foreground text-[0.95rem]">
+            {role} · {location}<span
+              data-local-time
+              class="text-muted-foreground/70 tabular-nums print:hidden"></span>
+          </p>
+        </div>
       </div>
 
-      <p class="text-foreground/90 max-w-prose text-[0.975rem] leading-relaxed print:max-w-none print:text-[10.5pt]">
+      <p class="text-foreground/85 max-w-[38rem] text-base leading-relaxed print:max-w-none print:text-[10.5pt]">
         {about}
       </p>
 
-      <div class="flex flex-wrap items-center gap-x-5 gap-y-2.5 text-sm print:hidden">
+      <ul class="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm print:hidden">
         {
           contact.map((link) => (
-            <a
-              href={link.url}
-              target={link.url.startsWith('mailto:') ? undefined : '_blank'}
-              rel="noopener noreferrer"
-              class="text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5"
-            >
-              <Icon name={link.icon} class="size-[0.95rem]" />
-              <span>{link.name}</span>
-            </a>
+            <li class="inline-flex items-center gap-1">
+              <a
+                href={link.url}
+                target={link.url.startsWith('mailto:') ? undefined : '_blank'}
+                rel={link.url.startsWith('mailto:') ? undefined : 'me noopener noreferrer'}
+                class="text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5"
+              >
+                <Icon name={link.icon} class="size-[0.95rem]" />
+                {link.name}
+              </a>
+              {link.icon === 'mail' && (
+                <button
+                  type="button"
+                  data-copy-email={email}
+                  class="text-muted-foreground/70 hover:text-foreground hover:bg-muted rounded-md px-1.5 py-0.5 text-xs transition-colors"
+                  aria-label={`Copy ${email}`}
+                >
+                  Copy
+                </button>
+              )}
+            </li>
           ))
         }
-      </div>
+      </ul>
 
       <p class="text-foreground/80 hidden text-[9.5pt] print:block">
         {printContact.join('  ·  ')}
@@ -111,37 +158,36 @@ const printContact = [
     </section>
 
     <!-- Work -->
-    <Section title="Work">
-      <div class="space-y-8 print:space-y-4">
+    <Section title="Work" id="work">
+      <div class="-mx-3 space-y-1 print:mx-0 print:space-y-0" data-stagger>
         {
           work.map((job) => (
-            <article class="flex gap-4 print:gap-0">
+            <article class="hover:bg-muted/70 flex gap-4 rounded-2xl p-3 transition-colors duration-200 print:gap-0 print:rounded-none print:p-0 print:py-2">
               {job.logo && (
                 <img
                   src={job.logo}
                   alt=""
+                  width="36"
+                  height="36"
                   loading="lazy"
-                  class="ring-border/70 mt-1 size-10 shrink-0 rounded-lg bg-white object-contain p-1 ring-1 print:hidden"
+                  decoding="async"
+                  class="border-border/80 mt-0.5 size-9 shrink-0 rounded-lg border bg-white object-contain p-1 print:hidden"
                 />
               )}
-              <div class="min-w-0 flex-1 space-y-1.5">
-                <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                  <h3 class="font-display text-lg font-semibold">
+              <div class="min-w-0 flex-1">
+                <div class="flex flex-wrap items-baseline justify-between gap-x-4">
+                  <h3 class="text-[0.95rem] font-semibold">
                     <a
                       href={job.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="hover:text-primary group inline-flex items-center gap-1"
+                      class="hover:text-primary"
                     >
                       {job.company}
-                      <Icon
-                        name="arrow-up-right"
-                        class="size-3.5 opacity-0 transition-all group-hover:opacity-60"
-                      />
                     </a>
                   </h3>
                   <span class="text-muted-foreground text-sm tabular-nums">
-                    {startYear(job.startDate)} — {job.end ?? 'Present'}
+                    {startYear(job.startDate)} – {job.end ?? 'Present'}
                     <span
                       class="text-muted-foreground/60"
                       data-duration-since={job.endDate ? undefined : job.startDate}
@@ -153,21 +199,14 @@ const printContact = [
                     </span>
                   </span>
                 </div>
-
-                <p class="text-foreground/75 text-sm">
+                <p class="text-muted-foreground text-sm">
                   {job.role}
-                  {job.mode && <span class="text-muted-foreground"> · {job.mode}</span>}
+                  {job.mode && <> · {job.mode}</>}
                 </p>
-
-                <p class="text-muted-foreground max-w-prose pt-1.5 text-sm leading-relaxed print:max-w-none print:pt-0.5">
+                <p class="text-foreground/80 mt-2.5 text-sm leading-relaxed print:mt-1">
                   {job.description}
                 </p>
-
-                {job.tags && job.tags.length > 0 && (
-                  <p class="text-muted-foreground/70 pt-1 text-xs">
-                    {job.tags.join(' · ')}
-                  </p>
-                )}
+                {job.tags && job.tags.length > 0 && <Tags tags={job.tags} />}
               </div>
             </article>
           ))
@@ -176,81 +215,89 @@ const printContact = [
     </Section>
 
     <!-- Projects -->
-    <Section title="Projects">
-      <div class="grid gap-x-6 gap-y-9 sm:grid-cols-2 print:grid-cols-2 print:gap-y-4">
+    <Section title="Projects" id="projects">
+      <div class="grid gap-x-5 gap-y-9 sm:grid-cols-2 print:grid-cols-2 print:gap-y-4" data-stagger>
         {
-          projects.map((project) => (
+          projects.map((project, i) => (
             <a
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              class:list={['group flex flex-col gap-3', project.hideInPrint && 'print:hidden']}
+              data-extra={i >= FEATURED ? '' : undefined}
+              class:list={[
+                'group',
+                i >= FEATURED ? 'hidden' : 'block',
+                i >= FEATURED && !project.hideInPrint && 'print:block',
+                project.hideInPrint && 'print:hidden',
+              ]}
             >
               {project.thumbnail && (
-                <div
-                  class="bg-muted print:hidden aspect-[1200/630] overflow-hidden rounded-lg border border-border/70"
-                >
+                <div class="bg-muted border-border/80 mb-3 aspect-[1200/630] overflow-hidden rounded-xl border print:hidden">
                   <img
                     src={project.thumbnail}
                     alt=""
+                    width="1200"
+                    height="630"
                     loading="lazy"
-                    class="size-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+                    decoding="async"
+                    class="size-full object-cover object-top transition-transform duration-700 ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:scale-[1.03]"
                   />
                 </div>
               )}
-
-              <div class="space-y-1.5">
-                <h3 class="font-display group-hover:text-primary inline-flex items-center gap-1 text-base font-semibold">
-                  {project.title}
-                  <Icon
-                    name="arrow-up-right"
-                    class="size-3.5 opacity-0 transition-opacity group-hover:opacity-60"
-                  />
-                </h3>
-                <p class="text-muted-foreground text-sm leading-relaxed">
-                  {project.description}
-                </p>
-                {project.tags && project.tags.length > 0 && (
-                  <p class="text-muted-foreground/80 pt-0.5 text-xs">
-                    {project.tags.join(' · ')}
-                  </p>
-                )}
-              </div>
+              <h3 class="group-hover:text-primary inline-flex items-center gap-1 text-[0.95rem] font-semibold">
+                {project.title}
+                <Icon
+                  name="arrow-up-right"
+                  class="size-3.5 opacity-0 transition-opacity group-hover:opacity-70"
+                />
+              </h3>
+              <p class="text-muted-foreground mt-1 text-sm leading-relaxed">
+                {project.description}
+              </p>
+              {project.tags && project.tags.length > 0 && <Tags tags={project.tags} />}
             </a>
           ))
         }
       </div>
+      {
+        projects.length > FEATURED && (
+          <button
+            type="button"
+            data-show-more
+            aria-expanded="false"
+            class="border-border/80 text-muted-foreground hover:text-foreground hover:bg-muted mt-8 inline-flex h-9 items-center rounded-lg border px-3.5 text-sm font-medium transition-colors print:hidden"
+          >
+            Show all {projects.length} projects
+          </button>
+        )
+      }
     </Section>
 
     <!-- Education -->
-    <Section title="Education">
-      <div class="space-y-5">
-        {
-          education.map((item) => (
-            <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-              <div>
-                <h3 class="font-display text-lg font-semibold">{item.school}</h3>
-                <p class="text-muted-foreground text-sm">{item.degree}</p>
-              </div>
-              <span class="text-muted-foreground text-sm tabular-nums">
-                {item.start} — {item.end}
-              </span>
+    <Section title="Education" id="education">
+      {
+        education.map((item) => (
+          <div class="flex flex-wrap items-baseline justify-between gap-x-4">
+            <div>
+              <h3 class="text-[0.95rem] font-semibold">{item.school}</h3>
+              <p class="text-muted-foreground text-sm">{item.degree}</p>
             </div>
-          ))
-        }
-      </div>
+            <span class="text-muted-foreground text-sm tabular-nums">
+              {item.start} – {item.end}
+            </span>
+          </div>
+        ))
+      }
     </Section>
 
     <!-- Stack -->
-    <Section title="Stack">
-      <dl class="space-y-4 print:space-y-1.5">
+    <Section title="Stack" id="stack">
+      <dl class="space-y-2.5 text-sm print:space-y-1" data-stagger>
         {
           stack.map((entry) => (
-            <div class="grid gap-1 sm:grid-cols-[7.5rem_1fr] sm:gap-6">
-              <dt class="text-muted-foreground text-sm">{entry.group}</dt>
-              <dd class="text-foreground/90 text-sm leading-relaxed">
-                {entry.items.join(', ')}
-              </dd>
+            <div class="grid gap-0.5 sm:grid-cols-[7rem_1fr] sm:gap-4">
+              <dt class="text-muted-foreground">{entry.group}</dt>
+              <dd class="text-foreground/85">{entry.items.join(', ')}</dd>
             </div>
           ))
         }
@@ -260,9 +307,9 @@ const printContact = [
     <!-- GitHub -->
     {
       github && (
-        <Section title="GitHub" class="print:hidden">
-          <div class="space-y-4">
-            <div class="relative print:hidden">
+        <Section title="GitHub" id="github" class="print:hidden">
+          <div class="space-y-3">
+            <div class="relative">
               <div class="-mx-1 overflow-x-auto px-1">
                 <svg
                   data-contribution-grid
@@ -311,7 +358,7 @@ const printContact = [
                 data-contribution-tooltip
                 role="tooltip"
                 hidden
-                class="border-border bg-card text-foreground pointer-events-none absolute z-10 -translate-x-1/2 -translate-y-full rounded-md border px-2 py-1 text-xs whitespace-nowrap shadow-sm"
+                class="border-border bg-card text-foreground pointer-events-none absolute z-10 -translate-x-1/2 -translate-y-full rounded-md border px-2 py-1 text-xs whitespace-nowrap"
               />
             </div>
 
@@ -331,42 +378,34 @@ const printContact = [
     }
 
     <!-- Elsewhere -->
-    <Section title="Elsewhere" class="print:hidden">
-      <div class="space-y-4">
+    <Section title="Elsewhere" id="elsewhere" class="print:hidden">
+      <ul class="space-y-2 text-sm" data-stagger>
         {
           elsewhere.map((link) => (
-            <a
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="group flex items-center gap-3"
-            >
-              <Icon
-                name={link.icon}
-                class="text-muted-foreground group-hover:text-foreground size-4 shrink-0 transition-colors"
-              />
-              <span class="group-hover:text-primary text-sm font-medium">
-                {link.name}
-              </span>
-              {link.note && (
-                <span class="text-muted-foreground truncate text-sm">
-                  {link.note}
-                </span>
-              )}
-              <Icon
-                name="arrow-up-right"
-                class="text-muted-foreground ml-auto size-3.5 shrink-0 opacity-0 transition-opacity group-hover:opacity-70"
-              />
-            </a>
+            <li>
+              <a
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group inline-flex items-center gap-2"
+              >
+                <span class="group-hover:text-primary font-medium">{link.name}</span>
+                {link.note && <span class="text-muted-foreground">{link.note}</span>}
+                <Icon
+                  name="arrow-up-right"
+                  class="text-muted-foreground size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                />
+              </a>
+            </li>
           ))
         }
-      </div>
+      </ul>
     </Section>
   </div>
   <script
     type="application/ld+json"
     is:inline
-    set:html={JSON.stringify(personSchema)}
+    set:html={JSON.stringify(schema)}
   />
 </Layout>
 
@@ -496,4 +535,86 @@ const printContact = [
     const next = elapsed ? ` · ${elapsed}` : '';
     if (next !== el.textContent) el.textContent = next;
   }
+</script>
+
+<script>
+  // Small, progressive interactions. Without JS the page is complete: every
+  // section is visible and all projects stay reachable through print.
+
+  // Local time in Bogor next to the location.
+  const clock = document.querySelector<HTMLElement>('[data-local-time]');
+  if (clock) {
+    const fmt = new Intl.DateTimeFormat('en-GB', {
+      hour: '2-digit',
+      minute: '2-digit',
+      timeZone: 'Asia/Jakarta',
+    });
+    const tick = () => {
+      clock.textContent = ` · ${fmt.format(new Date())} local`;
+    };
+    tick();
+    setInterval(tick, 30_000);
+  }
+
+  // Copy email with inline confirmation.
+  for (const button of document.querySelectorAll<HTMLButtonElement>('[data-copy-email]')) {
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(button.dataset.copyEmail ?? '');
+        button.textContent = 'Copied';
+      } catch {
+        button.textContent = 'Failed';
+      }
+      setTimeout(() => (button.textContent = 'Copy'), 1600);
+    });
+  }
+
+  // Reveal the rest of the projects.
+  const more = document.querySelector<HTMLButtonElement>('[data-show-more]');
+  if (more) {
+    const label = more.textContent?.trim() ?? '';
+    more.addEventListener('click', () => {
+      const open = more.getAttribute('aria-expanded') !== 'true';
+      document.querySelectorAll<HTMLElement>('[data-extra]').forEach((card, i) => {
+        card.classList.toggle('hidden', !open);
+        card.classList.toggle('block', open);
+        if (open) {
+          card.style.setProperty('--i', String(i));
+          card.classList.remove('enter');
+          void card.offsetWidth;
+          card.classList.add('enter');
+        }
+      });
+      more.setAttribute('aria-expanded', String(open));
+      more.textContent = open ? 'Show fewer' : label;
+      if (!open) document.getElementById('projects')?.scrollIntoView({ block: 'start' });
+    });
+  }
+
+  // Fade sections in as they enter the viewport. The observer reports every
+  // target once on start; if it never does (a background tab, a renderer that
+  // does not paint), show everything rather than leave sections hidden.
+  const revealTargets = document.querySelectorAll('[data-reveal]');
+  let observed = false;
+  setTimeout(() => {
+    if (!observed) revealTargets.forEach((el) => el.classList.add('is-visible'));
+  }, 3000);
+
+  const reveal = new IntersectionObserver(
+    (entries) => {
+      observed = true;
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        entry.target.querySelectorAll<HTMLElement>('[data-stagger]').forEach((list) => {
+          [...list.children].forEach((child, i) =>
+            (child as HTMLElement).style.setProperty('--i', String(Math.min(i, 8))),
+          );
+        });
+        entry.target.classList.add('is-visible');
+        reveal.unobserve(entry.target);
+      }
+    },
+    { rootMargin: '0px 0px -8% 0px' },
+  );
+  revealTargets.forEach((el) => reveal.observe(el));
 </script>

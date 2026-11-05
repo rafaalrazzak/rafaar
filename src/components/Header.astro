@@ -2,24 +2,44 @@
 import ThemeToggle from '@/components/ThemeToggle.astro';
 import Icon from '@/components/Icon.astro';
 import { RESUME_DATA } from '@/data/resume-data';
+
+const NAV = [
+  { id: 'work', label: 'Work' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'stack', label: 'Stack' },
+];
 ---
 
-<header
-  class="print:hidden bg-background/80 sticky top-0 z-40 border-b border-border/70 backdrop-blur"
->
-  <div class="mx-auto flex h-14 w-full max-w-3xl items-center justify-between px-6">
-    <a
-      href="/"
-      class="text-foreground hover:text-primary font-display text-base font-semibold tracking-tight"
-    >
+<header class="bg-background/80 sticky top-0 z-40 backdrop-blur-md print:hidden">
+  <div class="mx-auto flex h-14 w-full max-w-2xl items-center justify-between gap-4 px-5 sm:px-6">
+    <a href="/" class="hover:text-primary shrink-0 text-sm font-semibold tracking-tight">
       {RESUME_DATA.name}
     </a>
 
-    <div class="flex items-center gap-1">
+    <nav aria-label="Sections" class="relative hidden items-center gap-0.5 sm:flex">
+      <span
+        data-nav-pill
+        aria-hidden="true"
+        class="bg-muted pointer-events-none absolute top-0 left-0 h-full rounded-lg opacity-0 transition-[transform,width,opacity] duration-300 ease-[cubic-bezier(0.2,0.7,0.2,1)]"
+      ></span>
+      {
+        NAV.map((item) => (
+          <a
+            href={`#${item.id}`}
+            data-nav-link={item.id}
+            class="text-muted-foreground hover:text-foreground data-[active]:text-foreground relative rounded-lg px-2.5 py-1.5 text-sm transition-colors"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="-mr-2 flex items-center">
       <button
         type="button"
         data-print-page
-        class="text-muted-foreground hover:bg-muted hover:text-foreground hidden size-9 items-center justify-center rounded-md transition-colors sm:inline-flex"
+        class="text-muted-foreground hover:bg-muted hover:text-foreground hidden size-9 items-center justify-center rounded-lg transition-colors sm:inline-flex"
         aria-label="Print CV"
         title="Print CV"
       >
@@ -34,4 +54,61 @@ import { RESUME_DATA } from '@/data/resume-data';
   document
     .querySelector('[data-print-page]')
     ?.addEventListener('click', () => window.print());
+
+  // Mark the nav link for whichever section is crossing the upper part of the
+  // viewport.
+  const links = new Map(
+    [...document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]')].map((link) => [
+      link.dataset.navLink!,
+      link,
+    ]),
+  );
+  // One pill slides between links instead of each link toggling a background.
+  const pill = document.querySelector<HTMLElement>('[data-nav-pill]');
+  const setActive = (id: string | null) => {
+    for (const [key, link] of links) {
+      if (key === id) link.setAttribute('data-active', '');
+      else link.removeAttribute('data-active');
+    }
+    if (!pill) return;
+    const link = id ? links.get(id) : undefined;
+    if (!link) {
+      pill.style.opacity = '0';
+      return;
+    }
+    pill.style.width = `${link.offsetWidth}px`;
+    pill.style.transform = `translateX(${link.offsetLeft}px)`;
+    pill.style.opacity = '1';
+  };
+
+  // The active section is the last one whose top has passed 40% of the
+  // viewport. Nothing is marked while the intro is still in view.
+  const sections = [...links.keys()]
+    .map((id) => document.getElementById(id))
+    .filter((el): el is HTMLElement => el !== null);
+
+  let queued = false;
+  const update = () => {
+    queued = false;
+    const line = window.innerHeight * 0.4;
+    let current: string | null = null;
+    for (const section of sections) {
+      if (section.getBoundingClientRect().top <= line) current = section.id;
+    }
+    // At the very bottom the last section may never reach the line.
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+      current = sections.at(-1)?.id ?? current;
+    }
+    setActive(current);
+  };
+  const schedule = () => {
+    if (!queued) {
+      queued = true;
+      requestAnimationFrame(update);
+    }
+  };
+
+  update();
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule);
 </script>
