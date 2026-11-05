@@ -40,7 +40,7 @@ Cloudflare Pages dashboard settings:
 
 ```text
 src/
-  components/   Header, Section, Icon, ThemeToggle
+  components/   Header, Section, Tags, Icon, ThemeToggle, NowPlaying
   data/         resume-data.ts, social-media.ts, site-metadata.ts
   layouts/      Layout.astro
   pages/        index.astro

@@ -12,29 +12,29 @@
   --color-ring: hsl(var(--ring));
 }
 
+/* One cool gray family and a single, quiet cobalt for links and focus. */
 :root {
-  --background: 44 33% 97%;
-  --foreground: 220 17% 15%;
-  --card: 40 25% 94%;
-  --muted: 40 18% 91%;
-  --muted-foreground: 220 8% 46%;
-  --border: 36 14% 84%;
-  --primary: 205 72% 37%;
-  --ring: 205 72% 37%;
+  --background: 228 20% 98%;
+  --foreground: 230 25% 12%;
+  --card: 0 0% 100%;
+  --muted: 228 16% 94%;
+  --muted-foreground: 229 9% 45%;
+  --border: 228 14% 90%;
+  --primary: 229 64% 50%;
+  --ring: 229 64% 50%;
 
   --font-sans: Manrope, ui-sans-serif, system-ui, sans-serif;
-  --font-display: 'Source Serif 4', ui-serif, Georgia, serif;
 }
 
 .dark {
-  --background: 220 18% 9%;
-  --foreground: 42 22% 92%;
-  --card: 220 14% 13%;
-  --muted: 219 13% 16%;
-  --muted-foreground: 42 8% 62%;
-  --border: 218 10% 22%;
-  --primary: 199 66% 62%;
-  --ring: 199 66% 62%;
+  --background: 230 22% 8%;
+  --foreground: 228 20% 92%;
+  --card: 230 18% 11%;
+  --muted: 230 16% 14%;
+  --muted-foreground: 229 9% 62%;
+  --border: 230 14% 19%;
+  --primary: 229 80% 72%;
+  --ring: 229 80% 72%;
 }
 
 @layer base {
@@ -52,7 +52,7 @@
   h1,
   h2,
   h3 {
-    @apply text-foreground font-medium tracking-tight;
+    @apply text-foreground font-semibold tracking-tight;
     text-wrap: balance;
   }
 
@@ -75,8 +75,72 @@
   }
 }
 
-@utility font-display {
-  font-family: var(--font-display);
+
+/* Scroll reveal. Only armed once JS has run (the .js class), so content is
+   never hidden for a reader without scripts, in print, or with reduced motion. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.6s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Items inside a revealed section follow one after another. */
+.js [data-reveal] [data-stagger] > * {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.55s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.55s cubic-bezier(0.2, 0.7, 0.2, 1),
+    background-color 0.2s;
+  transition-delay: calc(var(--i, 0) * 60ms + 80ms), calc(var(--i, 0) * 60ms + 80ms), 0s;
+}
+
+.js [data-reveal].is-visible [data-stagger] > * {
+  opacity: 1;
+  transform: none;
+}
+
+/* Cards that appear after "Show all". */
+.enter {
+  animation: enter 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--i, 0) * 50ms);
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+/* Theme switch crossfade (View Transitions, where supported). */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.35s;
+  animation-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal],
+  .js [data-reveal] [data-stagger] > * {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media print {
+  .js [data-reveal],
+  .js [data-reveal] [data-stagger] > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
